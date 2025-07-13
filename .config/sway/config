@@ -12,7 +12,7 @@ smart_borders yes
 gaps inner 8
 
 output * background ~/my/dotfiles/Pictures/comfy-home.png fill
-seat * xcursor_theme Future-cursors 26
+seat * xcursor_theme Future-cyan-cursors 28
 
 include ./devices.conf
 include ./startup.conf

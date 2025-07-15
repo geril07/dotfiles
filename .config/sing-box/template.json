@@ -139,7 +139,7 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": "./ignored/cache.db"
+      "path": "cache.db"
     }
   }
 }

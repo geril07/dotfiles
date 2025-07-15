@@ -2,7 +2,7 @@ include /etc/sway/config.d/*
 
 default_border pixel 2
 hide_edge_borders --i3 smart
-font pango:JetBrainsMono 7
+font pango:JetBrainsMono 10
 focus_follows_mouse no
 mouse_warping none
 # focus_wrapping workspace
@@ -12,7 +12,7 @@ smart_borders yes
 gaps inner 8
 
 output * background ~/my/dotfiles/Pictures/comfy-home.png fill
-seat * xcursor_theme Future-cyan-cursors 28
+seat * xcursor_theme Future-cyan-cursors 26
 
 include ./devices.conf
 include ./startup.conf
@@ -207,4 +207,12 @@ for_window [app_id="discord"] layout tabbed
 
 for_window [app_id="lxqt-policykit-agent"] floating enable
 
-include ./catppuccin
+include ./catppuccin/frappe
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $blue
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base

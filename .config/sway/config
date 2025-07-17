@@ -210,7 +210,7 @@ for_window [app_id="lxqt-policykit-agent"] floating enable
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $rosewater $blue
+client.focused           $lavender $base $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
 client.urgent            $peach    $base $peach $overlay0  $peach

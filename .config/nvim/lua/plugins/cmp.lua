@@ -80,8 +80,8 @@ return {
 					fields = { "kind", "abbr", "menu" },
 					format = function(_, vim_item)
 						local MAX_ABBR_WIDTH, MAX_MENU_WIDTH = 40, 20
-						local ellipsis = require("icons").misc.ellipsis
-						local symbol_kinds = require("icons").symbol_kinds
+						local ellipsis = require("my.icons").misc.ellipsis
+						local symbol_kinds = require("my.icons").symbol_kinds
 
 						-- Add the icon.
 						vim_item.kind = (symbol_kinds[vim_item.kind] or symbol_kinds.Text)

@@ -1,6 +1,6 @@
 include /etc/sway/config.d/*
 
-default_border pixel 2
+default_border pixel 2  
 hide_edge_borders --i3 smart
 font pango:JetBrainsMono 10
 focus_follows_mouse no
@@ -210,9 +210,13 @@ for_window [app_id="lxqt-policykit-agent"] floating enable
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $rosewater $lavender
+client.focused           $lavender $base $text  $rosewater $blue
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
 client.urgent            $peach    $base $peach $overlay0  $peach
 client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
+
+
+# swayfx
+corner_radius 6

@@ -181,7 +181,7 @@ for_window [app_id="kitty"] {
   # opacity 0.9
 
   blur enable
-  # blur_radius 10
+  blur_radius 3
 }
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 0
 
@@ -192,6 +192,13 @@ for_window [class="Code"] {
   focus
   # border pixel 0
   opacity 0.9
+}
+for_window [app_id="code"] {
+  focus
+  opacity 0.9
+
+  blur enable
+  blur_radius 3
 }
 
 #vscode native wayland

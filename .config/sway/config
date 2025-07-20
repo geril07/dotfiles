@@ -1,6 +1,7 @@
 include /etc/sway/config.d/*
 
 default_border pixel 2  
+default_floating_border pixel 2
 hide_edge_borders --i3 none
 font pango:JetBrainsMono 10
 focus_follows_mouse no
@@ -25,7 +26,6 @@ set $down j
 set $up k
 set $right l
 
-
 set $term kitty
 set $drun tofi-drun --prompt-text "Apps: " | xargs swaymsg exec --
 set $run tofi-run --prompt-text "Run: " | xargs swaymsg exec --
@@ -46,6 +46,9 @@ bindsym --to-code {
   XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
   XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
   XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+
+  XF86MonBrightnessUp exec brightnessctl set +10%
+  XF86MonBrightnessDown exec brightnessctl set 10%-
 
 
   $mod+$left focus left
@@ -215,7 +218,7 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $blue      $blue
+client.focused           $blue     $base $text  $blue      $blue
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
 client.urgent            $peach    $base $peach $overlay0  $peach
@@ -225,3 +228,6 @@ client.background        $base
 
 # swayfx
 corner_radius 6
+titlebar_separator enable
+titlebar_border_thickness 2
+titlebar_padding 15 6

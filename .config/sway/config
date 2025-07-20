@@ -1,13 +1,13 @@
 include /etc/sway/config.d/*
 
 default_border pixel 2  
-hide_edge_borders --i3 smart
+hide_edge_borders --i3 none
 font pango:JetBrainsMono 10
 focus_follows_mouse no
 mouse_warping none
 # focus_wrapping workspace
 focus_on_window_activation smart
-smart_borders yes
+# smart_borders yes
 
 gaps inner 8
 
@@ -211,7 +211,7 @@ for_window [app_id="org.gnome.Calculator"] floating enable
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $rosewater $blue
+client.focused           $lavender $base $text  $blue      $blue
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
 client.urgent            $peach    $base $peach $overlay0  $peach

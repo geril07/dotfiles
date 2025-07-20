@@ -50,6 +50,9 @@ return {
 							TabLineFill = { bg = colors.none },
 							TabLineSel = { bg = colors.none },
 
+							BlinkCmpMenuBorder = { fg = colors.blue },
+							BlinkCmpDocBorder = { fg = colors.blue },
+
 							["@keyword.export"] = { fg = colors.mauve },
 							["@tag.attribute"] = { link = "@tag" },
 							["@tag.attribute.tsx"] = { link = "@tag" },

@@ -73,6 +73,8 @@ return {
 				},
 				completion = {
 					menu = {
+						border = "single",
+						min_width = 30,
 						auto_show = true,
 
 						draw = {
@@ -104,6 +106,10 @@ return {
 					documentation = {
 						auto_show = true,
 						auto_show_delay_ms = 150,
+
+						window = {
+							border = "single",
+						},
 					},
 				},
 

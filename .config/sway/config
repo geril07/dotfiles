@@ -179,6 +179,9 @@ for_window [app_id="Alacritty"] {
 for_window [app_id="kitty"] {
   # border pixel 0
   # opacity 0.9
+
+  blur enable
+  # blur_radius 10
 }
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 0
 

@@ -27,13 +27,17 @@ set $right l
 
 
 set $term kitty
+set $drun tofi-drun --prompt-text "Apps: " | xargs swaymsg exec --
+set $run tofi-run --prompt-text "Run: " | xargs swaymsg exec --
 
 bindsym --to-code {
   $mod+Return exec $term
   $mod+Shift+q kill
 
-  $mod+Shift+d exec dmenu_run 
-  $mod+d exec j4-dmenu-desktop
+  # $mod+Shift+d exec dmenu_run 
+  # $mod+d exec j4-dmenu-desktop
+  $mod+Shift+d exec $run
+  $mod+d exec $drun
 
   $mod+Shift+r reload
 

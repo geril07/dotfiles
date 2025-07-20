@@ -10,8 +10,8 @@
     "memory",
     "cpu",
     "network",
-    "pulseaudio",
     "battery",
+    "pulseaudio",
     "hyprland/language",
     "clock",
     "tray",
@@ -61,28 +61,17 @@
   },
 
   "battery": {
+    "interval": 60,
     "states": {
       "warning": 30,
       "critical": 15,
+      "90": 90,
+      "100": 100,
     },
-    "format": "{icon}",
-    "format-charging": "",
-    "format-plugged": "",
-    "format-alt": "{icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ],
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "format-100": "",
+    "max-length": 25,
   },
 
   "pulseaudio": {
@@ -94,5 +83,11 @@
     },
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pavucontrol",
+  },
+
+  "hyprland/language": {
+    "format": "{}",
+    "format-en": "en",
+    "format-ru": "ru",
   },
 }

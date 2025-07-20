@@ -113,7 +113,7 @@ bindsym --to-code {
 
   $mod+r mode "resize"
 
-  $mod+Shift+s exec slurp | grim -g - - | wl-copy
+  $mod+Shift+s exec slurp | grim -g - - | swappy -f -
   Alt+Shift+1 exec obs-recording-toggle.sh
 }
 
@@ -206,6 +206,7 @@ for_window [class="discord"] layout tabbed
 for_window [app_id="discord"] layout tabbed
 
 for_window [app_id="lxqt-policykit-agent"] floating enable
+for_window [app_id="org.gnome.Calculator"] floating enable
 
 include ./catppuccin/frappe
 

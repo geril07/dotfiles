@@ -28,7 +28,7 @@
 }
 
 #workspaces button.focused {
-  border-bottom: 4px solid @peach;
+  border-bottom: 4px solid @blue;
   background: #373b41;
 }
 

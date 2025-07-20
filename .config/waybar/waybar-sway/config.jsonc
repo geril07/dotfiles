@@ -11,14 +11,14 @@
     "cpu",
     "network",
     "pulseaudio",
-    // "battery",
+    "battery",
     "sway/language",
     "clock",
     "tray",
   ],
 
   "network": {
-    "interface": "wlo1",
+    // "interface": "wlo1",
     "format": "{ifname}",
     "format-wifi": " {essid}",
     "format-ethernet": "󰊗 {ipaddr}/{cidr}",
@@ -66,28 +66,17 @@
   },
 
   "battery": {
+    "interval": 60,
     "states": {
       "warning": 30,
       "critical": 15,
+      "90": 90,
+      "100": 100,
     },
-    "format": "{icon}",
-    "format-charging": "",
-    "format-plugged": "",
-    "format-alt": "{icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ],
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "format-100": "",
+    "max-length": 25,
   },
 
   "pulseaudio": {

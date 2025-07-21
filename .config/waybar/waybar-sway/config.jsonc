@@ -18,7 +18,7 @@
   ],
 
   "network": {
-    // "interface": "wlo1",
+    "interface": "wl*",
     "format": "{ifname}",
     "format-wifi": " {essid}",
     "format-ethernet": "󰊗 {ipaddr}/{cidr}",

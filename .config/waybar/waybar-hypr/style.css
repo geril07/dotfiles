@@ -71,13 +71,17 @@
   color: @yellow;
 }
 
-#language {
-  color: @rosewater;
-  min-width: 20px;
+#battery.good {
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
   color: @red;
+}
+
+#language {
+  color: @rosewater;
+  min-width: 20px;
 }
 
 #pulseaudio {

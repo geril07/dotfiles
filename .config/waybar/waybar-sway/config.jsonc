@@ -70,12 +70,12 @@
     "states": {
       "warning": 30,
       "critical": 15,
-      "90": 90,
-      "100": 100,
+      "good": 90,
+      "full": 100,
     },
     "format": "{icon} {capacity}%",
     "format-icons": ["", "", "", "", ""],
-    "format-100": "",
+    "format-full": "",
     "max-length": 25,
   },
 

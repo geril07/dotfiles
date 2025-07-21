@@ -29,7 +29,6 @@ local map_tbl = map_utils.map_tbl
 local on_attach = function(client, bufnr)
 	-- Disable formatting for some servers to use external utils like prettier
 	for _, server in ipairs({
-		"volar",
 		"ts_ls",
 		"vtsls",
 		"biome",
@@ -139,7 +138,7 @@ return {
 		event = "VeryLazy",
 		-- commit = "4ea9083b6d3dff4ddc6da17c51334c3255b7eba5",
 		config = function()
-      require("mason-tool-installer").setup({
+			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"astro-language-server",
 					"bash-language-server",
@@ -172,7 +171,7 @@ return {
 					"zls",
 					"vue-language-server",
 				},
-      })
+			})
 
 			require("mason").setup({
 				ui = {
@@ -234,9 +233,6 @@ return {
 				-- stylelint_lsp = {},
 				sqlls = {
 					root_dir = get_cwd,
-				},
-				volar = {
-					disabled = false,
 				},
 				jsonls = {
 					filetypes = { "json", "jsonc" },
@@ -395,7 +391,7 @@ return {
 		end,
 		dependencies = {
 			"williamboman/mason.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{
 				"j-hui/fidget.nvim",
 				event = "VeryLazy",

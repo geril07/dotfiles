@@ -1,6 +1,6 @@
 ignore-empty-password
 # indicator-idle-visible
-indicator-radius=200
+indicator-radius=100
 
 color=1e1e2e
 bs-hl-color=f5e0dc

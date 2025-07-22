@@ -28,7 +28,7 @@ return {
 					preset = "none",
 
 					["<C-Space>"] = {
-						"hide",
+						"cancel",
 						"show",
 						"fallback",
 					},

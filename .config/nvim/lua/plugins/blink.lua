@@ -89,6 +89,8 @@ return {
 					},
 
 					accept = {
+						resolve_timeout_ms = 50,
+
 						-- neovide cursor flicker
 						dot_repeat = true,
 
@@ -98,7 +100,6 @@ return {
 					},
 
 					list = {
-						-- Insert items while navigating the completion list.
 						selection = { preselect = true, auto_insert = false },
 						max_items = 25,
 					},
@@ -137,7 +138,7 @@ return {
 					default = { "lsp", "path", "snippets", "buffer" },
 
 					providers = {
-						lsp = { fallbacks = {} },
+						lsp = { fallbacks = {}, timeout_ms = 500 },
 					},
 				},
 

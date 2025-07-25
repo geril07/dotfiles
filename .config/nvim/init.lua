@@ -46,3 +46,9 @@ require("my.commands")
 pcall(function()
 	require("vim._extui").enable({})
 end)
+
+-- vim.api.nvim_create_autocmd("CursorMovedI", {
+-- 	callback = function()
+-- 		print("cursor_moved", vim.inspect(vim.api.nvim_win_get_cursor(0)))
+-- 	end,
+-- })

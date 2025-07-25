@@ -37,7 +37,7 @@ map_tbl({
 		},
 	},
 
-	i = {
+	it = {
 		["jk"] = { "<ESC>", { remap = true } },
 		["jj"] = { "<ESC>", { remap = true } },
 		["<C-v>"] = { '<ESC>"+pa', { remap = true } },

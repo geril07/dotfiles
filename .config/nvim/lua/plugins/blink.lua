@@ -86,7 +86,7 @@ return {
 				},
 
 				accept = {
-					resolve_timeout_ms = 2000, --50,
+					resolve_timeout_ms = 50, --50,
 
 					-- neovide cursor flicker
 					dot_repeat = true,
@@ -135,7 +135,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
-					lsp = { fallbacks = {}, timeout_ms = 2000 },
+					lsp = { fallbacks = {}, timeout_ms = 500 },
 				},
 			},
 

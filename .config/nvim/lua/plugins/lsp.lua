@@ -254,6 +254,11 @@ return {
 				},
 				tailwindcss = {
 					disabled = false,
+					settings = {
+						tailwindCSS = {
+							classFunctions = { "cva", "cx", "cn", "twMerge" },
+						},
+					},
 				},
 				eslint = {
 					root_dir = get_cwd,

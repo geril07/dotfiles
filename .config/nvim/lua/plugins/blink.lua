@@ -13,7 +13,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = { "LuaSnip" },
 		build = "cargo +nightly build --release",
-		dev = false,
+		dev = true,
 		lazy = true,
 		enabled = true,
 		opts = {
@@ -115,10 +115,12 @@ return {
 				sorts = {
 					"exact",
 					"score",
-					-- shorter first
-					function(a, b)
-						return #a.label < #b.label
-					end,
+					"sort_text",
+					-- "label_shorter_first",
+					-- shorter first, will have to use lua sort!
+					-- function(a, b)
+					-- 	return #a.label < #b.label
+					-- end,
 					"label",
 				},
 			},

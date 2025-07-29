@@ -184,8 +184,14 @@ return {
 			})
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			pcall(function()
+				if package.loaded["blink.cmp"] then
+					capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+				elseif package.loaded["cmp_nvim_lsp"] then
+					capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+				end
+			end)
 
 			local lspconfig = require("lspconfig")
 

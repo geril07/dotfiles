@@ -13,7 +13,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = { "LuaSnip" },
 		build = "cargo +nightly build --release",
-		dev = true,
+		dev = false,
 		lazy = true,
 		enabled = true,
 		opts = {
@@ -82,6 +82,13 @@ return {
 							{ "kind_icon" },
 							{ "label", "label_description", gap = 1 },
 						},
+						components = {
+							kind_icon = {
+								text = function(ctx)
+									return ctx.kind_icon .. ctx.icon_gap .. " "
+								end,
+							},
+						},
 					},
 				},
 
@@ -137,7 +144,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
-					lsp = { fallbacks = {}, timeout_ms = 500 },
+					lsp = { fallbacks = {}, timeout_ms = 5000 },
 				},
 			},
 

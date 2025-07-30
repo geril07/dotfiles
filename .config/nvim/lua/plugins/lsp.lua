@@ -215,16 +215,16 @@ return {
 				gleam = {},
 				ocamllsp = {},
 
-				ts_ls = {
-					disabled = true,
-					root_dir = get_cwd_root_dir,
-				},
-
 				vue_ls = {
 					root_dir = get_ts_root_dir,
 				},
 
+				ts_ls = {
+					disabled = true,
+					root_dir = get_cwd_root_dir,
+				},
 				vtsls = {
+					disabled = false,
 					root_dir = get_ts_root_dir,
 					filetypes = {
 						"javascript",

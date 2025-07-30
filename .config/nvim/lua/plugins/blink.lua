@@ -119,6 +119,7 @@ return {
 			},
 
 			fuzzy = {
+				max_typos = 0,
 				sorts = {
 					"exact",
 					"score",
@@ -144,7 +145,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
-					lsp = { fallbacks = {}, timeout_ms = 5000 },
+					lsp = { fallbacks = {}, timeout_ms = 500 },
 				},
 			},
 

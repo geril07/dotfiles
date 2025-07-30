@@ -120,7 +120,8 @@ bindsym --to-code {
 
   $mod+r mode "resize"
 
-  $mod+Shift+s exec slurp | grim -g - - | swappy -f -
+  # swappy -f -
+  $mod+Shift+s exec slurp | grim -g - - | wl-copy
   Alt+Shift+1 exec obs-recording-toggle.sh
 }
 

@@ -1,3 +1,4 @@
+-- vim.lsp.set_log_level(vim.log.levels.DEBUG)
 --- HACK: Override `vim.lsp.util.stylize_markdown` to use Treesitter.
 ---@param bufnr integer
 ---@param contents string[]
@@ -15,8 +16,24 @@ vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
 	return contents
 end
 
-local get_cwd = function()
-	return vim.uv.cwd()
+local function get_cwd_root_dir(bufnr, cb)
+	cb(vim.uv.cwd())
+end
+
+local function get_ts_root_dir(bufnr, cb)
+	local fname = vim.uri_to_fname(vim.uri_from_bufnr(bufnr))
+
+	local ts_root = vim.fs.find("tsconfig.json", { upward = true, path = fname })[1]
+	-- Use the git root to deal with monorepos where TypeScript is installed in the root node_modules folder.
+	local git_root = vim.fs.find(".git", { upward = true, path = fname })[1]
+
+	if git_root then
+		cb(vim.fn.fnamemodify(git_root, ":h"))
+	elseif ts_root then
+		cb(vim.fn.fnamemodify(ts_root, ":h"))
+	else
+		get_cwd_root_dir(bufnr, cb)
+	end
 end
 
 -- local methods = vim.lsp.protocol.Methods
@@ -193,23 +210,31 @@ return {
 				end
 			end)
 
-			local lspconfig = require("lspconfig")
-
 			local servers = {
 				zls = {},
-				gleam = {
-					root_dir = get_cwd,
-				},
-				ocamllsp = {
-					root_dir = get_cwd,
-				},
+				gleam = {},
+				ocamllsp = {},
+
 				ts_ls = {
 					disabled = true,
-					root_dir = get_cwd,
+					root_dir = get_cwd_root_dir,
 				},
+
+				vue_ls = {
+					root_dir = get_ts_root_dir,
+				},
+
 				vtsls = {
-					root_dir = get_cwd,
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					root_dir = get_ts_root_dir,
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"vue",
+					},
 					settings = {
 						typescript = { format = { enable = false } },
 						javascript = { format = { enable = false } },
@@ -230,16 +255,12 @@ return {
 						},
 					},
 				},
-				bashls = {
-					root_dir = get_cwd,
-				},
+				bashls = {},
 				html = {},
 				cssls = {},
 				-- cssmodules_ls = {},
 				-- stylelint_lsp = {},
-				sqlls = {
-					root_dir = get_cwd,
-				},
+				sqlls = {},
 				jsonls = {
 					filetypes = { "json", "jsonc" },
 					settings = {
@@ -267,7 +288,7 @@ return {
 					},
 				},
 				eslint = {
-					root_dir = get_cwd,
+					root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
 					settings = { format = false },
 				},
 				pylsp = {},
@@ -313,7 +334,6 @@ return {
 				dockerls = {},
 				prismals = {},
 				gopls = {
-					root_dir = get_cwd,
 					settings = { gopls = { completeFunctionCalls = false } },
 				},
 				emmet_language_server = {
@@ -361,7 +381,8 @@ return {
 				}
 
 				if not server_disabled then
-					lspconfig[server].setup(vim.tbl_deep_extend("force", default_options, config))
+					vim.lsp.config(server, vim.tbl_deep_extend("force", default_options, config))
+					vim.lsp.enable(server)
 				end
 			end
 

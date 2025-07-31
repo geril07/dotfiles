@@ -119,7 +119,7 @@ return {
 			},
 
 			fuzzy = {
-				max_typos = 0,
+				max_typos = 1,
 				sorts = {
 					"exact",
 					"score",

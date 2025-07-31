@@ -10,3 +10,5 @@ export LANG="en_GB.UTF-8"
 # export QT_QPA_PLATFORM=wayland
 
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+[ -f "/home/ilya/.ghcup/env" ] && . "/home/ilya/.ghcup/env" # ghcup-env

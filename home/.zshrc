@@ -38,3 +38,5 @@ alias vim="nvim"
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "tmux-sessioner\n"
 
+
+[ -f "/home/ilya/.ghcup/env" ] && . "/home/ilya/.ghcup/env" # ghcup-env

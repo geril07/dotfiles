@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 
-vim.o.fillchars = "eob: "
 vim.o.swapfile = false
 vim.o.signcolumn = "yes"
 vim.o.ignorecase = true
@@ -37,12 +36,20 @@ vim.o.cursorline = false
 vim.o.showmode = false
 vim.o.laststatus = 3
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100, priority = 250 })
-	end,
-})
+-- folds
+vim.o.foldcolumn = "1"
+vim.o.foldlevelstart = 99
+vim.wo.foldtext = ""
+
+local arrows = require("my.icons").arrows
+-- UI characters.
+vim.opt.fillchars = {
+	eob = " ",
+	fold = " ",
+	foldclose = arrows.right,
+	foldopen = arrows.down,
+	foldsep = " ",
+}
 
 local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
 local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]

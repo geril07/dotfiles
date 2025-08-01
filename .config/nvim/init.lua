@@ -38,14 +38,29 @@ require("lazy").setup("plugins", {
 	},
 })
 
-require("my.winbar")
-require("my.settings")
-require("my.keymaps")
-require("my.gui")
-require("my.commands")
-pcall(function()
-	require("vim._extui").enable({})
-end)
+local modules_to_require = {
+	"my.options",
+	"my.winbar",
+	"my.autocmds",
+	"my.autosave",
+	"my.commands",
+	"my.filetype",
+	"my.gui",
+	"my.keymaps",
+	"my.overrides",
+
+	"vim._extui",
+}
+
+for _, my_module in ipairs(modules_to_require) do
+	local _, err = pcall(function()
+		require(my_module)
+	end)
+
+	if err ~= nil then
+		print(err)
+	end
+end
 
 -- vim.api.nvim_create_autocmd("CursorMovedI", {
 -- 	callback = function()

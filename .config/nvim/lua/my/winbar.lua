@@ -31,7 +31,8 @@ local config = vim.tbl_extend("force", {}, default_config, {
 		"fzf",
 		"",
 	},
-	left_spacing = " ",
+	-- left_spacing = "       ",
+  left_spacing = nil
 })
 
 local status_web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")

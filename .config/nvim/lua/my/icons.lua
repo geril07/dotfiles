@@ -37,4 +37,18 @@ M.misc = {
 	vertical_bar = "│",
 }
 
+--- For folding.
+-- M.arrows = {
+-- 	right = "",
+-- 	left = "",
+-- 	up = "",
+-- 	down = "",
+-- }
+M.arrows = {
+	right = "",
+	left = "",
+	up = "",
+	down = "",
+}
+
 return M

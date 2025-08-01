@@ -14,7 +14,7 @@ return {
 		dependencies = { "LuaSnip" },
 		build = "cargo +nightly build --release",
 		dev = false,
-		lazy = true,
+		event = "InsertEnter",
 		enabled = true,
 		opts = {
 			enabled = function()

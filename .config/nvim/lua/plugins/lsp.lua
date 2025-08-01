@@ -214,6 +214,7 @@ return {
 				zls = {},
 				gleam = {},
 				ocamllsp = {},
+				hls = {},
 
 				vue_ls = {
 					root_dir = get_ts_root_dir,
@@ -280,7 +281,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					disabled = false,
+					disabled = true,
 					settings = {
 						tailwindCSS = {
 							classFunctions = { "cva", "cx", "cn", "twMerge" },

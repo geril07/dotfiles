@@ -37,7 +37,7 @@ vim.o.showmode = false
 vim.o.laststatus = 3
 
 -- folds
-vim.o.foldcolumn = "1"
+vim.o.foldcolumn = "0"
 vim.o.foldlevelstart = 99
 vim.wo.foldtext = ""
 

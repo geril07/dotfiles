@@ -69,7 +69,7 @@ require("nvim-tree").setup({
 		width = tree_utils.width,
 		float = {
 			enable = is_float,
-			quit_on_focus_loss = false,
+			quit_on_focus_loss = true,
 			open_win_config = function()
 				local screen_w = vim.opt.columns:get()
 				local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()

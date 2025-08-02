@@ -1,7 +1,10 @@
 {
   "layer": "top",
   "position": "bottom", // Waybar position (top|bottom|left|right)
-  "height": 35,
+  "height": 32,
+  "margin-right": 8,
+  "margin-left": 8,
+  "margin-bottom": 3,
 
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["custom/music"],

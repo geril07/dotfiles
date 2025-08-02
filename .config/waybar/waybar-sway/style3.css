@@ -1,6 +1,4 @@
-@import "macchiato.css";
-
-@define-color bg @mantle;
+@import "mocha.css";
 
 * {
   font-family: JetBrainsMono Nerd Font;
@@ -10,41 +8,33 @@
 }
 
 #waybar {
-  /* border: 2px solid @blue; */
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.5);
   /* background: @base; */
   color: @text;
 }
 
-#workspaces {
-  background-color: @bg;
-  border-radius: 1rem;
-}
-
 #workspaces button,
 #workspaces button:hover {
+  margin: 0;
   border-radius: 0px;
   border: none;
   background: none;
   box-shadow: inherit;
   text-shadow: inherit;
 
-  padding: 0px 10px;
-  color: @surface2;
+  padding: 0px 12px;
+  color: @lavender;
   border-bottom: 4px solid transparent;
 }
 
 #workspaces button.focused {
-  /* border-bottom: 4px solid @blue; */
-  /* background: #373b41; */
-  /* background: @blue; */
-  color: @blue;
+  border-bottom: 4px solid @blue;
+  background: #373b41;
 }
 
 #workspaces button.urgent {
-  /* background-color: @red; */
-  color: @red;
+  background-color: @red;
+  color: @base;
 }
 
 #custom-music,
@@ -61,30 +51,12 @@
 #disk,
 #mode,
 #network {
-  background-color: @bg;
-  padding: 0 7.5px;
-  /* margin: 0 7.5px; */
+  padding: 0;
+  margin: 0 7.5px;
 }
 
 #tray {
-  padding: 0 10px 0 7.5px;
-  border-radius: 1rem;
-  margin-left: 10px;
-}
-
-#clock,
-#network {
-  border-radius: 0px 1rem 1rem 0px;
-}
-
-#pulseaudio,
-#disk {
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 10px;
-}
-
-#custom-music {
-  border-radius: 1rem;
+  margin: 0 10px 0 7.5px;
 }
 
 #memory,

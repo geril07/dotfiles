@@ -69,6 +69,10 @@ return {
 				["<C-j>"] = { "scroll_documentation_down", "fallback" },
 			},
 			completion = {
+				trigger = {
+					show_on_blocked_trigger_characters = { " ", "\n", "\t", "{", "}" },
+				},
+
 				menu = {
 					border = "single",
 					min_width = 30,

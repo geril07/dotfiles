@@ -4,6 +4,7 @@ return {
 		name = "catppuccin",
 		lazy = false,
 		priority = 1000,
+		version = "1.11.0",
 		config = function()
 			local utils = require("my.utils")
 			local transparent = utils.transparent
@@ -13,6 +14,9 @@ return {
 				flavour = "macchiato",
 				-- flavour = "mocha",
 				transparent_background = transparent,
+				float = {
+					transparent = transparent,
+				},
 				highlight_overrides = {
 					all = function(colors)
 						return {

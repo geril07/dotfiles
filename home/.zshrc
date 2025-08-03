@@ -25,6 +25,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.profile ] && source ~/.profile
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -s "/home/ilya/.bun/_bun" ] && source "/home/ilya/.bun/_bun"
+source <(fzf --zsh)
 
 eval "$(oh-my-posh init zsh --config $HOME/ohmyposh.json)"
 # eval "$(zoxide init --cmd cd zsh)"

@@ -11,8 +11,8 @@ return {
 		enabled = true,
 		opts = function()
 			local actions = require("fzf-lua.actions")
-			local tree_api = require("nvim-tree.api")
-			local tree_utils = require("my.nvim-tree.utils")
+
+			require("fzf-lua").register_ui_select()
 
 			return {
 				{ "hide", "border-fused" },

@@ -11,7 +11,7 @@
 
 #waybar {
   /* border: 2px solid @blue; */
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: rgba(0, 0, 0, 0.15);
   /* background: @base; */
   color: @text;
@@ -19,7 +19,7 @@
 
 #workspaces {
   background-color: @bg;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 #workspaces button,
@@ -68,23 +68,23 @@
 
 #tray {
   padding: 0 10px 0 7.5px;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin-left: 10px;
 }
 
 #clock,
 #network {
-  border-radius: 0px 1rem 1rem 0px;
+  border-radius: 0px 0.5rem 0.5rem 0px;
 }
 
 #pulseaudio,
 #disk {
-  border-radius: 1rem 0px 0px 1rem;
+  border-radius: 0.5rem 0px 0px 0.5rem;
   margin-left: 10px;
 }
 
 #custom-music {
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 #memory,

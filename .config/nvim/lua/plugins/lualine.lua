@@ -77,7 +77,8 @@ return {
 						path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
 					},
 				},
-				lualine_x = { lsp_progress_component, "filetype" },
+				-- lualine_x = { lsp_progress_component, "filetype" },
+				lualine_x = { "lsp_status", "filetype" },
 				-- lualine_x = { harpoon_files, "filetype" },
 				lualine_y = { "progress" },
 

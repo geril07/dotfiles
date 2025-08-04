@@ -51,4 +51,13 @@ function M.cmd(map)
 	return ":" .. map .. "<CR>"
 end
 
+---@param tbl table
+---@return table
+function M.wrap_into_silent(tbl)
+	for _, value in ipairs(tbl) do
+		value.silent = true
+	end
+	return tbl
+end
+
 return M

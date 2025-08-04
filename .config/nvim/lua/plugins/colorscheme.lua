@@ -57,6 +57,9 @@ return {
 							BlinkCmpMenuBorder = { fg = colors.blue },
 							BlinkCmpDocBorder = { fg = colors.blue },
 
+							SnacksInputBorder = { fg = colors.blue },
+							SnacksInputTitle = { fg = colors.blue },
+
 							["@keyword.export"] = { fg = colors.mauve },
 							["@tag.attribute"] = { link = "@tag" },
 							["@tag.attribute.tsx"] = { link = "@tag" },

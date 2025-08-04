@@ -40,6 +40,6 @@ api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 api.nvim_create_autocmd({ "Filetype" }, {
-	pattern = { "lazy", "DressingInput" },
+	pattern = { "lazy", "DressingInput", "snacks_input" },
 	callback = toggle_tree_focus,
 })

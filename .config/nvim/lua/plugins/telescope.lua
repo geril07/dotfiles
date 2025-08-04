@@ -1,8 +1,11 @@
+local map_utils = require("my.utils.map")
+local mcmd = map_utils.cmd
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dev = false,
-		enabled = true,
+		enabled = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{
@@ -136,5 +139,42 @@ return {
 				end,
 			})
 		end,
+
+		keys = {
+			{ "<leader>snp", mcmd("Telescope neoclip plus") },
+			{ "<leader>sn", mcmd("Telescope neoclip") },
+			{ "<leader>snu", mcmd("Telescope neoclip unnamed") },
+			{ "<leader>sns", mcmd("Telescope neoclip star") },
+			{ "<leader>ff", mcmd("Telescope find_files") },
+			{ "<leader>p", mcmd("Telescope find_files") },
+			{ "<leader>P", mcmd("Telescope") },
+			{ "<leader>fp", mcmd("Telescope resume") },
+			{ "<C-p>", mcmd("Telescope find_files") },
+			{ "<leader>fz", mcmd("Telescope live_grep") },
+			{
+				"<leader>fx",
+				function()
+					require("telescope.builtin").grep_string({
+						search = vim.fn.input("Grep: "),
+					})
+				end,
+			},
+			{ "<leader>fl", mcmd("Telescope grep_string") },
+			{ "<leader>fb", mcmd("Telescope buffers") },
+			{ "<leader>fg", mcmd("Telescope git_files") },
+			{ "<leader>u", mcmd("Telescope undo") },
+			{ "<leader>fh", mcmd("Telescope harpoon marks initial_mode=normal") },
+			{ "<leader>fm", mcmd("Telescope marks") },
+			{ "<leader>fs", mcmd("Telescope lsp_document_symbols") },
+			{ "<leader>fw", mcmd("Telescope lsp_dynamic_workspace_symbols") },
+			{ "gf", mcmd("Telescope lsp_references") },
+			{ "gt", mcmd("Telescope lsp_type_definitions") },
+			{ "<leader>fd", mcmd("Telescope diagnostics ") },
+
+			{ "<leader>d", mcmd("Telescope lsp_definitions") },
+			{ "gd", mcmd("Telescope lsp_definitions") },
+
+			{ "gi", mcmd("Telescope lsp_implementations") },
+		},
 	},
 }

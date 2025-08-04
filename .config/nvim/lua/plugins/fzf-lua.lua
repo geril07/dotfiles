@@ -8,6 +8,7 @@ return {
 		cmd = "FzfLua",
 		event = "VeryLazy",
 		dev = false,
+		enabled = true,
 		opts = function()
 			local actions = require("fzf-lua.actions")
 			local tree_api = require("nvim-tree.api")

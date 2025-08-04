@@ -98,7 +98,6 @@ local on_attach = function(client, bufnr)
 	-- Mappings.lsp
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	local builtin = require("telescope.builtin")
 
 	map_tbl({
 		i = {
@@ -108,10 +107,7 @@ local on_attach = function(client, bufnr)
 		n = {
 			["gD"] = { vim.lsp.buf.declaration, bufopts },
 			["<leader>lh"] = { vim.lsp.buf.hover, bufopts },
-			["gi"] = { ":Telescope lsp_implementations<CR>", bufopts },
 
-			["<leader>d"] = { builtin.lsp_definitions, bufopts },
-			["gd"] = { builtin.lsp_definitions, bufopts },
 			["<leader>k"] = { vim.lsp.buf.signature_help, bufopts },
 			["<leader>r"] = { vim.lsp.buf.rename, bufopts },
 			["<leader>la"] = { vim.lsp.buf.code_action, bufopts },

@@ -19,8 +19,8 @@ export ZSH="$HOME/.oh-my-zsh"
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export EDITOR="nvim"
 
-export LEX_GITLAB_AUTH_TOKEN=$(cat ~/.lex-gitlab-auth-token)
-export NPM_TOKEN=$(cat ~/.npm-token)
+[[ -f ~/.lex-gitlab-auth-token ]] && export LEX_GITLAB_AUTH_TOKEN=$(<~/.lex-gitlab-auth-token)
+[[ -f ~/.npm-token ]] && export NPM_TOKEN=$(cat ~/.npm-token)
 
 source $ZSH/oh-my-zsh.sh
 [[ ! -r /home/ilya/.opam/opam-init/init.zsh ]] || source /home/ilya/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

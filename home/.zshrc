@@ -8,12 +8,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# catppuccin macchiato
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
 --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
---color=selected-bg:#494d64 \
---multi --bind change:first --no-cycle --height=5% --layout=reverse" 
+--color=selected-bg:#494d64" 
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--multi --bind change:first --no-cycle --height=15% --layout=reverse --min-height 15"
+
+export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 
 export ZSH="$HOME/.oh-my-zsh"
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"

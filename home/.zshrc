@@ -1,9 +1,5 @@
 zstyle ':omz:update' mode disabled
 
-ZSH_THEME="robbyrussell"
-
-plugins=(git zsh-autosuggestions) # z
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -28,11 +24,17 @@ export EDITOR="nvim"
 [[ -f ~/.lex-gitlab-auth-token ]] && export LEX_GITLAB_AUTH_TOKEN=$(<~/.lex-gitlab-auth-token)
 [[ -f ~/.npm-token ]] && export NPM_TOKEN=$(cat ~/.npm-token)
 
+
+ZSH_THEME="robbyrussell"
+
+plugins=(git zsh-autosuggestions) # z
+
 source $ZSH/oh-my-zsh.sh
 source <(fzf --zsh)
 [[ ! -r /home/ilya/.opam/opam-init/init.zsh ]] || source /home/ilya/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 [ -f ~/.profile ] && source ~/.profile
 [ -s "/home/ilya/.bun/_bun" ] && source "/home/ilya/.bun/_bun"
+[ -f "/home/ilya/.ghcup/env" ] && . "/home/ilya/.ghcup/env" # ghcup-env
 
 eval "$(oh-my-posh init zsh --config $HOME/ohmyposh.json)"
 eval "$(zoxide init zsh)"
@@ -45,7 +47,3 @@ alias vim="nvim"
 
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "tmux-sessioner\n"
-
-
-[ -f "/home/ilya/.ghcup/env" ] && . "/home/ilya/.ghcup/env" # ghcup-env
-

@@ -11,11 +11,22 @@ return {
 		enabled = true,
 		opts = function()
 			local actions = require("fzf-lua.actions")
+			-- vim.env.FZF_DEFAULT_OPTS = ""
 
 			require("fzf-lua").register_ui_select()
 
 			return {
 				{ "hide", "border-fused" },
+				fzf_opts = { ["--keep-right"] = "" },
+				-- fzf_colors = {
+				-- 	["hl"] = { "fg", "TelescopeMatching", "reverse" },
+				-- 	["hl+"] = { "fg", "TelescopeMatching", "reverse" },
+				-- },
+
+				defaults = {
+					formatter = "path.dirname_first",
+				},
+
 				winopts = {
 					title = "",
 					height = 0.85, -- window height
@@ -28,6 +39,7 @@ return {
 						vertical = "down:50%",
 						hidden = true,
 					},
+					treesitter = false,
 
 					-- on_create = function()
 					-- 	local tree_api = require("nvim-tree.api")
@@ -69,9 +81,11 @@ return {
 					},
 				},
 
+				lines = {},
+				blines = {},
 				files = {
-					winopts = { preview = { hidden = false } },
 					cwd_prompt = false,
+					-- fzf_opts = { ["--tiebreak"] = "length,begin,end" },
 				},
 
 				oldfiles = {
@@ -79,6 +93,7 @@ return {
 				},
 
 				lsp = {
+
 					symbols = {
 						winopts = { preview = { hidden = false } },
 						symbol_icons = require("my.icons").symbol_kinds,
@@ -98,8 +113,8 @@ return {
 			}
 		end,
 		keys = map_utils.wrap_into_silent({
-			{ "<leader>ffl", mcmd("FzfLua blines") },
-			{ "<leader>ffb", mcmd("FzfLua lines") },
+			{ "<leader>ffl", mcmd("FzfLua lines") },
+			{ "<leader>ffb", mcmd("FzfLua blines") },
 			{ "<leader>p", mcmd("FzfLua files") },
 			{ "<C-p>", mcmd("FzfLua files") },
 			{ "<leader>P", mcmd("FzfLua") },

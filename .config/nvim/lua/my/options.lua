@@ -51,6 +51,9 @@ vim.opt.fillchars = {
 	foldsep = " ",
 }
 
+-- Use rounded borders for floating windows.
+vim.o.winborder = "rounded"
+
 local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
 local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
 local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]

@@ -67,15 +67,12 @@ map_tbl({
 		["<leader>sb"] = mcmd("Lspsaga show_buf_diagnostics"),
 		["<leader>sw"] = mcmd("Lspsaga show_workspace_diagnostics"),
 		["<leader>so"] = mcmd("Lspsaga outline"),
-		["<leader>sh"] = mcmd("Lspsaga hover_doc"),
-		["gh"] = mcmd("Lspsaga hover_doc"),
-		["<leader>sf"] = mcmd("Lspsaga lsp_finder"),
+		["<leader>cd"] = mcmd("Lspsaga show_line_diagnostics"),
+		["gp"] = mcmd("Lspsaga peek_definition"),
+
 		["<leader>ha"] = mcmd("lua require('harpoon.mark').add_file()"),
 		["<leader>hl"] = mcmd("lua require('harpoon.ui').toggle_quick_menu()"),
-		["<leader>cd"] = mcmd("Lspsaga show_line_diagnostics"),
-		--?
-		-- ["<leader>cd"] = ":Lspsaga show_cursor_diagnostics<CR>",
-		["gp"] = mcmd("Lspsaga peek_definition"),
+
 		["<leader>tc"] = mcmd("TSContext toggle"),
 
 		["<A-z>"] = function()
@@ -85,6 +82,7 @@ map_tbl({
 
 	nv = {
 		["<leader>ca"] = mcmd("Lspsaga code_action"),
+
 		["<leader>gs"] = mcmd("Gitsigns"),
 		["<leader>gp"] = mcmd("Gitsigns preview_hunk"),
 		["<leader>gbs"] = mcmd("Gitsigns stage_buffer"),

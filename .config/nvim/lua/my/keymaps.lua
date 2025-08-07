@@ -41,6 +41,8 @@ map_tbl({
 		["jk"] = { "<ESC>", { remap = true } },
 		["jj"] = { "<ESC>", { remap = true } },
 		["<C-v>"] = { '<ESC>"+pa', { remap = true } },
+
+		["<M-k>"] = { vim.lsp.buf.signature_help },
 	},
 
 	n = {
@@ -67,6 +69,7 @@ map_tbl({
 		["<leader>sb"] = mcmd("Lspsaga show_buf_diagnostics"),
 		["<leader>sw"] = mcmd("Lspsaga show_workspace_diagnostics"),
 		["<leader>so"] = mcmd("Lspsaga outline"),
+		["<leader>sh"] = mcmd("Lspsaga hover_doc"),
 		["<leader>cd"] = mcmd("Lspsaga show_line_diagnostics"),
 		["gp"] = mcmd("Lspsaga peek_definition"),
 
@@ -78,6 +81,42 @@ map_tbl({
 		["<A-z>"] = function()
 			vim.wo.wrap = not vim.wo.wrap
 		end,
+
+		["gD"] = { vim.lsp.buf.declaration },
+		["gh"] = { vim.lsp.buf.hover },
+
+		["<leader>k"] = { vim.lsp.buf.signature_help },
+		["<leader>r"] = { vim.lsp.buf.rename },
+		["<leader>la"] = { vim.lsp.buf.code_action },
+
+		["<leader>ld"] = function()
+			vim.diagnostic.open_float({
+				scope = "line",
+				source = "if_many",
+			})
+		end,
+
+		["]e"] = {
+			function()
+				vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
+			end,
+		},
+		["[e"] = {
+			function()
+				vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
+			end,
+		},
+
+		["]d"] = {
+			function()
+				vim.diagnostic.jump({ count = 1, float = true })
+			end,
+		},
+		["[d"] = {
+			function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end,
+		},
 	},
 
 	nv = {

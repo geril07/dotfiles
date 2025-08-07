@@ -36,10 +36,6 @@ local function get_ts_root_dir(bufnr, cb)
 	end
 end
 
--- local methods = vim.lsp.protocol.Methods
-local map_utils = require("my.utils.map")
-local map_tbl = map_utils.map_tbl
-
 --- Sets up LSP keymaps and autocommands for the given buffer.
 ---@param client vim.lsp.Client
 ---@param bufnr integer
@@ -94,54 +90,6 @@ local on_attach = function(client, bufnr)
 		select_signature_key = "<A-n>", -- cycle to next signature, e.g. '<M-n>' function overloading
 		floating_window = false,
 	}, bufnr)
-
-	-- Mappings.lsp
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-	map_tbl({
-		i = {
-			["<M-k>"] = { vim.lsp.buf.signature_help, bufopts },
-		},
-
-		n = {
-			["gD"] = { vim.lsp.buf.declaration, bufopts },
-			["<leader>lh"] = { vim.lsp.buf.hover, bufopts },
-
-			["<leader>k"] = { vim.lsp.buf.signature_help, bufopts },
-			["<leader>r"] = { vim.lsp.buf.rename, bufopts },
-			["<leader>la"] = { vim.lsp.buf.code_action, bufopts },
-
-			["<leader>ld"] = function()
-				vim.diagnostic.open_float({
-					scope = "line",
-					source = "if_many",
-				})
-			end,
-
-			["]e"] = {
-				function()
-					vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
-				end,
-			},
-			["[e"] = {
-				function()
-					vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
-				end,
-			},
-
-			["]d"] = {
-				function()
-					vim.diagnostic.jump({ count = 1, float = true })
-				end,
-			},
-			["[d"] = {
-				function()
-					vim.diagnostic.jump({ count = -1, float = true })
-				end,
-			},
-		},
-	})
 end
 
 return {

@@ -45,8 +45,8 @@ return {
 							["<C-k>"] = actions.preview_scrolling_up,
 							["<C-l>"] = actions.preview_scrolling_right,
 							["<C-h>"] = actions.preview_scrolling_left,
-							["<M-s>"] = actions.select_vertical,
-							["<M-h>"] = actions.select_horizontal,
+							["<M-s>"] = actions.select_horizontal,
+							["<M-v>"] = actions.select_vertical,
 							["<C-u>"] = false,
 						},
 						n = {

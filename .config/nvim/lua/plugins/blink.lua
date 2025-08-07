@@ -149,7 +149,7 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
-					lsp = { fallbacks = {}, timeout_ms = 500 },
+					lsp = { fallbacks = {}, timeout_ms = 300 },
 				},
 			},
 

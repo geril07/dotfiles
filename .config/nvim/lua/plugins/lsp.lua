@@ -233,7 +233,7 @@ return {
 					},
 				},
 				eslint = {
-					enabled = false,
+					enabled = true,
 					root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
 					settings = { format = false },
 				},

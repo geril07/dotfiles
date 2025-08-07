@@ -84,6 +84,7 @@ return {
 				lines = {},
 				blines = {},
 				files = {
+					winopts = { preview = { hidden = false, delay = 100 } },
 					cwd_prompt = false,
 					fzf_opts = { ["--tiebreak"] = "length" },
 				},
@@ -93,6 +94,7 @@ return {
 				},
 
 				lsp = {
+					winopts = { preview = { hidden = false } },
 
 					symbols = {
 						winopts = { preview = { hidden = false } },

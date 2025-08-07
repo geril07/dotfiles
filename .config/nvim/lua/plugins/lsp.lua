@@ -165,11 +165,11 @@ return {
 				},
 
 				ts_ls = {
-					disabled = true,
+					enabled = false,
 					root_dir = get_cwd_root_dir,
 				},
 				vtsls = {
-					disabled = false,
+					enabled = true,
 					root_dir = get_ts_root_dir,
 					filetypes = {
 						"javascript",
@@ -225,7 +225,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					disabled = true,
+					enabled = false,
 					settings = {
 						tailwindCSS = {
 							classFunctions = { "cva", "cx", "cn", "twMerge" },
@@ -233,12 +233,13 @@ return {
 					},
 				},
 				eslint = {
+					enabled = false,
 					root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
 					settings = { format = false },
 				},
 				pylsp = {},
 				graphql = {
-					disabled = true,
+					enabled = false,
 				},
 				rust_analyzer = {
 					settings = {
@@ -301,7 +302,7 @@ return {
 					},
 				},
 				emmet_ls = {
-					disabled = true,
+					enabled = false,
 					filetypes = {
 						"astro",
 						"css",
@@ -318,14 +319,14 @@ return {
 			}
 
 			for server, config in pairs(servers) do
-				local server_disabled = (config.disabled ~= nil and config.disabled) or false
+				local is_server_enabled = config.enabled == nil and true or config.enabled
 
 				local default_options = {
 					on_attach = on_attach,
 					capabilities = capabilities,
 				}
 
-				if not server_disabled then
+				if is_server_enabled then
 					vim.lsp.config(server, vim.tbl_deep_extend("force", default_options, config))
 					vim.lsp.enable(server)
 				end

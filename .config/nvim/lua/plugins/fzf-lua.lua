@@ -85,7 +85,7 @@ return {
 				blines = {},
 				files = {
 					cwd_prompt = false,
-					-- fzf_opts = { ["--tiebreak"] = "length,begin,end" },
+					fzf_opts = { ["--tiebreak"] = "length" },
 				},
 
 				oldfiles = {

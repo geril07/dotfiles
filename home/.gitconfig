@@ -36,3 +36,11 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[delta]
+  line-numbers = true
+	features = catppuccin-macchiato
+
+[include]
+  path=~/catppuccin.gitconfig
+

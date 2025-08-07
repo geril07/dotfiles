@@ -10,3 +10,6 @@ gui:
 
 git:
   fetchAll: false
+  # paging:
+  #   colorArg: always
+  #   pager: delta --dark --paging=never

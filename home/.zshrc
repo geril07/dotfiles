@@ -1,6 +1,22 @@
 zstyle ':omz:update' mode disabled
 
+setopt HIST_FIND_NO_DUPS        # do not display previously found command
+setopt HIST_IGNORE_DUPS         # do not save duplicate of prior command
+setopt HIST_IGNORE_SPACE        # do not save if line starts with space
+setopt HIST_NO_STORE            # do not save history commands
+setopt HIST_REDUCE_BLANKS       # strip superfluous blanks
+setopt INC_APPEND_HISTORY       # don’t wait for shell to exit to save history lines
+
+# setopt HIST_ALLOW_CLOBBER       # related to shell clobber setting
+# setopt HIST_IGNORE_ALL_DUPS     # remove old event if new one is a duplicate
+# setopt HIST_LEX_WORDS           # related to how white space is saved
+# setopt HIST_NO_FUNCTIONS        # do not save function commands
+# setopt HIST_SAVE_NO_DUPS        # omit older duplicates of newer commands
+# setopt HIST_SUBST_PATTERN       # use pattern matching for substitutions
+# setopt HIST_VERIFY              # expand command line without executing it
+
 export NVM_DIR="$HOME/.nvm"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

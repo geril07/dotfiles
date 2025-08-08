@@ -168,9 +168,11 @@ return {
 					enabled = false,
 					root_dir = get_cwd_root_dir,
 				},
-				tsgo = {},
-				vtsls = {
+				tsgo = {
 					enabled = false,
+				},
+				vtsls = {
+					enabled = true,
 					root_dir = get_ts_root_dir,
 					filetypes = {
 						"javascript",

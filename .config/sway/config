@@ -225,6 +225,10 @@ for_window [app_id="discord"] layout tabbed
 
 for_window [app_id="lxqt-policykit-agent"] floating enable
 for_window [app_id="org.gnome.Calculator"] floating enable
+for_window [app_id="fzf-launcher"] {
+  floating enable
+  border pixel
+}
 
 include ./catppuccin/frappe
 

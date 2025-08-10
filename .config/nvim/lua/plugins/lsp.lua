@@ -228,7 +228,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					enabled = false,
+					enabled = true,
 					settings = {
 						tailwindCSS = {
 							classFunctions = { "cva", "cx", "cn", "twMerge" },

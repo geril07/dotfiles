@@ -94,7 +94,7 @@ return {
 				files = {
 					winopts = { preview = { hidden = false, delay = 100 } },
 					cwd_prompt = false,
-					fzf_opts = { ["--tiebreak"] = "length" },
+					fzf_opts = { ["--tiebreak"] = "length,begin,end" },
 				},
 
 				oldfiles = {
@@ -130,6 +130,7 @@ return {
 			{ "<leader>P", mcmd("FzfLua") },
 			{ "<leader>fp", mcmd("FzfLua resume") },
 			{ "<leader>fz", mcmd("FzfLua live_grep") },
+			{ "<leader>fz", mcmd("FzfLua grep_visual"), mode = "v" },
 			{ "<leader>fx", mcmd("FzfLua grep") },
 			{ "<leader>fl", mcmd("FzfLua grep_cword") },
 			{ "<leader>fb", mcmd("FzfLua buffers") },

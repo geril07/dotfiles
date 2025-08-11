@@ -13,15 +13,16 @@ return {
 			local actions = require("fzf-lua.actions")
 			-- vim.env.FZF_DEFAULT_OPTS = ""
 
-			require("fzf-lua").register_ui_select({
-
-				winopts = {
-					width = 0.5,
-					height = 0.4,
-					row = 0.50, -- window row position (0=top, 1=bottom)
-					col = 0.50, -- window col position (0=left, 1=right)
-				},
-			})
+			require("fzf-lua").register_ui_select(function()
+				return {
+					winopts = {
+						width = 0.5,
+						height = 0.4,
+						row = 0.50, -- window row position (0=top, 1=bottom)
+						col = 0.50, -- window col position (0=left, 1=right)
+					},
+				}
+			end)
 
 			return {
 				{ "hide", "border-fused" },

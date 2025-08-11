@@ -44,3 +44,5 @@
 [include]
   path=~/catppuccin.gitconfig
 
+[includeIf "gitdir:~/code/job/lex/"]
+ path = ~/code/job/lex/lex.gitconfig

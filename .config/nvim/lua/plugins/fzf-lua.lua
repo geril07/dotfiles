@@ -94,7 +94,7 @@ return {
 				files = {
 					winopts = { preview = { hidden = false, delay = 100 } },
 					cwd_prompt = false,
-					fzf_opts = { ["--tiebreak"] = "length,begin,end" },
+					fzf_opts = { ["--tiebreak"] = "length" },
 				},
 
 				oldfiles = {

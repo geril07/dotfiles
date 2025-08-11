@@ -189,6 +189,7 @@ return {
 						vtsls = {
 							autoUseWorkspaceTsdk = true,
 							tsserver = {
+								maxTsServerMemory = 8192,
 								globalPlugins = {
 									{
 										name = "@vue/typescript-plugin",

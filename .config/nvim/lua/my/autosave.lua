@@ -25,12 +25,19 @@ local function get_is_need_write_buf(buf)
 	return true
 end
 
+local debounced_last = nil
+local delay = 250
+
 api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave" }, {
 	group = group,
 	desc = "AutoSave",
 	callback = function(opts)
-		vim.schedule(function()
-			vim.cmd("silent! wa")
-		end)
+		local now = vim.uv.hrtime()
+		debounced_last = now
+		vim.defer_fn(function()
+			if debounced_last == now then
+				vim.cmd("silent! wa")
+			end
+		end, delay)
 	end,
 })

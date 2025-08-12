@@ -184,8 +184,6 @@ return {
 						"vue",
 					},
 					settings = {
-						typescript = { format = { enable = false }, tsserver = { maxTsServerMemory = 8192 } },
-						javascript = { format = { enable = false } },
 						vtsls = {
 							autoUseWorkspaceTsdk = true,
 							tsserver = {
@@ -205,10 +203,21 @@ return {
 								-- -- Inlay hint truncation.
 								-- maxInlayHintLength = 30,
 								-- For completion performance.
-								completion = {
-									enableServerSideFuzzyMatch = true,
-								},
+								-- completion = {
+								-- 	enableServerSideFuzzyMatch = true,
+								-- },
 							},
+						},
+
+						typescript = {
+							format = { enable = false },
+							tsserver = {
+								maxTsServerMemory = 8192,
+							},
+						},
+
+						javascript = {
+							format = { enable = false },
 						},
 					},
 				},
@@ -237,7 +246,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					enabled = true,
+					enabled = false,
 					settings = {
 						tailwindCSS = {
 							classFunctions = { "cva", "cx", "cn", "twMerge" },

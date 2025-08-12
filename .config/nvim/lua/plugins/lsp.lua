@@ -184,12 +184,11 @@ return {
 						"vue",
 					},
 					settings = {
-						typescript = { format = { enable = false } },
+						typescript = { format = { enable = false }, tsserver = { maxTsServerMemory = 8192 } },
 						javascript = { format = { enable = false } },
 						vtsls = {
 							autoUseWorkspaceTsdk = true,
 							tsserver = {
-								maxTsServerMemory = 8192,
 								globalPlugins = {
 									{
 										name = "@vue/typescript-plugin",
@@ -199,6 +198,15 @@ return {
 										configNamespace = "typescript",
 										enableForWorkspaceTypeScriptVersions = true,
 									},
+								},
+							},
+
+							experimental = {
+								-- -- Inlay hint truncation.
+								-- maxInlayHintLength = 30,
+								-- For completion performance.
+								completion = {
+									enableServerSideFuzzyMatch = true,
 								},
 							},
 						},

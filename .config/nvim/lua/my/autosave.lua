@@ -25,19 +25,31 @@ local function get_is_need_write_buf(buf)
 	return true
 end
 
-local debounced_last = nil
-local delay = 250
+-- Debounce for some reason sometimes rejects formatting
+local debounce_state = {
+	enabled = false,
+	delay = 200,
+	last = nil,
+}
+
+local function save_all()
+	vim.cmd("silent! wa")
+end
 
 api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave" }, {
 	group = group,
 	desc = "AutoSave",
-	callback = function(opts)
-		local now = vim.uv.hrtime()
-		debounced_last = now
-		vim.defer_fn(function()
-			if debounced_last == now then
-				vim.cmd("silent! wa")
-			end
-		end, delay)
+	callback = function()
+		if debounce_state.enabled then
+			local now = vim.uv.hrtime()
+			debounce_state.last = now
+			vim.defer_fn(function()
+				if debounce_state.last == now then
+					save_all()
+				end
+			end, debounce_state.delay)
+		else
+			save_all()
+		end
 	end,
 })

@@ -203,9 +203,9 @@ return {
 								-- -- Inlay hint truncation.
 								-- maxInlayHintLength = 30,
 								-- For completion performance.
-								-- completion = {
-								-- 	enableServerSideFuzzyMatch = true,
-								-- },
+								completion = {
+									enableServerSideFuzzyMatch = true,
+								},
 							},
 						},
 
@@ -246,7 +246,7 @@ return {
 					},
 				},
 				tailwindcss = {
-					enabled = false,
+					enabled = true,
 					settings = {
 						tailwindCSS = {
 							classFunctions = { "cva", "cx", "cn", "twMerge" },

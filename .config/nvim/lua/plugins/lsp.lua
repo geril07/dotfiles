@@ -161,6 +161,7 @@ return {
 				hls = {},
 
 				vue_ls = {
+					enabled = true,
 					root_dir = get_ts_root_dir,
 				},
 
@@ -304,12 +305,13 @@ return {
 					settings = { gopls = { completeFunctionCalls = false } },
 				},
 				emmet_language_server = {
+					enabled = true,
 					filetypes = {
 						"eruby",
 						"html",
 						-- "javascript",
-						-- "javascriptreact",
-						-- "typescriptreact",
+						"javascriptreact",
+						"typescriptreact",
 						"vue",
 						"svelte",
 						"css",
@@ -320,6 +322,9 @@ return {
 					},
 					init_options = {
 						showSuggestionsAsSnippets = true,
+						-- includeLanguages = {
+						-- 	svelte = "html",
+						-- },
 					},
 				},
 				emmet_ls = {
@@ -335,6 +340,7 @@ return {
 						"sass",
 						"scss",
 						"vue",
+						"svelte",
 					},
 				},
 			}

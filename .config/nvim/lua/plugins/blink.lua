@@ -122,6 +122,10 @@ return {
 				},
 			},
 
+			appearance = {
+				kind_icons = require("my.icons").symbol_kinds,
+			},
+
 			fuzzy = {
 				max_typos = 1,
 				sorts = {
@@ -149,12 +153,67 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
-					lsp = { fallbacks = {}, timeout_ms = 300 },
-				},
-			},
+					lsp = {
+						fallbacks = {},
+						timeout_ms = 300,
+						transform_items = function(ctx, items)
+							local function filter_emmet_if_outside_elements()
+								local bufnr = ctx.bufnr
+								local clients_per_bufnr = vim.lsp.get_clients({ bufnr = bufnr })
+								local emmet_name = "emmet_language_server"
 
-			appearance = {
-				kind_icons = require("my.icons").symbol_kinds,
+								if
+									#vim.tbl_filter(function(client)
+										if client.name == emmet_name then
+											return true
+										end
+										return false
+									end, clients_per_bufnr) == 0
+								then
+									return items
+								end
+								local buftype = vim.bo[bufnr].filetype
+								local embedded_fts = { "vue", "typescriptreact", "javascriptreact", "svelte" }
+								if vim.tbl_contains(embedded_fts, buftype) then
+									local ts_utils = require("nvim-treesitter.ts_utils")
+									local node = ts_utils.get_node_at_cursor()
+									local emmet_ts_nodes = { "jsx_element", "template_element", "style_element" }
+									local not_emmet_ts_nodes = { "script_element" }
+
+									while node ~= nil do
+										if vim.tbl_contains(emmet_ts_nodes, node:type()) then
+											return items
+										end
+										if vim.tbl_contains(not_emmet_ts_nodes, node:type()) then
+											break
+										end
+										node = node:parent()
+									end
+
+									return vim.tbl_filter(function(item)
+										return item.client_name ~= emmet_name
+									end, items)
+								end
+
+								return items
+							end
+
+							-- if true then
+							-- 	return items
+							-- end
+							-- local started = vim.uv.hrtime()
+							local ok, result = pcall(filter_emmet_if_outside_elements)
+							-- print("time: ", (vim.uv.hrtime() - started) / 1e6, "ms")
+
+							if ok then
+								return result
+							end
+							print("failed to filter out emmet", result)
+
+							return items
+						end,
+					},
+				},
 			},
 		},
 	},

@@ -20,3 +20,17 @@ sudo systemctl enable --now reflector.timer
 MaxRetentionSec=7d
 MaxFileSec=1d
 ```
+
+### Sway
+
+Env from zsh at startup.
+
+```bash
+❯ cat /usr/share/wayland-sessions/sway-zsh.desktop
+[Desktop Entry]
+Name=Sway(Zsh)
+Comment=An i3-compatible Wayland compositor
+Exec=zsh -lc sway
+Type=Application
+DesktopNames=sway;wlroots;swayfx
+```

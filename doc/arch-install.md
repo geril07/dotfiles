@@ -121,6 +121,25 @@ mkpart docker 90% 100%
 quit
 ```
 
+### LUKS + BTRFS
+
+```bash
+cryptsetup luksFormat --perf-no_read_workqueue --perf-no_write_workqueue /dev/nvme0n1pN
+cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue open /dev/nvme0n1pN cryptroot
+
+mkfs.btrfs -L ArchRoot /dev/mapper/cryptroot
+mount /dev/mapper/cryptroot /mnt
+
+btrfs sub create /mnt/@
+btrfs sub create /mnt/@home
+btrfs sub create /mnt/@snapshots
+
+mount -o compress=zstd:3,noatime,autodefrag,ssd,subvol=@ /dev/mapper/cryptroot /mnt
+mkdir -p /mnt/{home,.snapshots,boot}
+mount -o compress=zstd:3,noatime,autodefrag,ssd,subvol=@home /dev/mapper/cryptroot /mnt/home
+mount -o compress=zstd:3,noatime,autodefrag,ssd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
+```
+
 ### Filesystems
 
 #### Swap

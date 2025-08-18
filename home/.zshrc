@@ -20,35 +20,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
-# catppuccin macchiato
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
---color=selected-bg:#494d64" 
-
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---multi --bind change:first --height=15% --min-height 15 --layout=reverse --cycle"
-
-export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
-
-export ZSH="$HOME/.oh-my-zsh"
-export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-export EDITOR="nvim"
-
-[[ -f ~/.lex-gitlab-auth-token ]] && export LEX_GITLAB_AUTH_TOKEN=$(<~/.lex-gitlab-auth-token)
+[[ -f ~/.lex-gitlab-auth-token ]] && export LEX_GITLAB_AUTH_TOKEN=$(cat ~/.lex-gitlab-auth-token)
 [[ -f ~/.npm-token ]] && export NPM_TOKEN=$(cat ~/.npm-token)
-
 
 ZSH_THEME="robbyrussell"
 
 plugins=(git zsh-autosuggestions) # z
 
+export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
+
 source <(fzf --zsh)
 [[ ! -r /home/ilya/.opam/opam-init/init.zsh ]] || source /home/ilya/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-[ -f ~/.profile ] && source ~/.profile
+# [ -f ~/.profile ] && source ~/.profile
 [ -s "/home/ilya/.bun/_bun" ] && source "/home/ilya/.bun/_bun"
 [ -f "/home/ilya/.ghcup/env" ] && . "/home/ilya/.ghcup/env" # ghcup-env
 

@@ -20,7 +20,7 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": " ilya on",
+          "template": " {{.UserName}} on",
           "foreground": "#45F1C2",
           "type": "session",
           "style": "plain"

@@ -36,62 +36,6 @@ local function get_ts_root_dir(bufnr, cb)
 	end
 end
 
---- Sets up LSP keymaps and autocommands for the given buffer.
----@param client vim.lsp.Client
----@param bufnr integer
-local on_attach = function(client, bufnr)
-	-- Disable formatting for some servers to use external utils like prettier
-	for _, server in ipairs({
-		"ts_ls",
-		"vtsls",
-		"biome",
-		"html",
-		"cssls",
-		"cssmodules_ls",
-		"stylelint_lsp",
-		"jsonls",
-		"emmet_ls",
-		"emmet_language_server",
-		"tailwindcss",
-		"eslint",
-		"pylsp",
-		"graphql",
-		"lua_ls",
-		"astro",
-	}) do
-		if client.name == server then
-			client.server_capabilities.documentFormattingProvider = false
-		end
-	end
-
-	-- Highlight references when holding
-	if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-		vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-			desc = "Highlight references under the cursor",
-			buffer = bufnr,
-			callback = vim.lsp.buf.document_highlight,
-		})
-		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-			desc = "Clear highlight references",
-			buffer = bufnr,
-			callback = vim.lsp.buf.clear_references,
-		})
-	end
-
-	require("lsp_signature").on_attach({
-		bind = false,
-		doc_lines = 5,
-		handler_opts = {
-			border = "single", -- double, rounded, single, shadow, none, or a table of borders
-		},
-		hint_enable = true,
-		hint_prefix = "",
-		toggle_key = "<A-s>",
-		select_signature_key = "<A-n>", -- cycle to next signature, e.g. '<M-n>' function overloading
-		floating_window = false,
-	}, bufnr)
-end
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -259,7 +203,9 @@ return {
 					root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
 					settings = { format = false },
 				},
-				pylsp = {},
+				pylsp = {
+					formatter = true,
+				},
 				graphql = {
 					enabled = false,
 				},
@@ -274,7 +220,9 @@ return {
 						},
 					},
 				},
-				lua_ls = {},
+				lua_ls = {
+					formatter = true,
+				},
 				astro = {},
 				yamlls = {
 					settings = {
@@ -300,9 +248,12 @@ return {
 					},
 				},
 				dockerls = {},
-				prismals = {},
+				prismals = {
+					formatter = true,
+				},
 				gopls = {
 					settings = { gopls = { completeFunctionCalls = false } },
+					formatter = true,
 				},
 				emmet_language_server = {
 					enabled = true,
@@ -344,6 +295,45 @@ return {
 					},
 				},
 			}
+
+			--- Sets up LSP keymaps and autocommands for the given buffer.
+			---@param client vim.lsp.Client
+			---@param bufnr integer
+			local on_attach = function(client, bufnr)
+				-- Disable formatting for some servers to use external utils like prettier
+				for key, value in pairs(servers) do
+					if client.name == key and value.formatter == true then
+						client.server_capabilities.documentFormattingProvider = false
+					end
+				end
+
+				-- Highlight references when holding
+				if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+					vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
+						desc = "Highlight references under the cursor",
+						buffer = bufnr,
+						callback = vim.lsp.buf.document_highlight,
+					})
+					vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+						desc = "Clear highlight references",
+						buffer = bufnr,
+						callback = vim.lsp.buf.clear_references,
+					})
+				end
+
+				require("lsp_signature").on_attach({
+					bind = false,
+					doc_lines = 5,
+					handler_opts = {
+						border = "single", -- double, rounded, single, shadow, none, or a table of borders
+					},
+					hint_enable = true,
+					hint_prefix = "",
+					toggle_key = "<A-s>",
+					select_signature_key = "<A-n>", -- cycle to next signature, e.g. '<M-n>' function overloading
+					floating_window = false,
+				}, bufnr)
+			end
 
 			for server, config in pairs(servers) do
 				local is_server_enabled = config.enabled == nil and true or config.enabled

@@ -47,3 +47,18 @@ alias vim="nvim"
 
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "tmux-sessioner\n"
+
+function __zoxide_z() {
+    __zoxide_doctor
+    if [[ "$#" -eq 0 ]]; then
+        __zoxide_cd ~
+    elif [[ "$#" -eq 1 ]] && { [[ -d "$1" ]] || [[ "$1" = '-' ]] || [[ "$1" =~ ^[-+][0-9]+$ ]]; }; then
+        __zoxide_cd "$1"
+    elif [[ "$#" -eq 2 ]] && [[ "$1" = "--" ]]; then
+        __zoxide_cd "$2"
+    else
+        local result
+        # shellcheck disable=SC2312
+        result="$(\command zoxide query -- "$@")" && __zoxide_cd "${result}"
+    fi
+}

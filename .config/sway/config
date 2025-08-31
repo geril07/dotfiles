@@ -230,6 +230,11 @@ for_window [app_id="fzf-launcher"] {
   border pixel
 }
 
+for_window [title="Picture-in-picture"] {
+  floating enable
+  sticky enable
+}
+
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border

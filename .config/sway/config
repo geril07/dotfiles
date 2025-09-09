@@ -235,6 +235,11 @@ for_window [title="Picture-in-picture"] {
   sticky enable
 }
 
+
+for_window [app_id="xdg-desktop-portal-gtk"] {
+  border pixel 2
+}
+
 include ./catppuccin/frappe
 
 # target                 title     bg    text   indicator  border

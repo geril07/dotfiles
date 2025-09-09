@@ -65,3 +65,10 @@ DefaultTimeoutStopSec=10s
 Then reload systemd:
 
 sudo systemctl daemon-reexec
+
+### Nautilus as a default mime for dirs
+
+```bash
+xdg-mime default org.gnome.Nautilus.desktop inode/directory
+
+```

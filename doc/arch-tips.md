@@ -72,3 +72,17 @@ sudo systemctl daemon-reexec
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 
 ```
+
+### Dconf and gnome apps
+
+1. Export a whole schema (recommended if you only care about gnome-text-editor)
+
+```bash
+   dconf dump /org/gnome/TextEditor/ > gnome-text-editor.ini
+```
+
+Then in a fresh system, restore with:
+
+```bash
+dconf load /org/gnome/TextEditor/ < gnome-text-editor.ini
+```

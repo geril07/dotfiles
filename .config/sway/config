@@ -167,6 +167,9 @@ mode "resize" {
   }
 }
 
+for_window [app_id=".*"] {
+  border pixel 2
+}
 
 for_window [app_id="foot"] {
   # border pixel 0
@@ -236,9 +239,6 @@ for_window [title="Picture-in-picture"] {
 }
 
 
-for_window [app_id="xdg-desktop-portal-gtk"] {
-  border pixel 2
-}
 
 include ./catppuccin/frappe
 

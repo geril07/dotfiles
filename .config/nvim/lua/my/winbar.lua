@@ -32,7 +32,7 @@ local config = vim.tbl_extend("force", {}, default_config, {
 		"",
 	},
 	-- left_spacing = "       ",
-  left_spacing = nil
+	left_spacing = nil,
 })
 
 local status_web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")
@@ -56,16 +56,14 @@ end
 local get_filename_line = function()
 	local result = ""
 	local filename = fn.expand("%:t")
-	local filetype = vim.bo.filetype or ""
 
 	if not filename or filename == "" then
 		return result
 	end
 
-	if filetype and filetype ~= "" and status_web_devicons_ok then
-		local default = filetype and false or true
-		local file_icon, hl_name = web_devicons.get_icon_by_filetype(filetype, { default = default })
-		result = result .. wrap_with_hl(file_icon .. " ", hl_name or ("DevIcon" .. filetype))
+	local file_icon, hl_name = web_devicons.get_icon(filename)
+	if file_icon ~= nil then
+		result = result .. wrap_with_hl(file_icon .. " ", hl_name)
 	end
 
 	result = result .. wrap_with_hl(filename, hl_groups.filename)

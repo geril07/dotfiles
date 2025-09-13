@@ -300,12 +300,14 @@ return {
 			---@param client vim.lsp.Client
 			---@param bufnr integer
 			local on_attach = function(client, bufnr)
+				local is_formatting_enabled = false
 				-- Disable formatting for some servers to use external utils like prettier
 				for key, value in pairs(servers) do
 					if client.name == key and value.formatter == true then
-						client.server_capabilities.documentFormattingProvider = false
+						is_formatting_enabled = true
 					end
 				end
+				client.server_capabilities.documentFormattingProvider = is_formatting_enabled
 
 				-- Highlight references when holding
 				if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

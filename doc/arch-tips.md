@@ -86,3 +86,9 @@ Then in a fresh system, restore with:
 ```bash
 dconf load /org/gnome/TextEditor/ < gnome-text-editor.ini
 ```
+
+### Mask `xdg-desktop-portal-gnome`, so it will never mess with wlr
+
+```bash
+systemctl --user mask xdg-desktop-portal-gnome
+```

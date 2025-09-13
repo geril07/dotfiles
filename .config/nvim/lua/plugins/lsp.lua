@@ -210,6 +210,7 @@ return {
 					enabled = false,
 				},
 				rust_analyzer = {
+					formatter = true,
 					settings = {
 						["rust-analyzer"] = {
 							completion = {

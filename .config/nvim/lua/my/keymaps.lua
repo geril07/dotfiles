@@ -3,6 +3,7 @@ local map = map_utils.map
 local map_tbl = map_utils.map_tbl
 local mcmd = map_utils.cmd
 
+-- TODO: folding issues
 local prev_amount = 15
 local function get_amount_of_scrolling_lines()
 	local firstline = vim.fn.line("w0")

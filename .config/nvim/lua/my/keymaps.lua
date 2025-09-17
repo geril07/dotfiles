@@ -3,14 +3,16 @@ local map = map_utils.map
 local map_tbl = map_utils.map_tbl
 local mcmd = map_utils.cmd
 
--- TODO: folding issues
 local prev_amount = 15
 local function get_amount_of_scrolling_lines()
 	local firstline = vim.fn.line("w0")
 	local lastline = vim.fn.line("w$")
+	-- Because of possible folding items in a buffer, we need to check screenpos, gpt solution though
+	local firstrow = vim.fn.screenpos(0, firstline, 1).row
+	local lastrow = vim.fn.screenpos(0, lastline, 1).row
 
 	-- when last line of document <C-u> scrolls <10 lines
-	prev_amount = math.max(math.floor((lastline - firstline) / 2), prev_amount)
+	prev_amount = math.max(math.floor((lastrow - firstrow) / 2), prev_amount)
 	return prev_amount
 end
 

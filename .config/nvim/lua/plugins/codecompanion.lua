@@ -22,14 +22,24 @@ return {
 				},
 
 				adapters = {
-					gemini = function()
-						return require("codecompanion.adapters").extend("gemini", {
-							env = {
-								api_key = "cmd: cat ~/secrets/GEMINI_API_KEY",
-								-- api_key = "cmd: gpg --batch --quiet --decrypt ~/secrets/GEMINI_API_KEY.gpg",
-							},
-						})
-					end,
+					http = {
+						gemini = function()
+							return require("codecompanion.adapters").extend("gemini", {
+								env = {
+									api_key = "cmd: cat ~/secrets/GEMINI_API_KEY",
+									-- api_key = "cmd: gpg --batch --quiet --decrypt ~/secrets/GEMINI_API_KEY.gpg",
+								},
+							})
+						end,
+
+						openai = function()
+							return require("codecompanion.adapters").extend("openai", {
+								env = {
+									api_key = "cmd: cat ~/secrets/OPENAI_API_KEY",
+								},
+							})
+						end,
+					},
 				},
 
 				extensions = {

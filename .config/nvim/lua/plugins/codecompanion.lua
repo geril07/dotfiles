@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
+			"franco-ruggeri/codecompanion-spinner.nvim",
 		},
 		config = function()
 			require("codecompanion").setup({
@@ -30,11 +31,15 @@ return {
 						})
 					end,
 				},
+
+				extensions = {
+					spinner = {},
+				},
 			})
 
 			vim.cmd([[cab ccc CodeCompanion]])
 			vim.cmd([[cab cca CodeCompanionActions]])
-			vim.cmd([[cab ccmd CodeCompanionChat]])
+			vim.cmd([[cab ccmd CodeCompanionCmd]])
 			vim.cmd([[cab cc CodeCompanionChat]])
 		end,
 	},

@@ -67,8 +67,6 @@ return {
 		enabled = true,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
-			local codecompanion = require("my.lualine.codecompanion")
-
 			return {
 				sections = {
 					lualine_a = { "mode" },
@@ -81,7 +79,7 @@ return {
 						},
 					},
 					-- lualine_x = { lsp_progress_component, "filetype" },
-					lualine_x = { codecompanion, "lsp_status", "filetype" },
+					lualine_x = { "lsp_status", "filetype" },
 					-- lualine_x = { harpoon_files, "filetype" },
 					lualine_y = { "progress" },
 

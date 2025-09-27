@@ -133,6 +133,7 @@ return {
 			{ "<leader>fz", mcmd("FzfLua grep_visual"), mode = "v" },
 			{ "<leader>fx", mcmd("FzfLua grep") },
 			{ "<leader>fl", mcmd("FzfLua grep_cword") },
+			{ "<leader>fgb", mcmd("FzfLua grep_curbuf") },
 			{ "<leader>fb", mcmd("FzfLua buffers") },
 			{ "<leader>fr", mcmd("FzfLua oldfiles") },
 			{ "<leader>fg", mcmd("FzfLua git_files") },

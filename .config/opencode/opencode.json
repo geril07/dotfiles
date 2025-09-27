@@ -1,0 +1,109 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "catppuccin",
+  "share": "disabled",
+  "small_model": "openrouter/google/gemini-2.5-flash-lite",
+  "provider": {
+    "google": {
+      "options": {
+        "apiKey": "{file:~/.secrets/GEMINI_API_KEY}"
+      }
+    },
+    "openrouter": {
+      "options": {
+        "apiKey": "{file:~/.secrets/OPENROUTER_API_KEY}"
+      },
+      "models": {
+        "z-ai/glm-4-32b": {
+          "name": "Z.AI: GLM 4 32B"
+        },
+
+        "google/gemini-2.5-flash-lite": {
+          "name": "Google: Gemini 2.5 Flash Lite",
+          "cost": {
+            "cache_read": 0.025,
+            "cache_write": 0.183,
+            "input": 0.1,
+            "output": 0.4
+          }
+        },
+
+        "qwen/qwen3-coder-flash": {
+          "name": "Qwen: Qwen3 Coder Flash",
+
+          "cost": {
+            "input": 0.5,
+            "output": 1.5,
+            "cache_read": 0.12
+          }
+        },
+
+        "x-ai/grok-4-fast": {
+          "name": "xAI: Grok 4 Fast",
+          "cost": {
+            "input": 0.2,
+            "output": 0.4,
+            "cache_read": 0.05
+          }
+        },
+
+        "deepseek/deepseek-chat-v3.1:free": {
+          "name": "DeepSeek: DeepSeek V3.1 (free)"
+        },
+
+        "deepseek/deepseek-v3.1-terminus": {
+          "name": "DeepSeek: DeepSeek V3.1 Terminus",
+          "cost": {
+            "input": 0.27,
+            "output": 1
+          },
+          "options": {
+            "provider": {
+              "allow_fallbacks": false,
+              "only": ["novita"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "disabled_providers": ["opencode"],
+  "keybinds": {},
+  "tui": {
+    "scroll_speed": 5
+  },
+  "formatter": {
+    "gofmt": { "disabled": true },
+    "mix": { "disabled": true },
+    "prettier": { "disabled": true },
+    "biome": { "disabled": true },
+    "zig": { "disabled": true },
+    "clang-format": { "disabled": true },
+    "ktlint": { "disabled": true },
+    "ruff": { "disabled": true },
+    "rubocop": { "disabled": true },
+    "standardrb": { "disabled": true },
+    "htmlbeautifier": { "disabled": true }
+  },
+  "lsp": {
+    "typescript": { "disabled": true },
+    "eslint": { "disabled": true },
+    "gopls": { "disabled": true },
+    "ruby-lsp": { "disabled": true },
+    "pyright": { "disabled": true },
+    "elixir-ls": { "disabled": true },
+    "zls": { "disabled": true },
+    "csharp": { "disabled": true },
+    "vue": { "disabled": true },
+    "rust": { "disabled": true },
+    "clangd": { "disabled": true },
+    "svelte": { "disabled": true }
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  }
+}

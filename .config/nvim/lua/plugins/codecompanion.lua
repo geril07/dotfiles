@@ -38,7 +38,7 @@ return {
 						gemini = function()
 							return require("codecompanion.adapters").extend("gemini", {
 								env = {
-									api_key = "cmd: cat ~/.secrets/GEMINI_API_KEY",
+									api_key = "GEMINI_API_KEY",
 									-- api_key = "cmd: gpg --batch --quiet --decrypt ~/secrets/GEMINI_API_KEY.gpg",
 								},
 							})
@@ -47,7 +47,7 @@ return {
 						openai = function()
 							return require("codecompanion.adapters").extend("openai", {
 								env = {
-									api_key = "cmd: cat ~/.secrets/OPENAI_API_KEY",
+									api_key = "OPENAI_API_KEY",
 								},
 							})
 						end,
@@ -57,7 +57,7 @@ return {
 								name = "openrouter",
 								formatted_name = "OpenRouter",
 								env = {
-									api_key = "cmd: cat ~/.secrets/OPENROUTER_API_KEY",
+									api_key = "OPENROUTER_API_KEY",
 									url = "https://openrouter.ai/api",
 									chat_url = "/v1/chat/completions",
 								},

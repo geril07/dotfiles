@@ -6,12 +6,12 @@
   "provider": {
     "google": {
       "options": {
-        "apiKey": "{file:~/.secrets/GEMINI_API_KEY}"
+        "apiKey": "{env:GEMINI_API_KEY}"
       }
     },
     "openrouter": {
       "options": {
-        "apiKey": "{file:~/.secrets/OPENROUTER_API_KEY}"
+        "apiKey": "{env:OPENROUTER_API_KEY}"
       },
       "models": {
         "z-ai/glm-4-32b": {

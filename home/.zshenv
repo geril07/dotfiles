@@ -31,3 +31,6 @@ export LANG="en_GB.UTF-8"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
+
+
+[ -f "$HOME/load_secrets.zsh" ] && . "$HOME/load_secrets.zsh"

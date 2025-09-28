@@ -10,12 +10,36 @@
       }
     },
     "openrouter": {
+      "npm": "@openrouter/ai-sdk-provider",
+
       "options": {
         "apiKey": "{env:OPENROUTER_API_KEY}"
       },
       "models": {
         "z-ai/glm-4-32b": {
           "name": "Z.AI: GLM 4 32B"
+        },
+
+        "openai/gpt-5-codex-low": {
+          "id": "openai/gpt-5-codex",
+          "name": "GPT-5 Codex (Low)",
+
+          "options": {
+            "reasoning": {
+              "effort": "low"
+            }
+          }
+        },
+
+        "openai/gpt-5-codex-minimal": {
+          "id": "openai/gpt-5-codex",
+          "name": "GPT-5 Codex (Minimal)",
+
+          "options": {
+            "reasoning": {
+              "effort": "minimal"
+            }
+          }
         },
 
         "google/gemini-2.5-flash-lite": {
@@ -48,7 +72,12 @@
         },
 
         "deepseek/deepseek-chat-v3.1:free": {
-          "name": "DeepSeek: DeepSeek V3.1 (free)"
+          "name": "DeepSeek: DeepSeek V3.1 (free)",
+          "options": {
+            "provider": {
+              "only": ["deepinfra/fp4"]
+            }
+          }
         },
 
         "deepseek/deepseek-v3.1-terminus": {
@@ -70,7 +99,7 @@
   "disabled_providers": ["opencode"],
   "keybinds": {},
   "tui": {
-    "scroll_speed": 5
+    "scroll_speed": 3
   },
   "formatter": {
     "gofmt": { "disabled": true },

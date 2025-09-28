@@ -109,7 +109,7 @@ return {
 
 				list = {
 					selection = { preselect = true, auto_insert = false },
-					max_items = 25,
+					max_items = 100,
 				},
 
 				documentation = {

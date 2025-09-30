@@ -169,7 +169,7 @@ return {
 				bashls = {},
 				html = {},
 				cssls = {},
-				-- cssmodules_ls = {},
+				cssmodules_ls = {},
 				-- stylelint_lsp = {},
 				sqlls = {},
 				jsonls = {

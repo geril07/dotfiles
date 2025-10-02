@@ -6,26 +6,44 @@
   "provider": {
     "google": {
       "options": {
-        "apiKey": "{env:GEMINI_API_KEY}"
-      }
+        "apiKey": "{env:GEMINI_API_KEY}",
+      },
     },
     "openrouter": {
       "npm": "@openrouter/ai-sdk-provider",
 
       "options": {
-        "apiKey": "{env:OPENROUTER_API_KEY}"
+        "apiKey": "{env:OPENROUTER_API_KEY}",
       },
       "models": {
         "z-ai/glm-4-32b": {
-          "name": "Z.AI: GLM 4 32B"
+          "name": "Z.AI: GLM 4 32B",
         },
 
         "z-ai/glm-4.6": {
           "options": {
             "provider": {
-              "only": ["z-ai"]
-            }
-          }
+              "only": ["z-ai"],
+            },
+          },
+        },
+
+        "openai/gpt-oss-120b": {
+          "options": {
+            "provider": {
+              "require_parameters": true,
+              "only": ["deepinfra/fp4", "phala", "baseten/fp4", "fireworks"],
+            },
+          },
+        },
+
+        "openai/gpt-oss-20b": {
+          "options": {
+            "provider": {
+              "require_parameters": true,
+              "only": ["deepinfra/fp4"],
+            },
+          },
         },
 
         "openai/gpt-5-low": {
@@ -33,10 +51,13 @@
           "name": "GPT-5 (Low)",
 
           "options": {
+            "reasoning": {
+              "effort": "low",
+            },
             "reasoningEffort": "low",
             "textVerbosity": "low",
-            "reasoningSummary": "auto"
-          }
+            "reasoningSummary": "auto",
+          },
         },
 
         "openai/gpt-5-minimal": {
@@ -45,11 +66,12 @@
 
           "options": {
             "reasoning": {
-              "reasoningEffort": "minimal",
-              "textVerbosity": "low",
-              "reasoningSummary": "auto"
-            }
-          }
+              "effort": "minimal",
+            },
+            "reasoningEffort": "minimal",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto",
+          },
         },
 
         "openai/gpt-5-mini-high": {
@@ -57,10 +79,13 @@
           "name": "GPT-5 Mini (High)",
 
           "options": {
+            "reasoning": {
+              "effort": "high",
+            },
             "reasoningEffort": "high",
             "textVerbosity": "medium",
-            "reasoningSummary": "auto"
-          }
+            "reasoningSummary": "auto",
+          },
         },
 
         "openai/gpt-5-mini-low": {
@@ -68,10 +93,35 @@
           "name": "GPT-5 Mini (Low)",
 
           "options": {
+            "reasoning": {
+              "effort": "low",
+            },
             "reasoningEffort": "low",
             "textVerbosity": "low",
-            "reasoningSummary": "auto"
-          }
+            "reasoningSummary": "auto",
+          },
+        },
+
+        "google/gemini-2.5-flash-preview-09-2025": {
+          "cost": {
+            "cache_read": 0.075,
+            "cache_write": 0.383,
+            "input": 0.3,
+            "output": 2.5,
+          },
+          "options": {
+            "reasoning": {
+              "max_tokens": 1000,
+            },
+          },
+        },
+
+        "google/gemini-2.5-flash": {
+          "options": {
+            "reasoning": {
+              "max_tokens": 1000,
+            },
+          },
         },
 
         "google/gemini-2.5-flash-lite": {
@@ -80,8 +130,8 @@
             "cache_read": 0.025,
             "cache_write": 0.183,
             "input": 0.1,
-            "output": 0.4
-          }
+            "output": 0.4,
+          },
         },
 
         "qwen/qwen3-coder-flash": {
@@ -90,8 +140,8 @@
           "cost": {
             "input": 0.5,
             "output": 1.5,
-            "cache_read": 0.12
-          }
+            "cache_read": 0.12,
+          },
         },
 
         "x-ai/grok-4-fast": {
@@ -99,39 +149,42 @@
           "cost": {
             "input": 0.2,
             "output": 0.4,
-            "cache_read": 0.05
-          }
+            "cache_read": 0.05,
+          },
         },
 
         "deepseek/deepseek-chat-v3.1:free": {
           "name": "DeepSeek: DeepSeek V3.1 (free)",
           "options": {
             "provider": {
-              "only": ["deepinfra/fp4"]
-            }
-          }
+              "only": ["deepinfra/fp4"],
+            },
+          },
         },
 
         "deepseek/deepseek-v3.1-terminus": {
           "name": "DeepSeek: DeepSeek V3.1 Terminus",
           "cost": {
             "input": 0.27,
-            "output": 1
+            "output": 1,
           },
           "options": {
             "provider": {
               "allow_fallbacks": false,
-              "only": ["novita"]
-            }
-          }
-        }
-      }
-    }
+              "only": ["novita"],
+            },
+          },
+        },
+      },
+    },
   },
   "disabled_providers": ["opencode"],
-  "keybinds": {},
+  "keybinds": {
+    "session_child_cycle": "ctrl+alt+right",
+    "session_child_cycle_reverse": "ctrl+alt+left",
+  },
   "tui": {
-    "scroll_speed": 3
+    "scroll_speed": 3,
   },
   "formatter": {
     "gofmt": { "disabled": true },
@@ -144,7 +197,7 @@
     "ruff": { "disabled": true },
     "rubocop": { "disabled": true },
     "standardrb": { "disabled": true },
-    "htmlbeautifier": { "disabled": true }
+    "htmlbeautifier": { "disabled": true },
   },
   "lsp": {
     "typescript": { "disabled": true },
@@ -158,13 +211,13 @@
     "vue": { "disabled": true },
     "rust": { "disabled": true },
     "clangd": { "disabled": true },
-    "svelte": { "disabled": true }
+    "svelte": { "disabled": true },
   },
   "mcp": {
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
-      "enabled": true
-    }
-  }
+      "enabled": true,
+    },
+  },
 }

@@ -1,4 +1,7 @@
 {
+  "editor.smoothScrolling": true,
+  "eslint.enable": false,
+  "typescript.validate.enable": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.value": 5,
@@ -9,34 +12,30 @@
       "editorBracketHighlight.foreground3": "#56b6c2"
     }
   },
-  "workbench.colorTheme": "One Dark Pro",
+  "catppuccin.boldKeywords": false,
+  "catppuccin.italicComments": false,
+  "catppuccin.italicKeywords": false,
   "explorer.decorations.colors": false,
   "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
   "explorer.compactFolders": false,
   "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "terminal.integrated.fontFamily": "'JetBrainsMono NF', monospace",
-  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
+  "terminal.integrated.fontSize": 18,
   "window.newWindowDimensions": "maximized",
-  "emmet.triggerExpansionOnTab": true,
+  "emmet.triggerExpansionOnTab": false,
   "prettier.useEditorConfig": false,
-  "prettier.printWidth": 100,
-  "prettier.semi": false,
+  "prettier.printWidth": 80,
   "prettier.singleQuote": true,
+  "prettier.useTabs": false,
+  "prettier.tabWidth": 2,
+  "prettier.semi": false,
   "vsintellicode.modify.editor.suggestSelection": "enabled",
   "security.workspace.trust.emptyWindow": false,
   "security.workspace.trust.enabled": false,
-  "eslint.alwaysShowStatus": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "reactSnippets.settings.importReactOnTop": true,
+  "reactSnippets.settings.importReactOnTop": false,
   "reactSnippets.settings.typescriptPropsStatePrefix": "interface",
   "rust-analyzer.completion.callable.snippets": "none",
-  "files.associations": {
-    "*.cgi": "php"
-  },
-  "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-  },
+  "rust-analyzer.rustfmt.extraArgs": ["--config", "tab_spaces=2"],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
@@ -49,19 +48,23 @@
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
-  // "vim.cursorStylePerMode.insert": "block",
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "vim.halfPageScrollCentered": true,
+  "vim.surround": true,
   "vim.easymotion": true,
   "vim.incsearch": true,
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
   "vim.useSystemClipboard": true,
+  "vim.overrideCopy": false,
   "vim.visualModeKeyBindings": [
     {
       "before": ["<C-c>"],
-      "after": ["y"]
+      "after": ["\"", "+", "y"]
     }
   ],
-  "vim.overrideCopy": true,
   "vim.insertModeKeyBindings": [
     {
       "before": ["<Esc>"],
@@ -76,23 +79,35 @@
     {
       "before": ["j", "k"],
       "after": ["<Esc>"]
-    },
-    {
-      "before": ["<C-c"],
-      "after": []
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<C-u>"],
-      "after": ["<C-u>", "z", "z"]
+      "before": ["<C-c>"],
+      "after": ["\"", "+", "y"]
+    },
+    {
+      "before": ["Y"],
+      "after": ["\"", "+", "y"]
     },
     {
       "before": ["<C-d>"],
       "after": ["<C-d>", "z", "z"]
     },
-    // { "before": ["u"], "commands": ["undo"] },
-    { "before": ["K"], "commands": ["lineBreakInsert"], "silent": true },
+    {
+      "before": ["<C-u>"],
+      "after": ["<C-u>", "z", "z"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    },
+    {
+      "before": ["M"],
+      "after": ["`"],
+      "silent": true
+    },
     {
       "before": ["<tab>"],
       "commands": ["workbench.action.nextEditor"]
@@ -101,21 +116,57 @@
       "before": ["<S-tab>"],
       "commands": ["workbench.action.previousEditor"]
     },
-    { "before": ["<C-n>"], "commands": [":noh"] },
-    { "before": ["g", "f"], "commands": ["editor.action.goToReferences"] },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
     {
       "before": ["[", "e"],
-      "commands": ["editor.action.marker.prev", "closeMarkersNavigation", "editor.action.showHover"]
+      "commands": [
+        "editor.action.marker.prev",
+        "closeMarkersNavigation",
+        "editor.action.showHover"
+      ]
     },
     {
       "before": ["]", "e"],
-      "commands": ["editor.action.marker.next", "closeMarkersNavigation", "editor.action.showHover"]
+      "commands": [
+        "editor.action.marker.next",
+        "closeMarkersNavigation",
+        "editor.action.showHover"
+      ]
     },
-    { "before": ["<leader>", "d"], "commands": ["editor.action.revealDefinition"] },
-    { "before": ["<leader>", "b"], "commands": ["workbench.action.navigateBack"] },
+    {
+      "before": ["g", "f"],
+      "commands": ["editor.action.goToReferences"]
+    },
+    {
+      "before": ["g", "t"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["g", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    {
+      "before": ["<leader>", "b"],
+      "commands": ["workbench.action.navigateBack"]
+    },
+    {
+      "before": ["<leader>", "n"],
+      "commands": ["workbench.action.navigateForward"]
+    },
     {
       "before": ["<leader>", "e"],
       "commands": ["workbench.view.explorer"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["editor.action.format"]
     },
     {
       "before": ["<leader>", "r"],
@@ -125,7 +176,10 @@
       "before": ["<leader>", "p"],
       "commands": ["workbench.action.quickOpen"]
     },
-    { "before": ["<leader>", "t"], "commands": ["workbench.action.showAllSymbols"] },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.showAllSymbols"]
+    },
     {
       "before": ["<leader>", "w"],
       "commands": ["workbench.action.closeActiveEditor"]
@@ -135,10 +189,13 @@
       "commands": ["workbench.action.openSettingsJson"]
     },
     {
-      "before": ["<leader>", "f", "z"],
-      "commands": ["search.action.openNewEditor"]
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.quickFix"]
     },
-    { "before": ["<leader>", "x", "e", "E"], "commands": ["errorLens.toggle"] },
+    {
+      "before": ["<leader>", "x", "e", "E"],
+      "commands": ["errorLens.toggle"]
+    },
     {
       "before": ["<leader>", "x", "e", "e"],
       "commands": ["errorLens.toggleError"]
@@ -147,7 +204,10 @@
       "before": ["<leader>", "x", "e", "w"],
       "commands": ["errorLens.toggleWarning"]
     },
-    { "before": ["<leader>", "x", "e", "i"], "commands": ["errorLens.toggleInfo"] },
+    {
+      "before": ["<leader>", "x", "e", "i"],
+      "commands": ["errorLens.toggleInfo"]
+    },
     {
       "before": ["<leader>", "a", "f"],
       "commands": ["workbench.action.toggleCenteredLayout"]
@@ -157,6 +217,14 @@
       "commands": ["workbench.action.toggleActivityBarVisibility"]
     },
     {
+      "before": ["<leader>", "a", "p"],
+      "commands": ["workbench.action.pinEditor"]
+    },
+    {
+      "before": ["<leader>", "a", "b"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
       "before": ["<leader>", "<leader>", "W"],
       "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
     }
@@ -164,7 +232,7 @@
   "vim.leader": "<space>",
   "vim.handleKeys": {
     "<C-r>": false,
-    "<C-w>": false,
+    "<C-w>": true,
     "<C-f>": false,
     "<C-k>": false,
     "<C-v>": false,
@@ -181,10 +249,20 @@
   "errorLens.enabled": true,
   "errorLens.scrollbarHackEnabled": true,
   "errorLens.messageBackgroundMode": "none",
+  "errorLens.editorHoverPartsEnabled": {
+    "buttonsEnabled": false
+  },
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.hidesExplorerArrows": false,
-  "background.backgroundOpacity": [0.93, 0.9, 0.9, 0.9],
-  "settingsSync.ignoredSettings": ["background.windowBackgrounds"],
+  "background.backgroundOpacity": [0.95, 0.9, 0.9, 0.9],
+  "settingsSync.ignoredSettings": [
+    "background.windowBackgrounds",
+    "background.backgroundOpacity",
+    "editor.smoothScrolling",
+    "eslint.enable",
+    "editor.fontSize"
+  ],
   "files.autoSave": "onFocusChange",
   "editor.semanticTokenColorCustomizations": {
     "enabled": true,
@@ -194,17 +272,31 @@
       }
     }
   },
+  "editor.tokenColorCustomizations": {
+    "[One Dark Pro]": {
+      "textMateRules": [
+        {
+          "scope": [
+            "meta.type.tuple.ts entity.name.label.ts",
+            "meta.type.tuple.tsx entity.name.label.tsx"
+          ],
+          "settings": {
+            "foreground": "#E06C75"
+          }
+        }
+      ]
+    }
+  },
   "editor.suggestOnTriggerCharacters": false,
   "editor.gotoLocation.multipleDefinitions": "goto",
-  "editor.suggest.snippetsPreventQuickSuggestions": true,
-  "background.windowBackgrounds": ["c:/background/54249-devushka_anime_volosy.jpg"],
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.stickyScroll.enabled": false,
-  "editor.fontSize": 14,
+  "editor.fontSize": 15.5,
+  "editor.fontWeight": 500,
   "editor.lineNumbers": "relative",
-  "editor.cursorSurroundingLines": 4,
+  "editor.cursorSurroundingLines": 10,
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.fontLigatures": true,
-  "editor.smoothScrolling": false,
   "editor.cursorBlinking": "solid",
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.tabSize": 2,
@@ -212,9 +304,8 @@
   "editor.suggestSelection": "first",
   "editor.fontFamily": "JetBrains Mono",
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
-  "editor.linkedEditing": true,
-
+  "editor.occurrencesHighlight": "off",
+  "editor.linkedEditing": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.quickSuggestions": {
     "other": "on",
@@ -226,7 +317,25 @@
   "extensions.ignoreRecommendations": true,
   "workbench.startupEditor": "none",
   "update.mode": "none",
-  "update.enableWindowsBackgroundUpdates": false,
-  "window.zoomLevel": 1,
-  "editor.unicodeHighlight.ambiguousCharacters": false
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.colorTheme": "One Dark Pro",
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  },
+  "window.titleBarStyle": "native",
+  "window.menuBarVisibility": "toggle",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1,
+    "vscodevim.vim": 1
+  },
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "tailwindCSS.classFunctions": [
+    "cn",
+    "cva",
+    "cvaWithVariants",
+    "cvaWithVariantsAndDefault",
+    "twMerge",
+    "twJoin"
+  ]
 }

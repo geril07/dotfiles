@@ -1,3 +1,4 @@
+// Place your key bindings in this file to override the defaults
 [
   {
     "key": "ctrl+shift+o",
@@ -67,22 +68,22 @@
     "when": "inQuickOpen"
   },
   {
-    "key": "ctrl+n",
-    "command": "selectNextCodeAction",
-    "when": "codeActionMenuVisible"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "selectPrevCodeAction",
-    "when": "codeActionMenuVisible"
-  },
-  {
     "key": "j",
     "command": "selectNextCodeAction",
     "when": "codeActionMenuVisible"
   },
   {
     "key": "k",
+    "command": "selectPrevCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "selectNextCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "ctrl+p",
     "command": "selectPrevCodeAction",
     "when": "codeActionMenuVisible"
   },
@@ -98,5 +99,23 @@
     "key": "ctrl+space",
     "command": "hideSuggestWidget",
     "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+shift+x",
+    "command": "workbench.view.extensions"
+  },
+  {
+    "key": "ctrl+shift+x",
+    "command": "-workbench.view.extensions",
+    "when": "viewContainer.workbench.view.extensions.enabled"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
   }
 ]

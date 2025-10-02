@@ -33,9 +33,9 @@
           "name": "GPT-5 (Low)",
 
           "options": {
-            "reasoning": {
-              "effort": "low"
-            }
+            "reasoningEffort": "low",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto"
           }
         },
 
@@ -45,8 +45,32 @@
 
           "options": {
             "reasoning": {
-              "effort": "minimal"
+              "reasoningEffort": "minimal",
+              "textVerbosity": "low",
+              "reasoningSummary": "auto"
             }
+          }
+        },
+
+        "openai/gpt-5-mini-high": {
+          "id": "openai/gpt-5-mini",
+          "name": "GPT-5 Mini (High)",
+
+          "options": {
+            "reasoningEffort": "high",
+            "textVerbosity": "medium",
+            "reasoningSummary": "auto"
+          }
+        },
+
+        "openai/gpt-5-mini-low": {
+          "id": "openai/gpt-5-mini",
+          "name": "GPT-5 Mini (Low)",
+
+          "options": {
+            "reasoningEffort": "low",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto"
           }
         },
 

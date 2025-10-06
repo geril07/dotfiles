@@ -71,6 +71,7 @@ return {
 			completion = {
 				trigger = {
 					show_on_blocked_trigger_characters = { " ", "\n", "\t", "{", "}" },
+					show_on_insert_on_trigger_character = false,
 				},
 
 				menu = {

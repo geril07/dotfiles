@@ -51,6 +51,7 @@ return {
 					"clangd",
 					"css-lsp",
 					"cssmodules-language-server",
+					"css-variables-language-server",
 					"docker-compose-language-service",
 					"emmet-language-server",
 					"emmet-ls",
@@ -169,6 +170,20 @@ return {
 				bashls = {},
 				html = {},
 				cssls = {},
+				css_variables = {
+					settings = {
+						cssVariables = {
+							lookupFiles = {
+								"**/*.less",
+								"**/*.scss",
+								"**/*.sass",
+								"**/*.css",
+								"node_modules/@mantine/core/styles.css",
+								"node_modules/@radix-ui/themes/styles.css",
+							},
+						},
+					},
+				},
 				cssmodules_ls = {},
 				-- stylelint_lsp = {},
 				sqlls = {},

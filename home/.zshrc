@@ -6,6 +6,7 @@ setopt HIST_IGNORE_SPACE        # do not save if line starts with space
 setopt HIST_NO_STORE            # do not save history commands
 setopt HIST_REDUCE_BLANKS       # strip superfluous blanks
 setopt INC_APPEND_HISTORY       # don’t wait for shell to exit to save history lines
+setopt complete_aliases
 
 # setopt HIST_ALLOW_CLOBBER       # related to shell clobber setting
 # setopt HIST_IGNORE_ALL_DUPS     # remove old event if new one is a duplicate

@@ -325,19 +325,23 @@ return {
 				end
 				client.server_capabilities.documentFormattingProvider = is_formatting_enabled
 
-				-- Highlight references when holding
-				if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-					vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-						desc = "Highlight references under the cursor",
-						buffer = bufnr,
-						callback = vim.lsp.buf.document_highlight,
-					})
-					vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-						desc = "Clear highlight references",
-						buffer = bufnr,
-						callback = vim.lsp.buf.clear_references,
-					})
+				if client.name == "css_variables" then
+					client.server_capabilities.colorProvider = false
 				end
+
+				-- Highlight references when holding
+				-- if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+				-- 	vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
+				-- 		desc = "Highlight references under the cursor",
+				-- 		buffer = bufnr,
+				-- 		callback = vim.lsp.buf.document_highlight,
+				-- 	})
+				-- 	vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+				-- 		desc = "Clear highlight references",
+				-- 		buffer = bufnr,
+				-- 		callback = vim.lsp.buf.clear_references,
+				-- 	})
+				-- end
 
 				require("lsp_signature").on_attach({
 					bind = false,

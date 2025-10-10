@@ -236,7 +236,7 @@
   "agent": {
     "Spec-ify": {
       "description": "Spec-driven development expert that guides users through the complete SDD workflow, orchestrating PM, Architect, Planner, Implementer, and Solver subagents",
-      "mode": "primary",
+      "mode": "subagent",
       "prompt": "{file:./agents/sdd.md}",
       "tools": {
         "read": true,

@@ -27,8 +27,10 @@ set $up k
 set $right l
 
 set $term kitty
-set $drun tofi-drun --prompt-text "Apps: " | xargs swaymsg exec --
-set $run tofi-run --prompt-text "Run: " | xargs swaymsg exec --
+# set $drun tofi-drun --prompt-text "Apps: " | xargs swaymsg exec --
+# set $run tofi-run --prompt-text "Run: " | xargs swaymsg exec --
+set $drun rofi -show drun
+set $run rofi -show run
 
 bindsym --to-code {
   $mod+Return exec $term
@@ -38,6 +40,7 @@ bindsym --to-code {
   # $mod+d exec j4-dmenu-desktop
   $mod+Shift+d exec $run
   $mod+d exec $drun
+  $mod+Shift+w exec "rofi -show window"
 
   $mod+Shift+r reload
 

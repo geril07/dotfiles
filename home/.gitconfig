@@ -8,6 +8,19 @@
 [init]
 	defaultBranch = main
 
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[merge]
+  conflictstyle = diff3
+
+
 [credential]
 	helper = store
 

@@ -26,3 +26,12 @@
   mantle: #1e2030;
   crust: #181926;
 }
+
+* {
+    background:     var(mantle);
+    background-alt: var(base);
+    foreground:     var(text);
+    selected:       var(blue);
+    active:         var(green);
+    urgent:         var(red);
+}

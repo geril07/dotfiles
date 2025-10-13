@@ -154,6 +154,10 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 
 				providers = {
+					path = {
+						score_offset = 0,
+					},
+
 					lsp = {
 						fallbacks = {},
 						timeout_ms = 300,

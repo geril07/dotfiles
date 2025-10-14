@@ -32,6 +32,9 @@ set $term kitty
 set $drun rofi -show drun
 set $run rofi -show run
 
+bindsym --whole-window $mod+button4 focus left
+bindsym --whole-window $mod+button5 focus right
+
 bindsym --to-code {
   $mod+Return exec $term
   $mod+Shift+q kill

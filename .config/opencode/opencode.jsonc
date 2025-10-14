@@ -49,7 +49,7 @@
         "z-ai/glm-4.6": {
           "options": {
             "provider": {
-              "only": ["novita"],
+              "only": ["z-ai"],
             },
           },
         },
@@ -116,15 +116,15 @@
           },
         },
 
-        // "google/gemini-2.5-flash-lite-reasoning": {
-        //   "id": "google/gemini-2.5-flash-lite",
-        //   "name": "Google: Gemini 2.5 Flash Lite (Reasoning)",
-        //   "options": {
-        //     "reasoning": {
-        //       "max_tokens": 2000,
-        //     },
-        //   },
-        // },
+        "google/gemini-2.5-flash-lite-reasoning": {
+          "id": "google/gemini-2.5-flash-lite",
+          "name": "Google: Gemini 2.5 Flash Lite (Reasoning)",
+          "options": {
+            "reasoning": {
+              "max_tokens": 2000,
+            },
+          },
+        },
 
         "qwen/qwen3-coder-30b-a3b-instruct": {
           "name": "Qwen: Qwen3 Coder 30B A3B Instruct",

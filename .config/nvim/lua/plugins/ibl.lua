@@ -3,8 +3,8 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		event = "VeryLazy",
+		enabled = true,
 		opts = {
-			enabled = true,
 			indent = { char = "▏" },
 			scope = {
 				enabled = false,

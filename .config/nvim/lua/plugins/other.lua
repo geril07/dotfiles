@@ -1,5 +1,11 @@
 return {
 	{
+		"Wansmer/treesj",
+		keys = { { "gm", "<cmd>TSJToggle<cr>", desc = "Toggle Block" } },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = { use_default_keymap = false, max_join_length = 1000 },
+	},
+	{
 		"folke/persistence.nvim",
 		event = "BufReadPre",
 		opts = {},

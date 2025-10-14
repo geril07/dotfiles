@@ -128,6 +128,8 @@ return {
 			},
 
 			fuzzy = {
+				prebuilt_binaries = { ignore_version_mismatch = true },
+
 				-- max_typos = 1,
 				sorts = {
 					"exact",

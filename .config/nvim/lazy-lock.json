@@ -25,6 +25,9 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "517ef5994ef9d6b738322664d5fdd948f0fdeb46" },
   "mason.nvim": { "branch": "main", "commit": "ad7146aa61dcaeb54fa900144d768f040090bff0" },
   "mcphub.nvim": { "branch": "main", "commit": "8ff40b5edc649959bb7e89d25ae18e055554859a" },
+  "mini.cursorword": { "branch": "main", "commit": "d843392f739fcfd85969e2dadeb71c8e0221afb5" },
+  "mini.hipatterns": { "branch": "main", "commit": "5629d5fba132b4ab0b3f0039549308421f65ff45" },
+  "mini.indentscope": { "branch": "main", "commit": "e9fa0714fc753e1e737940577904e553ee340903" },
   "nvim-autopairs": { "branch": "master", "commit": "23320e75953ac82e559c610bec5a90d9c6dfa743" },
   "nvim-cmp": { "branch": "docs-view-ts", "commit": "263b6a37c5ec8cb9a145bf5596e5535716f057d3" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "a065833f35a3a7cc3ef137ac88b5381da2ba302e" },
@@ -43,5 +46,6 @@
   "schemastore.nvim": { "branch": "main", "commit": "8e17e50b519ba360bcfd5dfb5843ccac9be500ba" },
   "screenkey.nvim": { "branch": "main", "commit": "c4661983fa5b4aa8f69a0fe7a349bbb3fe5fdf69" },
   "snacks.nvim": { "branch": "main", "commit": "bfe8c26dbd83f7c4fbc222787552e29b4eccfcc0" },
-  "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" }
+  "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
+  "treesj": { "branch": "main", "commit": "4770492244ccecdc9b01e0e81fa8f2f6b4a23841" }
 }

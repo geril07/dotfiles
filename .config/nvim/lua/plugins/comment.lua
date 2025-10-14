@@ -2,6 +2,7 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = "VeryLazy",
+		enabled = true,
 		config = function()
 			require("Comment").setup({
 				enable_autocmd = false,

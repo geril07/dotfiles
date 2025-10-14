@@ -2,7 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "catppuccin",
   "share": "disabled",
-  "small_model": "openrouter/google/gemini-2.5-flash-lite",
+  // "small_model": "openrouter/google/gemini-2.5-flash-lite",
+  "small_model": "openrouter/openai/gpt-oss-20b",
   "permission": {
     "bash": {
       "*": "allow",
@@ -36,6 +37,7 @@
             },
           },
         },
+
         "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
           "name": "NVIDIA: Llama 3.3 Nemotron Super 49B V1.5",
         },
@@ -70,59 +72,21 @@
           },
         },
 
-        "openai/gpt-5-low": {
-          "id": "openai/gpt-5",
-          "name": "GPT-5 (Low)",
-
-          "options": {
-            "reasoning": {
-              "effort": "low",
-            },
-            "reasoningEffort": "low",
-            "textVerbosity": "low",
-            "reasoningSummary": "auto",
-          },
-        },
-
-        "openai/gpt-5-minimal": {
-          "id": "openai/gpt-5",
-          "name": "GPT-5 (Minimal)",
-
-          "options": {
-            // "reasoning": {
-            //   "effort": "minimal",
-            // },
-            "reasoningEffort": "minimal",
-            "textVerbosity": "low",
-            "reasoningSummary": "auto",
-          },
-        },
-
         "openai/gpt-5-mini-high": {
           "id": "openai/gpt-5-mini",
           "name": "GPT-5 Mini (High)",
 
           "options": {
-            // "reasoning": {
-            //   "effort": "high",
-            // },
             "reasoningEffort": "high",
-            "textVerbosity": "medium",
-            "reasoningSummary": "auto",
           },
         },
 
-        "openai/gpt-5-mini-low": {
-          "id": "openai/gpt-5-mini",
-          "name": "GPT-5 Mini (Low)",
+        "openai/gpt-5-nano-high": {
+          "id": "openai/gpt-5-nano",
+          "name": "GPT-5 Nano (High)",
 
           "options": {
-            "reasoning": {
-              "effort": "low",
-            },
-            "reasoningEffort": "low",
-            "textVerbosity": "low",
-            "reasoningSummary": "auto",
+            "reasoningEffort": "high",
           },
         },
 
@@ -133,9 +97,10 @@
             "input": 0.3,
             "output": 2.5,
           },
+
           "options": {
             "reasoning": {
-              "max_tokens": 1000,
+              "max_tokens": 2000,
             },
           },
         },
@@ -143,27 +108,30 @@
         "google/gemini-2.5-flash": {
           "options": {
             "reasoning": {
-              "max_tokens": 1000,
+              "max_tokens": 2000,
+            },
+            "provider": {
+              "only": ["google-vertex/global"],
             },
           },
         },
 
-        "google/gemini-2.5-flash-lite": {
-          "name": "Google: Gemini 2.5 Flash Lite",
-          "cost": {
-            "cache_read": 0.025,
-            "cache_write": 0.183,
-            "input": 0.1,
-            "output": 0.4,
-          },
-        },
+        // "google/gemini-2.5-flash-lite-reasoning": {
+        //   "id": "google/gemini-2.5-flash-lite",
+        //   "name": "Google: Gemini 2.5 Flash Lite (Reasoning)",
+        //   "options": {
+        //     "reasoning": {
+        //       "max_tokens": 2000,
+        //     },
+        //   },
+        // },
 
-        "google/gemini-2.5-flash-lite-reasoning": {
-          "id": "google/gemini-2.5-flash-lite",
-          "name": "Google: Gemini 2.5 Flash Lite (Reasoning)",
+        "qwen/qwen3-coder-30b-a3b-instruct": {
+          "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
           "options": {
-            "reasoning": {
-              "max_tokens": 2000,
+            "provider": {
+              "ignore": ["alibaba"],
+              "require_parameters": true,
             },
           },
         },
@@ -184,15 +152,6 @@
             "input": 0.2,
             "output": 0.4,
             "cache_read": 0.05,
-          },
-        },
-
-        "deepseek/deepseek-chat-v3.1:free": {
-          "name": "DeepSeek: DeepSeek V3.1 (free)",
-          "options": {
-            "provider": {
-              "only": ["deepinfra/fp4"],
-            },
           },
         },
 
@@ -262,6 +221,16 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "enabled": true,
+    },
+  },
+
+  "agent": {
+    "creative": {
+      "temperature": 0.8,
+    },
+
+    "build": {
+      "temperature": 0.3,
     },
   },
 }

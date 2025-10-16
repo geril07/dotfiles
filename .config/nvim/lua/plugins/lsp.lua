@@ -209,7 +209,18 @@ return {
 					enabled = true,
 					settings = {
 						tailwindCSS = {
-							classFunctions = { "cva", "cx", "cn", "twMerge" },
+							classFunctions = {
+								"cva",
+								"cx",
+								"cn",
+								"twMerge",
+							},
+
+							experimental = {
+								classRegex = {
+									{ "className\\s*[:=]\\s*['\"`]([^'\"`]*)['\"`]" },
+								},
+							},
 						},
 					},
 				},

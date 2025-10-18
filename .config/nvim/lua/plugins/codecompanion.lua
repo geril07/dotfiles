@@ -66,6 +66,13 @@ return {
 				strategies = {
 					chat = {
 						adapter = "openrouter",
+
+						keymaps = {
+							clear = {
+								modes = { n = "gX" },
+								description = "Clear chat",
+							},
+						},
 					},
 					inline = {
 						adapter = "gemini",

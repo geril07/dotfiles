@@ -214,6 +214,7 @@ return {
 								"cx",
 								"cn",
 								"twMerge",
+								"clsx",
 							},
 
 							experimental = {

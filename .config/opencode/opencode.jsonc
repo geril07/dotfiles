@@ -61,7 +61,7 @@
           "options": {
             "provider": {
               "require_parameters": true,
-              "only": ["deepinfra/fp4", "phala", "baseten/fp4", "fireworks"],
+              "only": ["groq"],
             },
           },
         },
@@ -70,7 +70,7 @@
           "options": {
             "provider": {
               "require_parameters": true,
-              "only": ["deepinfra/fp4"],
+              "only": ["groq"],
             },
           },
         },
@@ -213,7 +213,7 @@
     "session_child_cycle_reverse": "ctrl+alt+left",
   },
   "tui": {
-    "scroll_speed": 3,
+    "scroll_speed": 5,
   },
   "formatter": {
     "gofmt": { "disabled": false },
@@ -248,6 +248,10 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "enabled": true,
+    },
+    "figma-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
     },
   },
 

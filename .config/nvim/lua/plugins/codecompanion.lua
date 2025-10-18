@@ -10,6 +10,7 @@ return {
 			{
 				"ravitemer/mcphub.nvim",
 				build = "npm install -g mcp-hub@latest",
+				enabled = false,
 				opts = {
 					builtin_tools = {
 						edit_file = {
@@ -66,6 +67,13 @@ return {
 				strategies = {
 					chat = {
 						adapter = "openrouter",
+
+						keymaps = {
+							clear = {
+								modes = { n = "gX" },
+								description = "Clear chat",
+							},
+						},
 					},
 					inline = {
 						adapter = "gemini",
@@ -119,6 +127,7 @@ return {
 
 					mcphub = {
 						callback = "mcphub.extensions.codecompanion",
+						enabled = false,
 						opts = {
 							-- MCP Tools
 							make_tools = true, -- Make individual tools (@server__tool) and server groups (@server) from MCP servers

@@ -197,7 +197,13 @@ for_window [app_id="kitty"] {
 }
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 0
 
-for_window [class="neovide"] focus
+for_window [app_id="neovide"] {
+  focus
+  blur enable
+  opacity 0.9
+  blur_radius 3
+
+}
 # assign [class="neovide"] 3
 
 for_window [class="Code"] {

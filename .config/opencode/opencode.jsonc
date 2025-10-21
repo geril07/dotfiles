@@ -17,12 +17,91 @@
     },
   },
 
+  "disabled_providers": ["opencode", "openai"],
+  "keybinds": {
+    "session_child_cycle": "ctrl+alt+right",
+    "session_child_cycle_reverse": "ctrl+alt+left",
+  },
+
+  "tui": {
+    "scroll_speed": 5,
+  },
+
+  "formatter": {
+    "gofmt": { "disabled": false },
+    "mix": { "disabled": true },
+    "prettier": { "disabled": false },
+    "biome": { "disabled": true },
+    "zig": { "disabled": true },
+    "clang-format": { "disabled": true },
+    "ktlint": { "disabled": true },
+    "ruff": { "disabled": true },
+    "rubocop": { "disabled": true },
+    "standardrb": { "disabled": true },
+    "htmlbeautifier": { "disabled": true },
+  },
+
+  "lsp": {
+    "typescript": { "disabled": true },
+    "eslint": { "disabled": true },
+    "gopls": { "disabled": true },
+    "ruby-lsp": { "disabled": true },
+    "pyright": { "disabled": true },
+    "elixir-ls": { "disabled": true },
+    "zls": { "disabled": true },
+    "csharp": { "disabled": true },
+    "vue": { "disabled": true },
+    "rust": { "disabled": true },
+    "clangd": { "disabled": true },
+    "svelte": { "disabled": true },
+  },
+
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+    },
+    "figma-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
+    },
+  },
+
+  "agent": {
+    "creative": {
+      "temperature": 1,
+    },
+
+    "strict": {
+      "temperature": 0,
+    },
+
+    "build": {
+      "temperature": 0.5,
+    },
+  },
+
   "provider": {
+    "anthropic": {
+      "models": {
+        "claude-sonnet-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 5000,
+            },
+          },
+        },
+      },
+    },
+
     "google": {
       "options": {
         "apiKey": "{env:GEMINI_API_KEY}",
       },
     },
+
     "openrouter": {
       // "npm": "@openrouter/ai-sdk-provider",
 
@@ -205,67 +284,6 @@
           },
         },
       },
-    },
-  },
-  "disabled_providers": ["opencode", "openai"],
-  "keybinds": {
-    "session_child_cycle": "ctrl+alt+right",
-    "session_child_cycle_reverse": "ctrl+alt+left",
-  },
-  "tui": {
-    "scroll_speed": 5,
-  },
-  "formatter": {
-    "gofmt": { "disabled": false },
-    "mix": { "disabled": true },
-    "prettier": { "disabled": false },
-    "biome": { "disabled": true },
-    "zig": { "disabled": true },
-    "clang-format": { "disabled": true },
-    "ktlint": { "disabled": true },
-    "ruff": { "disabled": true },
-    "rubocop": { "disabled": true },
-    "standardrb": { "disabled": true },
-    "htmlbeautifier": { "disabled": true },
-  },
-  "lsp": {
-    "typescript": { "disabled": true },
-    "eslint": { "disabled": true },
-    "gopls": { "disabled": true },
-    "ruby-lsp": { "disabled": true },
-    "pyright": { "disabled": true },
-    "elixir-ls": { "disabled": true },
-    "zls": { "disabled": true },
-    "csharp": { "disabled": true },
-    "vue": { "disabled": true },
-    "rust": { "disabled": true },
-    "clangd": { "disabled": true },
-    "svelte": { "disabled": true },
-  },
-
-  "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true,
-    },
-    "figma-mcp": {
-      "type": "local",
-      "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
-    },
-  },
-
-  "agent": {
-    "creative": {
-      "temperature": 1,
-    },
-
-    "strict": {
-      "temperature": 0,
-    },
-
-    "build": {
-      "temperature": 0.5,
     },
   },
 }

@@ -164,59 +164,79 @@ return {
 						fallbacks = {},
 						timeout_ms = 300,
 						transform_items = function(ctx, items)
-							local function filter_emmet_if_outside_elements()
-								local bufnr = ctx.bufnr
-								local clients_per_bufnr = vim.lsp.get_clients({ bufnr = bufnr })
-								local emmet_name = "emmet_language_server"
+							local function client_exists(bufnr, name)
+								for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+									if client.name == name then
+										return true
+									end
+								end
+								return false
+							end
 
-								if
-									#vim.tbl_filter(function(client)
-										if client.name == emmet_name then
-											return true
-										end
-										return false
-									end, clients_per_bufnr) == 0
-								then
+							local function filter_emmet_if_outside_elements(ctx, items)
+								local bufnr = ctx.bufnr
+								local lsp_name = "emmet_language_server"
+								if not client_exists(bufnr, lsp_name) then
 									return items
 								end
-								local buftype = vim.bo[bufnr].filetype
+
+								local ft = vim.bo[bufnr].filetype
 								local embedded_fts = { "vue", "typescriptreact", "javascriptreact", "svelte" }
-								if vim.tbl_contains(embedded_fts, buftype) then
-									local ts_utils = require("nvim-treesitter.ts_utils")
-									local node = ts_utils.get_node_at_cursor()
-									local emmet_ts_nodes = { "jsx_element", "template_element", "style_element" }
-									local not_emmet_ts_nodes = { "script_element" }
-
-									while node ~= nil do
-										if vim.tbl_contains(emmet_ts_nodes, node:type()) then
-											return items
-										end
-										if vim.tbl_contains(not_emmet_ts_nodes, node:type()) then
-											break
-										end
-										node = node:parent()
-									end
-
-									return vim.tbl_filter(function(item)
-										return item.client_name ~= emmet_name
-									end, items)
+								if not vim.tbl_contains(embedded_fts, ft) then
+									return items
 								end
 
+								local ts_utils = require("nvim-treesitter.ts_utils")
+								local node = ts_utils.get_node_at_cursor()
+								local emmet_nodes = { "jsx_element", "template_element", "style_element" }
+								local not_emmet_nodes = { "script_element" }
+
+								while node do
+									local t = node:type()
+									if vim.tbl_contains(emmet_nodes, t) then
+										return items
+									elseif vim.tbl_contains(not_emmet_nodes, t) then
+										break
+									end
+									node = node:parent()
+								end
+
+								return vim.tbl_filter(function(item)
+									return item.client_name ~= lsp_name
+								end, items)
+							end
+
+							local function penalize_radix_ui(ctx, items)
+								local bufnr = ctx.bufnr
+								local lsp_name = "vtsls"
+								if not client_exists(bufnr, lsp_name) then
+									return items
+								end
+
+								local ft = vim.bo[bufnr].filetype
+								if vim.tbl_contains({ "typescriptreact", "javascriptreact" }, ft) then
+									for _, item in ipairs(items) do
+										local desc = item.labelDetails and item.labelDetails.description
+										if desc and desc:find("^@radix%-ui/react") then
+											item.score_offset = -1
+										end
+									end
+								end
 								return items
 							end
 
-							-- if true then
-							-- 	return items
-							-- end
-							-- local started = vim.uv.hrtime()
-							local ok, result = pcall(filter_emmet_if_outside_elements)
-							-- print("time: ", (vim.uv.hrtime() - started) / 1e6, "ms")
+							local ok_emmet, result = pcall(filter_emmet_if_outside_elements, ctx, items)
+							local ok_radix, result2 = pcall(penalize_radix_ui, ctx, result or items)
 
-							if ok then
+							if ok_radix then
+								return result2
+							end
+
+							print("failed to penalize_radix_ui", result)
+							if ok_emmet then
 								return result
 							end
 							print("failed to filter out emmet", result)
-
 							return items
 						end,
 					},

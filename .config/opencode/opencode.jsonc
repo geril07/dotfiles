@@ -66,6 +66,11 @@
       "type": "local",
       "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
     },
+
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+    },
   },
 
   "agent": {
@@ -86,6 +91,14 @@
     "anthropic": {
       "models": {
         "claude-sonnet-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 5000,
+            },
+          },
+        },
+        "claude-haiku-4-5-20251001": {
           "options": {
             "thinking": {
               "type": "enabled",

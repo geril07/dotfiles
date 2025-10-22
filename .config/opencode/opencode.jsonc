@@ -64,12 +64,12 @@
     },
     "figma-mcp": {
       "type": "local",
-      "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
+      "command": ["/usr/bin/npx", "-y", "figma-developer-mcp", "--stdio"],
     },
 
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "command": ["/usr/bin/npx", "-y", "chrome-devtools-mcp@latest"],
     },
   },
 

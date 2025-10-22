@@ -63,3 +63,7 @@ function __zoxide_z() {
         result="$(\command zoxide query -- "$@")" && __zoxide_cd "${result}"
     fi
 }
+
+export OPENCODE_AGENTS_SWITCH_SINGLE_MODEL=1
+export OPENCODE_DISABLE_LSP_DOWNLOAD=1
+export OPENCODE_DISABLE_AUTOCOMPACT=1

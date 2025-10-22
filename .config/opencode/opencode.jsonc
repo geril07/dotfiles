@@ -63,11 +63,13 @@
       "enabled": true,
     },
     "figma-mcp": {
+      "enabled": false,
       "type": "local",
       "command": ["/usr/bin/npx", "-y", "figma-developer-mcp", "--stdio"],
     },
 
     "chrome-devtools": {
+      "enabled": false,
       "type": "local",
       "command": ["/usr/bin/npx", "-y", "chrome-devtools-mcp@latest"],
     },
@@ -118,7 +120,19 @@
             },
           },
         },
+
+        "claude-haiku-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 5000,
+            },
+          },
+        },
+
         "claude-haiku-4-5-20251001": {
+          "name": "Claude Haiku 4.5 10-01",
+
           "options": {
             "thinking": {
               "type": "enabled",

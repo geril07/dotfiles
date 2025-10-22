@@ -90,7 +90,27 @@
   "provider": {
     "anthropic": {
       "models": {
+        "sonnet-4-5-thinker": {
+          "id": "claude-sonnet-4-5",
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 16000,
+            },
+          },
+        },
+
         "claude-sonnet-4-5": {
+          "options": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 5000,
+            },
+          },
+        },
+
+        "claude-sonnet-4-5-20250929": {
+          "name": "Claude Sonnet 4.5 09-29",
           "options": {
             "thinking": {
               "type": "enabled",

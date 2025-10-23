@@ -13,6 +13,10 @@ local modules_to_require = {
 	"my.gui",
 
 	function()
+		if require("my.utils").is_gui then
+			return
+		end
+
 		require("vim._extui").enable({})
 	end,
 }

@@ -8,7 +8,7 @@ return {
 		config = function()
 			local utils = require("my.utils")
 			local transparent = utils.transparent
-			transparent = true
+			-- transparent = true
 
 			require("catppuccin").setup({
 				flavour = "macchiato",

@@ -11,7 +11,7 @@ M.is_nvim_qt = vim.fn.has("gui_running") == 1
 	and not vim.g.nvy
 	and not M.is_goneovim
 
-M.transparent = vim.fn.has("gui_running") == 0
+M.transparent = true -- vim.fn.has("gui_running") == 0
 
 function M.apply_font(opts)
 	opts = opts or {}

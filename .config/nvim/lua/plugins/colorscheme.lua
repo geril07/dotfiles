@@ -8,7 +8,6 @@ return {
 		config = function()
 			local utils = require("my.utils")
 			local transparent = utils.transparent
-			-- transparent = true
 
 			require("catppuccin").setup({
 				flavour = "macchiato",
@@ -20,6 +19,9 @@ return {
 				highlight_overrides = {
 					all = function(colors)
 						return {
+							Normal = {
+								bg = (utils.is_gui or not transparent) and colors.base or colors.none,
+							},
 							DiagnosticSignWarn = { fg = colors.yellow, bg = colors.none },
 							DiagnosticSignHint = { fg = colors.teal, bg = colors.none },
 							DiagnosticSignInfo = { fg = colors.peach, bg = colors.none },

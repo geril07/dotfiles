@@ -7,8 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "ui_font_size": 18,
+  "buffer_font_size": 18,
+  "project_panel": {
+    "dock": "right"
+  },
+  "file_finder": {
+    "modal_max_width": "medium"
+  },
   "theme": {
     "mode": "system",
     "light": "Catppuccin Macchiato",
@@ -16,5 +22,9 @@
   },
   "vim_mode": true,
   "relative_line_numbers": true,
-  "autosave": "on_focus_change"
+  "autosave": "on_focus_change",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  }
 }

@@ -251,6 +251,9 @@ return {
 									snippets = "none",
 								},
 							},
+							cachePriming = {
+								enable = false,
+							},
 						},
 					},
 				},

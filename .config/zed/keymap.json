@@ -15,16 +15,31 @@
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore",
-      "j j": "vim::NormalBefore",
-      "alt-shift-f": "editor::Format"
+      "escape": ["workspace::SendKeystrokes", "escape ctrl-s"],
+      "j k": ["workspace::SendKeystrokes", "escape ctrl-s"],
+      "j j": ["workspace::SendKeystrokes", "escape ctrl-s"],
+      "alt shift-f": "editor::Format"
     }
   },
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
+      "space p": "file_finder::Toggle",
+      // "ctrl-shift-u": "editor::HalfPageUp",
+      // "ctrl-shift-d": "editor::HalfPageDown",
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
-      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"]
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "space e": "pane::RevealInProjectPanel",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      // TODO: Go to next/prev error
+      "] e": "editor::GoToDiagnostic",
+      "[ e": "editor::GoToPreviousDiagnostic",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+      "space c a": "editor::ToggleCodeActions",
+      "space r": "editor::Rename",
+      "alt-z": "editor::ToggleSoftWrap"
     }
   },
   {
@@ -39,6 +54,29 @@
       "ctrl-s": "workspace::Save", // vim default: show signature
       "ctrl-a": "editor::SelectAll", // vim default: increment
       "ctrl-b": "workspace::ToggleLeftDock" // vim default: down
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "A": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "o": "project_panel::OpenPermanent",
+      "alt-h": "project_panel::OpenSplitHorizontal",
+      "alt-v": "project_panel::OpenSplitVertical",
+      // Close project panel as project file panel on the right
+      "q": "workspace::ToggleRightDock",
+      "space e": "workspace::ToggleRightDock",
+      // Navigate between panel
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown"
     }
   }
 ]

@@ -13,7 +13,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = { "LuaSnip" },
 		build = "cargo +nightly build --release",
-		dev = false,
+		dev = true,
 		event = "InsertEnter",
 		enabled = true,
 		opts = {
@@ -129,7 +129,7 @@ return {
 
 			fuzzy = {
 				prebuilt_binaries = { ignore_version_mismatch = true },
-				use_frecency = true,
+				use_frecency = false,
 
 				-- max_typos = 1,
 				sorts = {

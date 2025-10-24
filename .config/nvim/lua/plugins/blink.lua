@@ -129,6 +129,7 @@ return {
 
 			fuzzy = {
 				prebuilt_binaries = { ignore_version_mismatch = true },
+				use_frecency = true,
 
 				-- max_typos = 1,
 				sorts = {
@@ -225,19 +226,42 @@ return {
 								return items
 							end
 
-							local ok_emmet, result = pcall(filter_emmet_if_outside_elements, ctx, items)
-							local ok_radix, result2 = pcall(penalize_radix_ui, ctx, result or items)
+							local function strip_zls_parentheses(ctx, items)
+								local bufnr = ctx.bufnr
+								local lsp_name = "zls"
+								if not client_exists(bufnr, lsp_name) then
+									return items
+								end
 
-							if ok_radix then
-								return result2
+								for _, item in ipairs(items) do
+									if item.client_name == lsp_name then
+										local stripped = item.label:match("^(.-)%s*%(")
+										if stripped then
+											item.label = stripped
+										end
+									end
+								end
+
+								return items
 							end
 
-							print("failed to penalize_radix_ui", result)
-							if ok_emmet then
-								return result
+							local transforms = {
+								filter_emmet_if_outside_elements,
+								penalize_radix_ui,
+								-- strip_zls_parentheses,
+							}
+
+							local result = items
+							for _, transform in ipairs(transforms) do
+								local ok, new_result = pcall(transform, ctx, result)
+								if ok then
+									result = new_result
+								else
+									print("transform failed:", new_result)
+								end
 							end
-							print("failed to filter out emmet", result)
-							return items
+
+							return result
 						end,
 					},
 				},

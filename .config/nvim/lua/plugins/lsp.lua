@@ -100,7 +100,13 @@ return {
 			end)
 
 			local servers = {
-				zls = {},
+				zls = {
+					settings = {
+						enable_argument_placeholders = false,
+						completion_label_details = false,
+						enable_snippets = false,
+					},
+				},
 				gleam = {},
 				ocamllsp = {},
 				hls = {},

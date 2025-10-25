@@ -100,13 +100,6 @@ return {
 			end)
 
 			local servers = {
-				zls = {
-					settings = {
-						enable_argument_placeholders = false,
-						completion_label_details = false,
-						enable_snippets = false,
-					},
-				},
 				gleam = {},
 				ocamllsp = {},
 				hls = {},
@@ -242,6 +235,16 @@ return {
 				graphql = {
 					enabled = false,
 				},
+
+				zls = {
+					formatter = true,
+					settings = {
+						enable_argument_placeholders = false,
+						completion_label_details = false,
+						enable_snippets = false,
+					},
+				},
+
 				rust_analyzer = {
 					formatter = true,
 					settings = {

@@ -1,45 +1,55 @@
 vim.g.mapleader = " "
 
-vim.o.swapfile = false
-vim.o.signcolumn = "yes"
-vim.o.ignorecase = true
 vim.o.cmdheight = 1
+vim.o.laststatus = 3
+vim.o.signcolumn = "yes"
+
 vim.o.termguicolors = true
-vim.o.spelllang = "en_us,ru_ru"
+
 vim.o.number = true
 vim.o.relativenumber = true
-
 vim.o.so = 10
+
+vim.o.swapfile = false
 vim.o.undofile = true
-vim.o.mouse = "a"
+
 vim.o.swb = "usetab,useopen,uselast"
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
+
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+
 vim.o.wrap = false
-vim.o.shiftwidth = 2
+
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.showtabline = 1
+
+vim.o.mouse = "a"
+vim.o.guicursor = "i:block"
 -- vim.o.guicursor = ""
 
-vim.o.guicursor = "i:block"
-
-vim.o.expandtab = true
-vim.o.smartindent = true
+vim.o.showtabline = 1
 
 vim.o.clipboard = "unnamedplus"
+
 vim.o.cursorlineopt = "number"
+vim.o.cursorline = false
 
 vim.o.updatetime = 250
 vim.o.timeoutlen = 500
-vim.o.cursorline = false
-vim.o.showmode = false
-vim.o.laststatus = 3
+
+-- Case insensitive searching UNLESS /C or the search has capitals.
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- folds
 vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99
 vim.wo.foldtext = ""
+
+-- -- Show whitespace.
+-- vim.opt.list = true
+-- vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  ↦" }
 
 local arrows = require("my.icons").arrows
 -- UI characters.
@@ -54,6 +64,8 @@ vim.opt.fillchars = {
 
 -- Use rounded borders for floating windows.
 vim.o.winborder = "rounded"
+
+vim.o.spelllang = "en_us,ru_ru"
 
 local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
 local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]

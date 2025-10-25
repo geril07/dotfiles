@@ -8,12 +8,14 @@ local snippet_active = function(filter)
 	return ls.in_snippet()
 end
 
+local is_dev = false
+
 return {
 	{
 		"saghen/blink.cmp",
 		dependencies = { "LuaSnip" },
 		build = "cargo +nightly build --release",
-		dev = true,
+		dev = is_dev,
 		event = "InsertEnter",
 		enabled = true,
 		opts = {
@@ -70,7 +72,7 @@ return {
 			},
 			completion = {
 				trigger = {
-					show_on_blocked_trigger_characters = { " ", "\n", "\t", "{", "}" },
+					show_on_blocked_trigger_characters = { " ", "\n", "\t", "{", "}", "!" },
 					show_on_insert_on_trigger_character = false,
 				},
 
@@ -129,7 +131,7 @@ return {
 
 			fuzzy = {
 				prebuilt_binaries = { ignore_version_mismatch = true },
-				use_frecency = false,
+				use_frecency = not is_dev,
 
 				-- max_typos = 1,
 				sorts = {

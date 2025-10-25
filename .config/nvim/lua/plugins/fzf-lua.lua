@@ -82,6 +82,7 @@ return {
 						["<C-k>"] = "preview-half-page-up",
 						["<C-l>"] = "preview-half-page-left",
 						["<C-h>"] = "preview-half-page-right",
+						["<A-z>"] = "toggle-preview-wrap",
 					},
 
 					fzf = {
@@ -102,6 +103,7 @@ return {
 				},
 
 				lsp = {
+					includeDeclaration = false,
 					winopts = { preview = { hidden = false } },
 
 					symbols = {

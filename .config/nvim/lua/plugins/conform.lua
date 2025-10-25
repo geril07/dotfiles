@@ -1,9 +1,10 @@
-local function format_file()
+---@param opts conform.FormatOpts?
+local function format_file(opts)
 	-- vim.lsp.buf.format({ async = true })
-	require("conform").format({
+	require("conform").format(vim.tbl_extend("force", {
 		async = true,
 		lsp_format = "fallback",
-	})
+	}, opts or {}))
 end
 
 local prettier_opts = { "prettierd", "prettier", stop_after_first = true }
@@ -56,6 +57,7 @@ return {
 
 				formatters_by_ft = formatters_by_ft,
 			})
+
 		end,
 		keys = {
 			{ "<leader>f", format_file, desc = "Format file" },

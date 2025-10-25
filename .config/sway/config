@@ -198,7 +198,7 @@ for_window [app_id="kitty"] {
 }
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 0
 
-for_window [class="neovide"] layout tabbed
+for_window [app_id="neovide"] layout tabbed
 for_window [app_id="neovide"] {
   focus
   blur enable

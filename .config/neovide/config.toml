@@ -1,4 +1,5 @@
-vsync = false
+vsync = true
+fork = true
 
 
 [font]

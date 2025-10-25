@@ -188,6 +188,7 @@ for_window [app_id="Alacritty"] {
   # border pixel 0
   # opacity 0.9
 }
+
 for_window [app_id="kitty"] {
   # border pixel 0
   # opacity 0.9
@@ -197,6 +198,7 @@ for_window [app_id="kitty"] {
 }
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 0
 
+for_window [class="neovide"] layout tabbed
 for_window [app_id="neovide"] {
   focus
   blur enable
@@ -204,7 +206,6 @@ for_window [app_id="neovide"] {
   blur_radius 3
 
 }
-# assign [class="neovide"] 3
 
 for_window [class="Code"] {
   focus

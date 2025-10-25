@@ -42,7 +42,7 @@ map_tbl({
 
 	i = {
 		["jk"] = { "<ESC>", { remap = true } },
-		["jj"] = { "<ESC>", { remap = true } },
+		-- ["jj"] = { "<ESC>", { remap = true } },
 		["<C-v>"] = { '<ESC>"+pa', { remap = true } },
 
 		["<M-k>"] = { vim.lsp.buf.signature_help },
@@ -157,6 +157,8 @@ map_tbl({
 
 	t = {
 		["<ESC>"] = "<C-\\><C-n>",
+		-- ["jk"] = { "<ESC>", { remap = true } },
+		-- ["jj"] = { "<ESC>", { remap = true } },
 	},
 })
 

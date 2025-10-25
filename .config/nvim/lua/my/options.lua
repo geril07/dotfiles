@@ -37,6 +37,7 @@ vim.o.cursorline = false
 
 vim.o.updatetime = 250
 vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 10
 
 -- Case insensitive searching UNLESS /C or the search has capitals.
 vim.o.ignorecase = true

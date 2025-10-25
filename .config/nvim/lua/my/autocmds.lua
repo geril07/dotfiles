@@ -33,3 +33,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100, priority = 250 })
 	end,
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.cmd("startinsert")
+	end,
+})

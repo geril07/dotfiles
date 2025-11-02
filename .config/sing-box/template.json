@@ -1,21 +1,26 @@
 {
   "log": {
     "level": "info",
-    "timestamp": true
+    "timestamp": true,
+    "output": "/tmp/box.log"
   },
-
   "dns": {
-    "rules": [],
     "servers": [
       {
-        "tag": "default",
-        "address": "1.1.1.1"
+        "tag": "cloudflare",
+        "type": "tls",
+        "server": "1.1.1.1"
+      },
+
+      {
+        "tag": "google",
+        "type": "tls",
+        "server": "8.8.8.8"
       }
     ],
-    "strategy": "prefer_ipv4",
-    "final": "default"
+    "final": "google",
+    "strategy": "prefer_ipv4"
   },
-
   "inbounds": [
     {
       "type": "tun",
@@ -26,115 +31,99 @@
       "auto_route": true,
       "strict_route": true,
       "auto_redirect": true,
-      "stack": "mixed",
-      "domain_strategy": "prefer_ipv4"
+      "stack": "mixed"
     }
   ],
-
   "outbounds": [
     {
       "type": "direct",
       "tag": "direct"
     }
   ],
-
   "route": {
-    "final": "direct",
-    "find_process": true,
-    "auto_detect_interface": true,
-
     "rules": [
-      { "action": "sniff" },
+      {
+        "action": "sniff"
+      },
       {
         "protocol": "dns",
         "action": "hijack-dns"
       },
+
+      {
+        "process_path": ["/usr/lib/firefox/firefox"],
+        "outbound": "proxy-work"
+      },
+
+      {
+        "process_path": [
+          "/usr/bin/dnf",
+          "/usr/bin/dnf5",
+          "/usr/bin/pacman",
+          "/usr/bin/yay",
+          "/usr/lib/systemd/systemd-resolved",
+          "/home/geril/.local/bin/hf",
+          "/home/geril/.local/bin/huggingface-cli"
+        ],
+        "outbound": "direct"
+      },
+
       {
         "domain_keyword": [
-          "steamdb",
-          ".ua",
-          "anthropic",
-          "claude",
-          "google",
-          "usher.ttvnw"
+          ".ru",
+          ".su",
+          "hls.ttvnw",
+          "playlist.ttvnw",
+          "godeaf",
+          "gencit",
+          "allo.cdnlbox.club",
+          "obrut.show",
+          "curseforge",
+          "forgecdn"
         ],
-        "outbound": "proxy"
+        "outbound": "direct"
       },
+
       {
-        "process_name": ["Discord.exe"],
-        "outbound": "proxy"
-      },
-      {
-        "process_path": ["/opt/discord/Discord", "/app/discord/Discord"],
-        "outbound": "proxy"
-      },
-      {
-        "process_name": ["Warframe.x64.exe"],
+        "rule_set": ["geoip-private", "geosite-category-ru", "geoip-ru"],
         "outbound": "direct"
       },
       {
-        "rule_set": ["geosite-ru-blocked"],
-        "outbound": "proxy"
-      },
-      {
-        "outbound": "direct",
-        "rule_set": [
-          "geoip-private",
-          "geosite-private",
-          "geosite-category-ru",
-          "geoip-ru"
-        ]
-      },
-      {
-        "rule_set": ["geosite-category-ads-all"],
-        "action": "reject"
+        "rule_set": "geosite-category-ads-all",
+        "action": "reject",
+        "method": "default"
       }
     ],
-
     "rule_set": [
       {
-        "type": "local",
-        "tag": "geoip-private",
         "format": "binary",
-        "path": "rulesets/geoip-private.srs"
-      },
-      {
-        "type": "local",
-        "tag": "geoip-ru-blocked",
-        "format": "binary",
-        "path": "rulesets/geoip-ru-blocked.srs"
-      },
-      {
-        "type": "local",
         "tag": "geoip-ru",
-        "format": "binary",
-        "path": "rulesets/geoip-ru.srs"
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/ru.srs"
       },
       {
-        "type": "local",
-        "tag": "geosite-category-ads-all",
         "format": "binary",
-        "path": "rulesets/geosite-category-ads-all.srs"
-      },
-      {
-        "type": "local",
         "tag": "geosite-category-ru",
-        "format": "binary",
-        "path": "rulesets/geosite-category-ru.srs"
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ru.srs"
       },
       {
-        "type": "local",
-        "tag": "geosite-private",
         "format": "binary",
-        "path": "rulesets/geosite-private.srs"
+        "tag": "geosite-category-ads-all",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs"
       },
       {
-        "type": "local",
-        "tag": "geosite-ru-blocked",
         "format": "binary",
-        "path": "rulesets/geosite-ru-blocked.srs"
+        "tag": "geoip-private",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
       }
-    ]
+    ],
+    "final": "proxy2",
+    "find_process": true,
+    "auto_detect_interface": true,
+    "default_domain_resolver": "google"
   },
 
   "experimental": {

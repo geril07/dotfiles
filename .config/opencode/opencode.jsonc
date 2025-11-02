@@ -19,8 +19,8 @@
 
   "disabled_providers": ["opencode", "openai"],
   "keybinds": {
-    "session_child_cycle": "ctrl+alt+right",
-    "session_child_cycle_reverse": "ctrl+alt+left",
+    // "session_child_cycle": "ctrl+alt+right",
+    // "session_child_cycle_reverse": "ctrl+alt+left",
   },
 
   "tui": {
@@ -58,9 +58,11 @@
 
   "mcp": {
     "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": false,
+      // "type": "remote",
+      // "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
     },
     "figma-mcp": {
       "enabled": false,

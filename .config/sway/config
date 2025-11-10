@@ -219,6 +219,7 @@ for_window [app_id="code"] {
   blur enable
   blur_radius 3
 }
+for_window [app_id="code"] layout tabbed
 
 #vscode native wayland
 for_window [app_id="code-url-handler"] {

@@ -230,6 +230,10 @@ return {
 					settings = { format = false },
 				},
 				pylsp = {
+					enabled = false,
+					formatter = true,
+				},
+				basedpyright = {
 					formatter = true,
 				},
 				graphql = {

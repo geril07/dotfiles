@@ -141,7 +141,7 @@ return {
 			{ "<leader>fg", mcmd("FzfLua git_files") },
 			{ "<leader>fm", mcmd("FzfLua marks") },
 			{ "<leader>fs", mcmd("FzfLua lsp_document_symbols") },
-			{ "<leader>fw", mcmd("FzfLua lsp_workspace_symbols") },
+			{ "<leader>fw", mcmd("FzfLua lsp_live_workspace_symbols") },
 			{ "gf", mcmd("FzfLua lsp_references") },
 			{ "gt", mcmd("FzfLua lsp_typedefs") },
 			{ "<leader>fd", mcmd("FzfLua lsp_workspace_diagnostics") },

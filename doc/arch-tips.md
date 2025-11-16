@@ -4,7 +4,7 @@
 
 ```bash
 ExecStart=
-ExecStart=/usr/bin/reflector --save /etc/pacman.d/mirrorlist --sort rate --age 12 -l 10
+ExecStart=/usr/bin/reflector --verbose --sort rate -l 50 -n 10 -p http -p https
 ```
 
 ```bash

@@ -28,7 +28,7 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		priority = 100,
 		lazy = false,
-		commit = "d54a1875a91e1a705795ea26074795210b92ce7f",
+		-- commit = "d54a1875a91e1a705795ea26074795210b92ce7f",
 		dev = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",

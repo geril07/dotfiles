@@ -86,7 +86,21 @@ map_tbl({
 		end,
 
 		["gD"] = { vim.lsp.buf.declaration },
-		["gh"] = { vim.lsp.buf.hover },
+		["gh"] = {
+			function()
+				vim.api.nvim_create_autocmd("WinNew", {
+					once = true,
+					callback = function()
+						vim.defer_fn(function()
+							vim.schedule(function()
+								vim.cmd("redraw")
+							end)
+						end, 25)
+					end,
+				})
+				vim.lsp.buf.hover()
+			end,
+		},
 
 		["<leader>k"] = { vim.lsp.buf.signature_help },
 		["<leader>r"] = { vim.lsp.buf.rename },

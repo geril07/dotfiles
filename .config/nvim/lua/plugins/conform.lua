@@ -42,6 +42,7 @@ return {
 				python = { "black" },
 				sql = { "sqlfmt" },
 				ocaml = { "ocamlformat" },
+				kdl = { "kdlfmt" },
 			}
 
 			for _, ft in ipairs(prettier_fts) do
@@ -57,7 +58,6 @@ return {
 
 				formatters_by_ft = formatters_by_ft,
 			})
-
 		end,
 		keys = {
 			{ "<leader>f", format_file, desc = "Format file" },

@@ -1,1 +1,7 @@
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "lxqt-policykit-agent"
+spawn-at-startup "gammastep"
+spawn-at-startup "mako"
+spawn-at-startup "gtk-launch" "google-chrome"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "~/.config/waybar/sway/launch.sh"

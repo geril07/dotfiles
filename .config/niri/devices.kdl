@@ -1,8 +1,8 @@
 input {
     keyboard {
         xkb {
-            layout us,ru
-            options grp:alt_caps_toggle
+            layout "us,ru"
+            options "grp:alt_caps_toggle"
         }
         numlock
         repeat-rate 50
@@ -15,7 +15,7 @@ input {
         middle-emulation
     }
     mouse {
-        accel-profile flat
+        accel-profile "flat"
     }
     trackpoint {
 

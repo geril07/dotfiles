@@ -2,27 +2,30 @@ include "startup.kdl"
 include "devices.kdl"
 include "local.kdl"
 layout {
-    gaps 16
+    gaps 8
     center-focused-column "never"
     preset-column-widths {
-        proportion 0.33333
         proportion 0.5
-        proportion 0.66667
+        proportion 1.0
+    }
+    preset-window-heights {
+        proportion 0.5
+        proportion 1.0
     }
     default-column-width {
-        proportion 1
+        proportion 1.0
     }
     focus-ring {
-        width 4
-        active-color "#7fc8ff"
-        inactive-color "#505050"
+        width 2
+        active-color "#8caaee"
+        inactive-color "#626880"
     }
     border {
         off
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
+        width 2
+        active-color "#8caaee"
+        inactive-color "#626880"
+        urgent-color "#ef9f76"
     }
     shadow {
         softness 30
@@ -48,18 +51,61 @@ window-rule {
     }
 }
 window-rule {
-    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="^kitty$" title="^floating$"
     open-floating true
+    default-window-height {
+        proportion 0.9
+    }
+    default-column-width {
+        proportion 0.9
+    }
+}
+window-rule {
+    match title="^Picture-in-Picture$"
+    open-floating true
+}
+window-rule {
+    match app-id="^lxqt-policykit-agent$"
+    open-floating true
+}
+window-rule {
+    match app-id="^org\\.gnome\\.Calculator$"
+    open-floating true
+}
+window-rule {
+    match app-id="^code-url-handler$"
+    open-on-workspace "3"
+}
+window-rule {
+    match app-id="^code$"
+    open-on-workspace "3"
+}
+window-rule {
+    match app-id="^org\\.telegram\\.desktop$"
+    open-on-workspace "4"
+}
+window-rule {
+    match app-id="^discord$"
+    open-on-workspace "4"
 }
 binds {
     Mod+Shift+Slash {
         show-hotkey-overlay
     }
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" {
-        spawn "alacritty"
+    Mod+Return {
+        spawn "kitty"
     }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" {
-        spawn "fuzzel"
+    Mod+Ctrl+Return {
+        spawn "kitty" "-T" "floating"
+    }
+    Mod+D hotkey-overlay-title="Run an Application: rofi" {
+        spawn "rofi" "-show" "drun"
+    }
+    Mod+Shift+D {
+        spawn "rofi" "-show" "run"
+    }
+    Mod+Shift+W {
+        spawn "rofi" "-show" "window"
     }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
@@ -68,13 +114,13 @@ binds {
         spawn-sh "pkill orca || exec orca"
     }
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"
+        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+2%"
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
+        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-2%"
     }
     XF86AudioMute allow-when-locked=true {
-        spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"
     }
     XF86AudioMicMute allow-when-locked=true {
         spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
@@ -92,15 +138,15 @@ binds {
         spawn-sh "playerctl next"
     }
     XF86MonBrightnessUp allow-when-locked=true {
-        spawn "brightnessctl" "--class=backlight" "set" "+10%"
+        spawn "brightnessctl" "set" "+10%"
     }
     XF86MonBrightnessDown allow-when-locked=true {
-        spawn "brightnessctl" "--class=backlight" "set" "10%-"
+        spawn "brightnessctl" "set" "10%-"
     }
     Mod+O repeat=false {
         toggle-overview
     }
-    Mod+Q repeat=false {
+    Mod+Shift+Q repeat=false {
         close-window
     }
     Mod+Left {
@@ -164,28 +210,16 @@ binds {
         move-column-to-last
     }
     Mod+Shift+Left {
-        focus-monitor-left
-    }
-    Mod+Shift+Down {
-        focus-monitor-down
-    }
-    Mod+Shift+Up {
-        focus-monitor-up
+        focus-workspace-down
     }
     Mod+Shift+Right {
-        focus-monitor-right
+        focus-workspace-up
     }
     Mod+Shift+H {
-        focus-monitor-left
-    }
-    Mod+Shift+J {
-        focus-monitor-down
-    }
-    Mod+Shift+K {
-        focus-monitor-up
+        focus-workspace-down
     }
     Mod+Shift+L {
-        focus-monitor-right
+        focus-workspace-up
     }
     Mod+Shift+Ctrl+Left {
         move-column-to-monitor-left
@@ -310,32 +344,38 @@ binds {
     Mod+9 {
         focus-workspace 9
     }
-    Mod+Ctrl+1 {
+    Mod+0 {
+        focus-workspace 10
+    }
+    Mod+Shift+1 {
         move-column-to-workspace 1
     }
-    Mod+Ctrl+2 {
+    Mod+Shift+2 {
         move-column-to-workspace 2
     }
-    Mod+Ctrl+3 {
+    Mod+Shift+3 {
         move-column-to-workspace 3
     }
-    Mod+Ctrl+4 {
+    Mod+Shift+4 {
         move-column-to-workspace 4
     }
-    Mod+Ctrl+5 {
+    Mod+Shift+5 {
         move-column-to-workspace 5
     }
-    Mod+Ctrl+6 {
+    Mod+Shift+6 {
         move-column-to-workspace 6
     }
-    Mod+Ctrl+7 {
+    Mod+Shift+7 {
         move-column-to-workspace 7
     }
-    Mod+Ctrl+8 {
+    Mod+Shift+8 {
         move-column-to-workspace 8
     }
-    Mod+Ctrl+9 {
+    Mod+Shift+9 {
         move-column-to-workspace 9
+    }
+    Mod+Shift+0 {
+        move-column-to-workspace 10
     }
     Mod+BracketLeft {
         consume-or-expel-window-left
@@ -352,26 +392,20 @@ binds {
     Mod+R {
         switch-preset-column-width
     }
-    Mod+Shift+R {
-        switch-preset-window-height
-    }
     Mod+Ctrl+R {
         reset-window-height
     }
     Mod+F {
-        maximize-column
+        fullscreen-window
     }
     Mod+Shift+F {
-        fullscreen-window
+        spawn-sh "killall -SIGUSR1 waybar"
     }
     Mod+Ctrl+F {
         expand-column-to-available-width
     }
     Mod+C {
         center-column
-    }
-    Mod+Ctrl+C {
-        center-visible-columns
     }
     Mod+Minus {
         set-column-width "-10%"
@@ -385,31 +419,31 @@ binds {
     Mod+Shift+Equal {
         set-window-height "+10%"
     }
-    Mod+V {
+    Mod+Shift+Space {
         toggle-window-floating
     }
-    Mod+Shift+V {
+    Mod+Space {
         switch-focus-between-floating-and-tiling
     }
     Mod+W {
         toggle-column-tabbed-display
     }
-    Print {
-        screenshot
+    Mod+Shift+S {
+        spawn-sh "slurp | grim -g - - | wl-copy"
     }
-    Ctrl+Print {
-        screenshot-screen
+    Alt+Shift+1 {
+        spawn "obs-recording-toggle.sh"
     }
-    Alt+Print {
-        screenshot-window
+    Mod+Ctrl+C {
+        spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
     }
     Mod+Escape allow-inhibiting=false {
         toggle-keyboard-shortcuts-inhibit
     }
-    Mod+Shift+E {
-        quit
+    Mod+Shift+R {
+        spawn-sh "niri msg action reload-config"
     }
-    Ctrl+Alt+Delete {
+    Mod+Shift+E {
         quit
     }
     Mod+Shift+P {
@@ -419,4 +453,7 @@ binds {
 recent-windows {
     open-delay-ms 0
 }
-
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}

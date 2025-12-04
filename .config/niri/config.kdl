@@ -110,9 +110,6 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
     }
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null {
-        spawn-sh "pkill orca || exec orca"
-    }
     XF86AudioRaiseVolume allow-when-locked=true {
         spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+2%"
     }
@@ -457,3 +454,13 @@ window-rule {
     geometry-corner-radius 6
     clip-to-geometry true
 }
+prefer-no-csd
+cursor {
+    xcursor-theme "Future-cyan-cursors"
+    xcursor-size 26
+}
+
+window-rule {
+  match app-id="kitty"
+}
+spawn-sh-at-startup "swaybg -i ~/my/dotfiles/Pictures/comfy-home.png -m fill"

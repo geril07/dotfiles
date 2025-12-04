@@ -4,7 +4,6 @@ input {
             layout "us,ru"
             options "grp:alt_caps_toggle"
         }
-        numlock
         repeat-rate 50
         repeat-delay 150
     }

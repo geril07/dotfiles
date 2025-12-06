@@ -7,6 +7,6 @@ spawn-at-startup "mako"
 spawn-at-startup "gtk-launch" "google-chrome"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 
-spawn-at-startup "~/.config/waybar/sway/launch.sh"
+spawn-at-startup "~/.config/waybar/niri/launch.sh"
 spawn-sh-at-startup "swaybg -i ~/my/dotfiles/Pictures/comfy-home.png -m fill"
 

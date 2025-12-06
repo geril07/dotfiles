@@ -1,0 +1,109 @@
+@import "mocha.css";
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 17px;
+  font-weight: 600;
+  min-height: 0;
+}
+
+#waybar {
+  /* border: 2px solid @blue; */
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  /* background: @base; */
+  color: @text;
+}
+
+#workspaces button,
+#workspaces button:hover {
+  border-radius: 0px;
+  border: none;
+  background: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+
+  padding: 0px 10px;
+  color: @text;
+  border-bottom: 4px solid transparent;
+}
+
+#workspaces button:first-child,
+#workspaces button:hover:first-child {
+  border-radius: 8px 0px 0px 8px;
+}
+
+#workspaces button.focused {
+  /* border-bottom: 4px solid @blue; */
+  /* background: #373b41; */
+  /* background: @blue; */
+  color: @peach;
+}
+
+#workspaces button.urgent {
+  /* background-color: @red; */
+  color: @red;
+}
+
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power,
+#cpu,
+#memory,
+#language,
+#disk,
+#mode,
+#network {
+  padding: 0;
+  margin: 0 7.5px;
+}
+
+#tray {
+  margin: 0 10px 0 7.5px;
+}
+
+#memory,
+#cpu,
+#disk,
+#battery,
+#network {
+  color: @green;
+}
+
+#battery.charging {
+  color: @yellow;
+}
+
+#battery.good {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#language {
+  color: @rosewater;
+  min-width: 20px;
+}
+
+#pulseaudio {
+  color: @maroon;
+}
+
+#clock {
+  color: @blue;
+}
+
+#custom-music {
+  color: @mauve;
+}
+
+#mode {
+  color: @yellow;
+}

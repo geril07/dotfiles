@@ -1,0 +1,129 @@
+@import "macchiato.css";
+
+@define-color bg @mantle;
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 17px;
+  font-weight: 600;
+  min-height: 0;
+}
+
+#waybar {
+  /* border: 2px solid @blue; */
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  /* background: @base; */
+  color: @text;
+}
+
+#workspaces {
+  background-color: @bg;
+  border-radius: 0.5rem;
+}
+
+#workspaces button,
+#workspaces button:hover {
+  border-radius: 0px;
+  border: none;
+  background: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+
+  padding: 0px 10px;
+  color: @surface2;
+  border-bottom: 4px solid transparent;
+}
+
+#workspaces button.focused {
+  /* border-bottom: 4px solid @blue; */
+  /* background: #373b41; */
+  /* background: @blue; */
+  color: @blue;
+}
+
+#workspaces button.urgent {
+  /* background-color: @red; */
+  color: @red;
+}
+
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power,
+#cpu,
+#memory,
+#language,
+#disk,
+#mode,
+#network {
+  background-color: @bg;
+  padding: 0 7.5px;
+  /* margin: 0 7.5px; */
+}
+
+#tray {
+  padding: 0 10px 0 7.5px;
+  border-radius: 0.5rem;
+  margin-left: 10px;
+}
+
+#clock,
+#network {
+  border-radius: 0px 0.5rem 0.5rem 0px;
+}
+
+#pulseaudio,
+#disk {
+  border-radius: 0.5rem 0px 0px 0.5rem;
+  margin-left: 10px;
+}
+
+#custom-music {
+  border-radius: 0.5rem;
+}
+
+#memory,
+#cpu,
+#disk,
+#battery,
+#network {
+  color: @green;
+}
+
+#battery.charging {
+  color: @yellow;
+}
+
+#battery.good {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#language {
+  color: @rosewater;
+  min-width: 20px;
+}
+
+#pulseaudio {
+  color: @maroon;
+}
+
+#clock {
+  color: @blue;
+}
+
+#custom-music {
+  color: @mauve;
+}
+
+#mode {
+  color: @yellow;
+}

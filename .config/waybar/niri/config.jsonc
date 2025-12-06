@@ -1,0 +1,96 @@
+{
+  "layer": "top",
+  "position": "bottom", // Waybar position (top|bottom|left|right)
+  "height": 32,
+  "margin-right": 8,
+  "margin-left": 8,
+  "margin-bottom": 3,
+
+  "modules-left": ["niri/workspaces", "sway/mode"],
+  "modules-center": ["custom/music"],
+  "modules-right": [
+    "disk",
+    "memory",
+    "cpu",
+    "network",
+    "pulseaudio",
+    "battery",
+    "sway/language",
+    "clock",
+    "tray",
+  ],
+
+  "network": {
+    "interface": "wl*",
+    "format": "{ifname}",
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰊗 {ipaddr}/{cidr}",
+    "format-disconnected": "Disconnected",
+  },
+
+  "tray": {
+    "icon-size": 22,
+    "spacing": 2,
+  },
+
+  "sway/mode": {
+    "format": "{}",
+    "max-length": 50,
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "󰉋 {percentage_used}%",
+  },
+
+  "cpu": {
+    "format": " {usage:2}%",
+    "interval": 3,
+  },
+
+  "memory": {
+    "format": " {}%",
+    "interval": 3,
+  },
+
+  "custom/music": {
+    "format": "{}",
+    "interval": 5,
+    "tooltip": false,
+    "exec": "~/.local/bin/player_title.sh",
+    "on-click": "playerctl play-pause",
+    "max-length": 50,
+  },
+
+  "clock": {
+    "timezone": "Europe/Moscow",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%d-%m-%Y %H:%M}", // 󰃭
+  },
+
+  "battery": {
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15,
+      "good": 90,
+      "full": 100,
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "format-full": "",
+    "max-length": 25,
+  },
+
+  "pulseaudio": {
+    "scroll-step": 2,
+    "max-volume": 150,
+    "format": "{icon}{volume:2}%",
+    "format-muted": " 0%",
+    "format-icons": {
+      "default": [" ", " ", " "],
+    },
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+  },
+}

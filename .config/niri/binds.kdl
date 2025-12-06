@@ -3,31 +3,31 @@ binds {
         show-hotkey-overlay
     }
     Mod+Return {
-        spawn "kitty"
+        spawn-sh "kitty"
     }
     Mod+Ctrl+Return {
-        spawn "kitty" "-T" "floating"
+        spawn-sh "kitty -T floating -o background_opacity=1"
     }
     Mod+D hotkey-overlay-title="Run an Application: rofi" {
-        spawn "rofi" "-show" "drun"
+        spawn-sh "rofi -show drun"
     }
     Mod+Shift+D {
-        spawn "rofi" "-show" "run"
+        spawn-sh "rofi -show run"
     }
     Mod+Shift+W {
-        spawn "rofi" "-show" "window"
+        spawn-sh "rofi -show window"
     }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
-        spawn "swaylock"
+        spawn-sh "swaylock"
     }
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+2%"
+        spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ +2%"
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-2%"
+        spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ -2%"
     }
     XF86AudioMute allow-when-locked=true {
-        spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"
+        spawn-sh "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     }
     XF86AudioMicMute allow-when-locked=true {
         spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
@@ -45,10 +45,10 @@ binds {
         spawn-sh "playerctl next"
     }
     XF86MonBrightnessUp allow-when-locked=true {
-        spawn "brightnessctl" "set" "+10%"
+        spawn-sh "brightnessctl set +10%"
     }
     XF86MonBrightnessDown allow-when-locked=true {
-        spawn "brightnessctl" "set" "10%-"
+        spawn-sh "brightnessctl set 10%-"
     }
     Mod+O repeat=false {
         toggle-overview
@@ -339,7 +339,7 @@ binds {
         spawn-sh "slurp | grim -g - - | wl-copy"
     }
     Alt+Shift+1 {
-        spawn "obs-recording-toggle.sh"
+        spawn-sh "obs-recording-toggle.sh"
     }
     Mod+Ctrl+C {
         spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy"

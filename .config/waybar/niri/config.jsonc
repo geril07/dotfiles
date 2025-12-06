@@ -15,7 +15,7 @@
     "network",
     "pulseaudio",
     "battery",
-    "sway/language",
+    "niri/language",
     "clock",
     "tray",
   ],
@@ -36,6 +36,10 @@
   "sway/mode": {
     "format": "{}",
     "max-length": 50,
+  },
+
+  "niri/language": {
+    "format": "{short}",
   },
 
   "disk": {

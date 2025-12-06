@@ -1,5 +1,5 @@
 include "startup.kdl"
-include "devices.kdl"
+include "input.kdl"
 include "local.kdl"
 include "binds.kdl"
 include "window-rules.kdl"

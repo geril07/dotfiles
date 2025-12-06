@@ -104,89 +104,11 @@ binds {
     Mod+Ctrl+L {
         move-column-right-or-to-monitor-right
     }
-    Mod+Home {
-        focus-column-first
+    Mod+Ctrl+Comma {
+      move-workspace-to-monitor-left
     }
-    Mod+End {
-        focus-column-last
-    }
-    Mod+Ctrl+Home {
-        move-column-to-first
-    }
-    Mod+Ctrl+End {
-        move-column-to-last
-    }
-    Mod+Shift+Left {
-        focus-workspace-down
-    }
-    Mod+Shift+Right {
-        focus-workspace-up
-    }
-    Mod+Shift+H {
-        focus-workspace-down
-    }
-    Mod+Shift+L {
-        focus-workspace-up
-    }
-    Mod+Shift+Ctrl+Left {
-        move-column-to-monitor-left
-    }
-    Mod+Shift+Ctrl+Down {
-        move-column-to-monitor-down
-    }
-    Mod+Shift+Ctrl+Up {
-        move-column-to-monitor-up
-    }
-    Mod+Shift+Ctrl+Right {
-        move-column-to-monitor-right
-    }
-    Mod+Shift+Ctrl+H {
-        move-column-to-monitor-left
-    }
-    Mod+Shift+Ctrl+J {
-        move-column-to-monitor-down
-    }
-    Mod+Shift+Ctrl+K {
-        move-column-to-monitor-up
-    }
-    Mod+Shift+Ctrl+L {
-        move-column-to-monitor-right
-    }
-    Mod+Page_Down {
-        focus-workspace-down
-    }
-    Mod+Page_Up {
-        focus-workspace-up
-    }
-    Mod+U {
-        focus-workspace-down
-    }
-    Mod+I {
-        focus-workspace-up
-    }
-    Mod+Ctrl+Page_Down {
-        move-column-to-workspace-down
-    }
-    Mod+Ctrl+Page_Up {
-        move-column-to-workspace-up
-    }
-    Mod+Ctrl+U {
-        move-column-to-workspace-down
-    }
-    Mod+Ctrl+I {
-        move-column-to-workspace-up
-    }
-    Mod+Shift+Page_Down {
-        move-workspace-down
-    }
-    Mod+Shift+Page_Up {
-        move-workspace-up
-    }
-    Mod+Shift+U {
-        move-workspace-down
-    }
-    Mod+Shift+I {
-        move-workspace-up
+    Mod+Ctrl+Period {
+      move-workspace-to-monitor-right
     }
     Mod+WheelScrollDown cooldown-ms=150 {
         focus-workspace-down

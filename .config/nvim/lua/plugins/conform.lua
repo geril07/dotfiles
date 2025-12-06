@@ -42,7 +42,7 @@ return {
 				python = { "black" },
 				sql = { "sqlfmt" },
 				ocaml = { "ocamlformat" },
-				kdl = { "kdlfmt" },
+				-- kdl = { "kdlfmt" },
 			}
 
 			for _, ft in ipairs(prettier_fts) do

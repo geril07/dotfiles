@@ -1,7 +1,12 @@
+spawn-at-startup "/usr/lib/xdg-desktop-portal-gtk"
+spawn-at-startup "/usr/lib/xdg-desktop-portal-gnome"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "lxqt-policykit-agent"
 spawn-at-startup "gammastep"
 spawn-at-startup "mako"
 spawn-at-startup "gtk-launch" "google-chrome"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+
 spawn-at-startup "~/.config/waybar/sway/launch.sh"
+spawn-sh-at-startup "swaybg -i ~/my/dotfiles/Pictures/comfy-home.png -m fill"
+

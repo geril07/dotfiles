@@ -1,0 +1,50 @@
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+    draw-border-with-background false
+}
+window-rule {
+    match app-id="^org\\.wezfurlong\\.wezterm$"
+    default-column-width {
+
+    }
+}
+window-rule {
+    match app-id="^kitty$" title="^floating$"
+    open-floating true
+    default-window-height {
+        proportion 0.9
+    }
+    default-column-width {
+        proportion 0.9
+    }
+}
+window-rule {
+    match title="^Picture-in-Picture$"
+    open-floating true
+}
+window-rule {
+    match app-id="^lxqt-policykit-agent$"
+    open-floating true
+}
+window-rule {
+    match app-id="^org\\.gnome\\.Calculator$"
+    open-floating true
+}
+window-rule {
+    match app-id="^code-url-handler$"
+    open-on-workspace "3"
+}
+window-rule {
+    match app-id="^code$"
+    open-on-workspace "3"
+}
+window-rule {
+    match app-id="^org\\.telegram\\.desktop$"
+    open-on-workspace "4"
+}
+window-rule {
+    match app-id="^discord$"
+    open-on-workspace "4"
+}
+

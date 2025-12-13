@@ -22,7 +22,8 @@
         {
           "options": {
             "folder_separator_icon": "/",
-            "style": "full"
+            "style": "full",
+            "max_depth": 4
           },
           "template": " \uf07b {{ .Path }} ",
           "foreground": "#0CA0D8",
@@ -49,7 +50,11 @@
           "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}<#7a7a7a></>",
           "foreground": "#6CA35E",
           "type": "node",
-          "style": "diamond"
+          "style": "diamond",
+          "cache": {
+            "duration": "5m",
+            "strategy": "folder"
+          }
         },
         {
           "leading_diamond": " \ue0b6",
@@ -58,20 +63,26 @@
           "foreground": "#ffffff",
           "background": "#4c1f5e",
           "type": "java",
-          "style": "diamond"
+          "style": "diamond",
+          "cache": {
+            "duration": "5m",
+            "strategy": "folder"
+          }
         },
         {
           "options": {
-            "always_enabled": true,
-            "cache_duration": "none"
+            "always_enabled": true
           },
           "template": " {{ if gt .Code 0 }}<#ff0000>\uf00d \ue23a</>{{ else }}<#23d18b>\uf42e \ue23a</>{{ end }} ",
           "type": "status",
+          "cache": {
+            "duration": "none"
+          },
           "style": "plain"
         },
         {
           "options": {
-            "threshold": 10
+            "threshold": 500
           },
           "template": " took \uf252 {{ .FormattedMs }} ",
           "foreground": "#bab02a",

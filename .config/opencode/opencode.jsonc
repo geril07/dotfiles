@@ -159,6 +159,22 @@
       },
 
       "models": {
+        "google/gemini-3-flash-preview": {
+          "options": {
+            "provider": {
+              "only": ["google-ai-studio"],
+            },
+          },
+        },
+
+        "google/gemini-3-pro-preview": {
+          "options": {
+            "provider": {
+              "only": ["google-ai-studio"],
+            },
+          },
+        },
+
         "moonshotai/kimi-k2-0905": {
           "name": "MoonshotAI: Kimi K2 0905",
 

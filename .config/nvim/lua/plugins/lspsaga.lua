@@ -1,6 +1,6 @@
 return {
 	{
-		"nvimdev/lspsaga.nvim",
+		"geril07/lspsaga.nvim",
 		event = "VeryLazy",
 		config = function()
 			local saga = require("lspsaga")

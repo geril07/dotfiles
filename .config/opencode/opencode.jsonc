@@ -17,7 +17,7 @@
     },
   },
 
-  "disabled_providers": ["opencode", "openai"],
+  "disabled_providers": ["openai"],
   "keybinds": {
     // "session_child_cycle": "ctrl+alt+right",
     // "session_child_cycle_reverse": "ctrl+alt+left",
@@ -148,6 +148,12 @@
     "google": {
       "options": {
         "apiKey": "{env:GEMINI_API_KEY}",
+      },
+    },
+
+    "deepseek": {
+      "options": {
+        "apiKey": "{env:DEEPSEEK_API_KEY}",
       },
     },
 

@@ -27,8 +27,8 @@ end
 
 -- Debounce for some reason sometimes rejects formatting
 local debounce_state = {
-	enabled = false,
-	delay = 200,
+	enabled = true,
+	delay = 100,
 	last = nil,
 }
 
@@ -36,20 +36,23 @@ local function save_all()
 	vim.cmd("silent! wa")
 end
 
+local save_fn = save_all
+
 api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave" }, {
 	group = group,
 	desc = "AutoSave",
+	pattern = "*",
 	callback = function()
 		if debounce_state.enabled then
 			local now = vim.uv.hrtime()
 			debounce_state.last = now
 			vim.defer_fn(function()
 				if debounce_state.last == now then
-					save_all()
+					save_fn()
 				end
 			end, debounce_state.delay)
 		else
-			save_all()
+			save_fn()
 		end
 	end,
 })

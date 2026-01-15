@@ -33,18 +33,18 @@ set $floating_term $term -T floating
 set $drun rofi -show drun
 set $run rofi -show run
 
-bindsym --whole-window $mod+button4 focus left
-bindsym --whole-window $mod+button5 focus right
+# bindsym --whole-window $mod+button4 focus left
+# bindsym --whole-window $mod+button5 focus right
 
 bindsym --to-code {
-  $mod+Control+Return exec $floating_term
-  $mod+Return exec $term
+  $mod+Control+equal exec $floating_term
+  $mod+equal exec $term
   $mod+Shift+q kill
 
   # $mod+Shift+d exec dmenu_run 
   # $mod+d exec j4-dmenu-desktop
-  $mod+Shift+d exec $run
-  $mod+d exec $drun
+  $mod+Shift+Return exec $run
+  $mod+Return exec $drun
   $mod+Shift+w exec "rofi -show window"
 
   $mod+Shift+r reload
@@ -63,6 +63,11 @@ bindsym --to-code {
   $mod+$down focus down
   $mod+$up focus up
   $mod+$right focus right
+
+  $mod+a focus left
+  $mod+s focus down
+  $mod+w focus up
+  $mod+d focus right
 
   $mod+Left focus left
   $mod+Down focus down
@@ -109,17 +114,15 @@ bindsym --to-code {
   $mod+b splith
   $mod+v splitv
 
-  $mod+s layout stacking
-  $mod+w layout tabbed
-  $mod+e layout toggle split
+  $mod+z layout stacking
+  $mod+x layout tabbed
+  $mod+c layout toggle split
 
   $mod+f fullscreen
   $mod+Shift+f exec killall -SIGUSR1 waybar 
 
   $mod+Shift+space floating toggle
   $mod+space focus mode_toggle
-
-  $mod+a focus parent
 
   # Scratchpad
   $mod+minus move scratchpad
@@ -171,7 +174,6 @@ mode "resize" {
     Shift+Up resize shrink height $resize_delta px or $resize_delta ppt
     Shift+Right resize grow width $resize_delta px or $resize_delta ppt
 
-    Return mode "default"
     Escape mode "default"
     $mod+r mode "default"
   }

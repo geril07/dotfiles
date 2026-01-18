@@ -37,8 +37,8 @@ set $run rofi -show run
 # bindsym --whole-window $mod+button5 focus right
 
 bindsym --to-code {
-  $mod+Control+equal exec $floating_term
-  $mod+equal exec $term
+  $mod+Control+backslash exec $floating_term
+  $mod+backslash exec $term
   $mod+Shift+q kill
 
   # $mod+Shift+d exec dmenu_run 

@@ -2,17 +2,17 @@ binds {
     Mod+Shift+Slash {
         show-hotkey-overlay
     }
-    Mod+Return {
-        spawn-sh "kitty"
-    }
-    Mod+Ctrl+Return {
+    Mod+Ctrl+Backslash {
         spawn-sh "kitty -T floating -o background_opacity=1"
     }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" {
-        spawn-sh "rofi -show drun"
+    Mod+Backslash {
+        spawn-sh "kitty"
     }
-    Mod+Shift+D {
+    Mod+Shift+Return {
         spawn-sh "rofi -show run"
+    }
+    Mod+Return hotkey-overlay-title="Run an Application: rofi" {
+        spawn-sh "rofi -show drun"
     }
     Mod+Shift+W {
         spawn-sh "rofi -show window"
@@ -78,6 +78,18 @@ binds {
         focus-window-or-workspace-up
     }
     Mod+L {
+        focus-column-or-monitor-right
+    }
+    Mod+A {
+        focus-column-or-monitor-left
+    }
+    Mod+S {
+        focus-window-or-workspace-down
+    }
+    Mod+W {
+        focus-window-or-workspace-up
+    }
+    Mod+D {
         focus-column-or-monitor-right
     }
     Mod+Ctrl+Left {
@@ -254,7 +266,7 @@ binds {
     Mod+Space {
         switch-focus-between-floating-and-tiling
     }
-    Mod+W {
+    Mod+X {
         toggle-column-tabbed-display
     }
     Mod+Shift+S {

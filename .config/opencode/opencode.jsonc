@@ -17,7 +17,7 @@
     },
   },
 
-  "disabled_providers": ["openai"],
+  "disabled_providers": [],
   "keybinds": {
     // "session_child_cycle": "ctrl+alt+right",
     // "session_child_cycle_reverse": "ctrl+alt+left",

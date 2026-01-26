@@ -219,7 +219,6 @@
         "openai/gpt-oss-20b": {
           "options": {
             "provider": {
-              "require_parameters": true,
               "only": ["groq"],
             },
           },

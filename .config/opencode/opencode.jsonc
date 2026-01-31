@@ -42,7 +42,7 @@
   },
 
   "lsp": {
-    "typescript": { "disabled": true },
+    // "typescript": { "disabled": true },
     "eslint": { "disabled": true },
     "gopls": { "disabled": true },
     "ruby-lsp": { "disabled": true },

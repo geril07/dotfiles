@@ -91,7 +91,7 @@ return {
 		end,
 		dependencies = {
 
-			{ "rafamadriz/friendly-snippets", lazy = true },
+			{ "geril07/friendly-snippets", lazy = true },
 			{
 				"saadparwaiz1/cmp_luasnip",
 				lazy = true,

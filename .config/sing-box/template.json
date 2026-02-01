@@ -61,7 +61,6 @@
           "/usr/bin/dnf5",
           "/usr/bin/pacman",
           "/usr/bin/yay",
-          "/usr/lib/systemd/systemd-resolved",
           "/home/geril/.local/bin/hf",
           "/home/geril/.local/bin/huggingface-cli"
         ],
@@ -70,16 +69,22 @@
 
       {
         "domain_keyword": [
-          ".ru",
-          ".su",
+          "hls.live-video",
           "hls.ttvnw",
           "playlist.ttvnw",
+          "chat.twitch.tv",
+          "twitchcdn",
+
           "godeaf",
           "gencit",
+          "opravar",
           "allo.cdnlbox.club",
           "obrut.show",
           "curseforge",
-          "forgecdn"
+          "forgecdn",
+          "stream-balancer-allo",
+          "anime",
+          "kodik"
         ],
         "outbound": "direct"
       },
@@ -120,7 +125,7 @@
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
       }
     ],
-    "final": "proxy2",
+    "final": "proxy",
     "find_process": true,
     "auto_detect_interface": true,
     "default_domain_resolver": "google"

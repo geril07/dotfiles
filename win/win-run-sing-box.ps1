@@ -2,4 +2,4 @@
 
 Set-Location "$HOME/my/dotfiles/.config/sing-box"
 
-sing-box run -c .\ignored\1.json 2> .\ignored\asd.log
+sing-box run -c .\ignored\1.json > .\ignored\1.log 2>&1

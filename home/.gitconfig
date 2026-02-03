@@ -9,8 +9,7 @@
 	defaultBranch = main
 
 [pull]
-  rebase = true
-  autostash = true
+	rebase = true
 
 [push]
 	autoSetupRemote = true

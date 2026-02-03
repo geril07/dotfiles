@@ -300,7 +300,7 @@ return {
 					formatter = true,
 				},
 				emmet_language_server = {
-					enabled = true,
+					enabled = false,
 					filetypes = {
 						"eruby",
 						"html",

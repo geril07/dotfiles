@@ -51,6 +51,11 @@
       },
 
       {
+        "rule_set": ["geoip-private", "geoip-ru"],
+        "outbound": "direct"
+      },
+
+      {
         "process_path": ["/usr/lib/firefox/firefox"],
         "outbound": "proxy-work"
       },
@@ -69,12 +74,6 @@
 
       {
         "domain_keyword": [
-          "hls.live-video",
-          "hls.ttvnw",
-          "playlist.ttvnw",
-          "chat.twitch.tv",
-          "twitchcdn",
-
           "godeaf",
           "gencit",
           "opravar",
@@ -90,13 +89,13 @@
       },
 
       {
-        "rule_set": ["geoip-private", "geosite-category-ru", "geoip-ru"],
-        "outbound": "direct"
+        "domain_keyword": ["usher.ttvnw"],
+        "outbound": "proxy"
       },
+
       {
-        "rule_set": "geosite-category-ads-all",
-        "action": "reject",
-        "method": "default"
+        "rule_set": ["geosite-twitch"],
+        "outbound": "direct"
       }
     ],
     "rule_set": [
@@ -105,12 +104,6 @@
         "tag": "geoip-ru",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/ru.srs"
-      },
-      {
-        "format": "binary",
-        "tag": "geosite-category-ru",
-        "type": "remote",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ru.srs"
       },
       {
         "format": "binary",
@@ -123,6 +116,12 @@
         "tag": "geoip-private",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
+      },
+      {
+        "format": "binary",
+        "tag": "geosite-twitch",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/twitch.srs"
       }
     ],
     "final": "proxy",

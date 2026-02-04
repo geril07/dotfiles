@@ -83,18 +83,11 @@
           "forgecdn",
           "stream-balancer-allo",
           "anime",
-          "kodik"
+          "kodik",
+
+          "playlist.ttvnw",
+          "hls.ttvnw"
         ],
-        "outbound": "direct"
-      },
-
-      {
-        "domain_keyword": ["usher.ttvnw"],
-        "outbound": "proxy"
-      },
-
-      {
-        "rule_set": ["geosite-twitch"],
         "outbound": "direct"
       }
     ],
@@ -116,12 +109,6 @@
         "tag": "geoip-private",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
-      },
-      {
-        "format": "binary",
-        "tag": "geosite-twitch",
-        "type": "remote",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/twitch.srs"
       }
     ],
     "final": "proxy",

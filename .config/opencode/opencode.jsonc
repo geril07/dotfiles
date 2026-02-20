@@ -79,7 +79,7 @@
 
   "agent": {
     "creative": {
-      "temperature": 1,
+      "temperature": 1.2,
     },
 
     "build": {

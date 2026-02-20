@@ -161,10 +161,20 @@
       },
 
       "models": {
+        "moonshotai/kimi-k2.5": {
+          "options": {
+            "provider": {
+              "order": ["moonshotai/int4"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+
         "minimax/minimax-m2.5": {
           "options": {
             "provider": {
-              "only": ["minimax/fp8"],
+              "order": ["minimax/fp8"],
+              "allow_fallbacks": false,
             },
           },
         },
@@ -172,7 +182,8 @@
         "z-ai/glm-5": {
           "options": {
             "provider": {
-              "only": ["z-ai"],
+              "order": ["z-ai"],
+              "allow_fallbacks": false,
             },
           },
         },
@@ -180,7 +191,8 @@
         "google/gemini-3-flash-preview": {
           "options": {
             "provider": {
-              "only": ["google-ai-studio"],
+              "order": ["google-ai-studio"],
+              "allow_fallbacks": false,
             },
           },
         },
@@ -188,33 +200,8 @@
         "google/gemini-3-pro-preview": {
           "options": {
             "provider": {
-              "only": ["google-ai-studio"],
-            },
-          },
-        },
-
-        "moonshotai/kimi-k2-0905": {
-          "name": "MoonshotAI: Kimi K2 0905",
-
-          "options": {
-            "provider": {
-              "only": ["moonshotai"],
-            },
-          },
-        },
-
-        "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
-          "name": "NVIDIA: Llama 3.3 Nemotron Super 49B V1.5",
-        },
-
-        "z-ai/glm-4-32b": {
-          "name": "Z.AI: GLM 4 32B",
-        },
-
-        "z-ai/glm-4.6": {
-          "options": {
-            "provider": {
-              "only": ["z-ai"],
+              "order": ["google-ai-studio"],
+              "allow_fallbacks": false,
             },
           },
         },
@@ -223,7 +210,8 @@
           "options": {
             "provider": {
               "require_parameters": true,
-              "only": ["groq"],
+              "order": ["groq"],
+              "allow_fallbacks": false,
             },
           },
         },
@@ -231,137 +219,8 @@
         "openai/gpt-oss-20b": {
           "options": {
             "provider": {
-              "only": ["groq"],
-            },
-          },
-        },
-
-        "openai/gpt-5-mini": {
-          "options": {
-            "provider": {
-              "only": ["openai"],
-            },
-          },
-        },
-
-        "openai/gpt-5-nano": {
-          "options": {
-            "provider": {
-              "only": ["openai"],
-            },
-          },
-        },
-
-        "openai/gpt-5": {
-          "options": {
-            "provider": {
-              "only": ["openai"],
-            },
-          },
-        },
-
-        "openai/gpt-5-mini-high": {
-          "id": "openai/gpt-5-mini",
-          "name": "GPT-5 Mini (High)",
-
-          "options": {
-            "reasoningEffort": "high",
-          },
-        },
-
-        "openai/gpt-5-nano-high": {
-          "id": "openai/gpt-5-nano",
-          "name": "GPT-5 Nano (High)",
-
-          "options": {
-            "reasoningEffort": "high",
-          },
-        },
-
-        "google/gemini-2.5-flash-preview-09-2025": {
-          "cost": {
-            "cache_read": 0.075,
-            "cache_write": 0.383,
-            "input": 0.3,
-            "output": 2.5,
-          },
-
-          "options": {
-            "reasoning": {
-              "max_tokens": 2000,
-            },
-          },
-        },
-
-        "google/gemini-2.5-flash": {
-          "options": {
-            "reasoning": {
-              "max_tokens": 2000,
-            },
-            "provider": {
-              "only": ["google-vertex/global"],
-            },
-          },
-        },
-
-        "google/gemini-2.5-flash-lite-reasoning": {
-          "id": "google/gemini-2.5-flash-lite",
-          "name": "Google: Gemini 2.5 Flash Lite (Reasoning)",
-          "options": {
-            "reasoning": {
-              "max_tokens": 2000,
-            },
-          },
-        },
-
-        "qwen/qwen3-coder-30b-a3b-instruct": {
-          "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
-          "options": {
-            "provider": {
-              "ignore": ["alibaba"],
-              "require_parameters": true,
-            },
-          },
-        },
-
-        "qwen/qwen3-coder-flash": {
-          "name": "Qwen: Qwen3 Coder Flash",
-
-          "cost": {
-            "input": 0.5,
-            "output": 1.5,
-            "cache_read": 0.12,
-          },
-        },
-
-        "x-ai/grok-4-fast": {
-          "name": "xAI: Grok 4 Fast",
-          "cost": {
-            "input": 0.2,
-            "output": 0.4,
-            "cache_read": 0.05,
-          },
-        },
-
-        "deepseek/deepseek-v3.2-exp": {
-          "name": "DeepSeek: DeepSeek V3.2 Exp",
-
-          "cost": {
-            "input": 0.27,
-            "output": 0.4,
-          },
-
-          "options": {
-            "provider": {
-              "only": ["novita/fp8", "deepinfra"],
-            },
-          },
-        },
-
-        "deepseek/deepseek-v3.1-terminus": {
-          "options": {
-            "provider": {
-              "only": ["novita", "deepinfra/fp4"],
+              "order": ["groq"],
+              "allow_fallbacks": false,
             },
           },
         },

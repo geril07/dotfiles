@@ -161,6 +161,22 @@
       },
 
       "models": {
+        "minimax/minimax-m2.5": {
+          "options": {
+            "provider": {
+              "only": ["minimax/fp8"],
+            },
+          },
+        },
+
+        "z-ai/glm-5": {
+          "options": {
+            "provider": {
+              "only": ["z-ai"],
+            },
+          },
+        },
+
         "google/gemini-3-flash-preview": {
           "options": {
             "provider": {

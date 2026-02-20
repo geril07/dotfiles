@@ -2,7 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "dae4f5aaa3574bd0c2b9dd20fb9542a02c10471c" },
   "avante.nvim": { "branch": "main", "commit": "3c3eca85181e3e7f466010251b09351dcfa4e043" },
-  "blink.cmp": { "branch": "main", "commit": "5489286d6149c6ff2e57ff0dce997d6f7d22dcfd" },
+  "blink.cmp": { "branch": "fix/visual-artifacts", "commit": "8a85527550c040db41272570f5fb4bae753c839f" },
   "catppuccin": { "branch": "main", "commit": "cb5665990a797b102715188e73c44c3931b3b42e" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "codecompanion.nvim": { "branch": "main", "commit": "991dd81ac37b56b6d13529a08e86a42d183d79dc" },

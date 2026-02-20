@@ -18,7 +18,7 @@ return {
 		dev = is_dev,
 		event = "InsertEnter",
 		enabled = true,
-		commit = "5489286d6149c6ff2e57ff0dce997d6f7d22dcfd",
+		branch = "fix/visual-artifacts",
 		opts = {
 			enabled = function()
 				return not vim.tbl_contains({ "DressingInput" }, vim.bo.filetype)

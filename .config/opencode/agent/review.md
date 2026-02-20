@@ -1,6 +1,6 @@
 ---
 description: Reviews code for quality and best practices
-temperature: 0.1
+# temperature: 0.1
 tools:
   write: false
   edit: false

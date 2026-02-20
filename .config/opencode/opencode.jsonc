@@ -79,12 +79,12 @@
 
   "agent": {
     "creative": {
-      "temperature": 1,
+      "temperature": 1.2,
     },
 
-    "build": {
-      "temperature": 0.2,
-    },
+    // "build": {
+    //   "temperature": 0.2,
+    // },
   },
 
   "provider": {

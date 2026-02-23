@@ -10,21 +10,21 @@
   "ui_font_size": 18,
   "buffer_font_size": 18,
   "project_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "file_finder": {
-    "modal_max_width": "medium"
+    "modal_max_width": "medium",
   },
   "theme": {
     "mode": "system",
     "light": "Catppuccin Macchiato",
-    "dark": "One Dark"
+    "dark": "One Dark",
   },
   "vim_mode": true,
   "relative_line_numbers": true,
   "autosave": "on_focus_change",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
-  }
+    "metrics": false,
+  },
 }

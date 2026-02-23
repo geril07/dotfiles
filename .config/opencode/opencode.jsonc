@@ -57,23 +57,28 @@
   },
 
   "mcp": {
+    "btca-local": {
+      "type": "local",
+      "command": ["npx", "-g", "-y", "btca", "mcp"],
+      "enabled": false,
+    },
     "context7": {
       // "type": "remote",
       // "url": "https://mcp.context7.com/mcp",
       "enabled": true,
       "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "command": ["npx", "-g", "-y", "@upstash/context7-mcp"],
     },
     "figma-mcp": {
       "enabled": false,
       "type": "local",
-      "command": ["/usr/bin/npx", "-y", "figma-developer-mcp", "--stdio"],
+      "command": ["npx", "-g", "-y", "figma-developer-mcp", "--stdio"],
     },
 
     "chrome-devtools": {
       "enabled": false,
       "type": "local",
-      "command": ["/usr/bin/npx", "-y", "chrome-devtools-mcp@latest"],
+      "command": ["npx", "-g", "-y", "chrome-devtools-mcp@latest"],
     },
   },
 

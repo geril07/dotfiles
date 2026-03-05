@@ -29,6 +29,7 @@ local config = vim.tbl_extend("force", {}, default_config, {
 		"harpoon",
 		"TelescopePrompt",
 		"fzf",
+		"pager",
 		"",
 	},
 	-- left_spacing = "       ",

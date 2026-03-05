@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "catppuccin",
   "share": "disabled",
   "autoupdate": false,
   // "small_model": "openrouter/google/gemini-2.5-flash-lite",
@@ -17,6 +18,14 @@
   },
 
   "disabled_providers": [],
+  "keybinds": {
+    // "session_child_cycle": "ctrl+alt+right",
+    // "session_child_cycle_reverse": "ctrl+alt+left",
+  },
+
+  "tui": {
+    "scroll_speed": 5,
+  },
 
   "formatter": {
     "gofmt": { "disabled": false },

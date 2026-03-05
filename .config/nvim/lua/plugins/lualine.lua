@@ -66,27 +66,29 @@ return {
 		"nvim-lualine/lualine.nvim",
 		enabled = true,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = function()
-			return {
-				sections = {
-					lualine_a = { "mode" },
-					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = {
-						{
-							"filename",
-							file_status = true, -- displays file status (readonly status, modified status)
-							path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-						},
-					},
-					-- lualine_x = { lsp_progress_component, "filetype" },
-					lualine_x = { "lsp_status", "filetype" },
-					-- lualine_x = { harpoon_files, "filetype" },
-					lualine_y = { "progress" },
+		opts = {
+			options = {
+				globalstatus = true,
+			},
 
-					-- lualine_z = { "location" },
-					lualine_z = {},
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = {
+					{
+						"filename",
+						file_status = true, -- displays file status (readonly status, modified status)
+						path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+					},
 				},
-			}
-		end,
+				-- lualine_x = { lsp_progress_component, "filetype" },
+				lualine_x = { "lsp_status", "filetype" },
+				-- lualine_x = { harpoon_files, "filetype" },
+				lualine_y = { "progress" },
+
+				-- lualine_z = { "location" },
+				lualine_z = {},
+			},
+		},
 	},
 }

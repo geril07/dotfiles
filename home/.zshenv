@@ -6,7 +6,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#494d64" 
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---multi --bind change:first --height=15% --min-height 15 --layout=reverse --cycle"
+--multi --bind change:first --height=15% --min-height 15 --layout=reverse --cycle --wrap-word"
 
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 

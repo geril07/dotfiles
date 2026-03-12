@@ -25,7 +25,7 @@ return {
 
 			return {
 				{ "hide", "border-fused" },
-				fzf_opts = { ["--keep-right"] = "" },
+				fzf_opts = {},
 				-- fzf_colors = {
 				-- 	["hl"] = { "fg", "TelescopeMatching", "reverse" },
 				-- 	["hl+"] = { "fg", "TelescopeMatching", "reverse" },

@@ -19,6 +19,10 @@ return {
 				highlight_overrides = {
 					all = function(colors)
 						return {
+							CustomHLIndent = {
+								fg = "#363a50",
+							},
+
 							Normal = {
 								bg = (utils.is_gui or not transparent) and colors.base or colors.none,
 							},

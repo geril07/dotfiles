@@ -1,4 +1,4 @@
-return {
+local ui = {
 	{
 		"saghen/blink.indent",
 		event = "VeryLazy",
@@ -59,3 +59,20 @@ return {
 		},
 	},
 }
+
+local autoindent = {
+	{
+		"NMAC427/guess-indent.nvim",
+		event = "VeryLazy",
+		enabled = false,
+		opts = {},
+	},
+	{
+		"Darazaki/indent-o-matic",
+		enabled = true,
+		event = "VeryLazy",
+		opts = {},
+	},
+}
+
+return vim.list_extend(vim.deepcopy(ui), autoindent)

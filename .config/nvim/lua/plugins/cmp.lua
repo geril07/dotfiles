@@ -7,7 +7,7 @@ return {
 		build = "cargo +nightly build --release",
 		dev = is_blink_dev,
 		event = "InsertEnter",
-		tag = "v1.10.1",
+		-- tag = "v1.10.1",
 		enabled = true,
 		opts = function()
 			-- cmp.snippet_active but without is_hidden_snippet()

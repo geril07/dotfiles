@@ -1,3 +1,5 @@
+local map = require("my.utils.map").map
+
 return {
 	{
 		"lewis6991/gitsigns.nvim",
@@ -7,6 +9,12 @@ return {
 			current_line_blame_opts = {
 				delay = 200,
 			},
+			on_attach = function()
+				local gs = package.loaded.gitsigns
+
+				map("n", "[h", gs.prev_hunk)
+				map("n", "]h", gs.next_hunk)
+			end,
 		},
 	},
 	-- Generate and open GitHub links.

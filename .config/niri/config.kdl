@@ -4,26 +4,20 @@ include "local.kdl"
 include "binds.kdl"
 include "window-rules.kdl"
 include "layout.kdl"
-
 screenshot-path null
 prefer-no-csd
-
-
 animations {
-}
 
+}
 recent-windows {
-    open-delay-ms 0
+  open-delay-ms 0
 }
-
-
 hotkey-overlay {
-    skip-at-startup
-    hide-not-bound
+  skip-at-startup
+  hide-not-bound
 }
-
 cursor {
-    xcursor-theme "Future-cyan-cursors"
-    xcursor-size 26
+  xcursor-theme "Future-cyan-cursors"
+  xcursor-size 26
 }
 

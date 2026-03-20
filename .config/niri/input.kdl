@@ -1,23 +1,23 @@
 input {
-    keyboard {
-        xkb {
-            layout "us,ru"
-            options "grp:alt_caps_toggle"
-        }
-        repeat-rate 50
-        repeat-delay 150
+  keyboard {
+    xkb {
+      layout us,ru
+      options grp:alt_caps_toggle
     }
-    touchpad {
-        dwt
-        tap
-        natural-scroll
-        middle-emulation
-    }
-    mouse {
-        accel-profile "flat"
-    }
-    trackpoint {
+    repeat-rate 50
+    repeat-delay 150
+  }
+  touchpad {
+    dwt
+    tap
+    natural-scroll
+    middle-emulation
+  }
+  mouse {
+    accel-profile flat
+  }
+  trackpoint {
 
-    }
+  }
 }
 

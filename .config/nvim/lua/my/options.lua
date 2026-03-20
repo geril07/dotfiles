@@ -19,6 +19,9 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 
+-- https://github.com/neovim/neovim/blob/e8b87a554f2b500dd39463cabdcffc10261f1cef/runtime/ftplugin/markdown.vim?plain=1#L27
+vim.g.markdown_recommended_style = 0
+
 vim.o.wrap = false
 
 vim.o.splitright = true

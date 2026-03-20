@@ -174,32 +174,32 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 set $resize_delta 5
 
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym h exec "i3-msg resize grow left $resize_delta px or $resize_delta ppt || i3-msg resize shrink right $resize_delta px or $resize_delta ppt"
-        bindsym l exec "i3-msg resize grow right $resize_delta px or $resize_delta ppt || i3-msg resize shrink left $resize_delta px or $resize_delta ppt"
-        bindsym j exec "i3-msg resize grow down $resize_delta px or $resize_delta ppt || i3-msg resize shrink up $resize_delta px or $resize_delta ppt"
-        bindsym k exec "i3-msg resize grow up $resize_delta px or $resize_delta ppt || i3-msg resize shrink down $resize_delta px or $resize_delta ppt"
+  # These bindings trigger as soon as you enter the resize mode
+  bindsym h exec "i3-msg resize grow left $resize_delta px or $resize_delta ppt || i3-msg resize shrink right $resize_delta px or $resize_delta ppt"
+  bindsym l exec "i3-msg resize grow right $resize_delta px or $resize_delta ppt || i3-msg resize shrink left $resize_delta px or $resize_delta ppt"
+  bindsym j exec "i3-msg resize grow down $resize_delta px or $resize_delta ppt || i3-msg resize shrink up $resize_delta px or $resize_delta ppt"
+  bindsym k exec "i3-msg resize grow up $resize_delta px or $resize_delta ppt || i3-msg resize shrink down $resize_delta px or $resize_delta ppt"
 
-        bindsym Left exec "i3-msg resize grow left $resize_delta px or $resize_delta ppt || i3-msg resize shrink right $resize_delta px or $resize_delta ppt"
-        bindsym Right exec "i3-msg resize grow right $resize_delta px or $resize_delta ppt || i3-msg resize shrink left $resize_delta px or $resize_delta ppt"
-        bindsym Up exec "i3-msg resize grow up $resize_delta px or $resize_delta ppt || i3-msg resize shrink down $resize_delta px or $resize_delta ppt"
-        bindsym Down exec "i3-msg resize grow down $resize_delta px or $resize_delta ppt || i3-msg resize shrink up $resize_delta px or $resize_delta ppt"
+  bindsym Left exec "i3-msg resize grow left $resize_delta px or $resize_delta ppt || i3-msg resize shrink right $resize_delta px or $resize_delta ppt"
+  bindsym Right exec "i3-msg resize grow right $resize_delta px or $resize_delta ppt || i3-msg resize shrink left $resize_delta px or $resize_delta ppt"
+  bindsym Up exec "i3-msg resize grow up $resize_delta px or $resize_delta ppt || i3-msg resize shrink down $resize_delta px or $resize_delta ppt"
+  bindsym Down exec "i3-msg resize grow down $resize_delta px or $resize_delta ppt || i3-msg resize shrink up $resize_delta px or $resize_delta ppt"
 
-        bindsym Shift+h resize shrink width $resize_delta px or $resize_delta ppt
-        bindsym Shift+j resize grow height $resize_delta px or $resize_delta ppt
-        bindsym Shift+k resize shrink height $resize_delta px or $resize_delta ppt
-        bindsym Shift+l resize grow width $resize_delta px or $resize_delta ppt
+  bindsym Shift+h resize shrink width $resize_delta px or $resize_delta ppt
+  bindsym Shift+j resize grow height $resize_delta px or $resize_delta ppt
+  bindsym Shift+k resize shrink height $resize_delta px or $resize_delta ppt
+  bindsym Shift+l resize grow width $resize_delta px or $resize_delta ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Shift+Left resize shrink width $resize_delta px or $resize_delta ppt
-        bindsym Shift+Down resize grow height $resize_delta px or $resize_delta ppt
-        bindsym Shift+Up resize shrink height $resize_delta px or $resize_delta ppt
-        bindsym Shift+Right resize grow width $resize_delta px or $resize_delta ppt
+  # same bindings, but for the arrow keys
+  bindsym Shift+Left resize shrink width $resize_delta px or $resize_delta ppt
+  bindsym Shift+Down resize grow height $resize_delta px or $resize_delta ppt
+  bindsym Shift+Up resize shrink height $resize_delta px or $resize_delta ppt
+  bindsym Shift+Right resize grow width $resize_delta px or $resize_delta ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+  # back to normal: Enter or Escape or $mod+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"

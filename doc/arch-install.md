@@ -268,10 +268,10 @@ As at 2025-06-30:
 ```sh
 # makepkg.conf default:
 #
-#PTIONS=( strip docs !libtool !staticlibs emptydirs  zipman  purge  debug  lto)
+OPTIONS=( strip docs !libtool !staticlibs emptydirs  zipman  purge  debug  lto)
 
 # commented defaults:
-#PTIONS=(!strip docs  libtool  staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
+OPTIONS=(!strip docs  libtool  staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
 
 # desired
 OPTIONS=(!strip docs !libtool !staticlibs emptydirs !zipman  purge !debug  lto !autodeps)

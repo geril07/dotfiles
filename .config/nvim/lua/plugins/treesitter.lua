@@ -24,6 +24,7 @@ return {
 				return is_disable
 			end
 
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"query",
@@ -54,7 +55,8 @@ return {
 				sync_install = false,
 
 				indent = {
-					enable = true,
+					-- stopped working with new nightly and why do I need ts indent?
+					enable = false,
 					-- disable = { "rust" },
 				},
 

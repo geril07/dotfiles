@@ -174,6 +174,21 @@ map_tbl({
 		-- ["jk"] = { "<ESC>", { remap = true } },
 		-- ["jj"] = { "<ESC>", { remap = true } },
 	},
+
+	xo = {
+		["af"] = function()
+			require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+		end,
+		["if"] = function()
+			require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+		end,
+		["ac"] = function()
+			require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+		end,
+		["ic"] = function()
+			require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+		end,
+	},
 })
 
 ---@param index integer

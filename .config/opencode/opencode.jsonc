@@ -84,6 +84,23 @@
   },
 
   "provider": {
+    "ollama": {
+      "models": {
+        "qwen3.5:4b": {
+          "name": "qwen3.5:4b",
+        },
+
+        "qwen3.5:9b": {
+          "name": "qwen3.5:9b",
+        },
+      },
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1",
+      },
+    },
+
     "anthropic": {
       "models": {
         "sonnet-4-5-thinker": {

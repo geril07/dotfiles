@@ -174,6 +174,16 @@
       },
 
       "models": {
+        "xiaomi/mimo-v2-pro": {
+          "options": {
+            "provider": {
+              "only": ["xiaomi/fp8"],
+              "order": ["xiaomi/fp8"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+
         "inception/mercury-2": {
           "options": {
             "provider": {
@@ -188,6 +198,16 @@
           "options": {
             "provider": {
               "order": ["moonshotai/int4"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+
+        "minimax/minimax-m2.7": {
+          "options": {
+            "provider": {
+              "only": ["minimax/fp8"],
+              "order": ["minimax/fp8"],
               "allow_fallbacks": false,
             },
           },

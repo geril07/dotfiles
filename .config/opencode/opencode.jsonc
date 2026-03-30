@@ -6,6 +6,10 @@
   "small_model": "openrouter/openai/gpt-oss-20b",
 
   "permission": {
+    "external_directory": {
+      "/tmp/**": "allow",
+    },
+
     "bash": {
       "*": "allow",
       "git commit *": "ask",

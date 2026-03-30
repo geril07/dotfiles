@@ -42,10 +42,10 @@ opt.showmode = false
 opt.laststatus = 3
 
 api.nvim_create_autocmd("TextYankPost", {
-	group = api.nvim_create_augroup("YankHighlight", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
-	end,
+  group = api.nvim_create_augroup("YankHighlight", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
+  end,
 })
 
 local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
@@ -54,13 +54,13 @@ local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
 local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
 
 local function escape(str)
-	local escape_chars = [[;,."|\]]
-	return vim.fn.escape(str, escape_chars)
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
 end
 
 local langmap = vim.fn.join({
-	escape(ru_shift) .. ";" .. escape(en_shift),
-	escape(ru) .. ";" .. escape(en),
+  escape(ru_shift) .. ";" .. escape(en_shift),
+  escape(ru) .. ";" .. escape(en),
 }, ",")
 
 vim.opt.langmap = langmap

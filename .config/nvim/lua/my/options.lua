@@ -55,12 +55,12 @@ vim.wo.foldtext = ""
 local arrows = require("my.icons").arrows
 -- UI characters.
 vim.opt.fillchars = {
-	eob = " ",
-	fold = " ",
-	foldclose = arrows.right,
-	foldopen = arrows.down,
-	foldinner = " ",
-	foldsep = " ",
+  eob = " ",
+  fold = " ",
+  foldclose = arrows.right,
+  foldopen = arrows.down,
+  foldinner = " ",
+  foldsep = " ",
 }
 
 -- Use rounded borders for floating windows.
@@ -74,13 +74,13 @@ local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
 local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
 
 local function escape(str)
-	local escape_chars = [[;,."|\]]
-	return vim.fn.escape(str, escape_chars)
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
 end
 
 local langmap = vim.fn.join({
-	escape(ru_shift) .. ";" .. escape(en_shift),
-	escape(ru) .. ";" .. escape(en),
+  escape(ru_shift) .. ";" .. escape(en_shift),
+  escape(ru) .. ";" .. escape(en),
 }, ",")
 
 vim.o.langmap = langmap

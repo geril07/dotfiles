@@ -1,36 +1,36 @@
 local modules_to_require = {
-	"my.lazy",
+  "my.lazy",
 
-	"my.options",
-	"my.keymaps",
-	"my.overrides",
-	"my.commands",
-	"my.filetype",
+  "my.options",
+  "my.keymaps",
+  "my.overrides",
+  "my.commands",
+  "my.filetype",
 
-	"my.winbar",
-	"my.autocmds",
-	"my.autosave",
-	"my.gui",
+  "my.winbar",
+  "my.autocmds",
+  "my.autosave",
+  "my.gui",
 
-	function()
-		if require("my.utils").is_gui then
-			return
-		end
+  function()
+    if require("my.utils").is_gui then
+      return
+    end
 
-		require("vim._core.ui2").enable({})
-	end,
+    require("vim._core.ui2").enable({})
+  end,
 }
 
 for _, my_module in ipairs(modules_to_require) do
-	local _, err = pcall(function()
-		if type(my_module) == "function" then
-			my_module()
-		else
-			require(my_module)
-		end
-	end)
+  local _, err = pcall(function()
+    if type(my_module) == "function" then
+      my_module()
+    else
+      require(my_module)
+    end
+  end)
 
-	if err ~= nil then
-		print(err)
-	end
+  if err ~= nil then
+    print(err)
+  end
 end

@@ -1,33 +1,33 @@
 -- Copilot completion.
 return {
-	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		enabled = false,
-		opts = {
-			-- The panel is useless.
-			panel = { enabled = false },
-			suggestion = {
-				enabled = false,
-				auto_trigger = true,
-				hide_during_completion = false,
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    enabled = false,
+    opts = {
+      -- The panel is useless.
+      panel = { enabled = false },
+      suggestion = {
+        enabled = false,
+        auto_trigger = true,
+        hide_during_completion = false,
 
-				keymap = {
-					accept = "<M-.>",
-					accept_word = "<M-w>",
-					accept_line = "<M-l>",
+        keymap = {
+          accept = "<M-.>",
+          accept_word = "<M-w>",
+          accept_line = "<M-l>",
 
-					next = "<M-]>",
-					prev = "<M-[>",
+          next = "<M-]>",
+          prev = "<M-[>",
 
-					dismiss = "<C-/>",
-				},
-			},
+          dismiss = "<C-/>",
+        },
+      },
 
-			-- filetypes = {
-			-- 	markdown = true,
-			-- 	yaml = true,
-			-- },
-		},
-	},
+      -- filetypes = {
+      -- 	markdown = true,
+      -- 	yaml = true,
+      -- },
+    },
+  },
 }

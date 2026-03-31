@@ -219,3 +219,29 @@ expac -H M '%m\t%n' | sort -h
 ```
 
 (`expac` is also in **pacman-contrib**.)
+
+---
+
+# explicit packages from official repos
+
+```bash
+pacman -Qqen > pkglist.txt
+```
+
+# explicit foreign packages (AUR/manual)
+
+```bash
+pacman -Qqem > aurlist.txt
+```
+
+# install from pkglist
+
+```bash
+sudo pacman -Syu --needed - < pkglist.txt
+```
+
+# install from aurlust
+
+```bash
+yay -S --needed - < aurlist.txt
+```

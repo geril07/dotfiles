@@ -10,6 +10,12 @@ return {
     -- tag = "v1.10.1",
     enabled = true,
     opts = function()
+      local function can_scroll_docs()
+        local docs = require("blink.cmp.completion.windows.documentation")
+        local winnr = docs.win:get_win()
+        return winnr ~= nil and docs.win:is_open()
+      end
+
       -- cmp.snippet_active but without is_hidden_snippet()
       -- https://github.com/Saghen/blink.cmp/blob/a1b5c1a47b65630010bf030c2b5a6fdb505b0cbb/lua/blink/cmp/config/snippets.lua#L45
       local snippet_active = function(filter)
@@ -69,8 +75,26 @@ return {
             end,
             "fallback",
           },
-          ["<C-k>"] = { "scroll_documentation_up", "fallback" },
-          ["<C-j>"] = { "scroll_documentation_down", "fallback" },
+          ["<C-k>"] = {
+            function(cmp)
+              local can_scroll = can_scroll_docs()
+              if can_scroll then
+                cmp.scroll_documentation_up(4)
+              end
+              return can_scroll
+            end,
+            "fallback",
+          },
+          ["<C-j>"] = {
+            function(cmp)
+              local can_scroll = can_scroll_docs()
+              if can_scroll then
+                cmp.scroll_documentation_down(4)
+              end
+              return can_scroll
+            end,
+            "fallback",
+          },
         },
         completion = {
           trigger = {

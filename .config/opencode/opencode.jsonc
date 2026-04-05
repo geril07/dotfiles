@@ -168,6 +168,16 @@
       },
 
       "models": {
+        "qwen/qwen3.6-plus:free": {
+          "options": {
+            "provider": {
+              "only": ["alibaba"],
+              "order": ["alibaba"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+
         "xiaomi/mimo-v2-pro": {
           "options": {
             "provider": {

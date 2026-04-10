@@ -74,3 +74,5 @@ alias mirrorlist-update='export TMPFILE="$(mktemp)"; \
       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
 '
+
+export SYSTEMD_LESS=FRXMK

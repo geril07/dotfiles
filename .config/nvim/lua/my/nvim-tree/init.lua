@@ -1,9 +1,10 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
-local tree_utils = require("my.nvim-tree.utils")
+local tree_persistence = require("my.nvim-tree.persistence")
+local tree_runtime = require("my.nvim-tree.runtime")
 
-local default_values = tree_utils.get_nvim_tree_values_from_cache()
+local default_values = tree_persistence.get_nvim_tree_values_from_cache()
 
 local is_float = default_values.is_float
 local quit_on_open = is_float or default_values.quit_on_open
@@ -42,8 +43,8 @@ local function on_attach(bufnr)
       ["sh"] = { api.node.open.horizontal, opts("Open Split: Horizontal") },
       ["<M-v>"] = { api.node.open.vertical, opts("Open Split: Vertical") },
       ["<M-h>"] = { api.node.open.horizontal, opts("Open Split: Horizontal") },
-      ["st"] = { tree_utils.toggle_quit_on_open, opts("NvimTree Always Open Toggle State") },
-      ["sf"] = { tree_utils.toggle_floating, opts("NvimTree Toggle Floating") },
+      ["st"] = { tree_runtime.toggle_quit_on_open, opts("NvimTree Always Open Toggle State") },
+      ["sf"] = { tree_runtime.toggle_floating, opts("NvimTree Toggle Floating") },
     },
   })
 end
@@ -66,15 +67,15 @@ require("nvim-tree").setup({
     -- cursorlineopt = "line",
     -- adaptive_size = quit_on_open,
     relativenumber = true,
-    width = tree_utils.width,
+    width = tree_runtime.width,
     float = {
       enable = is_float,
       quit_on_focus_loss = true,
       open_win_config = function()
         local screen_w = vim.opt.columns:get()
         local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-        local window_w = screen_w * tree_utils.width_ratio
-        local window_h = screen_h * tree_utils.height_ratio
+        local window_w = screen_w * tree_runtime.width_ratio
+        local window_h = screen_h * tree_runtime.height_ratio
         local window_w_int = math.floor(window_w)
         local window_h_int = math.floor(window_h)
         local center_x = (screen_w - window_w) / 2

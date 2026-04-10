@@ -274,13 +274,13 @@ return {
       require("telescope").load_extension("fzf")
 
       local tree_api = require("nvim-tree.api")
-      local tree_utils = require("my.nvim-tree.utils")
+      local tree_runtime = require("my.nvim-tree.runtime")
       local api = vim.api
 
       api.nvim_create_autocmd("User", {
         pattern = "TelescopeFindPre",
         callback = function()
-          if tree_utils.is_floating() then
+          if tree_runtime.is_floating() then
             tree_api.tree.close()
           end
         end,

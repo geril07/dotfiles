@@ -32,8 +32,8 @@ configuration {
 /*	drun-url-launcher: "xdg-open";*/
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
-	sort: true;
-	sorting-method: "fzf";
+	sort: false;
+	/* sorting-method: "fzf"; */
 /*	case-sensitive: false;*/
 	case-smart: true;
 	cycle: true;

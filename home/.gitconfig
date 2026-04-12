@@ -4,6 +4,7 @@
 
 [core]
   editor=nvim
+  pager = delta
 
 [init]
   defaultBranch = main
@@ -18,8 +19,10 @@
   prune = true
 
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 
+[interactive]
+  diffFilter = delta --color-only
 
 [credential]
   helper = store
@@ -44,6 +47,7 @@
 
   w = worktree
   wl = w list
+
 [filter "lfs"]
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
@@ -51,7 +55,10 @@
   clean = git-lfs clean -- %f
 
 [delta]
+  navigate = true
   line-numbers = true
+  file-modified-label = "modified:"
+  hunk-header-style = omit
   features = catppuccin-macchiato
 
 [include]

@@ -1,28 +1,28 @@
 [user]
-	name = geril
-	email = gergert.ilya@mail.ru
+  name = geril
+  email = gergert.ilya@mail.ru
 
 [core]
   editor=nvim
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [pull]
-	rebase = true
+  rebase = true
 
 [push]
-	autoSetupRemote = true
+  autoSetupRemote = true
 
 [fetch]
-	prune = true
+  prune = true
 
 [merge]
   conflictstyle = diff3
 
 
 [credential]
-	helper = store
+  helper = store
 
 [alias]
   b = branch
@@ -45,14 +45,14 @@
   w = worktree
   wl = w list
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
 
 [delta]
   line-numbers = true
-	features = catppuccin-macchiato
+  features = catppuccin-macchiato
 
 [include]
   path=~/catppuccin.gitconfig

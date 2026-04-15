@@ -22,6 +22,8 @@
 
   "disabled_providers": [],
 
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"],
+
   "formatter": {
     "gofmt": { "disabled": false },
     "mix": { "disabled": true },
@@ -279,7 +281,7 @@
           "options": {
             "provider": {
               "require_parameters": true,
-              "order": ["groq"],
+              "order": ["fireworks", "groq"],
               "allow_fallbacks": false,
             },
           },

@@ -122,16 +122,16 @@ binds {
   Mod+Ctrl+Period {
     move-workspace-to-monitor-right
   }
-  Mod+WheelScrollDown cooldown-ms=150 {
+  Mod+WheelScrollDown cooldown-ms=75 {
     focus-workspace-down
   }
-  Mod+WheelScrollUp cooldown-ms=150 {
+  Mod+WheelScrollUp cooldown-ms=75 {
     focus-workspace-up
   }
-  Mod+Ctrl+WheelScrollDown cooldown-ms=150 {
+  Mod+Ctrl+WheelScrollDown cooldown-ms=75 {
     move-column-to-workspace-down
   }
-  Mod+Ctrl+WheelScrollUp cooldown-ms=150 {
+  Mod+Ctrl+WheelScrollUp cooldown-ms=75 {
     move-column-to-workspace-up
   }
   Mod+WheelScrollRight {

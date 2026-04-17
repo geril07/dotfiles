@@ -1,4 +1,5 @@
 age
+alacritty
 amd-ucode
 amdgpu_top
 base
@@ -41,6 +42,7 @@ gimp
 git
 git-delta
 git-lfs
+github-cli
 glmark2
 gnome-calculator
 gnome-calendar
@@ -68,16 +70,17 @@ kitty
 lazydocker
 lazygit
 less
+lib32-vulkan-radeon
 libreoffice-fresh
 libvncserver
 linux
 linux-firmware
-llvm19
 loupe
 lxqt-policykit
 mako
 man-db
 man-pages
+meld
 mesa-utils
 mpv
 mtpaint
@@ -103,6 +106,7 @@ prismlauncher
 python-pip
 qrcodegencpp-cmake
 radeontop
+rate-mirrors
 redshift
 refind
 reflector
@@ -115,6 +119,7 @@ rustup
 shotcut
 slurp
 snapshot
+steam
 sudo
 swappy
 swaybg
@@ -149,6 +154,7 @@ xwayland-satellite
 yazi
 ydotool
 zed
+zellij
 zig
 zip
 zoxide

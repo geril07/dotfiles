@@ -33,15 +33,14 @@ window-rule {
 }
 window-rule {
   match app-id="^code-url-handler$"
-  open-on-workspace "3"
 }
 window-rule {
   match app-id="^code$"
-  open-on-workspace "3"
+  opacity 0.9
 }
 window-rule {
   match app-id="^org\\.telegram\\.desktop$"
-  open-on-workspace "4"
+  // open-on-workspace "4"
 }
 window-rule {
   match title="^Media viewer$" app-id="^org\\.telegram\\.desktop\\..+"
@@ -51,4 +50,7 @@ window-rule {
   match app-id="^discord$"
   open-on-workspace "4"
 }
-
+window-rule {
+  match app-id="^neovide$"
+  opacity 0.9
+}

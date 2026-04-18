@@ -75,8 +75,12 @@ bindsym --to-code {
   $mod+Right focus right
 
   $mod+Shift+$left focus output left
+  $mod+Shift+$down focus output down
+  $mod+Shift+$up focus output up
   $mod+Shift+$right focus output right
   $mod+Shift+Left focus output left
+  $mod+Shift+Down focus output down
+  $mod+Shift+Up focus output up
   $mod+Shift+Right focus output right
 
   $mod+Control+$left move left
@@ -84,6 +88,8 @@ bindsym --to-code {
   $mod+Control+$up move up
   $mod+Control+$right move right
   $mod+Control+Shift+$left move container to output left
+  $mod+Control+Shift+$down move container to output down
+  $mod+Control+Shift+$up move container to output up
   $mod+Control+Shift+$right move container to output right
 
   $mod+Control+Left move left
@@ -91,12 +97,18 @@ bindsym --to-code {
   $mod+Control+Up move up
   $mod+Control+Right move right
   $mod+Control+Shift+Left move container to output left
+  $mod+Control+Shift+Down move container to output down
+  $mod+Control+Shift+Up move container to output up
   $mod+Control+Shift+Right move container to output right
 
-  $mod+Shift+h focus output left
-  $mod+Shift+l focus output right
-  $mod+Control+Shift+h move container to output left
-  $mod+Control+Shift+l move container to output right
+  #$mod+Shift+h focus output left
+  #$mod+Shift+j focus output down
+  #$mod+Shift+k focus output up
+  #$mod+Shift+l focus output right
+  #$mod+Control+Shift+h move container to output left
+  #$mod+Control+Shift+j move container to output down
+  #$mod+Control+Shift+k move container to output up
+  #$mod+Control+Shift+l move container to output right
 
   $mod+1 workspace number 1
   $mod+2 workspace number 2

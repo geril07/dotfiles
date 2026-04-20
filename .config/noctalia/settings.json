@@ -128,7 +128,8 @@
                     "hidePassive": false,
                     "id": "Tray",
                     "pinned": [
-                        "Telegram Desktop"
+                        "Telegram Desktop",
+                        "OBS Studio"
                     ]
                 },
                 {
@@ -152,6 +153,12 @@
                     "textColor": "primary",
                     "useMonospaceFont": true,
                     "usePadding": true
+                },
+                {
+                    "displayMode": "alwaysHide",
+                    "iconColor": "tertiary",
+                    "id": "Network",
+                    "textColor": "primary"
                 },
                 {
                     "deviceNativePath": "__default__",

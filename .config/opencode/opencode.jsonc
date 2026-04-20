@@ -22,7 +22,7 @@
 
   "disabled_providers": [],
 
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"],
+  // "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"],
 
   "formatter": {
     "gofmt": { "disabled": false },

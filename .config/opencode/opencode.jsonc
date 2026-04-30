@@ -8,7 +8,12 @@
   "permission": {
     "external_directory": {
       "/tmp/**": "allow",
-      "/home/geril/.local/share/rtk/**": "allow",
+      "~/.local/share/rtk/**": "allow",
+      "~/.agents/skills/**": "allow",
+    },
+
+    "edit": {
+      "~/.agents/skills/**": "ask",
     },
 
     "bash": {
@@ -24,6 +29,25 @@
   "disabled_providers": [],
 
   // "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"],
+
+  "agent": {
+    "gemini-flash-agent": {
+      "mode": "subagent",
+      "model": "openrouter/google/gemini-3-flash-preview",
+    },
+
+    "gemini-flash-lite-agent": {
+      "mode": "subagent",
+      "model": "openrouter/google/gemini-3.1-flash-lite-preview",
+      "variant": "high",
+    },
+
+    "deepseek-flash-agent": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "variant": "max",
+    },
+  },
 
   "formatter": {
     "gofmt": { "disabled": false },

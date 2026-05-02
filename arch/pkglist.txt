@@ -21,7 +21,6 @@ docker
 docker-compose
 dotnet-sdk-8.0
 ethtool
-evolution
 expac
 eza
 fastfetch
@@ -62,9 +61,7 @@ i3blocks
 i3lock
 i3status
 inkscape
-inxi
 iptables
-j4-dmenu-desktop
 jq
 kitty
 lazydocker
@@ -80,7 +77,6 @@ lxqt-policykit
 mako
 man-db
 man-pages
-meld
 mesa-utils
 mpv
 mtpaint
@@ -96,6 +92,7 @@ noto-fonts-extra
 obs-studio
 ollama
 ollama-vulkan
+opencode
 openssh
 openvpn
 pacman-contrib
@@ -112,7 +109,6 @@ refind
 reflector
 remmina
 ripgrep
-rocminfo
 rofi
 rsync
 rustup
@@ -125,9 +121,7 @@ swappy
 swaybg
 swayidle
 swaylock
-swayosd
 sysbench
-tesseract
 thunderbird
 tlp
 tmux
@@ -143,6 +137,7 @@ vlc
 vulkan-radeon
 vulkan-tools
 waybar
+webkit2gtk-4.1
 wev
 wget
 woff2-font-awesome

@@ -39,3 +39,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("startinsert")
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  group = vim.api.nvim_create_augroup("RestartPrettierd", { clear = true }),
+  pattern = "*prettier*",
+  callback = function()
+    vim.system({ "prettierd", "restart" })
+  end,
+})

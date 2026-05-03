@@ -7,7 +7,7 @@ return {
     build = "cargo +nightly build --release",
     dev = is_blink_dev,
     event = "InsertEnter",
-    -- tag = "v1.10.1",
+    version = "1.*",
     enabled = true,
     opts = function()
       local function can_scroll_docs()

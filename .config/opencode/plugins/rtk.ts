@@ -8,6 +8,7 @@ import type { Plugin } from "@opencode-ai/plugin"
 // To add or change rewrite rules, edit the Rust registry — not this file.
 
 export const RtkOpenCodePlugin: Plugin = async ({ $ }) => {
+  return {}
   try {
     await $`which rtk`.quiet()
   } catch {

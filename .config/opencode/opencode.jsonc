@@ -219,6 +219,24 @@
       },
 
       "models": {
+        "deepseek/deepseek-v4-pro": {
+          "options": {
+            "provider": {
+              "only": ["deepseek"],
+              "order": ["deepseek"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+        "deepseek/deepseek-v4-flash": {
+          "options": {
+            "provider": {
+              "only": ["deepseek"],
+              "order": ["deepseek"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
         "qwen/qwen3.6-plus:free": {
           "options": {
             "provider": {

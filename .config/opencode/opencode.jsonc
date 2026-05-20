@@ -3,7 +3,8 @@
   "share": "disabled",
   "autoupdate": false,
   // "small_model": "openrouter/google/gemini-2.5-flash-lite",
-  "small_model": "openrouter/openai/gpt-oss-20b",
+  // "small_model": "openrouter/openai/gpt-oss-20b",
+  "small_model": "openrouter/google/gemini-3.1-flash-lite",
 
   "permission": {
     "external_directory": {
@@ -220,37 +221,7 @@
       },
 
       "models": {
-        "qwen/qwen3.6-plus:free": {
-          "options": {
-            "provider": {
-              "only": ["alibaba"],
-              "order": ["alibaba"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-
-        "xiaomi/mimo-v2-pro": {
-          "options": {
-            "provider": {
-              "only": ["xiaomi/fp8"],
-              "order": ["xiaomi/fp8"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-
-        "inception/mercury-2": {
-          "options": {
-            "provider": {
-              "only": ["inception"],
-              "order": ["inception"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-
-        "moonshotai/kimi-k2.5": {
+        "moonshotai/kimi-k2.6": {
           "options": {
             "provider": {
               "order": ["moonshotai/int4"],
@@ -269,26 +240,16 @@
           },
         },
 
-        "minimax/minimax-m2.5": {
-          "options": {
-            "provider": {
-              "only": ["minimax/fp8"],
-              "order": ["minimax/fp8"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-
-        "z-ai/glm-5": {
-          "options": {
-            "provider": {
-              "order": ["z-ai"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-
         "google/gemini-3.1-flash-lite-preview": {
+          "options": {
+            "provider": {
+              "order": ["google-ai-studio"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+
+        "google/gemini-3.1-flash-lite": {
           "options": {
             "provider": {
               "order": ["google-ai-studio"],

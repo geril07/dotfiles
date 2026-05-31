@@ -1,0 +1,146 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "anthropic/claude-opus-4-8",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "oracle": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "librarian": {
+      "model": "opencode-go/qwen3.5-plus",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "explore": {
+      "model": "opencode-go/qwen3.5-plus",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "opencode-go/kimi-k2.6"
+    },
+    "prometheus": {
+      "model": "anthropic/claude-opus-4-8",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "metis": {
+      "model": "anthropic/claude-opus-4-8",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "momus": {
+      "model": "anthropic/claude-opus-4-8",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "atlas": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "ultrabrain": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "deep": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "artistry": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/kimi-k2.6"
+        }
+      ]
+    },
+    "quick": {
+      "model": "opencode-go/minimax-m2.7",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "unspecified-low": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "unspecified-high": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    },
+    "writing": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "opencode-go/minimax-m2.7"
+        }
+      ]
+    }
+  }
+}

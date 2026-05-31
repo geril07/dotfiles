@@ -29,8 +29,11 @@
 
   "disabled_providers": [],
 
-  // "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"],
-  "plugin": ["@mohak34/opencode-notifier@0.2.5"],
+  "plugin": [
+    "@mohak34/opencode-notifier@0.2.5",
+    "opencode-with-claude@git+https://github.com/geril07/opencode-with-claude.git#54b0d00",
+    // "oh-my-openagent",
+  ],
 
   "agent": {
     "gemini-flash-agent": {
@@ -149,55 +152,9 @@
     },
 
     "anthropic": {
-      "models": {
-        "sonnet-4-5-thinker": {
-          "id": "claude-sonnet-4-5",
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 16000,
-            },
-          },
-        },
-
-        "claude-sonnet-4-5": {
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 5000,
-            },
-          },
-        },
-
-        "claude-sonnet-4-5-20250929": {
-          "name": "Claude Sonnet 4.5 09-29",
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 5000,
-            },
-          },
-        },
-
-        "claude-haiku-4-5": {
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 5000,
-            },
-          },
-        },
-
-        "claude-haiku-4-5-20251001": {
-          "name": "Claude Haiku 4.5 10-01",
-
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 5000,
-            },
-          },
-        },
+      "options": {
+        "baseURL": "http://127.0.0.1:3456",
+        "apiKey": "dummy",
       },
     },
 
@@ -210,6 +167,27 @@
     "deepseek": {
       "options": {
         "apiKey": "{env:DEEPSEEK_API_KEY}",
+      },
+    },
+    "cursor-acp": {
+      "name": "Cursor ACP",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:32124/v1",
+      },
+      "models": {
+        "cursor-acp/auto": { "name": "Auto" },
+
+        "cursor-acp/claude-opus-4-7": { "name": "Claude 4.7 Opus" },
+        "cursor-acp/claude-4.6-sonnet": { "name": "Claude 4.6 Sonnet" },
+        "cursor-acp/claude-4.5-haiku": { "name": "Claude 4.5 Haiku" },
+
+        "cursor-acp/gpt-5.5": { "name": "GPT-5.5" },
+
+        "cursor-acp/gemini-3.1-pro": { "name": "Gemini 3.1 Pro" },
+
+        "cursor-acp/composer-2.5": { "name": "Composer 2.5" },
+        "cursor-acp/composer-2.5-fast": { "name": "Composer 2.5 Fast" },
       },
     },
 

@@ -157,6 +157,7 @@ bindsym --to-code {
   Alt+Shift+1 exec obs-recording-toggle.sh
 
   $mod+Ctrl+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+  $mod+Shift+t exec LD_PRELOAD=/usr/lib/libonnxruntime.so.1.24.2 handy --toggle-transcription
 }
 
 bindcode {

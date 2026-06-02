@@ -34,3 +34,5 @@ export LANG="en_GB.UTF-8"
 
 
 [ -f "$HOME/load_secrets.zsh" ] && . "$HOME/load_secrets.zsh"
+
+alias handy="LD_PRELOAD=/usr/lib/libonnxruntime.so.1.24.2 handy"

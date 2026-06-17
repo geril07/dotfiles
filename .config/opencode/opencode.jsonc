@@ -11,6 +11,7 @@
       "/tmp/**": "allow",
       "~/.local/share/rtk/**": "allow",
       "~/.agents/skills/**": "allow",
+      "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow",
     },
 
     "edit": {
@@ -32,7 +33,7 @@
   "plugin": [
     "@mohak34/opencode-notifier@0.2.5",
     "opencode-with-claude@latest",
-    "oh-my-openagent@latest"
+    "oh-my-openagent@latest",
   ],
 
   "agent": {

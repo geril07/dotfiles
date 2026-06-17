@@ -3,5 +3,8 @@
   "theme": "catppuccin",
   "keybinds": {},
   "scroll_speed": 5,
-  "diff_style": "stacked"
+  "diff_style": "stacked",
+  "plugin": [
+    "oh-my-openagent@latest"
+  ]
 }

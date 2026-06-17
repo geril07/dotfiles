@@ -31,8 +31,8 @@
 
   "plugin": [
     "@mohak34/opencode-notifier@0.2.5",
-    "opencode-with-claude@git+https://github.com/geril07/opencode-with-claude.git#54b0d00",
-    // "oh-my-openagent",
+    "opencode-with-claude@latest",
+    "oh-my-openagent@latest"
   ],
 
   "agent": {

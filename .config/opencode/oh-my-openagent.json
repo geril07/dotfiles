@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "disabled_hooks": ["startup-toast", "session-notification"],
   "agents": {
     "sisyphus": {
       "model": "opencode-go/glm-5.2",

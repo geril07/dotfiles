@@ -11,15 +11,6 @@
       "installedAt": "2026-04-19T09:30:09.493Z",
       "updatedAt": "2026-04-19T09:30:09.493Z"
     },
-    "brainstorming": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/obra/superpowers.git",
-      "skillPath": "skills/brainstorming/SKILL.md",
-      "skillFolderHash": "27e73ef7b83994e913cba378081b587412d2e9cb",
-      "installedAt": "2026-04-21T09:09:47.055Z",
-      "updatedAt": "2026-06-20T08:18:28.678Z"
-    },
     "grill-me": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -161,3 +152,4 @@
     "zed"
   ]
 }
+

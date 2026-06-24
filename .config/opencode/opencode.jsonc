@@ -184,6 +184,22 @@
         "apiKey": "{env:DEEPSEEK_API_KEY}",
       },
     },
+
+    "ollama-cloud": {
+      "options": {
+        "apiKey": "{env:OLLAMA_CLOUD_API_KEY}",
+      },
+
+      "whitelist": [
+        "glm-5.2",
+        "minimax-m3",
+        "kimi-k2.7-code",
+        "kimi-k2.6",
+        "deepseek-v4-pro",
+        "deepseek-v4-flash",
+      ],
+    },
+
     "cursor-acp": {
       "name": "Cursor ACP",
       "npm": "@ai-sdk/openai-compatible",

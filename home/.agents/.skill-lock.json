@@ -35,8 +35,9 @@
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
       "skillFolderHash": "21adba95de7d93065d9fec725ddf37f871e01d05",
+      "pluginName": "mattpocock-skills",
       "installedAt": "2026-05-12T17:50:39.308Z",
-      "updatedAt": "2026-06-20T08:18:35.006Z"
+      "updatedAt": "2026-06-24T04:47:57.132Z"
     },
     "improve-codebase-architecture": {
       "source": "mattpocock/skills",
@@ -152,4 +153,3 @@
     "zed"
   ]
 }
-

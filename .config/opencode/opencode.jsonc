@@ -20,7 +20,7 @@
 
     "bash": {
       "*": "allow",
-      "git commit *": "ask",
+      // "git commit *": "ask",
       "git push *": "ask",
       "git clone *": "ask",
       // "mv *": "ask",

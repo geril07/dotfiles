@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(fd -HI '^\.git$' ~/code ~/my -x dirname | fzf)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+existing=$(herdr workspace list | jq -er --arg name "$selected_name" \
+  '.result.workspaces[] | select(.label == $name) | .workspace_id' | head -1)
+
+if [[ -n $existing ]]; then
+  herdr workspace focus "$existing"
+else
+  herdr workspace create --cwd "$selected" --label "$selected_name" --focus
+fi

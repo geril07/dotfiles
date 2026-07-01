@@ -76,3 +76,23 @@ alias mirrorlist-update='export TMPFILE="$(mktemp)"; \
 '
 
 export SYSTEMD_LESS=FRXMK
+
+tn() {
+  local name="${PWD:t}"
+
+  if tmux has-session -t "$name" 2>/dev/null; then
+    if [[ -n "$TMUX" ]]; then
+      tmux switch-client -t "$name"
+    else
+      tmux attach-session -t "$name"
+    fi
+    return
+  fi
+
+  if [[ -n "$TMUX" ]]; then
+    tmux new-session -d -s "$name" -c "$PWD"
+    tmux switch-client -t "$name"
+  else
+    tmux new-session -s "$name" -c "$PWD"
+  fi
+}

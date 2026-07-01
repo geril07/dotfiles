@@ -31,7 +31,7 @@
   "disabled_providers": [],
 
   "plugin": [
-    "@mohak34/opencode-notifier@0.2.5",
+    "@mohak34/opencode-notifier@0.2.8",
     "opencode-with-claude@latest",
     "opencode-mystatus",
     // "oh-my-openagent@latest",

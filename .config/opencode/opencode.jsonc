@@ -21,10 +21,10 @@
     "bash": {
       "*": "allow",
       // "git commit *": "ask",
-      "git push *": "ask",
-      "git clone *": "ask",
+      // "git push *": "ask",
+      // "git clone *": "ask",
       // "mv *": "ask",
-      "rm *": "ask",
+      // "rm *": "ask",
     },
   },
 
@@ -45,6 +45,10 @@
   },
 
   "agent": {
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash",
+    },
+
     "deepseek-v4-flash": {
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
@@ -78,9 +82,9 @@
 
     "orch-implement": {
       "mode": "subagent",
-      "model": "opencode-go/mimo-v2.5-pro",
+      "model": "opencode-go/deepseek-v4-flash",
+      "variant": "max",
       "description": "",
-      "variant": "high",
     },
 
     "orch-review": {
@@ -121,6 +125,12 @@
   },
 
   "mcp": {
+    "codegraph": {
+      "type": "local",
+      "command": ["codegraph", "serve", "--mcp"],
+      "enabled": true,
+    },
+
     "btca-local": {
       "type": "local",
       "command": ["npx", "-g", "-y", "btca", "mcp"],

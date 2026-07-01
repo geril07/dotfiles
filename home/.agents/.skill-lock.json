@@ -140,16 +140,16 @@
   "lastSelectedAgents": [
     "amp",
     "antigravity",
-    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
     "deepagents",
+    "dexto",
+    "firebender",
     "gemini-cli",
     "github-copilot",
-    "kimi-code-cli",
+    "kimi-cli",
     "opencode",
-    "warp",
-    "zed"
+    "warp"
   ]
 }

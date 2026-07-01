@@ -47,6 +47,7 @@
 
   w = worktree
   wl = w list
+	cwt = "!f() {\n  b=\"$1\"\n  base=\"${2:-dev}\"\n\n  if [ -z \"$b\" ]; then\n    echo \"usage: git gwt <branch> [base]\"\n    return 1\n  fi\n\n  repo=\"$(basename \"$(dirname \"$(git rev-parse --path-format=absolute --git-common-dir)\")\")\"\n\n  git worktree add -B \"$b\" \"../$repo-$b\" \"$base\"\n}; f"
 
 [filter "lfs"]
   smudge = git-lfs smudge -- %f

@@ -1,0 +1,1 @@
+/home/geril/.tmux/plugins/tmux-agents-overview/scripts/adapters/opencode.js

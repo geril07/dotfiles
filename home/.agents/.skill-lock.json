@@ -25,9 +25,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/upstash/context7.git",
       "skillPath": "skills/find-docs/SKILL.md",
-      "skillFolderHash": "ccd99a8580519fa9e65dcea938e92cb1c3a2f7a4",
+      "skillFolderHash": "f1f7597c0575b2c138a551a222f56808a86e16b1",
       "installedAt": "2026-05-08T06:56:46.352Z",
-      "updatedAt": "2026-05-08T06:56:46.352Z"
+      "updatedAt": "2026-07-08T16:58:11.843Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -53,36 +53,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/prototype/SKILL.md",
-      "skillFolderHash": "7ee08d81624de91a6dd8c61a438a32c50d570185",
+      "skillFolderHash": "046ef7c3aae3ec1934b075b26dba1cf87c9b1d5a",
       "installedAt": "2026-05-12T17:50:39.309Z",
-      "updatedAt": "2026-06-20T08:18:39.110Z"
+      "updatedAt": "2026-07-08T16:57:57.023Z"
     },
     "tdd": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/tdd/SKILL.md",
-      "skillFolderHash": "7e6fad2aedf8648f6154af32915eebd12c6d51cc",
+      "skillFolderHash": "57e1bee887816ed2af745e5fd388f224f6e61ada",
       "installedAt": "2026-05-12T17:50:39.309Z",
-      "updatedAt": "2026-06-20T08:18:41.157Z"
+      "updatedAt": "2026-07-08T16:57:58.791Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/handoff/SKILL.md",
-      "skillFolderHash": "aa82ffd61d7a3bda110060b4e24ec782b983cb8d",
+      "skillFolderHash": "3f7df8e717e41dfd6eacd03d47319a2e01248ffb",
       "installedAt": "2026-05-12T17:50:39.311Z",
-      "updatedAt": "2026-06-20T08:18:47.090Z"
+      "updatedAt": "2026-07-08T16:58:00.551Z"
     },
     "setup-matt-pocock-skills": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "8d7fc1569ee7c4a50827091a795daa490212506d",
+      "skillFolderHash": "3676b312e22e6b615c24e575cf9382a6da3016dd",
       "installedAt": "2026-05-12T17:50:39.311Z",
-      "updatedAt": "2026-06-20T08:18:49.221Z"
+      "updatedAt": "2026-07-08T16:58:02.343Z"
     },
     "codebase-design": {
       "source": "mattpocock/skills",
@@ -109,29 +109,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "skillFolderHash": "ab318c66a36253e872b5d0bd271b3df8f6ef816f",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "0ace40ac10f5c0b1534324e4e109ebfa831fb361",
       "installedAt": "2026-06-20T08:16:33.585Z",
-      "updatedAt": "2026-06-20T08:16:33.585Z"
+      "updatedAt": "2026-07-08T16:58:04.620Z"
     },
     "writing-great-skills": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
-      "skillFolderHash": "9252419010c7944edb297aa79b3f61a338a4f1f2",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "c84411b360fad91b8756e60fa17fd5b5761422dd",
       "installedAt": "2026-06-20T08:18:20.357Z",
-      "updatedAt": "2026-06-20T08:18:20.357Z"
+      "updatedAt": "2026-07-08T16:58:06.461Z"
     },
     "playwright-cli": {
       "source": "microsoft/playwright-cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "6bf055ae36a2460e4a8f70eaec772ab7ac7e12e4",
+      "skillFolderHash": "4da7802c1b788ca0054c45d868cc593f6fb3d385",
       "installedAt": "2026-06-20T08:39:32.675Z",
-      "updatedAt": "2026-06-20T08:39:32.675Z"
+      "updatedAt": "2026-07-08T16:58:13.598Z"
     }
   },
   "dismissed": {

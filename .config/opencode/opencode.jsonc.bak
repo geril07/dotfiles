@@ -8,14 +8,14 @@
       "/tmp/**": "allow",
       "~/.local/share/rtk/**": "allow",
       "~/.agents/skills/**": "allow",
-      "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow",
+      "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow"
     },
     "edit": {
-      "~/.agents/skills/**": "ask",
+      "~/.agents/skills/**": "ask"
     },
     "bash": {
-      "*": "allow",
-    },
+      "*": "allow"
+    }
   },
   "disabled_providers": [],
   "plugin": [
@@ -23,165 +23,186 @@
     "opencode-with-claude@latest",
     "opencode-mystatus",
     "@dietrichgebert/ponytail",
-    "oh-my-opencode-slim",
-    "@plannotator/opencode@latest",
+    "oh-my-opencode-slim"
   ],
   "command": {
     "mystatus": {
       "description": "Query quota usage for all AI accounts",
-      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification.",
-    },
+      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification."
+    }
   },
   "agent": {
     "explore": {
-      "model": "opencode-go/deepseek-v4-flash",
-      "disable": false,
+      "model": "opencode-go/deepseek-v4-flash"
     },
     "deepseek-v4-flash": {
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
-      "variant": "max",
+      "variant": "max"
     },
     "deepseek-v4-pro": {
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-pro",
-      "variant": "max",
+      "variant": "max"
     },
     "mimo-v2.5-pro": {
       "mode": "subagent",
       "model": "opencode-go/mimo-v2.5-pro",
-      "variant": "high",
+      "variant": "high"
     },
     "minimax-m3": {
       "mode": "subagent",
       "model": "opencode-go/minimax-m3",
-      "variant": "thinking",
+      "variant": "thinking"
     },
     "orch-explore": {
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
       "description": "",
-      "variant": "max",
+      "variant": "max"
     },
     "orch-implement": {
       "mode": "subagent",
       "model": "opencode-go/deepseek-v4-flash",
       "variant": "max",
-      "description": "",
+      "description": ""
     },
     "orch-review": {
       "mode": "subagent",
       "model": "opencode-go/minimax-m3",
       "variant": "thinking",
-      "description": "",
-    },
-    "general": {
-      "disable": true,
-    },
+      "description": ""
+    }
   },
   "formatter": {
     "gofmt": {
-      "disabled": false,
+      "disabled": false
     },
     "mix": {
-      "disabled": true,
+      "disabled": true
     },
     "prettier": {
-      "disabled": false,
+      "disabled": false
     },
     "biome": {
-      "disabled": true,
+      "disabled": true
     },
     "zig": {
-      "disabled": true,
+      "disabled": true
     },
     "clang-format": {
-      "disabled": true,
+      "disabled": true
     },
     "ktlint": {
-      "disabled": true,
+      "disabled": true
     },
     "ruff": {
-      "disabled": true,
+      "disabled": true
     },
     "rubocop": {
-      "disabled": true,
+      "disabled": true
     },
     "standardrb": {
-      "disabled": true,
+      "disabled": true
     },
     "htmlbeautifier": {
-      "disabled": true,
-    },
+      "disabled": true
+    }
   },
   "lsp": {
     "typescript": {
-      "disabled": true,
+      "disabled": true
     },
     "eslint": {
-      "disabled": true,
+      "disabled": true
     },
     "gopls": {
-      "disabled": true,
+      "disabled": true
     },
     "ruby-lsp": {
-      "disabled": true,
+      "disabled": true
     },
     "pyright": {
-      "disabled": true,
+      "disabled": true
     },
     "elixir-ls": {
-      "disabled": true,
+      "disabled": true
     },
     "zls": {
-      "disabled": true,
+      "disabled": true
     },
     "csharp": {
-      "disabled": true,
+      "disabled": true
     },
     "vue": {
-      "disabled": true,
+      "disabled": true
     },
     "rust": {
-      "disabled": true,
+      "disabled": true
     },
     "clangd": {
-      "disabled": true,
+      "disabled": true
     },
     "svelte": {
-      "disabled": true,
-    },
+      "disabled": true
+    }
   },
   "mcp": {
     "codegraph": {
       "type": "local",
-      "command": ["codegraph", "serve", "--mcp"],
-      "enabled": true,
+      "command": [
+        "codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "enabled": true
     },
     "btca-local": {
       "type": "local",
-      "command": ["npx", "-g", "-y", "btca", "mcp"],
-      "enabled": false,
+      "command": [
+        "npx",
+        "-g",
+        "-y",
+        "btca",
+        "mcp"
+      ],
+      "enabled": false
     },
     "context7": {
       "enabled": false,
       "type": "local",
-      "command": ["npx", "-g", "-y", "@upstash/context7-mcp"],
+      "command": [
+        "npx",
+        "-g",
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "figma-mcp": {
       "enabled": false,
       "type": "local",
-      "command": ["npx", "-g", "-y", "figma-developer-mcp", "--stdio"],
+      "command": [
+        "npx",
+        "-g",
+        "-y",
+        "figma-developer-mcp",
+        "--stdio"
+      ]
     },
     "grep-app": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true,
+      "enabled": true
     },
     "chrome-devtools": {
       "enabled": false,
       "type": "local",
-      "command": ["npx", "-g", "-y", "chrome-devtools-mcp@latest"],
+      "command": [
+        "npx",
+        "-g",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
     },
     "playwright": {
       "type": "local",
@@ -190,46 +211,46 @@
         "-y",
         "@playwright/mcp@latest",
         "--isolated",
-        "--browser=chromium",
+        "--browser=chromium"
       ],
-      "enabled": false,
-    },
+      "enabled": false
+    }
   },
   "provider": {
     "ollama": {
       "models": {
         "qwen3.5:4b": {
-          "name": "qwen3.5:4b",
+          "name": "qwen3.5:4b"
         },
         "qwen3.5:9b": {
-          "name": "qwen3.5:9b",
-        },
+          "name": "qwen3.5:9b"
+        }
       },
       "name": "Ollama",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://127.0.0.1:11434/v1",
-      },
+        "baseURL": "http://127.0.0.1:11434/v1"
+      }
     },
     "anthropic": {
       "options": {
         "baseURL": "http://127.0.0.1:3456",
-        "apiKey": "dummy",
-      },
+        "apiKey": "dummy"
+      }
     },
     "google": {
       "options": {
-        "apiKey": "{env:GEMINI_API_KEY}",
-      },
+        "apiKey": "{env:GEMINI_API_KEY}"
+      }
     },
     "deepseek": {
       "options": {
-        "apiKey": "{env:DEEPSEEK_API_KEY}",
-      },
+        "apiKey": "{env:DEEPSEEK_API_KEY}"
+      }
     },
     "ollama-cloud": {
       "options": {
-        "apiKey": "{env:OLLAMA_CLOUD_API_KEY}",
+        "apiKey": "{env:OLLAMA_CLOUD_API_KEY}"
       },
       "whitelist": [
         "glm-5.2",
@@ -237,122 +258,143 @@
         "kimi-k2.7-code",
         "kimi-k2.6",
         "deepseek-v4-pro",
-        "deepseek-v4-flash",
-      ],
+        "deepseek-v4-flash"
+      ]
     },
     "cursor-acp": {
       "name": "Cursor ACP",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://127.0.0.1:32124/v1",
+        "baseURL": "http://127.0.0.1:32124/v1"
       },
       "models": {
         "cursor-acp/auto": {
-          "name": "Auto",
+          "name": "Auto"
         },
         "cursor-acp/claude-opus-4-7": {
-          "name": "Claude 4.7 Opus",
+          "name": "Claude 4.7 Opus"
         },
         "cursor-acp/claude-4.6-sonnet": {
-          "name": "Claude 4.6 Sonnet",
+          "name": "Claude 4.6 Sonnet"
         },
         "cursor-acp/claude-4.5-haiku": {
-          "name": "Claude 4.5 Haiku",
+          "name": "Claude 4.5 Haiku"
         },
         "cursor-acp/gpt-5.5": {
-          "name": "GPT-5.5",
+          "name": "GPT-5.5"
         },
         "cursor-acp/gemini-3.1-pro": {
-          "name": "Gemini 3.1 Pro",
+          "name": "Gemini 3.1 Pro"
         },
         "cursor-acp/composer-2.5": {
-          "name": "Composer 2.5",
+          "name": "Composer 2.5"
         },
         "cursor-acp/composer-2.5-fast": {
-          "name": "Composer 2.5 Fast",
-        },
-      },
+          "name": "Composer 2.5 Fast"
+        }
+      }
     },
     "openrouter": {
       "options": {
-        "apiKey": "{env:OPENROUTER_API_KEY}",
+        "apiKey": "{env:OPENROUTER_API_KEY}"
       },
       "models": {
         "z-ai/glm-5.2": {
           "options": {
             "provider": {
-              "order": ["z-ai/fp8"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "z-ai/fp8"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "moonshotai/kimi-k2.6": {
           "options": {
             "provider": {
-              "order": ["moonshotai/int4"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "moonshotai/int4"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "minimax/minimax-m2.7": {
           "options": {
             "provider": {
-              "only": ["minimax/fp8"],
-              "order": ["minimax/fp8"],
-              "allow_fallbacks": false,
-            },
-          },
+              "only": [
+                "minimax/fp8"
+              ],
+              "order": [
+                "minimax/fp8"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "google/gemini-3.1-flash-lite-preview": {
           "options": {
             "provider": {
-              "order": ["google-ai-studio"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "google-ai-studio"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "google/gemini-3.1-flash-lite": {
           "options": {
             "provider": {
-              "order": ["google-ai-studio"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "google-ai-studio"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "google/gemini-3-flash-preview": {
           "options": {
             "provider": {
-              "order": ["google-ai-studio"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "google-ai-studio"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "google/gemini-3-pro-preview": {
           "options": {
             "provider": {
-              "order": ["google-ai-studio"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "google-ai-studio"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "openai/gpt-oss-120b": {
           "options": {
             "provider": {
               "require_parameters": true,
-              "order": ["fireworks", "groq"],
-              "allow_fallbacks": false,
-            },
-          },
+              "order": [
+                "fireworks",
+                "groq"
+              ],
+              "allow_fallbacks": false
+            }
+          }
         },
         "openai/gpt-oss-20b": {
           "options": {
             "provider": {
-              "order": ["groq"],
-              "allow_fallbacks": false,
-            },
-          },
-        },
-      },
-    },
-  },
+              "order": [
+                "groq"
+              ],
+              "allow_fallbacks": false
+            }
+          }
+        }
+      }
+    }
+  }
 }

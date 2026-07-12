@@ -4,5 +4,5 @@
   "keybinds": {},
   "scroll_speed": 5,
   "diff_style": "stacked",
-  "plugin": ["oc-tps@latest", "oh-my-opencode-slim"]
+  "plugin": ["oc-tps@latest"]
 }

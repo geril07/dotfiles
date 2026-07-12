@@ -1,41 +1,41 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "opencode-go",
+  "preset": "opencode-go-cheap",
   "presets": {
     "openai": {
       "orchestrator": {
-        "model": "openai/gpt-5.5",
+        "model": "openai/gpt-5.6-sol",
         "variant": "medium",
         "skills": ["*"],
         "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "openai/gpt-5.5",
+        "model": "openai/gpt-5.6-sol",
         "variant": "high",
         "skills": ["simplify"],
         "mcps": []
       },
       "librarian": {
-        "model": "openai/gpt-5.4-mini",
+        "model": "openai/gpt-5.6-luna",
         "variant": "low",
         "skills": [],
         "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
-        "model": "openai/gpt-5.4-mini",
+        "model": "openai/gpt-5.6-luna",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "designer": {
-        "model": "openai/gpt-5.4-mini",
+        "model": "openai/gpt-5.6-luna",
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "openai/gpt-5.5",
-        "variant": "low",
+        "model": "openai/gpt-5.6-luna",
+        "variant": "medium",
         "skills": [],
         "mcps": []
       }
@@ -54,28 +54,68 @@
       },
       "librarian": {
         "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
         "skills": [],
         "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
         "skills": [],
         "mcps": []
       },
       "designer": {
         "model": "opencode-go/kimi-k2.7-code",
-        "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "opencode-go/deepseek-v4-flash",
-        "variant": "high",
+        "model": "opencode-go/kimi-k2.7-code",
+        "variant": "max",
         "skills": [],
         "mcps": []
       },
       "observer": {
         "model": "opencode-go/kimi-k2.6",
+        "skills": [],
+        "mcps": []
+      }
+    },
+
+    "opencode-go-cheap": {
+      "orchestrator": {
+        "model": "opencode-go/minimax-m3",
+        "variant": "thinking",
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
+      },
+      "oracle": {
+        "model": "opencode-go/glm-5.2",
+        "variant": "max",
+        "skills": ["simplify"],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
+        "skills": [],
+        "mcps": ["websearch", "context7", "gh_grep"]
+      },
+      "explorer": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "designer": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "opencode-go/deepseek-v4-flash",
+        "variant": "max",
         "skills": [],
         "mcps": []
       }
@@ -112,7 +152,7 @@
         "mcps": []
       },
       "fixer": {
-        "model": "ollama-cloud/deepseek-v4-flash",
+        "model": "ollama-cloud/kimi-k2.7-code",
         "variant": "max",
         "skills": [],
         "mcps": []

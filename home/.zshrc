@@ -100,3 +100,5 @@ tn() {
 # >>> oh-my-opencode-slim background subagents >>>
 export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 # <<< oh-my-opencode-slim background subagents <<<
+
+export OH_MY_OPENCODE_SLIM_DISABLE=1

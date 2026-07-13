@@ -19,12 +19,12 @@
   },
   "disabled_providers": [],
   "plugin": [
-    "@mohak34/opencode-notifier@0.2.8",
-    "opencode-with-claude@latest",
+    "@mohak34/opencode-notifier",
+    "opencode-with-claude",
     "opencode-mystatus",
-    "@dietrichgebert/ponytail",
     "oh-my-opencode-slim",
-    "@plannotator/opencode@latest",
+    "@plannotator/opencode",
+    // "@dietrichgebert/ponytail",
   ],
   "command": {
     "mystatus": {
@@ -33,6 +33,9 @@
     },
   },
   "agent": {
+    "general": {
+      "disable": false,
+    },
     "explore": {
       "model": "opencode-go/deepseek-v4-flash",
       "disable": false,
@@ -74,9 +77,6 @@
       "model": "opencode-go/minimax-m3",
       "variant": "thinking",
       "description": "",
-    },
-    "general": {
-      "disable": true,
     },
   },
   "formatter": {

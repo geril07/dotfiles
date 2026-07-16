@@ -38,6 +38,7 @@
     },
     "explore": {
       "model": "opencode-go/deepseek-v4-flash",
+      "variant": "max",
       "disable": false,
     },
     "deepseek-v4-flash": {
@@ -153,6 +154,11 @@
     },
   },
   "mcp": {
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true,
+    },
     "codegraph": {
       "type": "local",
       "command": ["codegraph", "serve", "--mcp"],

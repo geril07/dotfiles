@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "ollama-cloud",
+  "preset": "openai",
   "presets": {
     "openai": {
       "orchestrator": {
@@ -79,51 +79,6 @@
       },
       "observer": {
         "model": "opencode-go/mimo-v2.5",
-        "variant": "max",
-        "skills": [],
-        "mcps": []
-      }
-    },
-
-    "ollama-cloud": {
-      "orchestrator": {
-        "model": "ollama-cloud/minimax-m3",
-        "variant": "max",
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
-      },
-      "oracle": {
-        "model": "ollama-cloud/glm-5.2",
-        "variant": "max",
-        "skills": ["simplify"],
-        "mcps": []
-      },
-      "librarian": {
-        "model": "ollama-cloud/deepseek-v4-flash",
-        "variant": "max",
-        "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
-      },
-      "explorer": {
-        "model": "ollama-cloud/deepseek-v4-flash",
-        "variant": "max",
-        "skills": [],
-        "mcps": []
-      },
-      "designer": {
-        "model": "ollama-cloud/kimi-k2.7-code",
-        "variant": "medium",
-        "skills": [],
-        "mcps": []
-      },
-      "fixer": {
-        "model": "ollama-cloud/deepseek-v4-flash",
-        "variant": "max",
-        "skills": [],
-        "mcps": []
-      },
-      "observer": {
-        "model": "ollama-cloud/mimo-v2.5",
         "variant": "max",
         "skills": [],
         "mcps": []

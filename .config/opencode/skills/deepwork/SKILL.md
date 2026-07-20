@@ -1,13 +1,18 @@
 ---
 name: deepwork
-description: Orchestrator-only workflow for heavy coding sessions, multi-phase implementation, and risky refactors. Use for complex work that needs planning, review gates, and persistent progress tracking.
+description: High-cost orchestrator workflow for large, high-risk, multi-phase coding efforts with meaningful dependencies and review gates. Do not activate for routine multi-file changes.
 ---
 
 # Deepwork
 
-Deepwork is an orchestrator workflow for heavy coding sessions. Use it when the
-work is broad, risky, multi-file, or likely to span several implementation
-phases. Do not use it for trivial edits, quick docs changes, or simple bug fixes.
+Deepwork is an orchestrator workflow for heavy coding sessions. Use it only
+when the work is clearly large or high-risk: multiple dependent phases,
+cross-cutting architectural change, unsafe-to-partially-ship migration, or
+sustained coordination across several specialist lanes.
+
+Do not infer Deepwork merely because a task touches multiple files. Do not use
+it for trivial edits, quick docs changes, simple bug fixes, or routine bounded
+features.
 
 ## Core Contract
 
@@ -16,27 +21,54 @@ not as the default implementation worker.
 
 Required behavior:
 
+- before planning, delegation, or creating a deepwork state file, inspect the
+  existing `.gitignore` and `.ignore`; add only missing entries, without
+  duplicates, so `.gitignore` contains `.slim/deepwork/` and `.ignore` contains
+  `!.slim/deepwork/` and `!.slim/deepwork/**`;
 - keep OpenCode todos aligned with the active deepwork phase;
 - create and maintain a local markdown progress file under `.slim/deepwork/`;
+- save code/doc deliverables to project paths (e.g. `src/`, `docs/`); reserve
+  `.slim/deepwork/` strictly for progress files;
 - write valuable research findings into that file as confirmed research context
   when they are received and reconciled;
 - draft a plan before implementation;
-- ask `@oracle` to review the plan and revise it until acceptable;
 - create a phased implementation/delegation plan;
-- before oracle reviews, add relevant confirmed research findings and file
-  references to the deepwork file so oracle can review the plan or phase from
+- before dispatch, choose a small number of coherent implementation phases from
+  the work's dependencies and natural delivery boundaries; do not split work
+  merely to reduce an Oracle review's scope;
+- before execution, show the user a compact overview containing only phase
+  titles and order, each delegated specialist with its ownership/scope, and the
+  total Oracle reviews with the gate after each phase and a short reason for it;
+- before each implementation phase, decide the execution path: what can run in
+  parallel, what must be sequential, which specialists to delegate to, and
+  whether to split the same agent into multiple bounded lanes;
+- after each planned phase, validate and update the deepwork file, then ask
+  `@oracle` to review the phase result before continuing;
+- before an Oracle review, add relevant confirmed research findings and file
+  references to the deepwork file so Oracle can assess the decision or risk from
   accepted context instead of redoing discovery;
-- ask `@oracle` to review that implementation plan before execution;
-- after oracle review and before each implementation phase, decide the execution
-  path: what can run in parallel, what must be sequential, which specialists to
-  delegate to, and whether to split the same agent into multiple bounded lanes;
-- after each phase, validate, update the deepwork file, prepare the plan file
-  for oracle review and ask `@oracle` to review the phase result, fix
-  actionable issues, then continue;
+- triage and batch material actionable Oracle findings into one bounded
+  remediation pass, then validate it with focused evidence; request a follow-up
+  Oracle review only if that remediation changes the reviewed decision/risk or
+  the original concern cannot otherwise be verified;
 - when a phase includes `@designer`, preserve designer intent across later
   phases. Use `@fixer` only for mechanical follow-up that does not alter the
   UI/UX;
 - finish with final validation and a concise summary.
+
+## Planned Phase Reviews
+
+Oracle reviews are automatic gates between the planned implementation phases.
+Before dispatch, decide the phases from the task itself: its dependencies,
+integration boundaries, and meaningful delivery points. Record the phase order,
+the total review count, the review after each phase, and a short reason for each
+gate in the deepwork file and compact user overview.
+
+Avoid micro-phases created only to make reviews smaller or cheaper. Larger,
+complex tasks can have broader phases, broader patches, and correspondingly
+broader phase reviews. The goal is a sensible number of predictable review
+gates, not the smallest possible review scope. Never add an extra Oracle review
+merely to re-confirm a mechanical fixer change.
 
 ## Designer Handoff Guardrail
 
@@ -65,8 +97,8 @@ Create a task-specific file such as:
 .slim/deepwork/<short-task-slug>.md
 ```
 
-Keep `.slim/deepwork/` out of git, but make it readable to OpenCode. Ensure the
-project ignore files include:
+Before creating this file—and before planning or delegation—inspect the existing
+`.gitignore` and `.ignore`. Add only missing entries and do not add duplicates:
 
 ```gitignore
 # .gitignore
@@ -79,6 +111,8 @@ project ignore files include:
 !.slim/deepwork/**
 ```
 
+These rules keep deepwork state git-local while allowing OpenCode to read it.
+
 Do not follow a rigid template. Choose whatever markdown structure best fits the
 work. The file only needs to remain useful as persistent session state and should
 capture, as applicable:
@@ -86,7 +120,7 @@ capture, as applicable:
 - current goal and understanding;
 - researched, factual context from `@librarian` to avoid oracle doing its own
   research;
-- plan drafts and oracle review notes;
+- plan drafts, Oracle review budget/gates, and review notes;
 - implementation phases and status;
 - validation results;
 - unresolved questions, blockers, and follow-ups.

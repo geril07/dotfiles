@@ -40,7 +40,7 @@ source <(fzf --zsh)
 eval "$(oh-my-posh init zsh --config $HOME/ohmyposh.json)"
 eval "$(zoxide init zsh)"
 
-alias ls="eza -la --group-directories-first --icons"
+alias ls="eza -la --group-directories-first --icons auto"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias nvide="neovide"

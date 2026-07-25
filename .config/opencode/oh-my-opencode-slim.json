@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "preset": "openai",
+
   "presets": {
     "openai": {
       "orchestrator": {
@@ -17,13 +18,13 @@
       },
       "librarian": {
         "model": "openai/gpt-5.6-luna",
-        "variant": "medium",
+        "variant": "high",
         "skills": [],
         "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "openai/gpt-5.6-luna",
-        "variant": "medium",
+        "variant": "high",
         "skills": [],
         "mcps": []
       },

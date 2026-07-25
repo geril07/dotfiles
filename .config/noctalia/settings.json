@@ -129,6 +129,7 @@
                     "id": "Tray",
                     "pinned": [
                         "Telegram Desktop",
+                        "tray-icon tray app 394092-1",
                         "OBS Studio"
                     ]
                 },
@@ -167,7 +168,7 @@
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
+                    "showPowerProfiles": true
                 },
                 {
                     "displayMode": "alwaysShow",

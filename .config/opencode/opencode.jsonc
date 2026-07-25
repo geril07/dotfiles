@@ -4,6 +4,8 @@
   "autoupdate": false,
   "small_model": "openrouter/google/gemini-3.1-flash-lite",
   "permission": {
+    "question": "deny",
+
     "external_directory": {
       "/tmp/**": "allow",
       "~/.local/share/rtk/**": "allow",

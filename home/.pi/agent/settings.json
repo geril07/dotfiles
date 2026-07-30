@@ -1,0 +1,13 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "hideThinkingBlock": false,
+  "defaultThinkingLevel": "high",
+  "editorPaddingX": 2,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "theme": "dark",
+  "enabledModels": [
+    "deepseek/deepseek-v4-flash",
+    "deepseek/deepseek-v4-pro"
+  ]
+}

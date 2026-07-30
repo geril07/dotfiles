@@ -24,7 +24,7 @@
   "plugin": [
     "@mohak34/opencode-notifier",
     // "opencode-with-claude",
-    // "opencode-mystatus",
+    "opencode-mystatus",
     // "oh-my-opencode-slim",
     "@plannotator/opencode",
     // "@slkiser/opencode-quota",

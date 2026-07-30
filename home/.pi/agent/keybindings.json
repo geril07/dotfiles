@@ -5,5 +5,5 @@
   "tui.select.down": ["down", "ctrl+n"],
   "app.model.cycleForward": ["alt+p"],
   "app.thinking.toggle": [],
-  "app.thinking.cycle": ["ctrl-t"]
+  "app.thinking.cycle": ["ctrl+t"]
 }

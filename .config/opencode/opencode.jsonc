@@ -161,6 +161,9 @@
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp",
       "enabled": true,
+      "headers": {
+        "x-api-key": "{env:EXA_API_KEY}",
+      },
     },
     "codegraph": {
       "type": "local",

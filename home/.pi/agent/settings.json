@@ -6,7 +6,9 @@
   "packages": [
     "npm:pi-subagents@0.38.0",
     "npm:pi-mcp-adapter@2.16.0",
-    "https://github.com/monotykamary/pi-double-esc@main"
+    "https://github.com/monotykamary/pi-double-esc@main",
+    "npm:@narumitw/pi-goal",
+    "npm:@juicesharp/rpiv-todo"
   ],
   "hideThinkingBlock": false,
   "enabledModels": [

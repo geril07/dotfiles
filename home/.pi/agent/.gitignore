@@ -2,3 +2,9 @@ auth.json
 models-store.json
 sessions/
 trust.json
+npm/
+git/
+mcp-cache.json
+mcp-npx-cache.json
+mcp-onboarding.json
+run-history.jsonl

@@ -1,11 +1,14 @@
 {
   "lastChangelogVersion": "0.83.0",
-  "hideThinkingBlock": false,
-  "defaultThinkingLevel": "high",
   "editorPaddingX": 2,
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
-  "theme": "dark",
+  "theme": "catppuccin-macchiato",
+  "defaultProjectTrust": "never",
+  "packages": [
+    "npm:pi-subagents@0.38.0",
+    "npm:pi-mcp-adapter@2.16.0",
+    "https://github.com/monotykamary/pi-double-esc@main"
+  ],
+  "hideThinkingBlock": false,
   "enabledModels": [
     "deepseek/deepseek-v4-flash",
     "deepseek/deepseek-v4-pro"

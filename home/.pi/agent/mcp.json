@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "x-api-key": "$env:EXA_API_KEY"
+      }
+    },
+    "codegraph": {
+      "command": "codegraph",
+      "args": ["serve", "--mcp"]
+    },
+    "grep-app": {
+      "url": "https://mcp.grep.app"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "disabled": true
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--isolated",
+        "--browser=chromium"
+      ],
+      "disabled": true
+    }
+  }
+}

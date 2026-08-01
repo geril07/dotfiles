@@ -1,8 +1,10 @@
-## Behavioral guidelines
+<geril-guidelines>
+
+## Behavioral
 
 - Be concise
 
-## Coding guidelines
+## Coding
 
 - When implementing a new feature or workflow, first look for analogous implementations and conventions in the codebase. Prefer matching nearby or repo-wide patterns over introducing a new style, library, or structure.
 - Never introduce hacks, monkey patches, brittle workarounds, or partial solutions.
@@ -10,3 +12,5 @@
 - If a robust solution is not possible, say so clearly.
 - After every non-trivial change, include an explicit report of fragility or uncertainty.
 - Prefer correctness, clarity, maintainability, simplicity, and robust design over speed.
+
+</geril-guidelines>

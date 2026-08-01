@@ -4,11 +4,12 @@
   "theme": "catppuccin-macchiato",
   "defaultProjectTrust": "never",
   "packages": [
-    "npm:pi-subagents@0.38.0",
-    "npm:pi-mcp-adapter@2.16.0",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
-    "npm:@juicesharp/rpiv-todo"
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@zeldrisho/pi-web-fetch"
   ],
   "hideThinkingBlock": false,
   "compaction": {

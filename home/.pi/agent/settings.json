@@ -11,6 +11,9 @@
     "npm:@juicesharp/rpiv-todo"
   ],
   "hideThinkingBlock": false,
+  "compaction": {
+    "enabled": false
+  },
   "enabledModels": [
     "deepseek/deepseek-v4-flash",
     "deepseek/deepseek-v4-pro"

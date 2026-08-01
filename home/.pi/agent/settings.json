@@ -3,13 +3,19 @@
   "editorPaddingX": 2,
   "theme": "catppuccin-macchiato",
   "defaultProjectTrust": "never",
+  "outputPad": 1,
+  "autocompleteMaxVisible": 20,
+  "transport": "auto",
+  "enableInstallTelemetry": false,
+  "treeFilterMode": "all",
   "packages": [
     "npm:pi-subagents",
     "npm:pi-mcp-adapter",
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
     "npm:@juicesharp/rpiv-todo",
-    "npm:@zeldrisho/pi-web-fetch"
+    "npm:@zeldrisho/pi-web-fetch",
+    "npm:@plannotator/pi-extension"
   ],
   "hideThinkingBlock": false,
   "compaction": {

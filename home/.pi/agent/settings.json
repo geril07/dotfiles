@@ -23,6 +23,15 @@
   },
   "enabledModels": [
     "deepseek/deepseek-v4-flash",
-    "deepseek/deepseek-v4-pro"
-  ]
+    "deepseek/deepseek-v4-pro",
+    "openai-codex/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-luna"
+  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "max",
+  "subagents": {
+    "disableThinking": true
+  }
 }

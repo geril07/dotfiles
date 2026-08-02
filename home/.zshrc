@@ -68,6 +68,14 @@ export OPENCODE_AGENTS_SWITCH_SINGLE_MODEL=1
 export OPENCODE_DISABLE_LSP_DOWNLOAD=1
 export OPENCODE_DISABLE_AUTOCOMPACT=1
 
+# Run OpenCode with oh-my-opencode only when explicitly requested.
+# `opencode` stays vanilla; `omo` adds the plugin for that process only.
+# OpenCode merges this inline config with ~/.config/opencode/opencode.jsonc,
+# so the JSONC file stays untouched and needs no preprocessing.
+omo() {
+  OPENCODE_CONFIG_CONTENT='{"plugin":["oh-my-opencode@latest"]}' command opencode "$@"
+}
+
 alias mirrorlist-update='export TMPFILE="$(mktemp)"; \
     sudo true; \
     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \

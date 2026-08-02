@@ -5,6 +5,7 @@
 [core]
   editor=nvim
   pager = delta
+  excludesFile = /home/geril/.gitignore_global
 
 [init]
   defaultBranch = main

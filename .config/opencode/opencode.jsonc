@@ -170,6 +170,15 @@
       "command": ["codegraph", "serve", "--mcp"],
       "enabled": true,
     },
+    "ave-atlassian": {
+      "type": "local",
+      "command": ["uvx", "mcp-atlassian"],
+      "enabled": true,
+      "environment": {
+        "CONFLUENCE_URL": "{env:AVE_CONFLUENCE_URL}",
+        "CONFLUENCE_PERSONAL_TOKEN": "{env:AVE_CONFLUENCE_API_KEY}",
+      },
+    },
     "grep-app": {
       "type": "remote",
       "url": "https://mcp.grep.app",

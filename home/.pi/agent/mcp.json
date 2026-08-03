@@ -10,6 +10,14 @@
       "command": "codegraph",
       "args": ["serve", "--mcp"]
     },
+    "ave-atlassian": {
+      "command": "uvx",
+      "args": ["mcp-atlassian"],
+      "env": {
+        "CONFLUENCE_URL": "$env:AVE_CONFLUENCE_URL",
+        "CONFLUENCE_PERSONAL_TOKEN": "$env:AVE_CONFLUENCE_API_KEY"
+      }
+    },
     "grep-app": {
       "url": "https://mcp.grep.app"
     },

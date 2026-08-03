@@ -26,7 +26,10 @@
     // "opencode-with-claude",
     "opencode-mystatus",
     // "oh-my-opencode-slim",
-    "@plannotator/opencode",
+    ["@plannotator/opencode@latest", {
+      "workflow": "manual",
+      "runtime": "embedded",
+    }],
     // "@slkiser/opencode-quota",
     // "superpowers@git+https://github.com/obra/superpowers.git",
     // "@dietrichgebert/ponytail",

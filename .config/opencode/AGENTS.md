@@ -4,30 +4,6 @@
 
 - Be concise
 
-## Planning
-
-When asked to create a plan, prefer this structure:
-
-```md
-# Plan title
-
-## Context
-
-## Goals and non-goals
-
-## Current behavior
-
-## Proposed approach
-
-## Files and symbols to change
-
-## Implementation steps
-
-## Verification
-
-## Risks and open questions
-```
-
 ## Coding
 
 - When implementing a new feature or workflow, first look for analogous implementations and conventions in the codebase. Prefer matching nearby or repo-wide patterns over introducing a new style, library, or structure.

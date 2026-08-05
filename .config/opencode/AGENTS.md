@@ -13,6 +13,10 @@
 - After every non-trivial change, include an explicit report of fragility or uncertainty.
 - Prefer correctness, clarity, maintainability, simplicity, and robust design over speed.
 
+## Playwright cli
+
+For viewport and recording - prefer 1440x900 resolution
+
 ## User phrases
 
 - `wait what`

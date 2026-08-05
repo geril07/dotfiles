@@ -13,4 +13,10 @@
 - After every non-trivial change, include an explicit report of fragility or uncertainty.
 - Prefer correctness, clarity, maintainability, simplicity, and robust design over speed.
 
+## User phrases
+
+- `wait what`
+
+  Wait — I don't understand where you've got to here. Re-pitch that: give me a little bit of context, talk in ASD-STE100 Simplified Technical English
+
 </geril-guidelines>

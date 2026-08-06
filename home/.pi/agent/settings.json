@@ -15,7 +15,8 @@
     "npm:@narumitw/pi-goal",
     "npm:@juicesharp/rpiv-todo",
     "npm:@zeldrisho/pi-web-fetch",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:@piotr-oles/pi-bash-timeout"
   ],
   "hideThinkingBlock": false,
   "compaction": {

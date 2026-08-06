@@ -73,15 +73,6 @@
       "installedAt": "2026-06-20T08:16:33.582Z",
       "updatedAt": "2026-07-14T20:46:18.993Z"
     },
-    "diagnosing-bugs": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
-      "skillFolderHash": "27bf00e3ccc53491e938e8b5602be39238ce68f3",
-      "installedAt": "2026-06-20T08:16:33.584Z",
-      "updatedAt": "2026-07-14T20:46:21.164Z"
-    },
     "grilling": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -108,7 +99,7 @@
       "skillFolderHash": "bd9c9c4762db0a9a094fd419316ebd4b0444d06e",
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-08-05T21:50:22.970Z",
-      "updatedAt": "2026-08-05T21:50:22.970Z"
+      "updatedAt": "2026-08-05T21:54:41.841Z"
     }
   },
   "dismissed": {

@@ -1,6 +1,7 @@
 auth.json
 models-store.json
 sessions/
+missions/
 trust.json
 npm/
 git/

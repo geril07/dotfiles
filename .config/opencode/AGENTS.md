@@ -15,7 +15,7 @@
 
 ## Playwright cli
 
-For viewport and recording - prefer 1440x900 resolution
+For viewport and recording - prefer 1920x1080 resolution
 
 ## User phrases
 

@@ -15,7 +15,8 @@
 
 ## Playwright cli
 
-For viewport and recording - prefer 1920x1080 resolution
+- For viewport and recording - prefer 1920x1080 resolution.
+- Always use named session for a task to avoid collisions with other agents.
 
 ## User phrases
 

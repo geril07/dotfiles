@@ -12,18 +12,17 @@
   "steeringMode": "all",
   "followUpMode": "all",
   "packages": [
-    "npm:pi-subagents@0.40.0",
     "npm:pi-mcp-adapter",
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
-    "npm:@juicesharp/rpiv-todo",
     "npm:@zeldrisho/pi-web-fetch",
     "npm:@plannotator/pi-extension",
-    "npm:@piotr-oles/pi-bash-timeout"
+    "npm:@piotr-oles/pi-bash-timeout",
+    "npm:@tintinweb/pi-subagents"
   ],
   "hideThinkingBlock": false,
   "compaction": {
-    "enabled": false
+    "enabled": true
   },
   "enabledModels": [
     "deepseek/deepseek-v4-flash",

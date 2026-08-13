@@ -1,7 +1,9 @@
 ---
 name: reviewer
 description: Code reviewer. Reviews code changes and provides actionable feedback. Use for reviewing diffs, plans, or proposed solutions. Read-only — does not modify files.
-tools: read, grep, find, ls, bash
+permission:
+  edit: deny
+  write: deny
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

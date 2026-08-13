@@ -2,6 +2,16 @@
   "providers": {
     "openrouter": {
       "modelOverrides": {
+        "openai/gpt-oss-120b": {
+          "maxTokens": 65536,
+          "compat": {
+            "openRouterRouting": {
+              "order": ["groq"],
+              "allow_fallbacks": false
+            }
+          }
+        },
+
         "deepseek/deepseek-v4-flash-0731": {
           "thinkingLevelMap": {
             "minimal": null,

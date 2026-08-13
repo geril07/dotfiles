@@ -1,7 +1,9 @@
 ---
 name: explorer
 description: Fast read-only code search agent. Use it to find files by pattern, search for symbols or keywords, or answer "where is X defined / which files reference Y". Not for review, design auditing, or open-ended analysis. When calling, specify breadth: "quick", "medium", or "very thorough".
-tools: read, grep, find, ls, bash
+permission:
+  edit: deny
+  write: deny
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

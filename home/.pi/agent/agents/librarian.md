@@ -1,7 +1,9 @@
 ---
 name: librarian
 description: Library research agent. Use it to understand external or open-source libraries: how they work, usage examples, API internals, and history. Returns evidence-backed answers with real source links. Not for local codebase search — that is explorer's job.
-tools: read, grep, find, ls, bash, web_fetch, mcp:exa/web_search_exa, mcp:exa/web_fetch_exa, mcp:grep-app/searchGitHub
+permission:
+  edit: deny
+  write: deny
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

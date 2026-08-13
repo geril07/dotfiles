@@ -1,7 +1,9 @@
 ---
 name: oracle
 description: Decision-consistency advisor. Use it before committing to a significant move — it reconstructs inherited decisions, checks the current trajectory for drift or contradiction, and recommends the best next move. Not for implementation.
-tools: read, grep, find, ls, bash, intercom
+permission:
+  edit: deny
+  write: deny
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

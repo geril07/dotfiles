@@ -36,6 +36,5 @@
   "defaultThinkingLevel": "max",
   "subagents": {
     "disableThinking": true,
-    "disableBuiltins": false
-  }
-}
+    "disableBuiltins": true
+  },

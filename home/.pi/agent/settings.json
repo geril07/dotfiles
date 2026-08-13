@@ -12,7 +12,11 @@
   "steeringMode": "all",
   "followUpMode": "all",
   "packages": [
-    "npm:pi-subagents@0.40.0",
+    {
+      "source": "npm:pi-subagents",
+      "prompts": [],
+      "skills": []
+    },
     "npm:pi-mcp-adapter",
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
@@ -36,5 +40,33 @@
   "defaultThinkingLevel": "max",
   "subagents": {
     "disableThinking": true,
-    "disableBuiltins": true
+    "disableBuiltins": true,
+    "agentOverrides": {
+      "qa": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "high"
+      },
+      "librarian": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "explorer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "medium"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "medium"
+      }
+    }
   },
+  "tuiMode": "regular"
+}

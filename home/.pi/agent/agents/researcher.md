@@ -1,5 +1,4 @@
 ---
-enabled: false
 name: researcher
 description: Autonomous web researcher — Exa MCP search + web_fetch (current stack; no pi-web-access)
 # tools: pin concrete Exa tools only. Whole-server mcp:exa also demands

@@ -12,13 +12,13 @@
   "steeringMode": "all",
   "followUpMode": "all",
   "packages": [
+    "npm:pi-subagents@0.40.0",
     "npm:pi-mcp-adapter",
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
     "npm:@zeldrisho/pi-web-fetch",
     "npm:@plannotator/pi-extension",
-    "npm:@piotr-oles/pi-bash-timeout",
-    "npm:@tintinweb/pi-subagents"
+    "npm:@piotr-oles/pi-bash-timeout"
   ],
   "hideThinkingBlock": false,
   "compaction": {
@@ -35,6 +35,7 @@
   "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "max",
   "subagents": {
-    "disableThinking": true
+    "disableThinking": true,
+    "disableBuiltins": false
   }
 }

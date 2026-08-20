@@ -1,0 +1,30 @@
+{
+  "subagents": {
+    "agentOverrides": {
+      "qa": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "high"
+      },
+      "librarian": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "explorer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "xhigh"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "max"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "max"
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@
 - Fix root causes, not symptoms.
 - If a robust solution is not possible, say so clearly.
 - After every non-trivial change, include an explicit report of fragility or uncertainty.
+- Do not preserve backwards compatibility when it protects bad design.
 - Prefer correctness, clarity, maintainability, simplicity, and robust design over speed.
 
 ## Playwright cli

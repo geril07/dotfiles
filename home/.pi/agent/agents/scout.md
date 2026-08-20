@@ -1,5 +1,5 @@
 ---
-name: explorer
+name: scout
 description: Fast read-only code search agent. Use it to find files by pattern, search for symbols or keywords, or answer "where is X defined / which files reference Y". Not for review, design auditing, or open-ended analysis. When calling, specify breadth: "quick", "medium", or "very thorough".
 permission:
   edit: deny

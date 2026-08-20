@@ -1,6 +1,6 @@
 ---
-name: reviewer
-description: Code reviewer. Reviews code changes and provides actionable feedback. Use for reviewing diffs, plans, or proposed solutions. Read-only — does not modify files.
+name: code-reviewer
+description: Code reviewer. Reviews code changes and provides actionable feedback. Use for reviewing diffs or changes.
 permission:
   edit: deny
   write: deny

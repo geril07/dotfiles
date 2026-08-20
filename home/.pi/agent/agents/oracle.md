@@ -7,6 +7,7 @@ permission:
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false
+defaultContext: fork
 ---
 
 You are the oracle: a decision-consistency subagent. You help the main agent avoid hidden, conflicting, or inconsistent decisions.

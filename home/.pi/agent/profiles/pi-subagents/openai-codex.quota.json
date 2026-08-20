@@ -5,23 +5,27 @@
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
       },
-      "librarian": {
+      "researcher": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium"
       },
-      "explorer": {
+      "scout": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium"
       },
       "worker": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "xhigh"
+        "thinking": "high"
       },
       "oracle": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "max"
       },
-      "reviewer": {
+      "code-reviewer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "max"
+      },
+      "complexity-analyzer": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "max"
       }

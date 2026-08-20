@@ -96,8 +96,8 @@ test("agent completion maps Pi stop reasons to notifier events", () => {
 
 test("subagent names and Ghostty OSC notifications are safely formatted", () => {
   assert.equal(
-    extractAgentName("ignored", { PI_SUBAGENT_CHILD_AGENT: "reviewer" }),
-    "reviewer",
+    extractAgentName("ignored", { PI_SUBAGENT_CHILD_AGENT: "code-reviewer" }),
+    "code-reviewer",
   );
   const sequence = formatGhosttyNotificationSequence("Pi;\n", "done\u001b", {
     TMUX: "1",

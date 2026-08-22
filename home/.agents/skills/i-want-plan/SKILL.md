@@ -8,6 +8,10 @@ Plan should include:
 - Relevant context
 - Requirements summary
 - Acceptance criteria (testable)
-- Implementation checklist
+- Vertical slice based implementation checklist. Sections:
+  - outcome
+  - call-stack diff
+  - (Optional, if slice touches components) component tree diff
+  - steps
 - Verification
 - Risks and mitigations

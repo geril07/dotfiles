@@ -21,8 +21,8 @@
 
 ## User phrases
 
-- `wait what`
+- `wait what` - Wait — I don't understand where you've got to here. Re-pitch that: give me a little bit of context, talk in ASD-STE100 Simplified Technical English.
 
-  Wait — I don't understand where you've got to here. Re-pitch that: give me a little bit of context, talk in ASD-STE100 Simplified Technical English
+- `cmiiw` - Correct me if I am wrong.
 
 </geril-guidelines>

@@ -1,6 +1,6 @@
 ---
 name: general
-description: General-purpose agent for researching complex questions and executing multi-step tasks. Use this agent to execute multiple units of work in parallel.
+description: General-purpose agent. Use when there is no dedicated agent for the task.
 systemPromptMode: append
 inheritProjectContext: true
 inheritSkills: true

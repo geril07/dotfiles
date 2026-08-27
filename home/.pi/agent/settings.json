@@ -60,15 +60,15 @@
       },
       "oracle": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "max"
+        "thinking": "xhigh"
       },
       "code-reviewer": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "max"
+        "thinking": "xhigh"
       },
       "complexity-analyzer": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "max"
+        "thinking": "xhigh"
       }
     }
   },

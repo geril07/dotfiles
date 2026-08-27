@@ -1,7 +1,47 @@
 {
   "providers": {
     "openrouter": {
+      "models": [
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "name": "Z.ai: GLM 5.3 Flash",
+          "api": "openai-completions",
+          "baseUrl": "https://openrouter.ai/api/v1",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "cost": {
+            "input": 0.075,
+            "output": 0.25,
+            "cacheRead": 0.015,
+            "cacheWrite": 0
+          },
+          "contextWindow": 1048576,
+          "maxTokens": 131072,
+          "compat": {
+            "supportsDeveloperRole": false,
+            "thinkingFormat": "openrouter"
+          }
+        }
+      ],
       "modelOverrides": {
+        "z-ai/glm-5.3-flash": {
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": "low",
+            "medium": null,
+            "high": "high",
+            "xhigh": null,
+            "max": "max"
+          },
+          "compat": {
+            "openRouterRouting": {
+              "order": ["z-ai/fp8"],
+              "allow_fallbacks": false
+            }
+          }
+        },
+
         "openai/gpt-oss-120b": {
           "maxTokens": 65536,
           "compat": {

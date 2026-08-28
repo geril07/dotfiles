@@ -22,7 +22,8 @@
     "npm:@narumitw/pi-goal",
     "npm:@zeldrisho/pi-web-fetch",
     "npm:@plannotator/pi-extension",
-    "npm:@piotr-oles/pi-bash-timeout"
+    "npm:@piotr-oles/pi-bash-timeout",
+    "npm:pi-openai-fast-mode"
   ],
   "hideThinkingBlock": false,
   "compaction": {

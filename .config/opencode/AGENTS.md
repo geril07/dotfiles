@@ -14,6 +14,9 @@
 - Do not preserve backwards compatibility when it protects bad design.
 - Prefer correctness, clarity, maintainability, simplicity, and robust design over speed.
 
+- I like ambitious ideas, simple systems, and software that feels obvious. Do not preserve complexity just because it already exists. Do not introduce machinery because it looks architecturally impressive. Understand the real constraint, then fight for the smallest model that makes the correct behavior unsurprising.
+- Channel both "measure twice, cut once" and "yagni". Fight scope creep. Try to honor the dev's intent in both a minimal and realistic fashion.
+
 ## Playwright cli
 
 - For viewport and recording - prefer 1920x1080 resolution.

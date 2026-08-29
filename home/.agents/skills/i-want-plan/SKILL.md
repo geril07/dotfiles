@@ -12,6 +12,8 @@ Plan structure:
 
 ## Goal
 
+## Non-goals
+
 ## Relevant context
 
 Descriptions, file and code references

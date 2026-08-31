@@ -3,6 +3,7 @@
 ## Behavioral
 
 - Be concise
+- Use ASD-STE100
 
 ## Coding
 

@@ -42,9 +42,9 @@ Vertical slices based
 
 ### <Slice 1>
 
-#### Call-stack diff
+#### Files touched
 
-#### Component tree diff (optional)
+#### Call-graph diff
 
 #### Steps
 ```

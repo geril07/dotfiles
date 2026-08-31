@@ -2,8 +2,8 @@
  * Pi TPS
  *
  * Shows live tokens per second, session-average TPS, and average time to first
- * token in Pi's footer. Live output is estimated from streamed text/reasoning
- * deltas; average output uses the provider's finalized token usage.
+ * token in Pi's footer. Live output is estimated from streamed token-bearing
+ * deltas; completed output prefers the provider's finalized token usage.
  */
 
 import type { AssistantMessageEvent } from "@earendil-works/pi-ai";
@@ -16,24 +16,27 @@ export const STATUS_REFRESH_MS = 1_000;
 
 export type StreamSample = {
   at: number;
-  tokens: number;
+  bytes: number;
 };
 
 export type MessageTiming = {
   requestStartAt: number;
   firstResponseAt?: number;
+  outputBytes: number;
 };
 
 export type SessionAverage = {
   totalTokens: number;
   totalDurationMs: number;
   totalTtftMs: number;
-  messageCount: number;
+  ttftMessageCount: number;
+  tpsMessageCount: number;
 };
 
 export type TpsTracker = {
   samples: StreamSample[];
   currentResponse?: MessageTiming;
+  pendingRequestStartAt?: number;
   sessionAverage?: SessionAverage;
   streaming: boolean;
 };
@@ -46,7 +49,16 @@ export function createTracker(): TpsTracker {
 }
 
 export function estimateStreamTokens(delta: string): number {
-  return Math.max(1, Math.ceil(Buffer.byteLength(delta, "utf8") / 5));
+  const bytes = Buffer.byteLength(delta, "utf8");
+  return estimateBytesTokens(bytes);
+}
+
+function estimateBytesTokens(bytes: number): number {
+  return Number.isFinite(bytes) && bytes > 0 ? Math.ceil(bytes / 5) : 0;
+}
+
+function hasPositiveValue(value: number | undefined): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0;
 }
 
 export function formatRate(value: number, withUnit = false): string | undefined {
@@ -83,38 +95,39 @@ export function activeDurationMs(samples: StreamSample[], tailAt?: number): numb
   return Math.max(duration, SINGLE_SAMPLE_MS);
 }
 
-export function pruneSamples(tracker: TpsTracker, now = Date.now()): void {
+export function pruneSamples(tracker: TpsTracker, now = performance.now()): void {
   const cutoff = now - STREAM_WINDOW_MS;
   tracker.samples = tracker.samples.filter((sample) => sample.at >= cutoff);
 }
 
-export function liveTps(tracker: TpsTracker, now = Date.now()): string | undefined {
+export function liveTps(tracker: TpsTracker, now = performance.now()): string | undefined {
   if (!tracker.streaming) return undefined;
 
   const relevant = tracker.samples.filter((sample) => now - sample.at <= STREAM_WINDOW_MS);
   const lastSample = relevant[relevant.length - 1];
   if (!lastSample || now - lastSample.at > LIVE_STALE_MS) return undefined;
 
-  const totalTokens = relevant.reduce((sum, sample) => sum + sample.tokens, 0);
+  const totalBytes = relevant.reduce((sum, sample) => sum + sample.bytes, 0);
+  const totalTokens = estimateBytesTokens(totalBytes);
   const durationSeconds = activeDurationMs(relevant, now) / 1000;
-  if (durationSeconds <= 0) return undefined;
+  if (totalTokens <= 0 || durationSeconds <= 0) return undefined;
 
   return formatRate(totalTokens / durationSeconds, true);
 }
 
 export function sessionAverageTps(tracker: TpsTracker): string | undefined {
   const totals = tracker.sessionAverage;
-  if (!totals || totals.totalTokens <= 0 || totals.totalDurationMs <= 0) return undefined;
+  if (!totals || totals.tpsMessageCount <= 0 || totals.totalTokens <= 0 || totals.totalDurationMs <= 0) return undefined;
   return formatRate(totals.totalTokens / (totals.totalDurationMs / 1000));
 }
 
 export function sessionAverageTtft(tracker: TpsTracker): string | undefined {
   const totals = tracker.sessionAverage;
-  if (!totals || totals.messageCount <= 0 || totals.totalTtftMs < 0) return undefined;
-  return formatTtft(totals.totalTtftMs / totals.messageCount / 1000);
+  if (!totals || totals.ttftMessageCount <= 0 || totals.totalTtftMs < 0) return undefined;
+  return formatTtft(totals.totalTtftMs / totals.ttftMessageCount / 1000);
 }
 
-export function statusText(tracker: TpsTracker, now = Date.now()): string {
+export function statusText(tracker: TpsTracker, now = performance.now()): string {
   const live = liveTps(tracker, now) ?? "-";
   const average = sessionAverageTps(tracker) ?? "-";
   const ttft = sessionAverageTtft(tracker) ?? "-";
@@ -136,55 +149,51 @@ export function recordResponseEvent(tracker: TpsTracker, at: number): void {
   tracker.streaming = true;
 }
 
-export function finishResponse(tracker: TpsTracker, outputTokens: number, completedAt = Date.now()): void {
+export function finishResponse(tracker: TpsTracker, outputTokens: number | undefined, completedAt = performance.now()): void {
   const timing = tracker.currentResponse;
   tracker.currentResponse = undefined;
   tracker.streaming = false;
   tracker.samples = [];
 
-  if (!timing?.firstResponseAt || outputTokens <= 0) return;
+  if (!timing?.firstResponseAt) return;
 
+  const resolvedTokens = hasPositiveValue(outputTokens)
+    ? outputTokens
+    : estimateBytesTokens(timing.outputBytes);
   const durationMs = Math.max(completedAt - timing.firstResponseAt, 1);
   const ttftMs = Math.max(timing.firstResponseAt - timing.requestStartAt, 0);
   const totals = tracker.sessionAverage ?? {
     totalTokens: 0,
     totalDurationMs: 0,
     totalTtftMs: 0,
-    messageCount: 0,
+    ttftMessageCount: 0,
+    tpsMessageCount: 0,
   };
 
   tracker.sessionAverage = {
-    totalTokens: totals.totalTokens + outputTokens,
-    totalDurationMs: totals.totalDurationMs + durationMs,
+    totalTokens: totals.totalTokens + resolvedTokens,
+    totalDurationMs: totals.totalDurationMs + (resolvedTokens > 0 ? durationMs : 0),
     totalTtftMs: totals.totalTtftMs + ttftMs,
-    messageCount: totals.messageCount + 1,
+    ttftMessageCount: totals.ttftMessageCount + 1,
+    tpsMessageCount: totals.tpsMessageCount + (resolvedTokens > 0 ? 1 : 0),
   };
 }
 
-function responseStartAt(messageTimestamp: number, now: number): number {
-  return Number.isFinite(messageTimestamp) && messageTimestamp > 0 ? messageTimestamp : now;
-}
-
-function updateStatus(ctx: ExtensionContext, tracker: TpsTracker, now = Date.now()): void {
+function updateStatus(ctx: ExtensionContext, tracker: TpsTracker, now = performance.now()): void {
   pruneSamples(tracker, now);
   ctx.ui.setStatus("pi-tps", ctx.ui.theme.fg("muted", statusText(tracker, now)));
 }
 
 function handleStreamEvent(tracker: TpsTracker, event: AssistantMessageEvent, at: number): void {
-  if (event.type === "text_delta" || event.type === "thinking_delta") {
-    if (event.delta.length === 0) return;
-
-    recordResponseEvent(tracker, at);
-    appendStreamSample(tracker, {
-      at,
-      tokens: estimateStreamTokens(event.delta),
-    });
+  if (event.type !== "text_delta" && event.type !== "thinking_delta" && event.type !== "toolcall_delta") {
     return;
   }
+  if (event.delta.length === 0) return;
 
-  if (event.type === "toolcall_start" || event.type === "toolcall_delta" || event.type === "toolcall_end") {
-    recordResponseEvent(tracker, at);
-  }
+  recordResponseEvent(tracker, at);
+  const bytes = Buffer.byteLength(event.delta, "utf8");
+  if (tracker.currentResponse) tracker.currentResponse.outputBytes += bytes;
+  appendStreamSample(tracker, { at, bytes });
 }
 
 export default function piTpsExtension(pi: ExtensionAPI): void {
@@ -200,6 +209,7 @@ export default function piTpsExtension(pi: ExtensionAPI): void {
   const resetTracker = (): void => {
     tracker.samples = [];
     tracker.currentResponse = undefined;
+    tracker.pendingRequestStartAt = undefined;
     tracker.sessionAverage = undefined;
     tracker.streaming = false;
   };
@@ -219,13 +229,19 @@ export default function piTpsExtension(pi: ExtensionAPI): void {
     ctx.ui.setStatus("pi-tps", undefined);
   });
 
+  pi.on("before_provider_request", () => {
+    tracker.pendingRequestStartAt = performance.now();
+  });
+
   pi.on("message_start", (event, ctx) => {
     if (event.message.role !== "assistant") return;
 
     tracker.samples = [];
     tracker.currentResponse = {
-      requestStartAt: responseStartAt(event.message.timestamp, Date.now()),
+      requestStartAt: tracker.pendingRequestStartAt ?? performance.now(),
+      outputBytes: 0,
     };
+    tracker.pendingRequestStartAt = undefined;
     tracker.streaming = event.message.stopReason === "pending";
     updateStatus(ctx, tracker);
   });
@@ -233,11 +249,13 @@ export default function piTpsExtension(pi: ExtensionAPI): void {
   pi.on("message_update", (event, ctx) => {
     if (event.message.role !== "assistant") return;
 
-    const at = Date.now();
+    const at = performance.now();
     if (!tracker.currentResponse) {
       tracker.currentResponse = {
-        requestStartAt: responseStartAt(event.message.timestamp, at),
+        requestStartAt: tracker.pendingRequestStartAt ?? at,
+        outputBytes: 0,
       };
+      tracker.pendingRequestStartAt = undefined;
     }
 
     handleStreamEvent(tracker, event.assistantMessageEvent, at);
@@ -247,13 +265,14 @@ export default function piTpsExtension(pi: ExtensionAPI): void {
   pi.on("message_end", (event, ctx) => {
     if (event.message.role !== "assistant") return;
 
-    finishResponse(tracker, event.message.usage.output, Date.now());
+    finishResponse(tracker, event.message.usage?.output, performance.now());
     updateStatus(ctx, tracker);
   });
 
   pi.on("agent_end", (_event, ctx) => {
     tracker.samples = [];
     tracker.currentResponse = undefined;
+    tracker.pendingRequestStartAt = undefined;
     tracker.streaming = false;
     updateStatus(ctx, tracker);
   });

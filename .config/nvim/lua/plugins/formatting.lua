@@ -1,10 +1,21 @@
----@param opts conform.FormatOpts?
-local function format_file(opts)
-  -- vim.lsp.buf.format({ async = true })
-  require("conform").format(vim.tbl_extend("force", {
+local function format_file()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = "oxfmt" })
+
+  if #clients > 0 then
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(client)
+        return client.name == "oxfmt"
+      end,
+    })
+    return
+  end
+
+  require("conform").format({
     async = true,
     lsp_format = "fallback",
-  }, opts or {}))
+  })
 end
 
 local prettier_opts = { "prettierd", "prettier", stop_after_first = true }

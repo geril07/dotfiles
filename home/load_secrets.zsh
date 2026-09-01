@@ -1,6 +1,9 @@
 # Path to your secrets folder
 SECRETS_DIR="$HOME/.secrets"
 
+zmodload zsh/stat
+typeset -a secret_stat
+
 # Safety: check if folder exists
 if [[ -d "$SECRETS_DIR" ]]; then
   for file in "$SECRETS_DIR"/*; do
@@ -8,17 +11,17 @@ if [[ -d "$SECRETS_DIR" ]]; then
     [[ -f "$file" ]] || continue
 
     # Safety: check file size (e.g., max 8KB)
-    if [[ $(wc -c < "$file") -gt 8192 ]]; then
-      echo "Warning: Skipping large secret file (>8KB): $file" >&2
+    zstat -L -A secret_stat +size -- "$file" || continue
+    if (( secret_stat[1] > 8192 )); then
+      print -u2 "Warning: Skipping large secret file (>8KB): $file"
       continue
     fi
 
-    key=$(basename "$file")
     value=$(<"$file")
 
     # Export as env var
-    export "$key=$value"
+    export "${file:t}=$value"
   done
 else
-  echo "Secrets folder not found: $SECRETS_DIR" >&2
+  print -u2 "Secrets folder not found: $SECRETS_DIR"
 fi

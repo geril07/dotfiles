@@ -99,6 +99,11 @@ return {
         end
       end)
 
+      local javascript_tooling_mode = vim.g.javascript_tooling or vim.env.NVIM_JAVASCRIPT_TOOLING or "auto"
+      if javascript_tooling_mode ~= "auto" and javascript_tooling_mode ~= "vp" and javascript_tooling_mode ~= "eslint" then
+        javascript_tooling_mode = "auto"
+      end
+
       local servers = {
         gleam = {},
         ocamllsp = {},
@@ -115,6 +120,13 @@ return {
         },
         tsgo = {
           enabled = false,
+        },
+        oxlint = {
+          enabled = javascript_tooling_mode ~= "eslint",
+        },
+        oxfmt = {
+          enabled = javascript_tooling_mode ~= "eslint",
+          formatter = true,
         },
         vtsls = {
           enabled = true,
@@ -225,7 +237,7 @@ return {
           },
         },
         eslint = {
-          enabled = true,
+          enabled = javascript_tooling_mode ~= "vp",
           root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
           settings = { format = false },
         },

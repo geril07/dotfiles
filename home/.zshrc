@@ -47,7 +47,7 @@ alias nvide="neovide"
 alias vim="nvim"
 
 bindkey '^[f' autosuggest-accept
-bindkey -s "^[F" "tmux-sessioner\n"
+bindkey -s "^[F" "sessionizer\n"
 
 function __zoxide_z() {
     __zoxide_doctor

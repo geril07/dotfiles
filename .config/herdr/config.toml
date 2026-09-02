@@ -69,7 +69,7 @@ prefix = "alt+a"
 # settings = "prefix+s"
 detach = "prefix+d"
 # reload_config = "prefix+shift+r"
-# open_notification_target = "prefix+o"
+open_notification_target = ""
 # workspace_picker = "prefix+w"
 # goto = "prefix+g"
 # new_workspace = "prefix+shift+n"
@@ -124,6 +124,20 @@ navigate_workspace_down = "j"
 # type = "pane"
 # command = "lazygit"
 
+[[keys.command]]
+key = "prefix+shift+f"
+type = "popup"
+command = "herdr-sessionizer"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+o"
+type = "popup"
+command = "herdr-agents-overview"
+width = "50%"
+height = "50%"
+
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
 # [keys.indexed]
@@ -135,6 +149,7 @@ navigate_workspace_down = "j"
 # directory = "~/.herdr/worktrees"
 
 [ui]
+tab_bar_position = "bottom"
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
 
@@ -170,7 +185,7 @@ navigate_workspace_down = "j"
 
 # Ask for a tab name before creating a new tab.
 # Set false to create tabs immediately with generated names.
-# prompt_new_tab_name = true
+prompt_new_tab_name = false
 
 # Draw borders around split panes.
 # pane_borders = true

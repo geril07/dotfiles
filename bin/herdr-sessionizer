@@ -3,20 +3,26 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fd -HI '^\.git$' ~/code ~/my -x dirname | fzf)
+  selected=$(fzf < <(fd -HI '^\.(git|tmux-session|herdr-session)$' ~/code ~/my -x dirname))
 fi
 
 if [[ -z $selected ]]; then
   exit 0
 fi
 
+zoxide add "$selected"
+
 selected_name=$(basename "$selected" | tr . _)
 
-existing=$(herdr workspace list | jq -er --arg name "$selected_name" \
-  '.result.workspaces[] | select(.label == $name) | .workspace_id' | head -1)
+existing=$(herdr workspace list 2>/dev/null | jq -er --arg name "$selected_name" \
+  '.result.workspaces[] | select(.label == $name) | .workspace_id' 2>/dev/null | head -1)
 
 if [[ -n $existing ]]; then
-  herdr workspace focus "$existing"
+  herdr workspace focus "$existing" >/dev/null
 else
-  herdr workspace create --cwd "$selected" --label "$selected_name" --focus
+  herdr workspace create --cwd "$selected" --label "$selected_name" --focus >/dev/null
+fi
+
+if [[ -z $HERDR_ENV ]]; then
+  herdr
 fi

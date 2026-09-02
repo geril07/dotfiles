@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+# herdr-agents-overview: Interactive coding agent picker for Herdr
+#
+#   herdr-agents-overview        fzf picker inside a Herdr popup
+#   herdr-agents-overview --list print tab-separated rows for fzf
+
+set -euo pipefail
+
+emit_rows() {
+  python3 - << 'EOF'
+import json
+import os
+import subprocess
+import sys
+
+def get_json(cmd):
+    try:
+        out = subprocess.check_output(cmd, stderr=subprocess.DEVNULL)
+        return json.loads(out).get("result", {})
+    except Exception:
+        return {}
+
+def icon_for_state(state):
+    if state == "waiting" or state == "blocked":
+        return "\033[33m●\033[0m waiting"
+    elif state == "idle" or state == "done":
+        return "\033[32m●\033[0m idle   "
+    elif state == "working":
+        return "\033[35m●\033[0m working"
+    return "\033[90m●\033[0m unknown"
+
+def rank_for_state(state):
+    if state == "waiting" or state == "blocked":
+        return 0
+    elif state == "idle" or state == "done":
+        return 1
+    elif state == "unknown":
+        return 2
+    elif state == "working":
+        return 3
+    return 2
+
+def main():
+    agents_res = get_json(["herdr", "agent", "list"])
+    agents = agents_res.get("agents", [])
+    if not agents:
+        return
+
+    workspaces = {w["workspace_id"]: w for w in get_json(["herdr", "workspace", "list"]).get("workspaces", [])}
+    tabs = {t["tab_id"]: t for t in get_json(["herdr", "tab", "list"]).get("tabs", [])}
+
+    rows = []
+    for a in agents:
+        status = a.get("agent_status", "unknown")
+        rank = rank_for_state(status)
+        pane_id = a.get("pane_id", "")
+        ws_id = a.get("workspace_id", "")
+        tab_id = a.get("tab_id", "")
+
+        ws_label = workspaces.get(ws_id, {}).get("label", ws_id)
+        tab_label = tabs.get(tab_id, {}).get("label", "1")
+        pane_num = pane_id.split(":")[-1].lstrip("p") if ":" in pane_id else "1"
+        label = f"{ws_label}:{tab_label}.{pane_num}"
+
+        agent_kind = a.get("agent", "")
+        name = a.get("name", "")
+        if name and agent_kind and name != agent_kind:
+            agent_str = f"{name} ({agent_kind})"
+        else:
+            agent_str = name or agent_kind or "agent"
+
+        status_fmt = icon_for_state(status)
+        # Matches tmux-agents-overview columns: pane, agent, status
+        display = f"{label:<26}  {agent_str:<12}  {status_fmt}"
+        rows.append((rank, pane_id, display))
+
+    rows.sort(key=lambda x: x[0])
+    for r in rows:
+        print(f"{r[1]}\t{r[2]}")
+
+if __name__ == "__main__":
+    main()
+EOF
+}
+
+if [[ "${1:-}" == "--list" ]]; then
+  emit_rows
+  exit 0
+fi
+
+if ! command -v fzf >/dev/null 2>&1; then
+  echo "herdr-agents-overview: fzf is required" >&2
+  exit 1
+fi
+
+self="$(command -v herdr-agents-overview 2>/dev/null || printf '%s' "${BASH_SOURCE[0]}")"
+
+header=$'Coding agents  ·  enter: jump  ·  ctrl-x: kill pane  ·  ctrl-r: refresh'
+fzf_args=(
+  --ansi
+  --delimiter=$'\t'
+  --with-nth=2
+  --height=100%
+  --reverse
+  --cycle
+  --header="$header"
+  --bind="ctrl-x:execute-silent(herdr pane close {1})+reload($self --list)"
+  --bind="ctrl-r:reload($self --list)"
+)
+
+sel=$(emit_rows | fzf "${fzf_args[@]}" || true)
+
+if [[ -z "$sel" ]]; then
+  exit 0
+fi
+
+target_pane=$(printf '%s' "$sel" | cut -f1)
+if [[ -n "$target_pane" ]]; then
+  herdr agent focus "$target_pane" >/dev/null
+fi

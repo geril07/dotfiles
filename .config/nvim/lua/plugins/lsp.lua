@@ -100,7 +100,11 @@ return {
       end)
 
       local javascript_tooling_mode = vim.g.javascript_tooling or vim.env.NVIM_JAVASCRIPT_TOOLING or "auto"
-      if javascript_tooling_mode ~= "auto" and javascript_tooling_mode ~= "vp" and javascript_tooling_mode ~= "eslint" then
+      if
+        javascript_tooling_mode ~= "auto"
+        and javascript_tooling_mode ~= "vp"
+        and javascript_tooling_mode ~= "eslint"
+      then
         javascript_tooling_mode = "auto"
       end
 
@@ -123,9 +127,11 @@ return {
         },
         oxlint = {
           enabled = javascript_tooling_mode ~= "eslint",
+          workspace_required = true,
         },
         oxfmt = {
           enabled = javascript_tooling_mode ~= "eslint",
+          workspace_required = true,
           formatter = true,
         },
         vtsls = {

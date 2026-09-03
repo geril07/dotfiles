@@ -7,7 +7,7 @@
       },
       "librarian": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium"
+        "thinking": "high"
       },
       "scout": {
         "model": "openai-codex/gpt-5.6-luna",

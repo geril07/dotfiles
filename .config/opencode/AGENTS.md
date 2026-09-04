@@ -29,4 +29,16 @@
 
 - `cmiiw` - Correct me if I am wrong.
 
+## Github
+
+Use `gh` cli for github interactions.
+
+## Gitlab
+
+Use `glab` for gitlab interactions.
+
+## Ast-grep
+
+`ast-grep` is installed; use it for syntax-aware or structural code search.
+
 </geril-guidelines>

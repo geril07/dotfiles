@@ -1,0 +1,14 @@
+{
+  "theme": {
+    "name": "catppuccin-macchiato"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "show"
+  },
+  "animations": true
+}

@@ -1,5 +1,7 @@
 <geril-guidelines>
 
+_These guidelines represent some knowledge user wants to share with you and guidelines to follow_
+
 ## Behavioral
 
 - Be concise

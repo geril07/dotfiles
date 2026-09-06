@@ -34,7 +34,7 @@
           "options": {
             "fetch_upstream_icon": true
           },
-          "template": "{{ if .UpstreamIcon }}{{ .UpstreamIcon }} {{ end }}{{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}",
+          "template": "{{ if .UpstreamIcon }}{{ .UpstreamIcon }} {{ end }}{{ .HEAD }}",
           "foreground": "#14A5AE",
           "powerline_symbol": "\ue0b0",
           "type": "git",

@@ -11,7 +11,7 @@
       "~/.local/share/rtk/**": "allow",
       "~/.agents/skills/**": "allow",
       "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow",
-      "~/code/job/ave/**": "allow",
+      "~/code/job/**": "allow",
     },
     "edit": {
       "~/.agents/skills/**": "ask",
@@ -26,10 +26,13 @@
     // "opencode-with-claude",
     "opencode-mystatus",
     // "oh-my-opencode-slim",
-    ["@plannotator/opencode@latest", {
-      "workflow": "manual",
-      "runtime": "embedded",
-    }],
+    [
+      "@plannotator/opencode@latest",
+      {
+        "workflow": "manual",
+        "runtime": "embedded",
+      },
+    ],
     // "@slkiser/opencode-quota",
     // "superpowers@git+https://github.com/obra/superpowers.git",
     // "@dietrichgebert/ponytail",

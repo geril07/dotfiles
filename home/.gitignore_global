@@ -1,2 +1,4 @@
 .pi-subagents/
 .pi/subagents
+
+**/.claude/settings.local.json

@@ -35,6 +35,8 @@ _These guidelines represent some knowledge user wants to share with you and guid
 
 Use `gh` cli for github interactions.
 
+Prefer rebase and merge(no merge commit) when merging PRs if possible.
+
 ## Gitlab
 
 Use `glab` for gitlab interactions.

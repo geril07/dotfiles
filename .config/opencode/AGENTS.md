@@ -2,12 +2,12 @@
 
 _These guidelines represent some knowledge user wants to share with you and guidelines to follow_
 
-## Behavioral
+## Behavioral principles
 
 - Be concise
 - Use ASD-STE100
 
-## Coding
+## Coding principles
 
 - When implementing a new feature or workflow, first look for analogous implementations and conventions in the codebase. Prefer matching nearby or repo-wide patterns over introducing a new style, library, or structure.
 - Never introduce hacks, monkey patches, brittle workarounds, or partial solutions.
@@ -19,6 +19,9 @@ _These guidelines represent some knowledge user wants to share with you and guid
 
 - I like ambitious ideas, simple systems, and software that feels obvious. Do not preserve complexity just because it already exists. Do not introduce machinery because it looks architecturally impressive. Understand the real constraint, then fight for the smallest model that makes the correct behavior unsurprising.
 - Channel both "measure twice, cut once" and "yagni". Fight scope creep. Try to honor the dev's intent in both a minimal and realistic fashion.
+
+- KISS. Keep things simple. If there are 5 ways to do something, the simplest and more obvious one should be the preferred option. Code should be legible and obvious.
+- Comment why, not what. Default to no comment; well-named code is the documentation. Comment only what the code cannot say itself — a non-obvious why, an invariant, a surprising edge case.
 
 ## Playwright cli
 

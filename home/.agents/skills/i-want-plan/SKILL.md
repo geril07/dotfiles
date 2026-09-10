@@ -47,12 +47,18 @@ Pick the smallest view that makes the point clear. Use one, use several — unli
 
 ```diff
   src/jobs/types.ts
-  JobStatus
+
+    JobStatus
 -     "pending" | "running" | "failed"
 +     "pending" | "running" | "failed" | "retrying"
 
+    JobAttempt
+      id: AttemptId
+      jobId: JobId
+
   src/jobs/service.ts
-  JobService
+
+    JobService
       get(id: JobId): Promise<Job>
 +     retry(id: JobId): Promise<JobAttempt>
 ```
@@ -158,14 +164,6 @@ All sections except Goal and Implementation are optional. Omit what does not app
 ### Files
 
 <!-- Structural overview of all files affected — the "blast radius" view. Implementation slices reference these without re-listing. -->
-
-## Implementation
-
-<!-- Vertical slices ordered by dependency. Each slice: heading + bullets with specific actions. Prefer end-to-end slices over horizontal grouping (backend / frontend / tests). -->
-
-### 1. <Working outcome>
-
-- <specific action>
 
 ## Verify
 

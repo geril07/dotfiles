@@ -11,6 +11,7 @@ Investigate the codebase first. Write conclusions, not the investigation transcr
 
 - Exact files, symbols, signatures, routes, types, components — not prose descriptions.
 - Show diffs, not before/after pairs.
+- Interfaces ordered topologically: dependencies/leaves first, consumers last.
 - Omit irrelevant sections. Do not fill the template for completeness.
 
 ## Diff notation
@@ -42,16 +43,18 @@ Pick the smallest view that makes the point clear. Use one, use several — unli
 +     <SkillResultCard />
 ```
 
-- Show changed or new interfaces as a structural diff:
+- Show changed or new interfaces as a structural diff, grouped by file in topological order (dependencies first):
 
 ```diff
-  JobService (src/jobs/service.ts)
-      get(id: JobId): Promise<Job>
-+     retry(id: JobId): Promise<JobAttempt>
-
-  JobStatus (src/jobs/types.ts)
+  src/jobs/types.ts
+  JobStatus
 -     "pending" | "running" | "failed"
 +     "pending" | "running" | "failed" | "retrying"
+
+  src/jobs/service.ts
+  JobService
+      get(id: JobId): Promise<Job>
++     retry(id: JobId): Promise<JobAttempt>
 ```
 
 - Show runtime flow as a call tree or call chain:
@@ -138,20 +141,19 @@ All sections except Goal and Implementation are optional. Omit what does not app
 
 ### Component tree
 
-<!-- UI structure changes. Show hierarchy, state, and module boundaries that matter. -->
-<!-- UI only. Omit this section when there is no UI change. -->
+<!-- UI structure changes: render hierarchy with state and boundaries. Each node annotated with its file path. UI only — omit when there is no UI change. -->
 
 ### Interfaces
 
-<!-- Changed or new contracts only: signatures, types, endpoints, schemas, props, events. Do not dump large unchanged definitions. -->
+<!-- Changed or new contracts: signatures, types, endpoints, schemas, props, events. Group by file, ordered topologically: dependencies/leaves first, callers/consumers last. Do not dump large unchanged definitions. -->
 
 ### Flow
 
-<!-- Changed runtime path. Use the representation that fits: call chain, request flow, event flow, data flow, state transition. Focus on what changes, not the entire system. -->
+<!-- Cross-cutting runtime path across boundaries. Use the representation that fits: call chain, request flow, event flow, data flow, state transition. Focus on what changes, not the entire system. -->
 
 ### Data / state
 
-<!-- Schema diffs, state shape changes, migrations, persistence. Include rollout constraints when relevant. -->
+<!-- Schema diffs, state shape changes, migrations, persistence. Group by table, store, or model file. Include rollout constraints when relevant. -->
 
 ### Files
 

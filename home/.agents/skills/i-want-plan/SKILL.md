@@ -7,13 +7,6 @@ Create a disposable implementation spec. Default location: `./plan-<slug>.md`
 
 Investigate the codebase first. Write conclusions, not the investigation transcript.
 
-## Principles
-
-- Exact files, symbols, signatures, routes, types, components — not prose descriptions.
-- Show diffs, not before/after pairs.
-- Interfaces ordered topologically: dependencies/leaves first, consumers last.
-- Omit irrelevant sections. Do not fill the template for completeness.
-
 ## Diff notation
 
 Use structural diffs when something existing changes. Not valid patch syntax — match the shape to what's changing.

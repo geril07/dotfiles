@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Switch tmux session via fzf. Lists session names only, alphabetically
+# by name (same order as `choose-tree -O name`), with the current session
+# first so the fzf cursor starts on it (fzf always starts on line 1).
+
+current=$(tmux display-message -p '#{session_name}' 2>/dev/null || true)
+sessions=$(tmux list-sessions -F '#{session_name}' -O name 2>/dev/null)
+
+list="$sessions"
+if [[ -n ${current:-} ]] && grep -Fxq "$current" <<<"$sessions"; then
+  list=$(printf '%s\n%s' "$current" "$(grep -Fxv "$current" <<<"$sessions")")
+fi
+
+if [[ -z ${list:-} ]]; then
+  exit 0
+fi
+
+selected=$(printf '%s\n' "$list" | fzf --no-multi --no-preview --height=100% --prompt='session> ')
+
+if [[ -z ${selected:-} ]]; then
+  exit 0
+fi
+
+if [[ -n ${TMUX:-} ]]; then
+  tmux switch-client -t "$selected"
+else
+  tmux attach-session -t "$selected"
+fi

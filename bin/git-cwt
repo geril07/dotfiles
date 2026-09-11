@@ -4,9 +4,12 @@
 #   git cwt <branch> [base]
 #
 # Behaviour:
-#   - branch exists locally  -> git worktree add ../<repo>-<branch> <branch>
-#   - branch is new           -> git worktree add -b <branch> ../<repo>-<branch> <base>
-#   - base defaults to "dev" (preserves old git alias behaviour).
+#   - branch exists locally or on a remote -> check it out at ../<repo>-<branch>
+#   - branch is new                          -> create it from <base>
+#   - '/' in <branch> becomes '-' in the directory name.
+#
+# Base precedence: explicit [base] arg > git config cwt.base > dev (if present) > main.
+# Set a per-repo default once: git config cwt.base main
 
 set -euo pipefail
 
@@ -25,19 +28,45 @@ if [[ $# -lt 1 || $# -gt 2 ]]; then
 fi
 
 branch="$1"
-base="${2:-dev}"
+given_base="${2:-}"
 
 if [[ -z "$branch" ]]; then
   usage
   exit 1
 fi
 
+resolve_base() {
+  local config_base
+  if [[ -n "$given_base" ]]; then
+    printf '%s' "$given_base"
+  elif config_base="$(git config --get cwt.base 2>/dev/null)"; then
+    printf '%s' "$config_base"
+  elif git show-ref --verify --quiet "refs/heads/dev"; then
+    printf 'dev'
+  else
+    printf 'main'
+  fi
+}
+
 git_common_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
 repo="$(basename "$(dirname "$git_common_dir")")"
-target="../${repo}-${branch}"
+safe_branch="${branch//\//-}"
+target="../${repo}-${safe_branch}"
+
+if [[ -e "$target" ]]; then
+  echo "git cwt: target '$target' already exists" >&2
+  exit 1
+fi
 
 if git show-ref --verify --quiet "refs/heads/${branch}"; then
   git worktree add "$target" "$branch"
+elif git worktree add "$target" "$branch" 2>/dev/null; then
+  : # remote-only branch, checked out with tracking
 else
+  base="$(resolve_base)"
+  if ! git rev-parse --verify --quiet "${base}^{commit}" >/dev/null; then
+    echo "git cwt: base '${base}' not found" >&2
+    exit 1
+  fi
   git worktree add -b "$branch" "$target" "$base"
 fi

@@ -44,6 +44,8 @@ Prefer rebase and merge(no merge commit) when merging PRs if possible.
 
 Use `glab` for gitlab interactions.
 
+For multiline GitLab MR descriptions, use `--description-file -` with a heredoc. Do not use literal `\n` in quoted arguments.
+
 ## Ast-grep
 
 `ast-grep` is installed; use it for syntax-aware or structural code search.

@@ -11,7 +11,8 @@
       "~/.local/share/rtk/**": "allow",
       "~/.agents/skills/**": "allow",
       "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow",
-      "~/code/job/**": "allow",
+      "~/code/**": "allow",
+      "~/my/**": "allow",
     },
     "edit": {
       "~/.agents/skills/**": "ask",

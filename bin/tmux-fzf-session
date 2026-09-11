@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 # Switch tmux session via fzf. Lists session names only, alphabetically
-# by name (same order as `choose-tree -O name`), with the current session
-# first so the fzf cursor starts on it (fzf always starts on line 1).
+# by name (same order as `choose-tree -O name`), with the cursor starting
+# on the current session like the native list.
 
 current=$(tmux display-message -p '#{session_name}' 2>/dev/null || true)
-sessions=$(tmux list-sessions -F '#{session_name}' -O name 2>/dev/null)
+mapfile -t sessions < <(tmux list-sessions -F '#{session_name}' -O name 2>/dev/null)
 
-list="$sessions"
-if [[ -n ${current:-} ]] && grep -Fxq "$current" <<<"$sessions"; then
-  list=$(printf '%s\n%s' "$current" "$(grep -Fxv "$current" <<<"$sessions")")
-fi
-
-if [[ -z ${list:-} ]]; then
+if ((${#sessions[@]} == 0)); then
   exit 0
 fi
 
-selected=$(printf '%s\n' "$list" | fzf --no-multi --no-preview --height=100% --prompt='session> ')
+# 1-based position of the current session (fzf cursor starts on line 1).
+pos=1
+for i in "${!sessions[@]}"; do
+  if [[ ${sessions[$i]} == "$current" ]]; then
+    pos=$((i + 1))
+    break
+  fi
+done
+
+fzf_args=(--no-multi --no-preview --height=100% --prompt='session> ' --sync)
+if ((pos > 1)); then
+  fzf_args+=(--bind="start:pos($pos)")
+fi
+
+selected=$(printf '%s\n' "${sessions[@]}" | fzf "${fzf_args[@]}")
 
 if [[ -z ${selected:-} ]]; then
   exit 0

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# git-cwt: create (or checkout) a worktree in a sibling directory.
+#
+#   git cwt <branch> [base]
+#
+# Behaviour:
+#   - branch exists locally  -> git worktree add ../<repo>-<branch> <branch>
+#   - branch is new           -> git worktree add -b <branch> ../<repo>-<branch> <base>
+#   - base defaults to "dev" (preserves old git alias behaviour).
+
+set -euo pipefail
+
+usage() {
+  echo "usage: git cwt <branch> [base]" >&2
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  usage
+  exit 1
+fi
+
+branch="$1"
+base="${2:-dev}"
+
+if [[ -z "$branch" ]]; then
+  usage
+  exit 1
+fi
+
+git_common_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
+repo="$(basename "$(dirname "$git_common_dir")")"
+target="../${repo}-${branch}"
+
+if git show-ref --verify --quiet "refs/heads/${branch}"; then
+  git worktree add "$target" "$branch"
+else
+  git worktree add -b "$branch" "$target" "$base"
+fi

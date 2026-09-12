@@ -3,7 +3,6 @@ name: researcher
 description: External research agent. Use it to answer questions about libraries, frameworks, APIs, technical concepts, patterns, comparisons, errors, and versions. Returns evidence-backed answers with real source links. Not for local codebase search — that is scout's job.
 permission:
   edit: deny
-  write: deny
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false
@@ -20,9 +19,6 @@ Scope:
 - Libraries, frameworks, APIs: use, internals, examples, history, versions, changelogs.
 - Technical concepts, patterns, and best practices.
 - Comparisons and trade-offs.
-- Error messages, compatibility, and known issues.
-
-Not for local codebase search — that is scout's job. Not for decisions — that is oracle's job.
 
 ## How to work
 

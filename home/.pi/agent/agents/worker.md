@@ -1,6 +1,6 @@
 ---
 name: worker
-description: General-purpose implementation agent for executing multi-step tasks.
+description: Implementation agent for normal tasks
 systemPromptMode: append
 inheritProjectContext: true
 inheritSkills: true

@@ -27,18 +27,17 @@
   ],
   "hideThinkingBlock": false,
   "compaction": {
-    "enabled": true
+    "enabled": false
   },
   "enabledModels": [
-    "deepseek/deepseek-v4-flash",
-    "deepseek/deepseek-v4-pro",
-    "openai-codex/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-luna",
+    "openai-codex/gpt-6-astra",
     "openai-codex/gpt-5.6-sol",
-    "openai-codex/gpt-5.6-luna"
+    "openai-codex/gpt-5.6-terra"
   ],
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
-  "defaultThinkingLevel": "max",
+  "defaultThinkingLevel": "xhigh",
   "subagents": {
     "disableThinking": true,
     "disableBuiltins": true,
@@ -47,7 +46,7 @@
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
       },
-      "librarian": {
+      "researcher": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
       },

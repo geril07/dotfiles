@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 # Switch tmux session via fzf. Lists session names only, alphabetically
 # by name (same order as `choose-tree -O name`), with the cursor starting
-# on the current session like the native list.
+# on the current session like the native list. ctrl-x kills the
+# highlighted session (no confirmation), Enter switches to it.
+
+# Subcommand for the ctrl-x binding: kill sessions listed in a file.
+# A file (fzf {+f}) is used instead of a {} placeholder because fzf
+# silently drops bindings with {} inside double quotes, and unquoted {}
+# breaks on session names with spaces.
+if [[ ${1:-} == --kill-file ]]; then
+  while IFS= read -r s; do
+    [[ -n $s ]] && tmux kill-session -t "$s" 2>/dev/null || true
+  done < "${2:?missing file}"
+  exit 0
+fi
 
 current=$(tmux display-message -p '#{session_name}' 2>/dev/null || true)
 mapfile -t sessions < <(tmux list-sessions -F '#{session_name}' -O name 2>/dev/null)
@@ -19,7 +31,8 @@ for i in "${!sessions[@]}"; do
   fi
 done
 
-fzf_args=(--no-multi --no-preview --height=100% --prompt='session> ' --sync)
+fzf_args=(--no-multi --no-preview --height=100% --prompt='session> ' --sync --track
+  --bind='ctrl-x:execute-silent(tmux kill-session -t "{}")+reload(tmux list-sessions -F "#{session_name}" -O name)')
 if ((pos > 1)); then
   fzf_args+=(--bind="start:pos($pos)")
 fi

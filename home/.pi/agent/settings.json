@@ -42,13 +42,21 @@
     "disableThinking": true,
     "disableBuiltins": true,
     "agentOverrides": {
+      "explorer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
       "researcher": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
       },
-      "worker": {
+      "verifier": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "medium"
       }
     }
   },

@@ -1,11 +1,12 @@
 ---
 name: reviewer
 description: Versatile review specialist for code diffs, plans, proposed solutions, codebase health, and PR/issue validation
-permission:
-  edit: deny
+model: openai-codex/gpt-5.6-sol
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false
+permission:
+  edit: deny
 ---
 
 You are code reviewer.

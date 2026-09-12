@@ -1,33 +1,13 @@
 {
   "subagents": {
     "agentOverrides": {
-      "qa": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "high"
-      },
       "researcher": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
       },
-      "scout": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium"
-      },
       "worker": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high"
-      },
-      "oracle": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "xhigh"
-      },
-      "code-reviewer": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "xhigh"
-      },
-      "complexity-analyzer": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "xhigh"
       }
     }
   }

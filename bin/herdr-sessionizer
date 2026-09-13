@@ -13,14 +13,27 @@ fi
 zoxide add "$selected"
 
 selected_name=$(basename "$selected" | tr . _)
+worktree_list=$(herdr worktree list --cwd "$selected" 2>/dev/null || true)
+parent_workspace=$(jq -er '.result.source.source_workspace_id // empty' <<<"$worktree_list" 2>/dev/null || true)
+target_worktree=$(jq -er --arg path "$selected" \
+  '.result.worktrees[]? | select(.path == $path and (.is_bare | not) and (.is_prunable | not)) | .path' \
+  <<<"$worktree_list" 2>/dev/null | head -1 || true)
 
-existing=$(herdr workspace list 2>/dev/null | jq -er --arg name "$selected_name" \
-  '.result.workspaces[] | select(.label == $name) | .workspace_id' 2>/dev/null | head -1)
-
-if [[ -n $existing ]]; then
-  herdr workspace focus "$existing" >/dev/null
+if [[ -n $parent_workspace && -n $target_worktree ]]; then
+  # Grouped worktree rows use the Git branch as their native label.
+  open_args=(worktree open --workspace "$parent_workspace" --path "$target_worktree" --focus)
+  if ! herdr "${open_args[@]}" >/dev/null; then
+    exit 1
+  fi
 else
-  herdr workspace create --cwd "$selected" --label "$selected_name" --focus >/dev/null
+  existing=$(herdr workspace list 2>/dev/null | jq -er --arg name "$selected_name" \
+    '.result.workspaces[] | select(.label == $name) | .workspace_id' 2>/dev/null | head -1)
+
+  if [[ -n $existing ]]; then
+    herdr workspace focus "$existing" >/dev/null
+  else
+    herdr workspace create --cwd "$selected" --label "$selected_name" --focus >/dev/null
+  fi
 fi
 
 if [[ -z $HERDR_ENV ]]; then

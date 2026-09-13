@@ -56,6 +56,7 @@ def main():
         pane_id = a.get("pane_id", "")
         ws_id = a.get("workspace_id", "")
         tab_id = a.get("tab_id", "")
+        focused = bool(a.get("focused", False))
 
         ws_label = workspaces.get(ws_id, {}).get("label", ws_id)
         tab_label = tabs.get(tab_id, {}).get("label", "1")
@@ -72,11 +73,12 @@ def main():
         status_fmt = icon_for_state(status)
         # Matches tmux-agents-overview columns: pane, agent, status
         display = f"{label:<26}  {agent_str:<12}  {status_fmt}"
-        rows.append((rank, pane_id, display))
+        rows.append((rank, pane_id, display, tab_id, focused))
 
     rows.sort(key=lambda x: x[0])
     for r in rows:
-        print(f"{r[1]}\t{r[2]}")
+        # Keep the tab id and focus marker hidden from fzf.
+        print(f"{r[1]}\t{r[2]}\t{r[3]}\t{int(r[4])}")
 
 if __name__ == "__main__":
     main()
@@ -95,26 +97,39 @@ fi
 
 self="$(command -v herdr-agents-overview 2>/dev/null || printf '%s' "${BASH_SOURCE[0]}")"
 
+rows=$(emit_rows)
+if [[ -z "$rows" ]]; then
+  exit 0
+fi
+
+current_index=$(printf '%s\n' "$rows" | awk -F '\t' '$4 == "1" { print NR; exit }')
+current_index=${current_index:-1}
+
 header=$'Coding agents  ·  enter: jump  ·  ctrl-x: kill pane  ·  ctrl-r: refresh'
 fzf_args=(
   --ansi
   --delimiter=$'\t'
   --with-nth=2
+  --sync
   --height=100%
   --reverse
   --cycle
   --header="$header"
+  --bind="load:pos($current_index)"
   --bind="ctrl-x:execute-silent(herdr pane close {1})+reload($self --list)"
   --bind="ctrl-r:reload($self --list)"
 )
 
-sel=$(emit_rows | fzf "${fzf_args[@]}" || true)
+sel=$(printf '%s\n' "$rows" | fzf "${fzf_args[@]}" || true)
 
 if [[ -z "$sel" ]]; then
   exit 0
 fi
 
 target_pane=$(printf '%s' "$sel" | cut -f1)
+target_tab=$(printf '%s' "$sel" | cut -f3)
 if [[ -n "$target_pane" ]]; then
   herdr agent focus "$target_pane" >/dev/null
+  # Older Herdr servers update agent focus in the server but do not project it to clients.
+  herdr tab focus "$target_tab" >/dev/null
 fi

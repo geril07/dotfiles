@@ -23,8 +23,10 @@ def get_json(cmd):
 def icon_for_state(state):
     if state == "waiting" or state == "blocked":
         return "\033[33m●\033[0m waiting"
-    elif state == "idle" or state == "done":
+    elif state == "idle":
         return "\033[32m●\033[0m idle   "
+    elif state == "done":
+        return "\033[36m✓\033[0m done   "
     elif state == "working":
         return "\033[35m●\033[0m working"
     return "\033[90m●\033[0m unknown"

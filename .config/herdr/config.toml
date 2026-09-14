@@ -111,7 +111,7 @@ split_horizontal = "prefix+_"
 # They are independent from focus_pane_*. Do not include prefix+, esc, enter, tab, or 1..9 here.
 navigate_workspace_up = "k"
 navigate_workspace_down = "j"
-navigate_workspace_open = "o"
+# navigate_workspace_open = "o"
 # navigate_pane_left = "h"      # left arrow always focuses the pane to the left
 # navigate_pane_down = "j"
 # navigate_pane_up = "k"

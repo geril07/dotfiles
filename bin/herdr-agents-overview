@@ -29,17 +29,6 @@ def icon_for_state(state):
         return "\033[35m●\033[0m working"
     return "\033[90m●\033[0m unknown"
 
-def rank_for_state(state):
-    if state == "waiting" or state == "blocked":
-        return 0
-    elif state == "idle" or state == "done":
-        return 1
-    elif state == "unknown":
-        return 2
-    elif state == "working":
-        return 3
-    return 2
-
 def main():
     agents_res = get_json(["herdr", "agent", "list"])
     agents = agents_res.get("agents", [])
@@ -52,7 +41,6 @@ def main():
     rows = []
     for a in agents:
         status = a.get("agent_status", "unknown")
-        rank = rank_for_state(status)
         pane_id = a.get("pane_id", "")
         ws_id = a.get("workspace_id", "")
         tab_id = a.get("tab_id", "")
@@ -73,12 +61,12 @@ def main():
         status_fmt = icon_for_state(status)
         # Matches tmux-agents-overview columns: pane, agent, status
         display = f"{label:<26}  {agent_str:<12}  {status_fmt}"
-        rows.append((rank, pane_id, display, tab_id, focused))
+        # Herdr returns agents in workspace, tab, and pane order.
+        rows.append((pane_id, display, tab_id, focused))
 
-    rows.sort(key=lambda x: x[0])
-    for r in rows:
+    for pane_id, display, tab_id, focused in rows:
         # Keep the tab id and focus marker hidden from fzf.
-        print(f"{r[1]}\t{r[2]}\t{r[3]}\t{int(r[4])}")
+        print(f"{pane_id}\t{display}\t{tab_id}\t{int(focused)}")
 
 if __name__ == "__main__":
     main()

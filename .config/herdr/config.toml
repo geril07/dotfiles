@@ -64,6 +64,9 @@ auto_switch = false
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
 prefix = "alt+a"
 
+settings = "prefix+S"                 # frees prefix+s for tmux muscle memory
+goto = ["prefix+g", "prefix+s"]
+
 # Prefix-mode actions
 # help = "prefix+?"
 # settings = "prefix+s"
@@ -150,6 +153,9 @@ height = "50%"
 # directory = "~/.herdr/worktrees"
 
 [ui]
+navigator_start_expanded = false      # sessions-only on open, Space still expands
+navigator_start_search_focused = false # type-to-filter at once
+
 tab_bar_position = "bottom"
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26

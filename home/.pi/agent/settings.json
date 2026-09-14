@@ -1,5 +1,9 @@
 {
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.85.1",
+  "tuiMode": "regular",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinking": "xhigh",
   "editorPaddingX": 2,
   "theme": "catppuccin-macchiato",
   "defaultProjectTrust": "always",
@@ -35,9 +39,6 @@
     "openai-codex/gpt-5.6-sol",
     "openai-codex/gpt-5.6-terra"
   ],
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
-  "defaultThinkingLevel": "xhigh",
   "subagents": {
     "disableThinking": true,
     "disableBuiltins": true,
@@ -63,6 +64,5 @@
         "thinking": "xhigh"
       }
     }
-  },
-  "tuiMode": "regular"
+  }
 }

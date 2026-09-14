@@ -46,6 +46,13 @@ alias ld="lazydocker"
 alias nvide="neovide"
 alias vim="nvim"
 
+# Keep the agents at normal priority; lower only heavy child commands.
+alias pi='PATH="$HOME/.local/lowprio-bin:$PATH" command pi'
+alias opencode='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
+alias agy='PATH="$HOME/.local/lowprio-bin:$PATH" command agy'
+alias codex='PATH="$HOME/.local/lowprio-bin:$PATH" command codex'
+alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude'
+
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "sessionizer\n"
 

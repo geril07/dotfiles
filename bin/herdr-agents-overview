@@ -12,6 +12,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 
 def get_json(cmd):
     try:
@@ -30,6 +31,23 @@ def icon_for_state(state):
     elif state == "working":
         return "\033[35m●\033[0m working"
     return "\033[90m●\033[0m unknown"
+
+
+def format_status_elapsed(status_changed_unix_ms):
+    if status_changed_unix_ms is None:
+        return None
+    try:
+        elapsed_minutes = (time.time_ns() // 1_000_000 - int(status_changed_unix_ms)) // 60_000
+    except (TypeError, ValueError):
+        return None
+    if elapsed_minutes < 0:
+        return None
+    if elapsed_minutes == 0:
+        return "<1m"
+    if elapsed_minutes < 60:
+        return f"{elapsed_minutes}m"
+    return f"{elapsed_minutes // 60}h{elapsed_minutes % 60:02d}m"
+
 
 def main():
     agents_res = get_json(["herdr", "agent", "list"])
@@ -61,8 +79,10 @@ def main():
             agent_str = name or agent_kind or "agent"
 
         status_fmt = icon_for_state(status)
-        # Matches tmux-agents-overview columns: pane, agent, status
-        display = f"{label:<26}  {agent_str:<12}  {status_fmt}"
+        elapsed = format_status_elapsed(a.get("status_changed_unix_ms"))
+        elapsed_fmt = f"  {elapsed}" if elapsed else ""
+        # Matches tmux-agents-overview columns: pane, agent, status, elapsed
+        display = f"{label:<26}  {agent_str:<12}  {status_fmt}{elapsed_fmt}"
         # Herdr returns agents in workspace, tab, and pane order.
         rows.append((pane_id, display, tab_id, focused))
 

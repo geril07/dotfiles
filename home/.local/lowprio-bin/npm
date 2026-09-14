@@ -1,3 +1,6 @@
 #!/bin/sh
-PATH="${PATH#"$HOME/.local/lowprio-bin:"}"
+P=":${PATH}:"
+P="${P//:$HOME\/.local\/lowprio-bin:/:}"
+P="${P#:}"
+PATH="${P%:}"
 exec nice -n 10 npm "$@"

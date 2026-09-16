@@ -5,7 +5,9 @@ return {
     priority = 1000,
     ---@type snacks.Config
     opts = {
-      bigfile = {},
+      bigfile = {
+        notify = true,
+      },
       -- normal mode not working, i_esc closes window but stays in insert mode
       input = { enabled = false, icon = "" },
       styles = {

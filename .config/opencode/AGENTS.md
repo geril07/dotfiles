@@ -34,6 +34,10 @@ _These guidelines represent some knowledge user wants to share with you and guid
 - KISS. Keep things simple. If there are 5 ways to do something, the simplest and more obvious one should be the preferred option. Code should be legible and obvious.
 - Comment why, not what. Default to no comment; well-named code is the documentation. Comment only what the code cannot say itself — a non-obvious why, an invariant, a surprising edge case.
 
+## Testing
+
+- Test meaningful logic or observable behavior. Skip tests that mirror implementation logic.
+
 ## Subagents
 
 Use subagents only when user explicitly asks for them

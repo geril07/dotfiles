@@ -157,6 +157,7 @@ navigator_start_expanded = false      # sessions-only on open, Space still expan
 navigator_start_search_focused = false # type-to-filter at once
 
 tab_bar_position = "bottom"
+tab_bar_numbers = true
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
 # sidebar_width = 26
 

@@ -375,8 +375,14 @@ function unpatchCycleScopedModel(): void {
 export default function (pi: ExtensionAPI) {
 	let lastUsed: Record<string, number> = {};
 	const tracker = createThinkingTracker();
+	let managesMru = false;
 
 	pi.on("session_start", async (event, ctx) => {
+		// Native subagent sessions run in print mode. Keep their explicit model
+		// and prevent them from changing the shared interactive MRU state.
+		managesMru = ctx.mode === "tui";
+		if (!managesMru) return;
+
 		const config = readConfig();
 		lastUsed = config.lastUsed;
 		tracker.thinking = config.thinking;
@@ -446,6 +452,8 @@ export default function (pi: ExtensionAPI) {
 	// level changes — for manual changes (Ctrl+T, /thinking) and for the
 	// re-clamp inside setModel/cycle, which runs before model_select fires.
 	pi.on("thinking_level_select", (event, ctx) => {
+		if (!managesMru) return;
+
 		const currentKey = ctx.model ? buildModelKey(ctx.model.provider, ctx.model.id) : null;
 		if (recordThinkingSelect(tracker, currentKey, event.level, event.previousLevel)) {
 			writeConfig({ lastUsed, thinking: tracker.thinking });
@@ -459,6 +467,8 @@ export default function (pi: ExtensionAPI) {
 	// (currentIndex + 1) % len always hits position 1 — toggling forever
 	// between the top 2. Thinking restore still applies to cycle selections.
 	pi.on("model_select", async (event, _ctx) => {
+		if (!managesMru) return;
+
 		const newKey = buildModelKey(event.model.provider, event.model.id);
 		if (event.source !== "cycle") {
 			lastUsed[newKey] = Date.now();
@@ -480,6 +490,8 @@ export default function (pi: ExtensionAPI) {
 
 	// Cleanup on shutdown / reload
 	pi.on("session_shutdown", (_event, ctx) => {
+		if (!managesMru) return;
+
 		unpatchSortModels();
 		unpatchScopedLoader();
 		unpatchFilterModels();

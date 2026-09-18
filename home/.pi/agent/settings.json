@@ -28,7 +28,6 @@
     "npm:@plannotator/pi-extension",
     "npm:@piotr-oles/pi-bash-timeout",
     "npm:pi-openai-fast-mode",
-    "npm:@benvargas/pi-model-sort",
   ],
   "hideThinkingBlock": false,
   "compaction": {

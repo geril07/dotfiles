@@ -42,6 +42,12 @@ _These guidelines represent some knowledge user wants to share with you and guid
 
 Use subagents only when user explicitly asks for them
 
+### Prompt for subagents
+
+- If subagent will be launched with fresh context, include relevant context, decisions made along the way.
+
+- Avoid including or requesting exact file contents, prefer references instead.
+
 ## Playwright cli
 
 - For viewport and recording - prefer 1920x1080 resolution.

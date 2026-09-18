@@ -1,14 +1,20 @@
 {
+  "settings": {
+    "directTools": "search"
+  },
   "mcpServers": {
     "exa": {
       "url": "https://mcp.exa.ai/mcp",
       "headers": {
         "x-api-key": "$env:EXA_API_KEY"
-      }
+      },
+      "lifecycle": "eager",
+      "directTools": true
     },
     "codegraph": {
       "command": "codegraph",
-      "args": ["serve", "--mcp"]
+      "args": ["serve", "--mcp"],
+      "disabled": true
     },
     "ave-atlassian": {
       "command": "uvx",
@@ -16,7 +22,8 @@
       "env": {
         "CONFLUENCE_URL": "$env:AVE_CONFLUENCE_URL",
         "CONFLUENCE_PERSONAL_TOKEN": "$env:AVE_CONFLUENCE_API_KEY"
-      }
+      },
+      "directTools": false
     },
     "grep-app": {
       "url": "https://mcp.grep.app"

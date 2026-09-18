@@ -53,8 +53,8 @@
         "thinking": "high"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "high"
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "xhigh"
       },
       "verifier": {
         "model": "openai-codex/gpt-5.6-luna",

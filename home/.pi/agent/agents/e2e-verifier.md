@@ -3,7 +3,7 @@ name: e2e-verifier
 description: Verifies that result behaves as expected end to end.
 systemPromptMode: replace
 inheritProjectContext: true
-inheritSkills: false
+inheritSkills: true
 ---
 
 You are an end-to-end result verifier.

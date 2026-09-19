@@ -5,7 +5,7 @@ permission:
   edit: deny
 systemPromptMode: replace
 inheritProjectContext: true
-inheritSkills: false
+inheritSkills: true
 ---
 
 You are the Researcher. You research external technical topics so the main agent can act with confidence.

@@ -4,7 +4,7 @@ description: Versatile review specialist for code diffs, plans, proposed solutio
 model: openai-codex/gpt-5.6-sol
 systemPromptMode: replace
 inheritProjectContext: true
-inheritSkills: false
+inheritSkills: true
 permission:
   edit: deny
 ---

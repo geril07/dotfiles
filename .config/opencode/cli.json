@@ -1,4 +1,5 @@
 {
+  "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
     "name": "catppuccin-macchiato"
   },
@@ -10,5 +11,9 @@
     "scrollbar": false,
     "thinking": "show"
   },
-  "animations": true
+  "animations": true,
+  "tabs": {
+    "enabled": false
+  },
+  "plugins": ["./herdr-opencode"]
 }

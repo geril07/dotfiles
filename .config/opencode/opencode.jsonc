@@ -1,100 +1,110 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "update": "disable",
   "share": "disabled",
-  "autoupdate": false,
-  "small_model": "openrouter/google/gemini-3.1-flash-lite",
-  "permission": {
-    "question": "deny",
-
-    "external_directory": {
-      "/tmp/**": "allow",
-      "~/.local/share/rtk/**": "allow",
-      "~/.agents/skills/**": "allow",
-      "~/.cache/opencode/packages/oh-my-openagent@latest/**": "allow",
-      "~/code/**": "allow",
-      "~/my/**": "allow",
+  "permissions": [
+    {
+      "action": "question",
+      "resource": "*",
+      "effect": "deny",
     },
-    "edit": {
-      "~/.agents/skills/**": "ask",
+    {
+      "action": "external_directory",
+      "resource": "/tmp/**",
+      "effect": "allow",
     },
-    "bash": {
-      "*": "allow",
+    {
+      "action": "external_directory",
+      "resource": "~/.local/share/rtk/**",
+      "effect": "allow",
     },
-  },
-  "disabled_providers": [],
-  "plugin": [
-    "@mohak34/opencode-notifier",
-    // "opencode-with-claude",
-    "opencode-mystatus",
-    // "oh-my-opencode-slim",
-    [
-      "@plannotator/opencode@latest",
-      {
+    {
+      "action": "external_directory",
+      "resource": "~/.agents/skills/**",
+      "effect": "allow",
+    },
+    {
+      "action": "external_directory",
+      "resource": "~/.cache/opencode/packages/oh-my-openagent@latest/**",
+      "effect": "allow",
+    },
+    {
+      "action": "external_directory",
+      "resource": "~/code/**",
+      "effect": "allow",
+    },
+    {
+      "action": "external_directory",
+      "resource": "~/my/**",
+      "effect": "allow",
+    },
+    {
+      "action": "edit",
+      "resource": "~/.agents/skills/**",
+      "effect": "ask",
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "allow",
+    },
+  ],
+  "plugins": [
+    {
+      "package": "@plannotator/opencode@latest",
+      "options": {
         "workflow": "manual",
         "runtime": "embedded",
       },
-    ],
-    // "@slkiser/opencode-quota",
-    // "superpowers@git+https://github.com/obra/superpowers.git",
-    // "@dietrichgebert/ponytail",
-  ],
-  "command": {
-    "mystatus": {
-      "description": "Query quota usage for all AI accounts",
-      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification.",
     },
-  },
-  "agent": {
+  ],
+  "agents": {
     "general": {
-      "disable": false,
+      "disabled": false,
     },
     "explore": {
-      "disable": false,
+      "disabled": false,
     },
     "deepseek-v4-flash": {
       "mode": "subagent",
-      "model": "deepseek/deepseek-v4-flash",
-      "variant": "max",
+      "model": "deepseek/deepseek-v4-flash#max",
     },
     "deepseek-v4-pro": {
       "mode": "subagent",
-      "model": "deepseek/deepseek-v4-pro",
-      "variant": "max",
+      "model": "deepseek/deepseek-v4-pro#max",
     },
     "mimo-v2.5-pro": {
       "mode": "subagent",
-      "model": "opencode-go/mimo-v2.5-pro",
-      "variant": "high",
+      "model": "opencode-go/mimo-v2.5-pro#high",
     },
     "minimax-m3": {
       "mode": "subagent",
-      "model": "opencode-go/minimax-m3",
-      "variant": "thinking",
+      "model": "opencode-go/minimax-m3#thinking",
     },
     "orch-explore": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash#max",
       "description": "",
-      "variant": "max",
     },
     "orch-implement": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash",
-      "variant": "max",
+      "model": "opencode-go/deepseek-v4-flash#max",
       "description": "",
     },
     "orch-review": {
       "mode": "subagent",
-      "model": "opencode-go/minimax-m3",
-      "variant": "thinking",
+      "model": "opencode-go/minimax-m3#thinking",
       "description": "",
+    },
+    "title": {
+      "model": "openrouter/google/gemini-3.1-flash-lite",
     },
   },
   "formatter": {
     "gofmt": {
       "disabled": true,
     },
-    "rustftm": {
+    "rustfmt": {
       "disabled": true,
     },
     "mix": {
@@ -167,52 +177,59 @@
     },
   },
   "mcp": {
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
-      "enabled": true,
-      "headers": {
-        "x-api-key": "{env:EXA_API_KEY}",
+    "servers": {
+      "exa": {
+        "type": "remote",
+        "url": "https://mcp.exa.ai/mcp",
+        "disabled": false,
+        "headers": {
+          "x-api-key": "{env:EXA_API_KEY}",
+        },
       },
-    },
-    "codegraph": {
-      "type": "local",
-      "command": ["codegraph", "serve", "--mcp"],
-      "enabled": true,
-    },
-    "ave-atlassian": {
-      "type": "local",
-      "command": ["uvx", "mcp-atlassian"],
-      "enabled": true,
-      "environment": {
-        "CONFLUENCE_URL": "{env:AVE_CONFLUENCE_URL}",
-        "CONFLUENCE_PERSONAL_TOKEN": "{env:AVE_CONFLUENCE_API_KEY}",
+      "codegraph": {
+        "type": "local",
+        "command": ["codegraph", "serve", "--mcp"],
+        "disabled": false,
       },
-    },
-    "grep-app": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true,
-    },
-    "chrome-devtools": {
-      "enabled": false,
-      "type": "local",
-      "command": ["npx", "-g", "-y", "chrome-devtools-mcp@latest"],
-    },
-    "playwright": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@playwright/mcp@latest",
-        "--isolated",
-        "--browser=chromium",
-      ],
-      "enabled": false,
+      "ave-atlassian": {
+        "type": "local",
+        "command": ["uvx", "mcp-atlassian"],
+        "disabled": false,
+        "environment": {
+          "CONFLUENCE_URL": "{env:AVE_CONFLUENCE_URL}",
+          "CONFLUENCE_PERSONAL_TOKEN": "{env:AVE_CONFLUENCE_API_KEY}",
+        },
+      },
+      "grep-app": {
+        "type": "remote",
+        "url": "https://mcp.grep.app",
+        "disabled": false,
+      },
+      "chrome-devtools": {
+        "type": "local",
+        "command": ["npx", "-g", "-y", "chrome-devtools-mcp@latest"],
+        "disabled": true,
+      },
+      "playwright": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@playwright/mcp@latest",
+          "--isolated",
+          "--browser=chromium",
+        ],
+        "disabled": true,
+      },
     },
   },
-  "provider": {
+  "providers": {
     "ollama": {
+      "name": "Ollama",
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
+        "baseURL": "http://127.0.0.1:11434/v1",
+      },
       "models": {
         "qwen3.5:4b": {
           "name": "qwen3.5:4b",
@@ -221,81 +238,30 @@
           "name": "qwen3.5:9b",
         },
       },
-      "name": "Ollama",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://127.0.0.1:11434/v1",
-      },
     },
     "anthropic": {
-      "options": {
+      "settings": {
         "baseURL": "http://127.0.0.1:3456",
         "apiKey": "dummy",
       },
     },
     "google": {
-      "options": {
+      "settings": {
         "apiKey": "{env:GEMINI_API_KEY}",
       },
     },
     "deepseek": {
-      "options": {
+      "settings": {
         "apiKey": "{env:DEEPSEEK_API_KEY}",
       },
     },
-    "ollama-cloud": {
-      "options": {
-        "apiKey": "{env:OLLAMA_CLOUD_API_KEY}",
-      },
-      "whitelist": [
-        "glm-5.2",
-        "minimax-m3",
-        "kimi-k2.7-code",
-        "kimi-k2.6",
-        "deepseek-v4-pro",
-        "deepseek-v4-flash",
-      ],
-    },
-    "cursor-acp": {
-      "name": "Cursor ACP",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://127.0.0.1:32124/v1",
-      },
-      "models": {
-        "cursor-acp/auto": {
-          "name": "Auto",
-        },
-        "cursor-acp/claude-opus-4-7": {
-          "name": "Claude 4.7 Opus",
-        },
-        "cursor-acp/claude-4.6-sonnet": {
-          "name": "Claude 4.6 Sonnet",
-        },
-        "cursor-acp/claude-4.5-haiku": {
-          "name": "Claude 4.5 Haiku",
-        },
-        "cursor-acp/gpt-5.5": {
-          "name": "GPT-5.5",
-        },
-        "cursor-acp/gemini-3.1-pro": {
-          "name": "Gemini 3.1 Pro",
-        },
-        "cursor-acp/composer-2.5": {
-          "name": "Composer 2.5",
-        },
-        "cursor-acp/composer-2.5-fast": {
-          "name": "Composer 2.5 Fast",
-        },
-      },
-    },
     "openrouter": {
-      "options": {
+      "settings": {
         "apiKey": "{env:OPENROUTER_API_KEY}",
       },
       "models": {
         "z-ai/glm-5.2": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["z-ai/fp8"],
               "allow_fallbacks": false,
@@ -303,7 +269,7 @@
           },
         },
         "moonshotai/kimi-k2.6": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["moonshotai/int4"],
               "allow_fallbacks": false,
@@ -311,7 +277,7 @@
           },
         },
         "minimax/minimax-m2.7": {
-          "options": {
+          "settings": {
             "provider": {
               "only": ["minimax/fp8"],
               "order": ["minimax/fp8"],
@@ -320,7 +286,7 @@
           },
         },
         "google/gemini-3.1-flash-lite-preview": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["google-ai-studio"],
               "allow_fallbacks": false,
@@ -328,7 +294,7 @@
           },
         },
         "google/gemini-3.1-flash-lite": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["google-ai-studio"],
               "allow_fallbacks": false,
@@ -336,7 +302,7 @@
           },
         },
         "google/gemini-3-flash-preview": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["google-ai-studio"],
               "allow_fallbacks": false,
@@ -344,7 +310,7 @@
           },
         },
         "google/gemini-3-pro-preview": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["google-ai-studio"],
               "allow_fallbacks": false,
@@ -352,7 +318,7 @@
           },
         },
         "openai/gpt-oss-120b": {
-          "options": {
+          "settings": {
             "provider": {
               "require_parameters": true,
               "order": ["fireworks", "groq"],
@@ -361,7 +327,7 @@
           },
         },
         "openai/gpt-oss-20b": {
-          "options": {
+          "settings": {
             "provider": {
               "order": ["groq"],
               "allow_fallbacks": false,
@@ -370,11 +336,8 @@
         },
       },
     },
-    // Detected openai authentication; opencode-quota added this global provider declaration.
     "openai": {},
-    // Detected zai authentication; opencode-quota added this global provider declaration.
     "zai": {},
-    // Detected xai authentication; opencode-quota added this global provider declaration.
     "xai": {},
   },
 }

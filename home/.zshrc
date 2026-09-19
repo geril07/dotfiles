@@ -48,7 +48,8 @@ alias vim="nvim"
 
 # Keep the agents at normal priority; lower only heavy child commands.
 alias pi='PATH="$HOME/.local/lowprio-bin:$PATH" command pi'
-alias opencode='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
+alias opencode='XDG_CONFIG_HOME="$HOME/my/dotfiles/.config" OPENCODE_CONFIG_DIR="$HOME/my/dotfiles/.config/opencode" PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
+alias opencode2='XDG_CONFIG_HOME="$HOME/my/dotfiles/.config" OPENCODE_CONFIG_DIR="$HOME/my/dotfiles/.config/opencode" PATH="$HOME/.local/lowprio-bin:$PATH" command opencode2'
 alias agy='PATH="$HOME/.local/lowprio-bin:$PATH" command agy'
 alias codex='PATH="$HOME/.local/lowprio-bin:$PATH" command codex'
 alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude'
@@ -75,16 +76,16 @@ function __zoxide_z() {
 export PI_BASH_DEFAULT_TIMEOUT_SECONDS=180
 export PI_BASH_MAX_TIMEOUT_SECONDS=1800
 
+# OpenCode V2 must watch the real config directory, not the symlink at ~/.config/opencode.
+export OPENCODE_CONFIG_DIR="$HOME/my/dotfiles/.config/opencode"
 export OPENCODE_AGENTS_SWITCH_SINGLE_MODEL=1
 export OPENCODE_DISABLE_LSP_DOWNLOAD=1
 export OPENCODE_DISABLE_AUTOCOMPACT=1
 
-# Run OpenCode with oh-my-opencode only when explicitly requested.
-# `opencode` stays vanilla; `omo` adds the plugin for that process only.
-# OpenCode merges this inline config with ~/.config/opencode/opencode.jsonc,
-# so the JSONC file stays untouched and needs no preprocessing.
+# oh-my-opencode is V1-only and is not active in the V2 configuration.
 omo() {
-  OPENCODE_CONFIG_CONTENT='{"plugin":["oh-my-opencode@latest"]}' command opencode "$@"
+  printf '%s\n' 'omo is unavailable until oh-my-opencode publishes a V2 plugin.' >&2
+  return 1
 }
 
 alias mirrorlist-update='export TMPFILE="$(mktemp)"; \

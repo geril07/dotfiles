@@ -1,4 +1,4 @@
-import type { Plugin } from "@opencode-ai/plugin";
+import { Plugin } from "@opencode/plugin";
 import { homedir } from "node:os";
 import path from "node:path";
 import { stat } from "node:fs/promises";
@@ -208,15 +208,15 @@ function render(files: InstructionFile[]) {
     .join("\n\n");
 }
 
-const RepositoryContextPlugin: Plugin = async ({ worktree }) => {
-  const filepath = globalConfigPath();
-  const config = await loadConfig(filepath);
-  const currentWorktree = absolute(worktree);
+export default Plugin.define({
+  id: "opencode.repository-context",
+  async setup(ctx) {
+    const filepath = globalConfigPath();
+    const config = await loadConfig(filepath);
+    const currentWorktree = absolute(ctx.location.project.directory);
+    const configDirectory = path.dirname(filepath);
 
-  const configDirectory = path.dirname(filepath);
-
-  return {
-    "experimental.chat.system.transform": async (_input, output) => {
+    await ctx.session.hook("context", async (event) => {
       const paths = await resolveInstructionPaths(
         config,
         currentWorktree,
@@ -225,9 +225,9 @@ const RepositoryContextPlugin: Plugin = async ({ worktree }) => {
       const files = (await Promise.all(paths.map(readInstruction))).filter(
         (file): file is InstructionFile => file !== undefined,
       );
-      if (files.length > 0) output.system.push(render(files));
-    },
-  };
-};
-
-export default RepositoryContextPlugin;
+      if (files.length > 0) {
+        event.system.push({ type: "text", text: render(files) });
+      }
+    });
+  },
+});

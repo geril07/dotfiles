@@ -2,5 +2,9 @@ node_modules
 package.json
 package-lock.json
 bun.lock
+
+# V2 local plugins use the native plugin API.
+!package.json
+!package-lock.json
 opencode-notifier-state.json
 service.json

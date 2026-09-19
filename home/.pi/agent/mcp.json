@@ -9,7 +9,7 @@
         "x-api-key": "$env:EXA_API_KEY"
       },
       "lifecycle": "eager",
-      "directTools": true
+      "directTools": ["web_search_exa"]
     },
     "codegraph": {
       "command": "codegraph",
@@ -26,7 +26,8 @@
       "directTools": false
     },
     "grep-app": {
-      "url": "https://mcp.grep.app"
+      "url": "https://mcp.grep.app",
+      "directTools": true
     },
     "chrome-devtools": {
       "command": "npx",

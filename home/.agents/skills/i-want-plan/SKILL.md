@@ -5,163 +5,79 @@ description: Explicit user invocation required. Load this skill only when the cu
 
 Create a disposable implementation spec. Default location: `./plan-<slug>.md`
 
-Investigate the codebase first. Write conclusions, not the investigation transcript.
-
-## Diff notation
-
-Use structural diffs when something existing changes. Not valid patch syntax — match the shape to what's changing.
-
-```diff
-  unchanged
-+ added
-- removed
-```
-
-Works for interfaces, component trees, file trees, data shapes, state transitions, call flows. Pick the representation that fits.
-
-Show the complete target structure instead of a diff when most of it is new or diff markers would dominate.
-
-## Representations
-
-Pick the smallest view that makes the point clear. Use one, use several — unlikely you need all of them.
-
-- Show UI structure as a component tree, including state and module boundaries that matter:
-
-```diff
-  <SessionPage> (src/routes/session.tsx)
-    useSessionEvents()
-    <SessionToolbar> (src/components/toolbar.tsx)
-+     <RunSkillButton /> (src/components/run-skill.tsx)
-    <SessionTimeline>
-+     <SkillResultCard />
-```
-
-- Show changed or new interfaces as a structural diff, grouped by file in topological order (dependencies first):
-
-```diff
-  src/jobs/types.ts
-
-    JobStatus
--     "pending" | "running" | "failed"
-+     "pending" | "running" | "failed" | "retrying"
-
-    JobAttempt
-      id: AttemptId
-      jobId: JobId
-
-  src/jobs/service.ts
-
-    JobService
-      get(id: JobId): Promise<Job>
-+     retry(id: JobId): Promise<JobAttempt>
-```
-
-- Show runtime flow as a call tree or call chain:
-
-```diff
-  submitForm
-    createSession
-      persistPrompt
-+     expandSkillMention
-      launchAgent
-```
-
-- Show file responsibility as a file tree:
-
-```diff
-  src/
-  ├── commands/
-+ │   └── show-me.ts
-  ├── sessions/
-- └── transport.ts
-+ └── transport/
-+     ├── client.ts
-+     └── stream.ts
-```
-
-- Show state or data shape changes:
-
-```diff
-  JobAttempt (src/jobs/types.ts)
-      id
-      jobId
-      createdAt
-+     retryOf: AttemptId | null
-```
-
-- Show interaction or async sequences with Mermaid when a flat tree cannot capture concurrency or back-and-forth.
+Investigate the relevant codebase before writing the plan. Record conclusions from that investigation rather than the investigation process.
 
 ## Plan structure
 
-All sections except Goal and Implementation are optional. Omit what does not apply.
+**Goal**, **Approach**, and **Verification** are required.
+
+Include an optional section only when it contains information that could materially affect implementation or verification.
 
 ```markdown
 # <Outcome-oriented title>
 
 ## Goal
 
-<!-- What outcome does this change produce. -->
+<!-- What outcome does this change produce? State the problem/current behavior only when needed to understand the outcome. -->
 
-## Non goals
+## Non-goals
 
-<!-- Only meaningful exclusions a reader might otherwise expect in scope. -->
+<!-- Meaningful exclusions a reader could reasonably expect to be in scope. -->
 
 ## Acceptance criteria
 
-<!-- Observable end-state. What must be true when the work is done. Not an exhaustive test list — that belongs in Verify. -->
+<!-- Observable properties of the completed change. Focus on end-state behavior; detailed checks belong in Verification. -->
 
 ## Open questions
 
-<!-- Questions that could change the implementation or block a slice. State the impact if answered differently. Remove when resolved — move the answer to Decisions. -->
+<!-- Unresolved questions whose answers could change the implementation or block progress. State why each answer matters. Remove resolved questions and capture consequential answers in Decisions. -->
 
 ## Decisions
 
-<!-- Non-obvious design choices with short reasoning. Do not record obvious choices. -->
+<!-- Non-obvious choices already made. Include brief reasoning when it helps prevent the decision from being revisited accidentally. -->
 
 ## Assumptions
 
-<!-- Things treated as true but not verified. State the impact if wrong. -->
-
-## Risks
-
-<!-- Material risks with mitigation. Concrete scenarios, not generic warnings. -->
+<!-- Material facts currently treated as true but not verified. Minimize these through codebase investigation. State the impact if an assumption is wrong. -->
 
 ## Invariants
 
-<!-- Hard rules the implementation must not violate. Concrete, auditable. -->
+<!-- Existing behavior, contracts, or properties that must remain true. Keep them concrete and auditable. -->
+
+## Risks
+
+<!-- Concrete failure scenarios with material impact. Include mitigation where useful. -->
 
 ## Edge cases
 
-<!-- Failure paths, concurrency issues, boundary conditions, idempotency. Things an implementation agent could plausibly get wrong. -->
+<!-- Boundary conditions, failure paths, concurrency, idempotency, unusual state transitions, or similar cases that materially influence the implementation. -->
 
-## Technical delta
+## Approach
 
-<!-- Main review surface. A reader should understand the architectural shape without reading Implementation. Use only subsections that matter. Place context beside the thing it explains. -->
+<!-- Describe the implementation strategy: relevant components/files, important contracts, data flow, technical decisions, and sequencing constraints. Keep local coding mechanics for implementation. -->
 
-### Component tree
+## Verification
 
-<!-- UI structure changes: render hierarchy with state and boundaries. Each node annotated with its file path. UI only — omit when there is no UI change. -->
+<!-- Mechanically demonstrate that the complete change works. Prefer exact commands and observable results. Cover the changed behavior and important regressions. -->
 
-### Interfaces
-
-<!-- Changed or new contracts: signatures, types, endpoints, schemas, props, events. Group by file, ordered topologically: dependencies/leaves first, callers/consumers last. Do not dump large unchanged definitions. -->
-
-### Flow
-
-<!-- Cross-cutting runtime path across boundaries. Use the representation that fits: call chain, request flow, event flow, data flow, state transition. Focus on what changes, not the entire system. -->
-
-### Data / state
-
-<!-- Schema diffs, state shape changes, migrations, persistence. Group by table, store, or model file. Include rollout constraints when relevant. -->
-
-### Files
-
-<!-- Structural overview of all files affected — the "blast radius" view. Implementation slices reference these without re-listing. -->
-
-## Verify
-
-<!-- How to prove the entire change works. Mechanically checkable: targeted test commands, typecheck, API responses, persisted state, browser behavior, regression cases. Not a single generic "run tests." -->
-
-- `<exact command>`
+- `<exact command>` → <expected result>
 - <observable behavior>
 ```
+
+## Writing rules
+
+- State each fact once, in the section where it is most useful.
+- Include project-specific and change-specific information.
+- Prefer facts verified from the repository over assumptions.
+- Use exact file paths, symbols, interfaces, and commands when they make the plan more actionable.
+- Describe implementation at the level of strategy, contracts, affected components, and meaningful sequencing.
+- Make verification specific enough that another agent can determine whether the change is complete.
+- Keep optional sections absent when they add no material information.
+- Keep the plan readable in one pass.
+
+## Boundaries
+
+- Create no additional spec, design, task, checklist, research, or decision documents.
+- Do not modify implementation files while producing the plan.
+- Do not invent risks, assumptions, questions, edge cases, or exclusions merely to populate sections.
+- Do not copy generic engineering advice already implied by the repository or normal development practice.

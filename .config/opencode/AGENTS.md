@@ -6,6 +6,7 @@ _These guidelines represent some knowledge user wants to share with you and guid
 
 - Be concise
 - Use ASD-STE100
+- Only act when asked
 
 ## Communication style:
 

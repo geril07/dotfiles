@@ -1,0 +1,11 @@
+{
+  "mappings": [
+    {
+      "selector": [
+        "~/code/job/ave/va-*"
+      ],
+      "instructions": ["~/code/job/ave/VOICE_ANALYTICS.md"],
+      "mcp": ["ave-atlassian"]
+    }
+  ]
+}

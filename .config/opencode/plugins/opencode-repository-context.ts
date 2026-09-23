@@ -26,6 +26,7 @@ const CONFIG_FILENAME = "repository-context.json";
 type Mapping = {
   selector: string[];
   instructions: string[];
+  mcp: string[];
 };
 
 type RepositoryContextConfig = {
@@ -111,12 +112,23 @@ function parseConfig(
         );
       }
 
+      const mcp = item.mcp ?? [];
+      if (!Array.isArray(mcp)) {
+        throw new Error(`${filepath}.mappings[${index}].mcp must be an array`);
+      }
+
       return {
         selector: selectors,
         instructions: item.instructions.map((source, sourceIndex) =>
           requireString(
             source,
             `${filepath}.mappings[${index}].instructions[${sourceIndex}]`,
+          ),
+        ),
+        mcp: mcp.map((server, serverIndex) =>
+          requireString(
+            server,
+            `${filepath}.mappings[${index}].mcp[${serverIndex}]`,
           ),
         ),
       };
@@ -133,6 +145,16 @@ async function loadConfig(filepath: string) {
 
 function matches(selectors: string[], worktree: string) {
   return selectors.some((selector) => new Bun.Glob(selector).match(worktree));
+}
+
+function resolveMcpServers(config: RepositoryContextConfig, worktree: string) {
+  const servers = new Set<string>();
+  for (const mapping of config.mappings) {
+    if (matches(mapping.selector, worktree)) {
+      mapping.mcp.forEach((server) => servers.add(server));
+    }
+  }
+  return servers;
 }
 
 function hasGlobPattern(value: string) {
@@ -215,6 +237,26 @@ export default Plugin.define({
     const config = await loadConfig(filepath);
     const currentWorktree = absolute(ctx.location.project.directory);
     const configDirectory = path.dirname(filepath);
+    const managedMcpServers = new Set(
+      config.mappings.flatMap((mapping) => mapping.mcp),
+    );
+    const enabledMcpServers = resolveMcpServers(config, currentWorktree);
+
+    if (managedMcpServers.size > 0) {
+      await ctx.mcp.transform((editor) => {
+        for (const server of managedMcpServers) {
+          if (!editor.get(server)) {
+            console.warn(
+              `repository-context: MCP server "${server}" is not configured`,
+            );
+            continue;
+          }
+          editor.update(server, (config) => {
+            config.disabled = !enabledMcpServers.has(server);
+          });
+        }
+      });
+    }
 
     await ctx.session.hook("context", async (event) => {
       const paths = await resolveInstructionPaths(

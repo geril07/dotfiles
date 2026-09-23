@@ -122,7 +122,7 @@
       "ave-atlassian": {
         "type": "local",
         "command": ["uvx", "mcp-atlassian"],
-        "disabled": false,
+        "disabled": true,
         "environment": {
           "CONFLUENCE_URL": "{env:AVE_CONFLUENCE_URL}",
           "CONFLUENCE_PERSONAL_TOKEN": "{env:AVE_CONFLUENCE_API_KEY}",

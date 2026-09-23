@@ -189,7 +189,7 @@
       "codegraph": {
         "type": "local",
         "command": ["codegraph", "serve", "--mcp"],
-        "disabled": false,
+        "disabled": true,
       },
       "ave-atlassian": {
         "type": "local",

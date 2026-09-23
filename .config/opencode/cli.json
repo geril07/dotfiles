@@ -1,5 +1,11 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
+  "keybinds": {
+    "app.exit": "ctrl+c,ctrl+d",
+    "session.queued_prompts": "<leader>q",
+    "prompt.queue": "alt+return",
+    "input.newline": "shift+return,ctrl+return,ctrl+j"
+  },
   "theme": {
     "name": "catppuccin-macchiato"
   },
@@ -9,7 +15,8 @@
   "session": {
     "sidebar": "auto",
     "scrollbar": false,
-    "thinking": "show"
+    "thinking": "show",
+    "markdown": "rendered"
   },
   "animations": true,
   "tabs": {

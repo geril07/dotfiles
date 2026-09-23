@@ -34,33 +34,32 @@
     "enabled": false
   },
   "enabledModels": [
-    "openai-codex/gpt-5.6-luna",
+    "openai-codex/gpt-6-luna",
     "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-5.6-sol",
-    "openai-codex/gpt-5.6-terra"
+    "openai-codex/gpt-6-sol"
   ],
   "subagents": {
     "disableThinking": true,
     "disableBuiltins": true,
     "agentOverrides": {
       "explorer": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "medium"
       },
       "researcher": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "high"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "xhigh"
       },
       "e2e-verifier": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "high"
       },
       "worker": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "xhigh"
       }
     }

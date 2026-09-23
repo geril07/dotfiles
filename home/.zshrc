@@ -48,8 +48,8 @@ alias vim="nvim"
 
 # Keep the agents at normal priority; lower only heavy child commands.
 alias pi='PATH="$HOME/.local/lowprio-bin:$PATH" command pi'
-alias opencode='XDG_CONFIG_HOME="$HOME/my/dotfiles/.config" OPENCODE_CONFIG_DIR="$HOME/my/dotfiles/.config/opencode" PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
-alias opencode2='XDG_CONFIG_HOME="$HOME/my/dotfiles/.config" OPENCODE_CONFIG_DIR="$HOME/my/dotfiles/.config/opencode" PATH="$HOME/.local/lowprio-bin:$PATH" command opencode2'
+alias opencode='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
+alias opencode2='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode2'
 alias agy='PATH="$HOME/.local/lowprio-bin:$PATH" command agy'
 alias codex='PATH="$HOME/.local/lowprio-bin:$PATH" command codex'
 alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude'

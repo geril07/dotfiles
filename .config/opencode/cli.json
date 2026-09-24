@@ -13,14 +13,20 @@
     "wrap": "word"
   },
   "session": {
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": false,
     "thinking": "show",
-    "markdown": "rendered"
+    "markdown": "rendered",
+    "grouping": "auto",
+    "new_location": "launch",
+    "permissions": "prompt"
   },
   "animations": true,
   "tabs": {
-    "enabled": false
+    "enabled": false,
+    "mode": "off",
+    "layout": "horizontal",
+    "indicators": "status"
   },
   "plugins": ["./herdr-opencode"]
 }

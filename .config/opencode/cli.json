@@ -10,7 +10,10 @@
     "name": "catppuccin-macchiato"
   },
   "diffs": {
-    "wrap": "word"
+    "wrap": "word",
+    "single": true,
+    "view": "unified",
+    "tree": true
   },
   "session": {
     "sidebar": "hide",
@@ -28,5 +31,11 @@
     "layout": "horizontal",
     "indicators": "status"
   },
-  "plugins": ["./herdr-opencode"]
+  "plugins": [
+    "./herdr-opencode"
+  ],
+  "prompt": {
+    "paste": "compact",
+    "image_preview": false
+  }
 }

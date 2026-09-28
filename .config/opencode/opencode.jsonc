@@ -67,7 +67,7 @@
       "disabled": false,
     },
     "explore": {
-      "disabled": false,
+      "disabled": true,
     },
     "deepseek-v4-flash": {
       "mode": "subagent",

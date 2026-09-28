@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "tuiMode": "regular",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
@@ -48,7 +48,7 @@
       },
       "researcher": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "high"
+        "thinking": "xhigh"
       },
       "reviewer": {
         "model": "openai-codex/gpt-6-luna",

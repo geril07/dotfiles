@@ -1,4 +1,5 @@
 .pi-subagents/
 .pi/subagents
+.playwright-cli
 
 **/.claude/settings.local.json

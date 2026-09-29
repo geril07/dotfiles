@@ -69,37 +69,6 @@
     "explore": {
       "disabled": true,
     },
-    "deepseek-v4-flash": {
-      "mode": "subagent",
-      "model": "deepseek/deepseek-v4-flash#max",
-    },
-    "deepseek-v4-pro": {
-      "mode": "subagent",
-      "model": "deepseek/deepseek-v4-pro#max",
-    },
-    "mimo-v2.5-pro": {
-      "mode": "subagent",
-      "model": "opencode-go/mimo-v2.5-pro#high",
-    },
-    "minimax-m3": {
-      "mode": "subagent",
-      "model": "opencode-go/minimax-m3#thinking",
-    },
-    "orch-explore": {
-      "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash#max",
-      "description": "",
-    },
-    "orch-implement": {
-      "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash#max",
-      "description": "",
-    },
-    "orch-review": {
-      "mode": "subagent",
-      "model": "opencode-go/minimax-m3#thinking",
-      "description": "",
-    },
     // "title": {
     //   "model": "openrouter/google/gemini-3.1-flash-lite",
     // },

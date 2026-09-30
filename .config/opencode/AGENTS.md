@@ -58,6 +58,8 @@ Use subagents only when user explicitly asks for them
 
 - `cmiiw` - Correct me if I am wrong.
 
+- `stt*` - The prompt was written using speech to text, some words can be inaccurate.
+
 ## Github
 
 Use `gh` cli for github interactions.

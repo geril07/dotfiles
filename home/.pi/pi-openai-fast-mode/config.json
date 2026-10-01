@@ -70,6 +70,18 @@
       "provider": "openai-codex",
       "model": "gpt-6-astra",
       "serviceTier": "priority"
+    },
+
+    {
+      "provider": "openai-codex",
+      "model": "gpt-6-luna",
+      "serviceTier": "priority"
+    },
+
+    {
+      "provider": "openai-codex",
+      "model": "gpt-6-sol",
+      "serviceTier": "priority"
     }
   ]
 }

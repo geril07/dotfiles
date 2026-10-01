@@ -27,16 +27,15 @@
     "npm:@zeldrisho/pi-web-fetch",
     "npm:@plannotator/pi-extension",
     "npm:@piotr-oles/pi-bash-timeout",
-    "npm:pi-openai-fast-mode",
   ],
   "hideThinkingBlock": false,
   "compaction": {
     "enabled": false
   },
   "enabledModels": [
+    "openai-codex/gpt-6.1-sol",
     "openai-codex/gpt-6-luna",
     "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6-sol"
   ],
   "subagents": {
     "disableThinking": true,

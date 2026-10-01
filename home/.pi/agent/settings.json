@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "1.0.0",
   "tuiMode": "fullscreen",
-  "fullscreenWheelScrollLines": 4,
+  "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "xhigh",

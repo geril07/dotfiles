@@ -6,13 +6,19 @@ import path from "node:path";
 const CONFIG_FILENAME = "repository-context.json";
 const GLOB_CHARACTERS = ["*", "?", "[", "]", "{", "}"];
 
+type McpServerConfig = Parameters<ExtensionAPI["registerMcpServer"]>[1];
+
 type Mapping = {
   selector: string[];
   instructions: string[];
+  mcp: string[];
 };
 
 type RepositoryContextConfig = {
   mappings: Mapping[];
+  pi: {
+    mcpServers: Record<string, McpServerConfig>;
+  };
 };
 
 type InstructionFile = {
@@ -71,7 +77,26 @@ function parseConfig(
     throw new Error(`${filepath}.mappings must be an array`);
   }
 
+  const piConfig = value.pi ?? {};
+  if (!isRecord(piConfig)) {
+    throw new Error(`${filepath}.pi must be an object`);
+  }
+
+  const mcpServers = piConfig.mcpServers ?? {};
+  if (!isRecord(mcpServers)) {
+    throw new Error(`${filepath}.pi.mcpServers must be an object`);
+  }
+
+  const parsedMcpServers: Record<string, McpServerConfig> = {};
+  for (const [name, serverConfig] of Object.entries(mcpServers)) {
+    if (!isRecord(serverConfig)) {
+      throw new Error(`${filepath}.pi.mcpServers.${name} must be an object`);
+    }
+    parsedMcpServers[name] = serverConfig as unknown as McpServerConfig;
+  }
+
   return {
+    pi: { mcpServers: parsedMcpServers },
     mappings: mappings.map((item, index) => {
       if (!isRecord(item)) {
         throw new Error(`${filepath}.mappings[${index}] must be an object`);
@@ -102,12 +127,23 @@ function parseConfig(
         );
       }
 
+      const mcp = item.mcp ?? [];
+      if (!Array.isArray(mcp)) {
+        throw new Error(`${filepath}.mappings[${index}].mcp must be an array`);
+      }
+
       return {
         selector: selectors,
         instructions: item.instructions.map((source, sourceIndex) =>
           requireString(
             source,
             `${filepath}.mappings[${index}].instructions[${sourceIndex}]`,
+          ),
+        ),
+        mcp: mcp.map((server, serverIndex) =>
+          requireString(
+            server,
+            `${filepath}.mappings[${index}].mcp[${serverIndex}]`,
           ),
         ),
       };
@@ -121,7 +157,7 @@ async function loadConfig(filepath: string) {
     return parseConfig(JSON.parse(content) as unknown, filepath);
   } catch (error) {
     if (isNodeError(error) && error.code === "ENOENT") {
-      return { mappings: [] } satisfies RepositoryContextConfig;
+      return { mappings: [], pi: { mcpServers: {} } } satisfies RepositoryContextConfig;
     }
     throw error;
   }
@@ -230,6 +266,16 @@ function matchesGlob(pattern: string, value: string) {
 
 function matches(selectors: string[], worktree: string) {
   return selectors.some((selector) => matchesGlob(selector, worktree));
+}
+
+function resolveMcpServerNames(config: RepositoryContextConfig, worktree: string) {
+  const servers = new Set<string>();
+  for (const mapping of config.mappings) {
+    if (matches(mapping.selector, worktree)) {
+      mapping.mcp.forEach((server) => servers.add(server));
+    }
+  }
+  return servers;
 }
 
 function globRoot(pattern: string) {
@@ -342,10 +388,40 @@ export default async function repositoryContextExtension(pi: ExtensionAPI) {
   try {
     config = await loadConfig(filepath);
   } catch (error) {
-    config = { mappings: [] };
+    config = { mappings: [], pi: { mcpServers: {} } };
     const message = error instanceof Error ? error.message : String(error);
     console.error(`[repository-context] Failed to load ${filepath}: ${message}`);
   }
+
+  const registeredMcpServers = new Set<string>();
+  pi.on("session_start", (_event, ctx) => {
+    const selected = resolveMcpServerNames(config, absolute(ctx.cwd));
+
+    for (const name of registeredMcpServers) {
+      if (selected.has(name)) continue;
+      pi.unregisterMcpServer(name);
+      registeredMcpServers.delete(name);
+    }
+
+    for (const name of selected) {
+      if (registeredMcpServers.has(name)) continue;
+      const serverConfig = config.pi.mcpServers[name];
+      if (!serverConfig) {
+        console.error(
+          `[repository-context] MCP server "${name}" is selected for ${ctx.cwd} but has no Pi config in ${filepath}`,
+        );
+        continue;
+      }
+
+      try {
+        pi.registerMcpServer(name, serverConfig);
+        registeredMcpServers.add(name);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`[repository-context] Failed to register MCP server "${name}": ${message}`);
+      }
+    }
+  });
 
   pi.on("before_agent_start", async (event, ctx) => {
     try {

@@ -4,8 +4,26 @@
       "selector": [
         "~/code/job/ave/va-*"
       ],
-      "instructions": ["~/code/job/ave/VOICE_ANALYTICS.md"],
-      "mcp": ["ave-atlassian"]
+      "instructions": [
+        "~/code/job/ave/VOICE_ANALYTICS.md"
+      ],
+      "mcp": [
+        "ave-atlassian"
+      ]
     }
-  ]
+  ],
+  "pi": {
+    "mcpServers": {
+      "ave-atlassian": {
+        "command": "uvx",
+        "args": [
+          "mcp-atlassian"
+        ],
+        "env": {
+          "CONFLUENCE_URL": "${AVE_CONFLUENCE_URL}",
+          "CONFLUENCE_PERSONAL_TOKEN": "${AVE_CONFLUENCE_API_KEY}"
+        }
+      }
+    }
+  }
 }

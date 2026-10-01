@@ -1,0 +1,47 @@
+{
+  "mcpServers": {
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "x-api-key": "${EXA_API_KEY}"
+      },
+      "exposure": "hidden",
+      "toolExposure": {
+        "web_search_exa": "direct"
+      }
+    },
+    "codegraph": {
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp"
+      ],
+      "enabled": false
+    },
+    "grep-app": {
+      "url": "https://mcp.grep.app",
+      "exposure": "hidden",
+      "toolExposure": {
+        "searchGitHub": "direct"
+      }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "enabled": false
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--isolated",
+        "--browser=chromium"
+      ],
+      "enabled": false
+    }
+  }
+}

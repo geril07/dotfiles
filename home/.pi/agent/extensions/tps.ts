@@ -100,6 +100,7 @@ export default function (pi: ExtensionAPI) {
 		if (!ctx.hasUI) return;
 		if (agentStartMs === null) return;
 
+		const totalMs = Math.max(performance.now() - agentStartMs, 0);
 		const metrics = responseMetrics;
 		agentStartMs = null;
 		pendingRequestStartMs = null;
@@ -125,7 +126,7 @@ export default function (pi: ExtensionAPI) {
 
 		const tokensPerSecond = outputTokens / (decodeMs / 1000);
 		const ttftMs = metrics.reduce((sum, metric) => sum + metric.ttftMs, 0) / metrics.length;
-		const message = `TPS ${tokensPerSecond.toFixed(1)} tok/s. TTFT ${(ttftMs / 1000).toFixed(1)}s. out ${outputTokens.toLocaleString()}, in ${input.toLocaleString()}, cache r/w ${cacheRead.toLocaleString()}/${cacheWrite.toLocaleString()}, total ${totalTokens.toLocaleString()}, decode ${(decodeMs / 1000).toFixed(1)}s`;
+		const message = `TPS ${tokensPerSecond.toFixed(1)} tok/s. TTFT ${(ttftMs / 1000).toFixed(1)}s. out ${outputTokens.toLocaleString()}, in ${input.toLocaleString()}, cache r/w ${cacheRead.toLocaleString()}/${cacheWrite.toLocaleString()}, total tokens ${totalTokens.toLocaleString()}, decode ${(decodeMs / 1000).toFixed(1)}s, total ${(totalMs / 1000).toFixed(1)}s`;
 		ctx.ui.notify(message, "info");
 	});
 }

@@ -1,6 +1,6 @@
 ---
 name: explorer
-description: Fast codebase recon that returns compressed context for handoff
+description: Fast codebase recon that returns compressed context for handoff. Treat him as a cheap and fast agent.
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

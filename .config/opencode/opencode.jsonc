@@ -69,6 +69,21 @@
     "explore": {
       "disabled": true,
     },
+    "explorer": {
+      "model": "openai/gpt-6-luna#high",
+    },
+    "researcher": {
+      "model": "openai/gpt-6-luna#xhigh",
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol#high",
+    },
+    "e2e-verifier": {
+      "model": "openai/gpt-6.1-sol#medium",
+    },
+    "worker": {
+      "model": "openai/gpt-6.1-sol#medium",
+    },
     // "title": {
     //   "model": "openrouter/google/gemini-3.1-flash-lite",
     // },

@@ -22,7 +22,7 @@
     "markdown": "rendered",
     "grouping": "auto",
     "new_location": "launch",
-    "permissions": "prompt"
+    "permissions": "autoaccept"
   },
   "animations": true,
   "tabs": {

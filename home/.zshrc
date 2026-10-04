@@ -52,7 +52,7 @@ alias opencode='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
 alias opencode2='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode2'
 alias agy='PATH="$HOME/.local/lowprio-bin:$PATH" command agy'
 alias codex='PATH="$HOME/.local/lowprio-bin:$PATH" command codex'
-alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude'
+alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude --mcp-config="$HOME/.claude/mcp.json"'
 
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "sessionizer\n"

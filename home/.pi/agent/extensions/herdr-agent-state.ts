@@ -184,6 +184,7 @@ export default function (pi) {
   let agentActive = false;
   let blockedCount = 0;
   let blockedMessage: string | undefined;
+  let busyCount = 0;
   let lastState: AgentState | undefined;
   let lastMessage: string | undefined;
   let rootSession = false;
@@ -192,7 +193,7 @@ export default function (pi) {
     if (blockedCount > 0) {
       return { state: "blocked" as const, message: blockedMessage };
     }
-    if (agentActive) {
+    if (agentActive || busyCount > 0) {
       return { state: "working" as const, message: undefined };
     }
     return { state: "idle" as const, message: undefined };
@@ -224,6 +225,16 @@ export default function (pi) {
     blockedCount += 1;
     blockedMessage = data.label;
     publishState();
+  });
+
+  // Local patch: herdr ignores pi-subagents' herdr:busy upstream (#3796), so the
+  // pane goes idle while async subagents still run. Counted before rootSession is
+  // set because pi-subagents can emit during its own session_start.
+  pi.events.on("herdr:busy", (data) => {
+    busyCount = data?.active ? busyCount + 1 : Math.max(0, busyCount - 1);
+    if (rootSession) {
+      publishState();
+    }
   });
 
   pi.on("session_start", async (event, ctx) => {

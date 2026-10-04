@@ -1,0 +1,308 @@
+[shell]
+font_family = "Sans Serif"
+avatar_path = "/home/geril/.face"
+telemetry_enabled = false
+popup_shadows = false
+polkit_agent = false
+# Clipboard history is owned by the compositor's wl-paste/cliphist setup.
+clipboard_enabled = false
+clipboard_auto_paste = "off"
+
+[shell.animation]
+enabled = true
+speed = 2.0
+
+[shell.shadow]
+alpha = 0.0
+
+[shell.panel]
+transparency_mode = "solid"
+borders = false
+shadow = false
+launcher_placement = "floating"
+launcher_position = "center"
+control_center_placement = "attached"
+open_near_click_control_center = true
+session_placement = "floating"
+
+[shell.launcher]
+categories = true
+sort_by_usage = true
+app_grid = false
+auto_paste = "off"
+
+[shell.launcher.providers.session]
+global = true
+
+[shell.launcher.providers.windows]
+global = true
+
+[shell.session]
+grid = false
+show_shortcuts = true
+
+[[shell.session.actions]]
+action = "lock"
+shortcut = "1"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "suspend"
+shortcut = "2"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "command"
+label = "Hibernate"
+command = "systemctl hibernate"
+shortcut = "3"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "reboot"
+shortcut = "4"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "logout"
+shortcut = "5"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "shutdown"
+shortcut = "6"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "command"
+label = "Reboot to UEFI"
+command = "systemctl reboot --firmware-setup"
+shortcut = "7"
+countdown_seconds = 10
+
+[keybinds]
+validate = ["return", "kp_enter"]
+
+[theme]
+mode = "dark"
+source = "custom"
+custom_palette = "Catppuccin Lavender"
+
+[theme.templates]
+enable_builtin_templates = false
+enable_community_templates = false
+
+[bar.main]
+position = "bottom"
+auto_hide = false
+reserve_space = true
+background_opacity = 0.7
+compositor_blur = false
+radius = 12
+margin_ends = 4
+margin_edge = 4
+padding = 4
+widget_spacing = 4
+font_scale = 1.15
+shadow = false
+capsule = true
+capsule_opacity = 1.0
+color = "primary"
+icon_color = "tertiary"
+start = ["taskbar"]
+center = ["group:media"]
+end = ["tray", "group:system", "battery", "volume", "keyboard_layout", "clock", "notifications"]
+
+[[bar.main.capsule_group]]
+id = "media"
+members = ["media", "audio_visualizer"]
+opacity = 1.0
+widget_spacing = 4
+
+[[bar.main.capsule_group]]
+id = "system"
+members = ["cpu", "memory", "disk"]
+opacity = 1.0
+widget_spacing = 4
+
+[bar.main.dead_zone.actions]
+left = "none"
+right = "panel-toggle control-center"
+middle = "none"
+scroll_up = "none"
+scroll_down = "none"
+
+# V5's taskbar provides the per-workspace application icons used in v4.
+[widget.taskbar]
+group_by_workspace = true
+workspace_group_content = "icons"
+only_active_workspace = false
+show_all_outputs = false
+hide_empty_workspaces = false
+show_workspace_label = true
+workspace_label_placement = "inside"
+workspace_group_capsule = true
+group_single_icon_per_app = false
+focused_color = "tertiary"
+occupied_color = "primary"
+icon_scale = 0.8
+font_weight = 700
+capsule = false
+
+[widget.media]
+artist_first = true
+max_length = 300
+title_scroll = "on_hover"
+hide_when_no_media = false
+show_progress = true
+color = "on_surface"
+
+[widget.audio_visualizer]
+width = 56
+mirrored = true
+show_when_idle = false
+
+[widget.tray]
+drawer = true
+hide_passive = false
+pinned = ["Telegram Desktop", "tray-icon tray app 394092-1", "OBS Studio"]
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+visualization = "none"
+font_family = "monospace"
+
+[widget.memory]
+type = "sysmon"
+stat = "ram_pct"
+visualization = "none"
+font_family = "monospace"
+
+[widget.disk]
+type = "sysmon"
+stat = "disk_used_pct"
+path = "/"
+visualization = "none"
+font_family = "monospace"
+
+[widget.battery]
+display_mode = "graphic"
+show_label = false
+hide_when_full = true
+
+[widget.volume]
+show_label = true
+
+[widget.volume.actions]
+middle = "exec pwvucontrol || pavucontrol"
+scroll_up = "volume-up 2%"
+scroll_down = "volume-down 2%"
+
+[widget.keyboard_layout]
+show_glyph = true
+show_label = true
+hide_when_single_layout = false
+
+[widget.clock]
+format = "{:%H:%M %a, %b %d}"
+vertical_format = "{:%H %M - %d %m}"
+tooltip_format = "{:%H:%M %a, %b %d}"
+
+[widget.notifications]
+hide_when_no_unread = false
+
+[notification]
+enable_daemon = true
+position = "top_right"
+layer = "overlay"
+background_opacity = 1.0
+keep_dismissed_in_history = false
+
+[osd]
+position = "top_right"
+hide_delay_ms = 2000
+background_opacity = 1.0
+
+[osd.kinds]
+volume = true
+volume_output = true
+volume_input = true
+brightness = true
+wifi = false
+bluetooth = false
+power_profile = false
+caffeine = false
+nightlight = false
+dnd = false
+lock_keys = false
+keyboard_layout = false
+keyboard_backlight = false
+media = false
+privacy = false
+
+[audio]
+enable_overdrive = true
+enable_sounds = false
+
+[battery]
+warning_threshold = 20
+
+[brightness]
+enable_ddcutil = false
+
+[lockscreen]
+# Sway's swayidle already invokes hyprlock before suspend.
+lock_before_suspend = false
+transition = []
+blurred_desktop = false
+blur_intensity = 0.0
+tint_intensity = 0.0
+
+[idle.behavior.lock]
+enabled = false
+
+[idle.behavior.screen-off]
+enabled = false
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "wallpaper"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[plugins]
+auto_update = "none"
+
+[wallpaper]
+enabled = false
+
+[backdrop]
+enabled = false
+
+[dock]
+enabled = false
+
+[desktop_widgets]
+enabled = false
+
+[weather]
+enabled = false
+
+[nightlight]
+enabled = false
+
+[location]
+auto_locate = false

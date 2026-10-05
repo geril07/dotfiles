@@ -131,6 +131,41 @@ export function hasExplicitModelArg(argv: readonly string[]): boolean {
 	return false;
 }
 
+/** Explicit CLI thinking takes priority over remembered per-model levels. */
+export function hasExplicitThinkingArg(argv: readonly string[]): boolean {
+	for (let i = 0; i < argv.length; i++) {
+		const arg = argv[i];
+		if (arg === "--") break;
+		for (const flag of ["--thinking", "--model", "--models"]) {
+			const value = arg === flag ? argv[i + 1] : arg.startsWith(`${flag}=`) ? arg.slice(flag.length + 1) : undefined;
+			if (!value || value.startsWith("-")) continue;
+			if (flag === "--thinking" && isThinkingLevel(value)) return true;
+			if (flag !== "--thinking" && value.split(",").some((model) => isThinkingLevel(model.slice(model.lastIndexOf(":") + 1)))) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+export function shouldRestoreStartupThinking(
+	reason: SessionStartReason,
+	hasSessionMessages: boolean,
+	argv: readonly string[],
+): boolean {
+	if (!shouldApplyMruOverride(reason, hasSessionMessages) || hasExplicitThinkingArg(argv)) return false;
+	// Even an empty saved session owns its reasoning level.
+	if (reason === "startup") {
+		for (const arg of argv) {
+			if (arg === "--") break;
+			if (["--session", "--session-id", "--resume", "-r", "--continue", "-c", "--fork"].includes(arg.split("=")[0])) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 /**
  * Whether the model pi restored for this session start should be recorded as
  * last-used. Pi 0.84.3 restores a continued session's model during

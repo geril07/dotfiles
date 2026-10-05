@@ -26,8 +26,8 @@
  * ~/.pi/agent/extensions/pi-model-sort.json.
  *
  * It also remembers the thinking level last used on each model and restores
- * it on every switch (including Ctrl+P cycling), clamped to what the model
- * supports — deepseek stays on max, claude on high, without manual
+ * it on fresh starts and every switch (including Ctrl+P cycling), clamped to
+ * what the model supports — deepseek stays on max, claude on high, without manual
  * re-adjustment after every switch.
  *
  * With no recorded usage, the sort degrades gracefully to the default
@@ -46,10 +46,12 @@ import {
 	handleModelSelect,
 	hasContextMessages,
 	hasExplicitModelArg,
+	hasExplicitThinkingArg,
 	type ModelSortConfig,
 	parseConfig,
 	recordThinkingSelect,
 	shouldApplyMruOverride,
+	shouldRestoreStartupThinking,
 	shouldTimestampRestoredModel,
 	sortByLastUsed,
 } from "./sort.js";
@@ -396,7 +398,7 @@ export default function (pi: ExtensionAPI) {
 		patchCycleScopedModel(() => lastUsed);
 
 		// Override the initial model to MRU on fresh starts.
-		// Pi core picks the saved default if in scope, otherwise scopedModels[0].
+		// Pi core picks scopedModels[0] when a scope is configured, otherwise the saved default.
 		// This override switches to the most recently used model instead, so your
 		// actual usage history determines the default — not scope order.
 		//
@@ -412,15 +414,15 @@ export default function (pi: ExtensionAPI) {
 		// for its continuation check, not raw branch length and not literal
 		// message entries alone.
 		//
-		// An explicit `--model` on the command line always wins. Pi resolved
+		// Explicit CLI model/thinking selections always win. Pi resolved
 		// that model during construction without emitting model_select, so on
 		// the initial startup record it as last-used instead of overriding it.
 		// This is what bb's Pi provider relies on: it launches
 		// `pi --mode rpc --model provider/id` and aborts the thread if pi
 		// reports a different model back.
 		const hasSessionMessages = hasContextMessages(ctx.sessionManager.buildContextEntries());
-		const explicitModel = hasExplicitModelArg(process.argv);
-		if (explicitModel && shouldApplyMruOverride(event.reason, hasSessionMessages)) {
+		const explicitSelection = hasExplicitModelArg(process.argv) || hasExplicitThinkingArg(process.argv);
+		if (explicitSelection && shouldApplyMruOverride(event.reason, hasSessionMessages)) {
 			if (event.reason === "startup" && ctx.model) {
 				lastUsed[buildModelKey(ctx.model.provider, ctx.model.id)] = Date.now();
 				writeConfig({ lastUsed, thinking: tracker.thinking });
@@ -445,6 +447,12 @@ export default function (pi: ExtensionAPI) {
 			// they perform no construction-time restore worth recording.
 			lastUsed[buildModelKey(ctx.model.provider, ctx.model.id)] = Date.now();
 			writeConfig({ lastUsed, thinking: tracker.thinking });
+		}
+
+		// A fresh session may already be on MRU, so no model_select fires.
+		if (shouldRestoreStartupThinking(event.reason, hasSessionMessages, process.argv) && tracker.activeKey) {
+			const remembered = tracker.thinking[tracker.activeKey];
+			if (remembered !== undefined) pi.setThinkingLevel(remembered);
 		}
 	});
 

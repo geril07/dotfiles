@@ -9,5 +9,4 @@ When skill is invoked by system or user([skill]), it's entire content is provide
 ## Pi subagents
 
 - Set optional subagent controls only when explicitly requested or required by the task contract.
-- Always use `bg_wait` when waiting for subagents/workflows. It's needed for thread to be in working status.
 - Avoid using sync subagents, they have behavior constraints and forced to be launched as async either way.

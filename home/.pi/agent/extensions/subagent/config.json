@@ -1,3 +1,4 @@
 {
-  "forceTopLevelAsync": true
+  "forceTopLevelAsync": true,
+  "toolActivation": "eager"
 }

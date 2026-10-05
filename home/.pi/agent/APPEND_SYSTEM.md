@@ -10,3 +10,4 @@ When skill is invoked by system or user([skill]), it's entire content is provide
 
 - Set optional subagent controls only when explicitly requested or required by the task contract.
 - Avoid using sync subagents, they have behavior constraints and forced to be launched as async either way.
+- `subagent` is not callable from codemode scripts. Call `subagent` directly; for several children, use one `subagent` workflow call.

@@ -154,7 +154,8 @@ height = "50%"
 
 [ui]
 navigator_start_expanded = false      # sessions-only on open, Space still expands
-navigator_start_search_focused = false # type-to-filter at once
+navigator_start_search_focused = true # type-to-filter at once
+agent_picker_start_search_focused = true
 
 tab_bar_position = "bottom"
 tab_bar_numbers = true

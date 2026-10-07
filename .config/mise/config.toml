@@ -1,0 +1,18 @@
+[settings]
+idiomatic_version_file_enable_tools = ["node", "npm", "pnpm", "yarn"]
+
+[tool_alias]
+pnpm = "npm:pnpm"
+
+[tools]
+node = ["22", "24"]
+pnpm = "latest"
+yarn = "1"
+
+"npm:@anthropic-ai/claude-code" = { version = "latest", allow_builds = ["@anthropic-ai/claude-code"] }
+"npm:@colbymchenry/codegraph" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@fission-ai/openspec" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
+"npm:@playwright/cli" = "latest"

@@ -30,6 +30,7 @@
     "npm:@plannotator/pi-extension",
     "npm:@piotr-oles/pi-bash-timeout",
     "npm:pi-mcp-adapter",
+    "npm:pi-claude-bridge"
   ],
   "hideThinkingBlock": false,
   "compaction": {

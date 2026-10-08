@@ -60,7 +60,8 @@
         "workflow": "manual",
         "runtime": "embedded"
       }
-    }
+    },
+    "@openchamber/opencode-claude"
   ],
   "agents": {
     "general": {

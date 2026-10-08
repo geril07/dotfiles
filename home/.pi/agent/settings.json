@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.0",
+  "lastChangelogVersion": "1.0.3",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
@@ -16,9 +16,11 @@
   "showCacheMissNotices": true,
   "steeringMode": "all",
   "followUpMode": "all",
+  "extensions": ["-builtin:mcp"],
+  "defaultTools": ["+codemode"],
   "packages": [
     {
-      "source": "npm:pi-subagents",
+      "source": "https://github.com/nicobailon/pi-subagents",
       "prompts": [],
       "skills": []
     },
@@ -27,6 +29,7 @@
     "npm:@zeldrisho/pi-web-fetch",
     "npm:@plannotator/pi-extension",
     "npm:@piotr-oles/pi-bash-timeout",
+    "npm:pi-mcp-adapter",
   ],
   "hideThinkingBlock": false,
   "compaction": {

@@ -1,6 +1,7 @@
 {
   "settings": {
-    "directTools": "search"
+    "directTools": false,
+    "disableProxyTool": false
   },
   "mcpServers": {
     "exa": {
@@ -9,25 +10,20 @@
         "x-api-key": "$env:EXA_API_KEY"
       },
       "lifecycle": "eager",
-      "directTools": ["web_search_exa"]
+      "disabled": false,
+      "directTools": ["web_search_exa"],
+      "includeTools": ["web_search_exa"]
     },
     "codegraph": {
       "command": "codegraph",
       "args": ["serve", "--mcp"],
       "disabled": true
     },
-    "ave-atlassian": {
-      "command": "uvx",
-      "args": ["mcp-atlassian"],
-      "env": {
-        "CONFLUENCE_URL": "$env:AVE_CONFLUENCE_URL",
-        "CONFLUENCE_PERSONAL_TOKEN": "$env:AVE_CONFLUENCE_API_KEY"
-      },
-      "directTools": false
-    },
     "grep-app": {
       "url": "https://mcp.grep.app",
-      "directTools": true
+      "disabled": false,
+      "directTools": ["searchGitHub"],
+      "includeTools": ["searchGitHub"]
     },
     "chrome-devtools": {
       "command": "npx",

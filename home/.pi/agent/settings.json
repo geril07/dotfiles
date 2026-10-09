@@ -4,7 +4,11 @@
   "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "medium",
+  "modelThinkingLevels": {
+    "openai-codex/gpt-6-luna": "xhigh",
+    "claude-bridge/claude-sonnet-5-5": "high"
+  },
   "editorPaddingX": 2,
   "theme": "catppuccin-macchiato",
   "defaultProjectTrust": "always",

@@ -25,10 +25,7 @@
  * pi 0.84.3 restores them without emitting model_select. Data persists to
  * ~/.pi/agent/extensions/pi-model-sort.json.
  *
- * It also remembers the thinking level last used on each model and restores
- * it on fresh starts and every switch (including Ctrl+P cycling), clamped to
- * what the model supports — deepseek stays on max, claude on high, without manual
- * re-adjustment after every switch.
+ * Thinking levels are managed by pi's native defaults and session controls.
  *
  * With no recorded usage, the sort degrades gracefully to the default
  * provider/model-id alphabetical order.
@@ -41,17 +38,13 @@ import { AgentSession, getAgentDir, ModelSelectorComponent } from "@earendil-wor
 import {
 	buildModelKey,
 	CONFIG_FILENAME,
-	createThinkingTracker,
 	findMruModel,
-	handleModelSelect,
 	hasContextMessages,
 	hasExplicitModelArg,
 	hasExplicitThinkingArg,
 	type ModelSortConfig,
 	parseConfig,
-	recordThinkingSelect,
 	shouldApplyMruOverride,
-	shouldRestoreStartupThinking,
 	shouldTimestampRestoredModel,
 	sortByLastUsed,
 } from "./sort.js";
@@ -62,13 +55,13 @@ const CONFIG_PATH = join(getAgentDir(), "extensions", CONFIG_FILENAME);
 
 function readConfig(): ModelSortConfig {
 	if (!existsSync(CONFIG_PATH)) {
-		return { lastUsed: {}, thinking: {} };
+		return { lastUsed: {} };
 	}
 	try {
 		const raw = readFileSync(CONFIG_PATH, "utf-8");
 		return parseConfig(JSON.parse(raw));
 	} catch {
-		return { lastUsed: {}, thinking: {} };
+		return { lastUsed: {} };
 	}
 }
 
@@ -376,20 +369,14 @@ function unpatchCycleScopedModel(): void {
 
 export default function (pi: ExtensionAPI) {
 	let lastUsed: Record<string, number> = {};
-	const tracker = createThinkingTracker();
 	let managesMru = false;
 
 	pi.on("session_start", async (event, ctx) => {
-		// Native subagent sessions run in print mode. Keep their explicit model
-		// and prevent them from changing the shared interactive MRU state.
+		// Non-interactive sessions must not change shared interactive MRU state.
 		managesMru = ctx.mode === "tui";
 		if (!managesMru) return;
 
-		const config = readConfig();
-		lastUsed = config.lastUsed;
-		tracker.thinking = config.thinking;
-		tracker.activeKey = ctx.model ? buildModelKey(ctx.model.provider, ctx.model.id) : null;
-		tracker.sawSwitchClamp = false;
+		lastUsed = readConfig().lastUsed;
 
 		patchRegistry(ctx.modelRegistry as unknown as PatchedRegistry, () => lastUsed);
 		patchSortModels(() => lastUsed);
@@ -397,35 +384,14 @@ export default function (pi: ExtensionAPI) {
 		patchFilterModels(() => lastUsed);
 		patchCycleScopedModel(() => lastUsed);
 
-		// Override the initial model to MRU on fresh starts.
-		// Pi core picks scopedModels[0] when a scope is configured, otherwise the saved default.
-		// This override switches to the most recently used model instead, so your
-		// actual usage history determines the default — not scope order.
-		//
-		// Continued sessions (pi -c, --session, /resume, forks) are skipped: pi
-		// has already restored the model saved in the session file, and global
-		// MRU should not clobber it.
-		//
-		// NOTE: pi seeds every new session with model_change +
-		// thinking_level_change entries before session_start fires, so
-		// continuation is derived by projecting the branch through pi's own
-		// context-message rules (message, custom_message, non-empty
-		// branch_summary, compaction entries) — the same predicate pi core uses
-		// for its continuation check, not raw branch length and not literal
-		// message entries alone.
-		//
-		// Explicit CLI model/thinking selections always win. Pi resolved
-		// that model during construction without emitting model_select, so on
-		// the initial startup record it as last-used instead of overriding it.
-		// This is what bb's Pi provider relies on: it launches
-		// `pi --mode rpc --model provider/id` and aborts the thread if pi
-		// reports a different model back.
 		const hasSessionMessages = hasContextMessages(ctx.sessionManager.buildContextEntries());
+		// Switching models also applies native thinking defaults, so explicit
+		// CLI reasoning must prevent the startup MRU switch.
 		const explicitSelection = hasExplicitModelArg(process.argv) || hasExplicitThinkingArg(process.argv);
 		if (explicitSelection && shouldApplyMruOverride(event.reason, hasSessionMessages)) {
 			if (event.reason === "startup" && ctx.model) {
 				lastUsed[buildModelKey(ctx.model.provider, ctx.model.id)] = Date.now();
-				writeConfig({ lastUsed, thinking: tracker.thinking });
+				writeConfig({ lastUsed });
 			}
 		} else if (shouldApplyMruOverride(event.reason, hasSessionMessages) && Object.keys(lastUsed).length > 0) {
 			const mruModel = findMruModel(lastUsed, ctx.modelRegistry);
@@ -439,64 +405,21 @@ export default function (pi: ExtensionAPI) {
 				await pi.setModel(mruModel as Parameters<typeof pi.setModel>[0]);
 			}
 		} else if (shouldTimestampRestoredModel(event.reason, hasSessionMessages) && ctx.model) {
-			// Continued session (continued startup, resume, or context-bearing
-			// fork): pi 0.84.3 restores the session's model during construction
-			// without emitting model_select, so recency would never update for
-			// continuations. Record the restored model here so "last used"
-			// stays accurate. Fresh "new" sessions and "reload" are excluded —
-			// they perform no construction-time restore worth recording.
+			// Construction-time session restores do not emit model_select.
 			lastUsed[buildModelKey(ctx.model.provider, ctx.model.id)] = Date.now();
-			writeConfig({ lastUsed, thinking: tracker.thinking });
-		}
-
-		// A fresh session may already be on MRU, so no model_select fires.
-		if (shouldRestoreStartupThinking(event.reason, hasSessionMessages, process.argv) && tracker.activeKey) {
-			const remembered = tracker.thinking[tracker.activeKey];
-			if (remembered !== undefined) pi.setThinkingLevel(remembered);
+			writeConfig({ lastUsed });
 		}
 	});
 
-	// Record thinking levels per model. Pi emits this only when the effective
-	// level changes — for manual changes (Ctrl+T, /thinking) and for the
-	// re-clamp inside setModel/cycle, which runs before model_select fires.
-	pi.on("thinking_level_select", (event, ctx) => {
-		if (!managesMru) return;
+	pi.on("model_select", (event) => {
+		if (!managesMru || event.source === "cycle") return;
 
-		const currentKey = ctx.model ? buildModelKey(ctx.model.provider, ctx.model.id) : null;
-		if (recordThinkingSelect(tracker, currentKey, event.level, event.previousLevel)) {
-			writeConfig({ lastUsed, thinking: tracker.thinking });
-		}
+		// Updating recency while cycling re-sorts the active model to position
+		// zero, trapping subsequent cycles between the two most recent models.
+		lastUsed[buildModelKey(event.model.provider, event.model.id)] = Date.now();
+		writeConfig({ lastUsed });
 	});
 
-	// Track model selections (manual, session restore).
-	// Skip lastUsed updates for "cycle" events — updating lastUsed during
-	// Ctrl+P cycling creates a feedback loop: each cycle step makes the
-	// selected model most-recent, re-sorts it to position 0, then
-	// (currentIndex + 1) % len always hits position 1 — toggling forever
-	// between the top 2. Thinking restore still applies to cycle selections.
-	pi.on("model_select", async (event, _ctx) => {
-		if (!managesMru) return;
-
-		const newKey = buildModelKey(event.model.provider, event.model.id);
-		if (event.source !== "cycle") {
-			lastUsed[newKey] = Date.now();
-		}
-
-		const previousKey = event.previousModel
-			? buildModelKey(event.previousModel.provider, event.previousModel.id)
-			: null;
-		const restoreLevel = handleModelSelect(tracker, newKey, previousKey, pi.getThinkingLevel());
-		writeConfig({ lastUsed, thinking: tracker.thinking });
-
-		// Restore the model's remembered thinking level. setThinkingLevel clamps
-		// to the model's capabilities; if clamping changes the level, the
-		// resulting thinking_level_select records the effective level instead.
-		if (restoreLevel !== null) {
-			pi.setThinkingLevel(restoreLevel);
-		}
-	});
-
-	// Cleanup on shutdown / reload
 	pi.on("session_shutdown", (_event, ctx) => {
 		if (!managesMru) return;
 

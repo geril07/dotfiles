@@ -32,7 +32,8 @@
     "indicators": "status"
   },
   "plugins": [
-    "./herdr-opencode"
+    "./herdr-opencode",
+    "./cache-miss"
   ],
   "prompt": {
     "paste": "compact",

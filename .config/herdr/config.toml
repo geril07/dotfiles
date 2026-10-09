@@ -229,6 +229,9 @@ rows = [["state_icon", "workspace"]]
 # delivery = "off"
 # delay_seconds = 1
 
+delivery = "system"
+delay_seconds = 1
+
 [ui.toast.herdr]
 # position = "bottom-right"
 
@@ -249,6 +252,7 @@ rows = [["state_icon", "workspace"]]
 # [ui.sound.agents]
 # droid = "off"
 
+enabled = true
 [session]
 # Resume supported AI-agent panes into their native conversation sessions after
 # a Herdr server restart. Requires official integrations that report session refs.

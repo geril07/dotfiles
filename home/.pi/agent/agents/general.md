@@ -4,5 +4,4 @@ description: General-purpose agent. Use only when user explicitly asked to use h
 systemPromptMode: append
 inheritProjectContext: true
 inheritSkills: true
-defaultContext: fork
 ---

@@ -45,7 +45,7 @@ Use subagents only when user explicitly asks for them
 - For viewport and recording - prefer 1920x1080 resolution.
 - Always use named session for a task to avoid collisions with other agents.
 
-## User phrases
+## User shortcuts in the messages
 
 - `wait what` - Wait — I don't understand where you've got to here. Re-pitch that: give me a little bit of context.
 

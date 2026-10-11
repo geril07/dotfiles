@@ -69,4 +69,8 @@ For multiline GitLab MR descriptions, use `--description-file -` with a heredoc.
 
 `ast-grep` is installed; use it for syntax-aware or structural code search.
 
+## Runtimes
+
+Node and package managers are managed by mise, not nvm. Run commands normally. For a missing or different version, use `mise install` or `mise exec node@<version> -- <command>`.
+
 </geril-guidelines>

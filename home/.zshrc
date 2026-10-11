@@ -16,10 +16,7 @@ setopt complete_aliases
 # setopt HIST_SUBST_PATTERN       # use pattern matching for substitutions
 # setopt HIST_VERIFY              # expand command line without executing it
 
-export NVM_DIR="$HOME/.nvm"
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(mise activate zsh)"
 
 [[ -f ~/.lex-gitlab-auth-token ]] && export LEX_GITLAB_AUTH_TOKEN=$(cat ~/.lex-gitlab-auth-token)
 [[ -f ~/.npm-token ]] && export NPM_TOKEN=$(cat ~/.npm-token)
@@ -47,12 +44,15 @@ alias nvide="neovide"
 alias vim="nvim"
 
 # Keep the agents at normal priority; lower only heavy child commands.
-alias pi='PATH="$HOME/.local/lowprio-bin:$PATH" command pi'
-alias opencode='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode'
-alias opencode2='PATH="$HOME/.local/lowprio-bin:$PATH" command opencode2'
-alias agy='PATH="$HOME/.local/lowprio-bin:$PATH" command agy'
-alias codex='PATH="$HOME/.local/lowprio-bin:$PATH" command codex'
-alias claude='PATH="$HOME/.local/lowprio-bin:$PATH" command claude --mcp-config="$HOME/.claude/mcp.json"'
+# Shims go before mise activate paths: those are fixed to the launch directory,
+# and agent commands do not run the prompt hook when they cd to another project.
+AGENT_PATH="$HOME/.local/lowprio-bin:$HOME/.local/share/mise/shims"
+alias pi='PATH="$AGENT_PATH:$PATH" command pi'
+alias opencode='PATH="$AGENT_PATH:$PATH" command opencode'
+alias opencode2='PATH="$AGENT_PATH:$PATH" command opencode2'
+alias agy='PATH="$AGENT_PATH:$PATH" command agy'
+alias codex='PATH="$AGENT_PATH:$PATH" command codex'
+alias claude='PATH="$AGENT_PATH:$PATH" command claude --mcp-config="$HOME/.claude/mcp.json"'
 
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "sessionizer\n"

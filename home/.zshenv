@@ -21,8 +21,9 @@ CARGO_BIN=$HOME/.cargo/bin
 GO_BIN=/opt/go/bin
 LOCAL_GO_BIN=$HOME/go/bin
 BUN_BIN=$HOME/.bun/bin
+MISE_SHIMS=$HOME/.local/share/mise/shims
 
-export PATH=$LOCAL_BIN:$CARGO_BIN:$LOCAL_GO_BIN:$GO_BIN:$BUN_BIN:$PATH
+export PATH=$LOCAL_BIN:$CARGO_BIN:$LOCAL_GO_BIN:$GO_BIN:$BUN_BIN:$MISE_SHIMS:$PATH
 
 export LANG="en_GB.UTF-8"
 

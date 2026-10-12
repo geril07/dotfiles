@@ -1,9 +1,9 @@
 {
-  "lastChangelogVersion": "1.0.3",
+  "lastChangelogVersion": "1.1.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gpt-6-luna",
   "defaultThinkingLevel": "medium",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-luna": "xhigh",
@@ -20,8 +20,12 @@
   "showCacheMissNotices": true,
   "steeringMode": "all",
   "followUpMode": "all",
-  "extensions": ["-builtin:mcp"],
-  "defaultTools": ["+codemode"],
+  "extensions": [
+    "-builtin:mcp"
+  ],
+  "defaultTools": [
+    "+codemode"
+  ],
   "packages": [
     {
       "source": "https://github.com/nicobailon/pi-subagents",

@@ -12,6 +12,8 @@ By default playwright-cli opens in headless mode. Include `--headed` when:
 
 ## Existing authenticated Chrome
 
+For a site listed in `playwright-profiles`, use that persistent profile instead of the extension.
+
 To reuse the user's Chrome login, use `attach --extension=chrome` with the [official Playwright Extension](https://chromewebstore.google.com/detail/playwright-extension/mmlmfjhmonkocbjadbfplnigmagldckm). If it is absent, ask the user to install it in the logged-in profile.
 
 Tell the user to approve Chrome's connection prompt before attaching, then confirm the target tab with `tab-list`:

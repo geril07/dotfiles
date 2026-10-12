@@ -6,12 +6,16 @@ export default Plugin.define({
   setup(context) {
     const starts = new Map<string, { model: { providerID: string; id: string }; started: number }>()
     const stopStarted = context.data.on("session.step.started", (event) => {
+      const route = context.ui.router.current()
+      if (route.type !== "session" || route.sessionID !== event.data.sessionID) return
       starts.set(event.data.assistantMessageID, event.data)
     })
     const stopEnded = context.data.on("session.step.ended", (event) => {
       const data = event.data
       const start = starts.get(data.assistantMessageID)
       starts.delete(data.assistantMessageID)
+      const route = context.ui.router.current()
+      if (route.type !== "session" || route.sessionID !== data.sessionID) return
       const message = context.data.session.message.get(data.sessionID, data.assistantMessageID)
       const model = start?.model ?? (message?.type === "assistant" ? message.model : undefined)
       const created = start?.started ?? message?.time.created
@@ -24,7 +28,6 @@ export default Plugin.define({
         message: notice,
         variant: "warning",
         duration: 10_000,
-        sessionID: data.sessionID,
       })
     })
     const stopFailed = context.data.on("session.step.failed", (event) => {

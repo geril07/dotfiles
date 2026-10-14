@@ -2,11 +2,12 @@
   "lastChangelogVersion": "1.2.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-luna",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "medium",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-luna": "xhigh",
+    "openai/gpt-6-luna": "xhigh",
+    "openai/gpt-6.1-sol": "low",
     "claude-bridge/claude-sonnet-5-5": "high"
   },
   "editorPaddingX": 2,
@@ -34,39 +35,43 @@
     "npm:@plannotator/pi-extension",
     "npm:@piotr-oles/pi-bash-timeout",
     "npm:pi-mcp-adapter",
-    "npm:pi-claude-bridge"
+    "npm:pi-claude-bridge",
+    "npm:pi-antigravity"
   ],
   "hideThinkingBlock": false,
   "compaction": {
     "enabled": false
   },
   "enabledModels": [
-    "openai-codex/gpt-6.1-sol",
-    "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6-astra",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-luna",
+    "openai/gpt-6-astra",
+    "antigravity/gemini-3.8-flash",
+    "claude-bridge/claude-sonnet-5-5",
+    "claude-bridge/claude-opus-5-5"
   ],
   "subagents": {
     "disableThinking": true,
     "disableBuiltins": true,
     "agentOverrides": {
       "explorer": {
-        "model": "openai-codex/gpt-6-luna",
+        "model": "openai/gpt-6-luna",
         "thinking": "xhigh"
       },
       "researcher": {
-        "model": "openai-codex/gpt-6-luna",
+        "model": "openai/gpt-6-luna",
         "thinking": "xhigh"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "openai/gpt-6.1-sol",
         "thinking": "high"
       },
       "e2e-verifier": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "openai/gpt-6.1-sol",
         "thinking": "low"
       },
       "worker": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "openai/gpt-6.1-sol",
         "thinking": "low"
       }
     }

@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.1.0",
+  "lastChangelogVersion": "1.2.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
@@ -20,12 +20,8 @@
   "showCacheMissNotices": true,
   "steeringMode": "all",
   "followUpMode": "all",
-  "extensions": [
-    "-builtin:mcp"
-  ],
-  "defaultTools": [
-    "+codemode"
-  ],
+  "extensions": ["-builtin:mcp"],
+  "defaultTools": ["+codemode"],
   "packages": [
     {
       "source": "https://github.com/nicobailon/pi-subagents",
@@ -55,7 +51,7 @@
     "agentOverrides": {
       "explorer": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "high"
+        "thinking": "xhigh"
       },
       "researcher": {
         "model": "openai-codex/gpt-6-luna",
@@ -67,11 +63,11 @@
       },
       "e2e-verifier": {
         "model": "openai-codex/gpt-6.1-sol",
-        "thinking": "medium"
+        "thinking": "low"
       },
       "worker": {
         "model": "openai-codex/gpt-6.1-sol",
-        "thinking": "medium"
+        "thinking": "low"
       }
     }
   }

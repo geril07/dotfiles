@@ -18,11 +18,14 @@ When the user names a model by alias, use this table. Pass it as `model: "<model
 An alias in the request counts as an explicit model request.
 Use the default thinking level. A thinking level from the user overrides the default.
 
+Thinking level variants: low/medium/high/xhigh/max
+
 | Alias        | Model                             | Default thinking |
 | ------------ | --------------------------------- | ---------------- |
-| Luna         | `openai-codex/gpt-6-luna`         | xhigh            |
-| Sol          | `openai-codex/gpt-6.1-sol`        | medium           |
-| Astra        | `openai-codex/gpt-6-astra`        | medium           |
+| Luna         | `openai/gpt-6-luna`               | xhigh            |
+| Sol          | `openai/gpt-6.1-sol`              | low              |
+| Astra        | `openai/gpt-6-astra`              | medium           |
 | Sonnet       | `claude-bridge/claude-sonnet-5-5` | high             |
 | Opus         | `claude-bridge/claude-opus-5-5`   | medium           |
+| Haiku        | `claude-bridge/claude-haiku-5-5`  | high             |
 | Gemini Flash | `antigravity/gemini-3.8-flash`    | high             |

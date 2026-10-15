@@ -1,0 +1,17 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "launchOptions": {
+      "channel": "chrome",
+      "headless": true,
+      "args": [
+        "--enable-gpu",
+        "--use-angle=vulkan",
+        "--ozone-platform=headless"
+      ]
+    },
+    "contextOptions": {
+      "viewport": { "width": 1920, "height": 1080 }
+    }
+  }
+}

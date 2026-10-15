@@ -3,12 +3,23 @@ name: extra-playwright-cli
 description: Extra playwright-cli gotchas. Always load this skill alongside playwright-cli.
 ---
 
-## Headed mode
+## GPU headless QA
 
-By default playwright-cli opens in headless mode. Include `--headed` when:
+For canvas/WebGL games on this AMD Linux host, create a new, uniquely named headless session:
 
-- The user requests a visible browser.
-- Testing applications / games that use canvas with GPU rendering.
+```bash
+env -u DISPLAY -u WAYLAND_DISPLAY playwright-cli -s=<name> open <url> --config="$HOME/.config/playwright/agent-gpu.json"
+```
+
+Before testing, verify hardware WebGL:
+
+```bash
+playwright-cli -s=<name> eval '() => { const gl = document.createElement("canvas").getContext("webgl"); if (!gl) throw new Error("WebGL unavailable"); const ext = gl.getExtension("WEBGL_debug_renderer_info"); if (!ext) throw new Error("Renderer unavailable"); return gl.getParameter(ext.UNMASKED_RENDERER_WEBGL); }'
+```
+
+Require AMD/RADV, not SwiftShader, llvmpipe or lavapipe; stop and diagnose if verification fails. Record the renderer and browser version with any FPS results. The config selects GPU Vulkan rendering and a 1920×1080 viewport without desktop windows; pass it explicitly rather than changing global defaults.
+
+Use `--headed` only when the user explicitly requests a visible browser; it overrides headless configuration. For background QA, never use `show` or attach to the user's browser. Close only sessions you created with `playwright-cli -s=<name> close`; never use `close-all` or `kill-all`.
 
 ## Existing authenticated Chrome
 

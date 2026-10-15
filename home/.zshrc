@@ -54,6 +54,32 @@ alias agy='PATH="$AGENT_PATH:$PATH" command agy'
 alias codex='PATH="$AGENT_PATH:$PATH" command codex'
 alias claude='PATH="$AGENT_PATH:$PATH" command claude --mcp-config="$HOME/.claude/mcp.json"'
 
+ca() (
+  if (( $# < 2 )); then
+    printf '%s\n' 'Usage: ca <profile> <command> [args...]' >&2
+    return 2
+  fi
+
+  local profile="$1"
+  if [[ "$profile" == *[^a-zA-Z0-9_-]* ]]; then
+    printf '%s\n' 'Profile must contain only letters, digits, underscores or hyphens.' >&2
+    return 2
+  fi
+  if [[ -z "$profile" ]]; then
+    printf '%s\n' 'Profile must not be empty.' >&2
+    return 2
+  fi
+  shift
+
+  umask 077
+  export CLAUDE_CONFIG_DIR="$HOME/.claude-profiles/$profile"
+  mkdir -p -- "$CLAUDE_CONFIG_DIR" || return
+
+  # Argument-based commands bypass the agent aliases above.
+  export PATH="${AGENT_PATH:+$AGENT_PATH:}$PATH"
+  command "$@"
+)
+
 bindkey '^[f' autosuggest-accept
 bindkey -s "^[F" "sessionizer\n"
 

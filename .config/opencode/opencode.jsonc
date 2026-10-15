@@ -58,10 +58,10 @@
       "package": "@plannotator/opencode@latest",
       "options": {
         "workflow": "manual",
-        "runtime": "embedded"
-      }
+        "runtime": "embedded",
+      },
     },
-    "@openchamber/opencode-claude"
+    "@openchamber/opencode-claude",
   ],
   "agents": {
     "general": {
@@ -177,6 +177,14 @@
           "settings": {
             "provider": {
               "order": ["z-ai/fp8"],
+              "allow_fallbacks": false,
+            },
+          },
+        },
+        "deepseek/deepseek-v4.1-flash": {
+          "settings": {
+            "provider": {
+              "order": ["deepseek"],
               "allow_fallbacks": false,
             },
           },

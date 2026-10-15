@@ -2,12 +2,14 @@
   "lastChangelogVersion": "1.2.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
-  "defaultProvider": "openai",
+  "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "medium",
   "modelThinkingLevels": {
     "openai/gpt-6-luna": "xhigh",
     "openai/gpt-6.1-sol": "low",
+    "openai-codex/gpt-6-luna": "xhigh",
+    "openai-codex/gpt-6.1-sol": "low",
     "claude-bridge/claude-sonnet-5-5": "high"
   },
   "editorPaddingX": 2,
@@ -43,9 +45,9 @@
     "enabled": false
   },
   "enabledModels": [
-    "openai/gpt-6.1-sol",
-    "openai/gpt-6-luna",
-    "openai/gpt-6-astra",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6-astra",
     "antigravity/gemini-3.8-flash",
     "claude-bridge/claude-sonnet-5-5",
     "claude-bridge/claude-opus-5-5"
@@ -55,23 +57,23 @@
     "disableBuiltins": true,
     "agentOverrides": {
       "explorer": {
-        "model": "openai/gpt-6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "xhigh"
       },
       "researcher": {
-        "model": "openai/gpt-6-luna",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "xhigh"
       },
       "reviewer": {
-        "model": "openai/gpt-6.1-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "e2e-verifier": {
-        "model": "openai/gpt-6.1-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "low"
       },
       "worker": {
-        "model": "openai/gpt-6.1-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "low"
       }
     }

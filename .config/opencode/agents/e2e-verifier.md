@@ -1,5 +1,5 @@
 ---
-description: Verifies that result behaves as expected end to end. He already knows what to do, provide scope, requirements so he can tell if result behaves as expected.
+description: Verifies that result behaves as expected end to end. Agent already knows how to work, he needs to know what scope and requirements he should observe.
 mode: subagent
 ---
 

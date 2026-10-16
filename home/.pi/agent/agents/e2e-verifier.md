@@ -1,6 +1,6 @@
 ---
 name: e2e-verifier
-description: Verifies that result behaves as expected end to end.
+description: Verifies that result behaves as expected end to end. Agent already knows how to work, he needs to know what scope and requirements he should observe.
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: true

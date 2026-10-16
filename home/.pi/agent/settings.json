@@ -58,11 +58,11 @@
     "agentOverrides": {
       "explorer": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "xhigh"
+        "thinking": "high"
       },
       "researcher": {
-        "model": "openai-codex/gpt-6-luna",
-        "thinking": "xhigh"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "loww"
       },
       "reviewer": {
         "model": "openai-codex/gpt-6.1-sol",

@@ -16,6 +16,7 @@ When skill is invoked by system or user([skill]), it's entire content is provide
 
 When the user names a model by alias, use this table. Pass it as `model: "<model>:<thinking>"`.
 An alias in the request counts as an explicit model request.
+The alias selects only the model. Choose the agent by the job: researcher for research, worker for implementation, and so on. Use `general` only when the user names it.
 Use the default thinking level. A thinking level from the user overrides the default.
 
 Thinking level variants: low/medium/high/xhigh/max

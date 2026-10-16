@@ -1,5 +1,5 @@
 ---
-description: Fast codebase recon that returns compressed context for handoff. Treat him as a cheap and fast agent.
+description: Cheap, fast, read-only search of the local codebase. Returns the answer, files with line ranges, key code, and how the parts connect. Not for external research.
 mode: subagent
 ---
 

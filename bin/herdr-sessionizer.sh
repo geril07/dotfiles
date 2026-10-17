@@ -1,18 +1,10 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
-  selected=$1
-else
-  roots=(~/code ~/my)
-  [[ -d ~/.t3/worktrees ]] && roots+=(~/.t3/worktrees)
-  selected=$(fzf < <(fd -HI '^\.(git|tmux-session|herdr-session)$' "${roots[@]}" -x dirname))
-fi
+selected=$(sessionizer-select "$@") || exit "$?"
 
 if [[ -z $selected ]]; then
   exit 0
 fi
-
-zoxide add "$selected"
 
 selected_name=$(basename "$selected" | tr . _)
 worktree_list=$(herdr worktree list --cwd "$selected" 2>/dev/null || true)

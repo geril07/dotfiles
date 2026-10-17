@@ -3,9 +3,9 @@
 if [[ -n $HERDR_ENV ]]; then
   exec herdr-sessionizer "$@"
 elif [[ -n $TMUX ]]; then
-  exec tmux-sessioner "$@"
+  exec tmux-sessionizer "$@"
 elif pgrep -x herdr >/dev/null; then
   exec herdr-sessionizer "$@"
 else
-  exec tmux-sessioner "$@"
+  exec tmux-sessionizer "$@"
 fi

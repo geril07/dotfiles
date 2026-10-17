@@ -1,0 +1,125 @@
+diff --git a/.config/opencode/herdr-tui-session.js b/.config/opencode/herdr-tui-session.js
+index d21c1f7..a6309c2 100644
+--- a/.config/opencode/herdr-tui-session.js
++++ b/.config/opencode/herdr-tui-session.js
+@@ -413,9 +413,12 @@ function setup(api) {
+   let chain = Promise.resolve();
+   let retryIndex = 0;
+   let nextSelectionAt = 0;
+-  let state = "idle";
++  let failed = false;
+   let retryTimer;
+   const sessions = new Map();
++  let running = new Set();
++  const activityChanges = new Map();
++  const deleted = new Set();
+   let blockers = new Map();
+   // Event callbacks may precede cache updates. Retain each delta until the
+   // cache reflects it, so late hydration cannot undo a reply or lose an ask.
+@@ -423,7 +426,7 @@ function setup(api) {
+ 
+   function root(id) {
+     const seen = new Set();
+-    while (typeof id === "string" && !seen.has(id)) {
++    while (typeof id === "string" && !seen.has(id) && !deleted.has(id)) {
+       seen.add(id);
+       const session = api.data.session.get(id) ?? sessions.get(id);
+       if (!session) return;
+@@ -463,7 +466,24 @@ function setup(api) {
+   }
+ 
+   function publish() {
+-    enqueue(blockers.size ? "blocked" : state);
++    enqueue(blockers.size || failed ? "blocked" : running.size ? "working" : "idle");
++  }
++
++  // Local patch for herdr#4511: child executions outlive the parent turn.
++  // Retain event deltas until the cache catches up, as with request blockers.
++  function reconcileActivity() {
++    const next = new Set();
++    const members = new Set([selected, ...api.data.session.family(selected), ...running, ...activityChanges.keys()]);
++    for (const id of members) {
++      if (root(id) !== selected) continue;
++      const active = api.data.session.status(id) === "running";
++      const change = activityChanges.get(id);
++      if (change === active) activityChanges.delete(id);
++      if (change ?? active) next.add(id);
++    }
++    const changed = (running.size > 0) !== (next.size > 0);
++    running = next;
++    return changed;
+   }
+ 
+   function changeBlocker(id, kind, requestID, present) {
+@@ -516,14 +536,15 @@ function setup(api) {
+       nextSelectionAt = 0;
+       blockers.clear();
+       blockerChanges.clear();
+-      if (id) {
+-        state = api.data.session.status(id) === "running" ? "working" : "idle";
+-      }
++      running.clear();
++      activityChanges.clear();
++      failed = false;
+     }
+     if (!id) return;
+     const blockersChanged = reconcileBlockers();
++    const activityChanged = reconcileActivity();
+     if (Date.now() < nextSelectionAt) {
+-      if (blockersChanged) publish();
++      if (blockersChanged || activityChanged) publish();
+       return;
+     }
+     enqueue(undefined);
+@@ -537,11 +558,16 @@ function setup(api) {
+     const data = event.data;
+     if (data == null) return;
+     if (event.type === "session.created") {
++      deleted.delete(data.sessionID);
+       sessions.set(data.sessionID, { id: data.sessionID, parentID: data.parentID });
+     }
+     if (event.type === "session.deleted") {
+-      const affected = data.sessionID === selected || [...blockers.values()].includes(data.sessionID);
++      const affected = data.sessionID === selected || running.has(data.sessionID) ||
++        [...blockers.values()].includes(data.sessionID);
++      deleted.add(data.sessionID);
+       sessions.delete(data.sessionID);
++      running.delete(data.sessionID);
++      activityChanges.delete(data.sessionID);
+       // Deletion is delivered after the cache can remove the session. Use
+       // stored ownership rather than looking up the deleted child's ancestry.
+       for (const [key, owner] of blockers) if (owner === data.sessionID) blockers.delete(key);
+@@ -570,17 +596,16 @@ function setup(api) {
+         changeBlocker(id, "form", data.id, false);
+         break;
+       case "session.execution.started":
+-        if (id !== selected) return;
+-        state = "working";
++        activityChanges.set(id, true);
++        if (id === selected) failed = false;
++        reconcileActivity();
+         break;
+       case "session.execution.succeeded":
+       case "session.execution.interrupted":
+-        if (id !== selected) return;
+-        state = "idle";
+-        break;
+       case "session.execution.failed":
+-        if (id !== selected) return;
+-        state = "blocked";
++        activityChanges.set(id, false);
++        if (id === selected) failed = event.type === "session.execution.failed";
++        reconcileActivity();
+         break;
+       default:
+         return;
+@@ -598,6 +623,9 @@ function setup(api) {
+     clearInterval(poll);
+     unsubscribe();
+     sessions.clear();
++    running.clear();
++    activityChanges.clear();
++    deleted.clear();
+     blockers.clear();
+     blockerChanges.clear();
+   };

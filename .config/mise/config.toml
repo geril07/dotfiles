@@ -9,10 +9,10 @@ node = ["22", "24"]
 pnpm = "latest"
 yarn = "1"
 
-"npm:@anthropic-ai/claude-code" = { version = "latest", allow_builds = ["@anthropic-ai/claude-code"] }
+"npm:@anthropic-ai/claude-code" = { version = "latest", minimum_release_age = "0s", allow_builds = ["@anthropic-ai/claude-code"] }
 "npm:@colbymchenry/codegraph" = "latest"
-"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", minimum_release_age = "0s" }
 "npm:@fission-ai/openspec" = "latest"
-"npm:@openai/codex" = "latest"
-"npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
+"npm:@openai/codex" = { version = "latest", minimum_release_age = "0s" }
+"npm:@opencode/cli" = { version = "latest", minimum_release_age = "0s", allow_builds = ["@opencode/cli"] }
 "npm:@playwright/cli" = "latest"

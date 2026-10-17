@@ -16,3 +16,4 @@ yarn = "1"
 "npm:@openai/codex" = { version = "latest", minimum_release_age = "0s" }
 "npm:@opencode/cli" = { version = "latest", minimum_release_age = "0s", allow_builds = ["@opencode/cli"] }
 "npm:@playwright/cli" = "latest"
+"npm:tripo-cli" = "latest"

@@ -62,7 +62,7 @@
       },
       "researcher": {
         "model": "openai-codex/gpt-6.1-sol",
-        "thinking": "loww"
+        "thinking": "low"
       },
       "reviewer": {
         "model": "openai-codex/gpt-6.1-sol",

@@ -264,7 +264,8 @@ export default Plugin.define({
         currentWorktree,
         configDirectory,
       );
-      const files = (await Promise.all(paths.map(readInstruction))).filter(
+      paths.unshift(absolute(path.join(configDirectory, "APPEND_SYSTEM.md")));
+      const files = (await Promise.all([...new Set(paths)].map(readInstruction))).filter(
         (file): file is InstructionFile => file !== undefined,
       );
       if (files.length > 0) {

@@ -99,6 +99,7 @@ function __zoxide_z() {
 }
 
 # Pi bash commands default to three minutes; explicit commands may run up to 30 minutes.
+export PI_OFFLINE=1
 export PI_BASH_DEFAULT_TIMEOUT_SECONDS=180
 export PI_BASH_MAX_TIMEOUT_SECONDS=1800
 

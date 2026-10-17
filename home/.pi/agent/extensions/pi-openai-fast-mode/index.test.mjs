@@ -29,10 +29,12 @@ async function fixture(t, config = { enabled: false, targets: [target] }) {
 function harness(agentDir, { mode = "tui", fast = false, currentModel = model } = {}) {
   const handlers = new Map();
   const commands = new Map();
+  const virtualModels = [];
   const widgets = [];
   const errors = [];
   createPiFastModeExtension({ agentDir })({
     registerFlag() {},
+    registerVirtualModel: (definition) => virtualModels.push(definition),
     getFlag: () => fast,
     registerCommand: (name, command) => commands.set(name, command),
     on: (event, handler) => handlers.set(event, handler),
@@ -51,7 +53,7 @@ function harness(agentDir, { mode = "tui", fast = false, currentModel = model } 
     },
   };
   return {
-    ctx, widgets, errors,
+    ctx, widgets, errors, virtualModels,
     start: (reason = "startup") => handlers.get("session_start")({ reason }, ctx),
     shutdown: () => handlers.get("session_shutdown")({}, ctx),
     command: (args = "") => commands.get("fast").handler(args, ctx),
@@ -63,6 +65,41 @@ function harness(agentDir, { mode = "tui", fast = false, currentModel = model } 
     indicator: (width = 8) => widgets.at(-1)?.[1]?.().render(width),
   };
 }
+
+test("fast aliases route to physical models and request priority independently of /fast", async (t) => {
+  const { agentDir, path } = await fixture(t);
+  const bytes = await readFile(path, "utf8");
+  const session = harness(agentDir);
+  await session.start();
+  assert.equal(session.virtualModels.length, 4);
+  for (const alias of session.virtualModels) {
+    const isSol = alias.id === "gpt-6.1-sol-fast";
+    const physical = { provider: alias.provider, id: isSol ? "gpt-6.1-sol" : "gpt-6-luna" };
+    const routeContext = { modelRegistry: { find: (provider, id) => {
+      assert.equal(provider, physical.provider);
+      assert.equal(id, physical.id);
+      return physical;
+    } } };
+    const thinkingLevels = ["off", "minimal", "low", "medium", "high", "xhigh", "max"];
+    for (const reason of ["user", "continuation", "retry", "direct"]) {
+      for (const thinkingLevel of thinkingLevels) {
+        assert.deepEqual(alias.route({ reason, thinkingLevel }, routeContext), { model: physical, thinkingLevel });
+      }
+    }
+    assert.deepEqual(alias.thinkingLevels, thinkingLevels);
+    assert.throws(() => alias.route({}, { modelRegistry: { find: () => undefined } }), /model not found/);
+    session.select({ provider: alias.provider, id: alias.id });
+    const payload = { model: physical.id, input: [] };
+    assert.deepEqual(session.request(payload), { ...payload, service_tier: "priority" });
+    assert.deepEqual(session.indicator(), ["    fast"]);
+    await session.command("off");
+    assert.equal(session.request(payload).service_tier, "priority");
+    session.select(physical);
+    assert.equal(session.request(payload), undefined);
+    assert.equal(session.indicator(), undefined);
+  }
+  assert.equal(await readFile(path, "utf8"), bytes);
+});
 
 async function document(path) {
   return JSON.parse(await readFile(path, "utf8"));
@@ -327,6 +364,11 @@ test("Pi SDK discovers the local extension once and applies its headless request
   const errors = [];
   await session.bindExtensions({ mode: "print", onError: (error) => errors.push(error) });
   assert.deepEqual(errors, []);
+  for (const provider of ["openai", "openai-codex"]) {
+    for (const id of ["gpt-6.1-sol-fast", "gpt-6-luna-fast"]) {
+      assert.equal(modelRuntime.getModel(provider, id)?.api, "pi-virtual");
+    }
+  }
   const payload = { model: model.id, input: [] };
   assert.deepEqual(await session.extensionRunner.emitBeforeProviderRequest(payload), { ...payload, service_tier: "priority" });
   await session.prompt("/fast off");

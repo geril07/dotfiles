@@ -1,5 +1,6 @@
 import type { ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { findMatchingTarget } from "./payload.js";
+import { isFastVirtualModel } from "./virtual-models.js";
 import { STATUS_KEY, type FastModeConfig, type ModelRef } from "./types.js";
 
 export function updateFastStatus(
@@ -8,7 +9,7 @@ export function updateFastStatus(
   model: ModelRef | undefined,
 ): void {
   if (ctx.mode !== "tui" || !ctx.hasUI) return;
-  const visible = config?.enabled && findMatchingTarget(model, config.targets);
+  const visible = config && (isFastVirtualModel(model) || (config.enabled && findMatchingTarget(model, config.targets)));
   ctx.ui.setWidget(
     STATUS_KEY,
     visible ? () => ({

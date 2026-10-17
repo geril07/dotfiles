@@ -28,6 +28,19 @@ Edit `~/.pi/agent/extensions/pi-openai-fast-mode.json` (or the same path under `
 
 Run `/reload` or start a new Pi session after manual changes. Each session retains its own snapshot, including its targets. Switching models uses that same list. Already running sessions do not watch the file.
 
+## Virtual fast models
+
+The extension registers these exact IDs under both `openai` and `openai-codex`:
+
+| Virtual model | Physical model |
+| --- | --- |
+| `gpt-6.1-sol-fast` | `gpt-6.1-sol` |
+| `gpt-6-luna-fast` | `gpt-6-luna` |
+
+Select them through `/model` or `--model openai-codex/gpt-6.1-sol-fast` (use `openai/` for API access). They request `service_tier: "priority"` regardless of the saved toggle, `--fast`, or the target list. `/fast off` does not disable a fast alias: select the physical model instead. The physical model must exist in the local catalog and have credentials. Offline mode does not prevent registration. Invalid configuration still disables request changes until corrected and reloaded.
+
+Thinking remains selectable and is passed through to the physical model. Pi clamps unsupported levels to the physical model's supported levels. Existing physical models and the `/fast` toggle retain their behavior. Scoped model lists and subagent profiles must explicitly name the new IDs to use them. Priority remains a request, not a guarantee of provider support or speed. Session responses record the physical model; session selection records the virtual model.
+
 ## Commands and persistence
 
 ```text
@@ -41,7 +54,7 @@ In the TUI, `/fast` saves only `enabled`. It reads the current file before writi
 
 In print, JSON, and RPC modes, the command changes only the current session. These modes never save the shared toggle. `pi --fast` also enables only the current session in any mode; it does not change the file. Startup and shutdown never write it.
 
-The TUI shows a right-aligned `fast` indicator below the editor only when enabled and the current model is in the list. It reports the requested mode, not a server-confirmed tier.
+The TUI shows a right-aligned `fast` indicator below the editor when a fast alias is selected, or when enabled and the current physical model is in the list. It reports the requested mode, not a server-confirmed tier.
 
 New headless sessions that load this extension read the saved toggle and targets at startup. Existing children retain their snapshot and cannot restore an old toggle when they finish. This extension does not change `pi-subagents`; its own `fast: true` request hook remains independent. `/fast off` disables only this extension's injection, not another hook or a server-side default tier.
 
@@ -57,4 +70,4 @@ npm run check
 
 Tests cover config preservation, invalid files, missing files, session snapshots, reload, model matching, headless read-only behavior, temporary CLI enablement, and real Pi SDK loading without model API requests.
 
-The test dependency on Pi 0.87.1 currently includes `brace-expansion@5.0.9`, which `npm audit` reports as a high-severity denial-of-service risk. Normal `npm audit fix`/`npm update` do not replace that packaged dependency. The extension adds no runtime dependencies; this test setup does not update the globally installed Pi.
+The test dependency is pinned to Pi 1.3.0, matching the installed CLI and its virtual-model API. The extension adds no runtime dependencies; this test setup does not update the globally installed Pi.

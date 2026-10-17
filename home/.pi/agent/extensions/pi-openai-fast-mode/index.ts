@@ -1,7 +1,9 @@
 import type { ExtensionContext, ExtensionFactory } from "@earendil-works/pi-coding-agent";
 import { getFastCommandCompletions, parseFastCommand } from "./commands.js";
 import { getUserConfigPath, loadConfig, saveEnabled } from "./config.js";
-import { getFastModePayload, toModelRef } from "./payload.js";
+import { applyFastModePayload, getFastModePayload, toModelRef } from "./payload.js";
+import { isFastVirtualModel, registerFastModels } from "./virtual-models.js";
+import { DEFAULT_SERVICE_TIER } from "./types.js";
 import { updateFastStatus } from "./status.js";
 import type { FastModeConfig } from "./types.js";
 
@@ -14,6 +16,7 @@ export function createPiFastModeExtension(
   options: { agentDir?: string } = {},
 ): ExtensionFactory {
   return (pi) => {
+    registerFastModels(pi);
     const configPath = getUserConfigPath(options.agentDir);
     let config: FastModeConfig | undefined;
 
@@ -55,7 +58,9 @@ export function createPiFastModeExtension(
 
     pi.on("before_provider_request", (event, ctx) => {
       if (!config) return undefined;
-      return getFastModePayload(config, toModelRef(ctx.model), event.payload);
+      const model = toModelRef(ctx.model);
+      if (isFastVirtualModel(model)) return applyFastModePayload(event.payload, DEFAULT_SERVICE_TIER);
+      return getFastModePayload(config, model, event.payload);
     });
 
     pi.on("session_shutdown", (_event, ctx) => {

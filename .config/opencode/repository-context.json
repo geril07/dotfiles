@@ -1,6 +1,10 @@
 {
   "mappings": [
     {
+      "selector": "/**",
+      "instructions": ["APPEND_SYSTEM.md"]
+    },
+    {
       "selector": [
         "~/code/job/ave/va-*"
       ],

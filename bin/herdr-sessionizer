@@ -3,7 +3,9 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fzf < <(fd -HI '^\.(git|tmux-session|herdr-session)$' ~/code ~/my -x dirname))
+  roots=(~/code ~/my)
+  [[ -d ~/.t3/worktrees ]] && roots+=(~/.t3/worktrees)
+  selected=$(fzf < <(fd -HI '^\.(git|tmux-session|herdr-session)$' "${roots[@]}" -x dirname))
 fi
 
 if [[ -z $selected ]]; then

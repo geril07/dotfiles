@@ -33,7 +33,8 @@
     {
       "source": "https://github.com/nicobailon/pi-subagents",
       "prompts": [],
-      "skills": []
+      "skills": [],
+      "extensions": []
     },
     "https://github.com/monotykamary/pi-double-esc@main",
     "npm:@narumitw/pi-goal",
@@ -42,7 +43,10 @@
     "npm:@piotr-oles/pi-bash-timeout",
     "npm:pi-mcp-adapter",
     "npm:pi-claude-bridge",
-    "npm:pi-antigravity"
+    "npm:pi-antigravity",
+    {
+      "source": "/home/geril/code/my/pi-sidekicks"
+    }
   ],
   "hideThinkingBlock": false,
   "compaction": {

@@ -33,4 +33,4 @@ Scope:
 - Cite sources inline with links — GitHub permalinks and docs URLs — and show the relevant snippet when it makes the point.
 - Be concise: facts over opinions, evidence over speculation.
 - If you cannot verify something, say so plainly and suggest where to look next.
-- Do not modify files. Return findings in your response.
+- Return findings in your response. Write to a file only when the task asks you to save the report, and only at the path given.

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# usage: subagents-switch mine|theirs [agent-dir]
+# mine = pi-sidekicks, theirs = nicobailon/pi-subagents. Only one of them may load: both register a `subagent` tool.
+# Flips the package in settings.json and points APPEND_SYSTEM.md at that tool's instruction file.
+set -euo pipefail
+mode=${1:-}; agent=${2:-$HOME/.pi/agent}; file=$agent/settings.json
+[[ $mode == mine || $mode == theirs ]] || { echo "usage: subagents-switch mine|theirs" >&2; exit 2; }
+variant=APPEND_SYSTEM.$([[ $mode == mine ]] && echo sidekicks || echo nicobailon).md
+[[ -f $agent/$variant ]] || { echo "missing $agent/$variant" >&2; exit 1; }
+if [[ -e $agent/APPEND_SYSTEM.md && ! -L $agent/APPEND_SYSTEM.md ]]; then
+  echo "$agent/APPEND_SYSTEM.md is a regular file; move it to one of the APPEND_SYSTEM.<tool>.md files first" >&2; exit 1
+fi
+sidekicks=/home/geril/code/my/pi-sidekicks
+tmp=$(mktemp "$file.XXXXXX")
+jq --arg mode "$mode" --arg sidekicks "$sidekicks" '
+  def source: if type == "string" then . else .source end;
+  .packages |= (if any(.[]; source == $sidekicks) then . else . + [$sidekicks] end
+    | map((if type == "string" then {source: .} else . end) as $o
+      | if ($o.source | test("nicobailon/pi-subagents$")) then ($o | if $mode == "theirs" then del(.extensions) else .extensions = [] end)
+        elif $o.source == $sidekicks then ($o | if $mode == "mine" then del(.extensions) else .extensions = [] end)
+        else . end))' "$file" > "$tmp"
+mv "$tmp" "$file"
+ln -sfn "$variant" "$agent/APPEND_SYSTEM.md"
+jq -r '.packages[] | (if type == "string" then {source: .} else . end) | select(.source | test("pi-sidekicks$|nicobailon/pi-subagents$"))
+  | "\(.source | sub(".*/"; "")): \(if .extensions == [] then "off" else "ON" end)"' "$file"
+echo "APPEND_SYSTEM.md -> $(readlink "$agent/APPEND_SYSTEM.md")"

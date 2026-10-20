@@ -30,3 +30,4 @@ Thinking level variants: low/medium/high/xhigh/max
 | Opus         | `claude-bridge/claude-opus-5-5`   | medium           |
 | Haiku        | `claude-bridge/claude-haiku-5-5`  | high             |
 | Gemini Flash | `antigravity/gemini-3.8-flash`    | high             |
+| Deepseek     | `opencode-go/deepseek-v4.1-flash` | high             |

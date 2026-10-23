@@ -9,8 +9,6 @@ When skill is invoked by system or user([skill]), it's entire content is provide
 ## Pi subagents
 
 - Set optional subagent controls only when explicitly requested or required by the task contract.
-- `subagent` is not callable from codemode scripts; call it directly. Children always run in the background.
-- Launch several independent children in one `launch` call with `tasks`. Results arrive as messages, so do not poll or wait.
 
 ### Model aliases
 

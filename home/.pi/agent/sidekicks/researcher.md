@@ -1,7 +1,7 @@
 ---
 name: researcher
-model: openai-codex/gpt-6.1-sol
-thinking: low
+model: openai-codex/gpt-6-luna
+thinking: xhigh
 description: External research agent. Use it to answer questions about libraries, frameworks, APIs, technical concepts, patterns, comparisons, errors, and versions. Returns evidence-backed answers with real source links. Not for local codebase search — that is explorer's job.
 systemPromptMode: replace
 inheritProjectContext: true

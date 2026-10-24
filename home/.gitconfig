@@ -13,6 +13,17 @@
 [pull]
   rebase = true
 
+[rebase]
+  autoSquash = true
+  updateRefs = true
+
+[rerere]
+  enabled = true
+
+[diff]
+  colorMoved = default
+  algorithm = histogram
+
 [push]
   autoSetupRemote = true
 

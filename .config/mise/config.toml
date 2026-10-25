@@ -1,5 +1,7 @@
 [settings]
 idiomatic_version_file_enable_tools = ["node", "npm", "pnpm", "yarn"]
+auto_install = false
+not_found_system_fallback = false
 
 [tool_alias]
 pnpm = "npm:pnpm"
@@ -9,11 +11,14 @@ node = ["22", "24"]
 pnpm = "latest"
 yarn = "1"
 
-"npm:@anthropic-ai/claude-code" = { version = "latest", minimum_release_age = "0s", allow_builds = ["@anthropic-ai/claude-code"] }
-"npm:@colbymchenry/codegraph" = "latest"
-"npm:@earendil-works/pi-coding-agent" = { version = "latest", minimum_release_age = "0s" }
-"npm:@fission-ai/openspec" = "latest"
-"npm:@openai/codex" = { version = "latest", minimum_release_age = "0s" }
-"npm:@opencode/cli" = { version = "latest", minimum_release_age = "0s", allow_builds = ["@opencode/cli"] }
+"aqua:anthropics/claude-code" = { version = "latest", minimum_release_age = "0s" }
+"aqua:colbymchenry/codegraph" = "latest"
+"aqua:earendil-works/pi" = { version = "latest", minimum_release_age = "0s" }
+"github:Fission-AI/OpenSpec" = { version = "latest", bin = "openspec" }
+"aqua:openai/codex" = { version = "latest", minimum_release_age = "0s" }
+"aqua:anomalyco/opencode" = { version = "latest", minimum_release_age = "0s" }
 "npm:@playwright/cli" = "latest"
 "npm:tripo-cli" = "latest"
+
+[wrappers]
+opencode2 = "opencode"

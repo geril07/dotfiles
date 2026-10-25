@@ -18,7 +18,7 @@
         "server": "8.8.8.8"
       }
     ],
-    "final": "google",
+    "final": "cloudflare",
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
@@ -53,13 +53,23 @@
       },
 
       {
-        "rule_set": ["geoip-private", "geoip-ru"],
+        "ip_cidr": ["192.168.0.0/16"],
         "outbound": "direct"
       },
 
       {
-        "process_path": ["/usr/lib/firefox/firefox"],
-        "outbound": "proxy-work"
+        "domain_keyword": ["maven.neoforged"],
+        "outbound": "proxy"
+      },
+
+      {
+        "rule_set": ["geosite-private", "geoip-private", "geoip-ru"],
+        "outbound": "direct"
+      },
+
+      {
+        "process_path": ["/opt/yandex/browser/yandex_browser"],
+        "outbound": "direct"
       },
 
       {
@@ -67,6 +77,7 @@
           "/usr/bin/dnf",
           "/usr/bin/dnf5",
           "/usr/bin/pacman",
+          "/usr/bin/rate-mirrors",
           "/usr/bin/yay",
           "/home/geril/.local/bin/hf",
           "/home/geril/.local/bin/huggingface-cli"
@@ -77,6 +88,7 @@
       {
         "domain_keyword": [
           "godeaf",
+          "ceramet.net",
           "gencit",
           "opravar",
           "allo.cdnlbox.club",
@@ -89,7 +101,8 @@
           "ozon.ru",
 
           "playlist.ttvnw",
-          "hls.ttvnw"
+          "hls.ttvnw",
+          "hls.live-video.net"
         ],
         "outbound": "direct"
       }
@@ -101,6 +114,7 @@
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/ru.srs"
       },
+
       {
         "format": "binary",
         "tag": "geosite-category-ads-all",
@@ -112,6 +126,24 @@
         "tag": "geoip-private",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs"
+      },
+      {
+        "format": "binary",
+        "tag": "geosite-private",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs"
+      },
+      {
+        "format": "binary",
+        "tag": "geosite-twitch",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/twitch.srs"
+      },
+      {
+        "format": "binary",
+        "tag": "geosite-openai",
+        "type": "remote",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs"
       }
     ],
     "final": "proxy",

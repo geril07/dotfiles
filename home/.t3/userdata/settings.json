@@ -5,7 +5,7 @@
     {
       "id": "terminal-floating",
       "name": "Terminal",
-      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\"",
+      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" && exit",
       "icon": "play",
       "runOnWorktreeCreate": false,
       "runOnSettle": false
@@ -13,7 +13,7 @@
     {
       "id": "herdr-floating",
       "name": "Herdr",
-      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" /usr/bin/python3 /home/geril/my/dotfiles/bin/herdr-open-project.py \"$PWD\"",
+      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" /usr/bin/python3 /home/geril/my/dotfiles/bin/herdr-open-project.py \"$PWD\" && exit",
       "icon": "play",
       "runOnWorktreeCreate": false,
       "runOnSettle": false

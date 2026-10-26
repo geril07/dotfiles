@@ -46,7 +46,8 @@
     "npm:pi-antigravity",
     {
       "source": "/home/geril/code/my/pi-sidekicks"
-    }
+    },
+    "npm:@sting8k/pi-vcc"
   ],
   "hideThinkingBlock": false,
   "compaction": {

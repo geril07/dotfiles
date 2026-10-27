@@ -1,113 +1,114 @@
 {
-  "enableProviderUpdateChecks": false,
-  "projectSettingsFolded": true,
-  "defaultProjectScripts": [
+  "favorites": [
     {
-      "id": "terminal-floating",
-      "name": "Terminal",
-      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" && exit",
-      "icon": "play",
-      "runOnWorktreeCreate": false,
-      "runOnSettle": false
+      "provider": "codex",
+      "model": "gpt-6.1-terra"
     },
     {
-      "id": "herdr-floating",
-      "name": "Herdr",
-      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" /usr/bin/python3 /home/geril/my/dotfiles/bin/herdr-open-project.py \"$PWD\" && exit",
-      "icon": "play",
-      "runOnWorktreeCreate": false,
-      "runOnSettle": false
+      "provider": "pi",
+      "model": "openai-codex/gpt-6.1-terra"
+    },
+    {
+      "provider": "pi",
+      "model": "openai-codex/gpt-6.1-terra-fast"
+    },
+    {
+      "provider": "pi",
+      "model": "claude-bridge/claude-haiku-5-5"
+    },
+    {
+      "provider": "pi",
+      "model": "claude-bridge/claude-sonnet-5-5"
+    },
+    {
+      "provider": "pi",
+      "model": "claude-bridge/claude-opus-5-5"
+    },
+    {
+      "provider": "pi",
+      "model": "openai-codex/gpt-6.1-sol"
+    },
+    {
+      "provider": "pi",
+      "model": "openai-codex/gpt-6-luna"
+    },
+    {
+      "provider": "pi",
+      "model": "openai-codex/gpt-6-astra"
+    },
+    {
+      "provider": "pi",
+      "model": "antigravity/gemini-3.8-flash"
+    },
+    {
+      "provider": "pi",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "provider": "opencode",
+      "model": "claude-code/claude-haiku-5-5"
+    },
+    {
+      "provider": "opencode",
+      "model": "claude-code/claude-sonnet-5-5"
+    },
+    {
+      "provider": "opencode",
+      "model": "claude-code/claude-opus-5-5[1m]"
+    },
+    {
+      "provider": "opencode",
+      "model": "openai/gpt-6.1-sol"
+    },
+    {
+      "provider": "opencode",
+      "model": "openai/gpt-6-luna"
+    },
+    {
+      "provider": "opencode",
+      "model": "openai/gpt-6-astra"
+    },
+    {
+      "provider": "opencode",
+      "model": "google/gemini-3.8-flash"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "claude-code/claude-haiku-5-5"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "claude-code/claude-sonnet-5-5"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "claude-code/claude-opus-5-5[1m]"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "openai/gpt-6.1-sol"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "openai/gpt-6-luna"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "openai/gpt-6-astra"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "google/gemini-3.8-flash"
+    },
+    {
+      "provider": "opencode_work",
+      "model": "opencode-go/deepseek-v4.1-flash"
     }
   ],
-  "providerInstances": {
-    "opencode": {
-      "driver": "opencode",
-      "enabled": true,
-      "config": {
-        "binaryPath": "opencode",
-        "serverUrl": "",
-        "serverPassword": "",
-        "customModels": []
-      },
-      "displayName": "OpenCode Default",
-      "environment": [
-        {
-          "name": "CLAUDE_CONFIG_DIR",
-          "value": "/home/geril/.claude"
-        },
-        {
-          "name": "OPENCODE_CONFIG_DIR",
-          "value": "/home/geril/my/dotfiles/.config/opencode"
-        },
-        {
-          "name": "OPENCODE_CLAUDE_PROXY_PORT",
-          "value": "0"
-        }
-      ]
-    },
-    "opencode_work": {
-      "driver": "opencode",
-      "enabled": true,
-      "config": {
-        "binaryPath": "opencode",
-        "serverUrl": "",
-        "serverPassword": "",
-        "customModels": []
-      },
-      "displayName": "OpenCode Work",
-      "environment": [
-        {
-          "name": "CLAUDE_CONFIG_DIR",
-          "value": "/home/geril/.claude-profiles/work"
-        },
-        {
-          "name": "OPENCODE_CONFIG_DIR",
-          "value": "/home/geril/my/dotfiles/.config/opencode"
-        },
-        {
-          "name": "OPENCODE_CLAUDE_PROXY_PORT",
-          "value": "0"
-        }
-      ]
-    },
-    "pi": {
-      "driver": "pi",
-      "displayName": "Pi",
-      "enabled": true
-    },
-    "pi_work": {
-      "driver": "pi",
-      "displayName": "Pi Work",
-      "enabled": true,
-      "environment": [
-        {
-          "name": "CLAUDE_CONFIG_DIR",
-          "value": "/home/geril/.claude-profiles/work"
-        }
-      ],
-      "config": {
-        "binaryPath": "pi",
-        "launchArgs": "--provider claude-bridge --model claude-sonnet-5-5"
-      }
-    },
-    "claudeAgent": {
-      "driver": "claudeAgent",
-      "displayName": "Claude Personal",
-      "enabled": true,
-      "config": {
-        "binaryPath": "claude"
-      }
-    },
-    "claude_work": {
-      "driver": "claudeAgent",
-      "displayName": "Claude Work",
-      "enabled": true,
-      "config": {
-        "binaryPath": "claude",
-        "homePath": "~/.claude-profiles/work"
-      }
-    }
-  },
   "providerModelPreferences": {
     "pi": {
       "hiddenModels": [
@@ -2656,114 +2657,135 @@
       ]
     }
   },
-  "favorites": [
+  "enableProviderUpdateChecks": false,
+  "defaultProjectScripts": [
     {
-      "provider": "codex",
-      "model": "gpt-6.1-terra"
+      "id": "terminal-floating",
+      "name": "Terminal",
+      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" && exit",
+      "icon": "play",
+      "runOnWorktreeCreate": false,
+      "runOnSettle": false
     },
     {
-      "provider": "pi",
-      "model": "openai-codex/gpt-6.1-terra"
-    },
-    {
-      "provider": "pi",
-      "model": "openai-codex/gpt-6.1-terra-fast"
-    },
-    {
-      "provider": "pi",
-      "model": "claude-bridge/claude-haiku-5-5"
-    },
-    {
-      "provider": "pi",
-      "model": "claude-bridge/claude-sonnet-5-5"
-    },
-    {
-      "provider": "pi",
-      "model": "claude-bridge/claude-opus-5-5"
-    },
-    {
-      "provider": "pi",
-      "model": "openai-codex/gpt-6.1-sol"
-    },
-    {
-      "provider": "pi",
-      "model": "openai-codex/gpt-6-luna"
-    },
-    {
-      "provider": "pi",
-      "model": "openai-codex/gpt-6-astra"
-    },
-    {
-      "provider": "pi",
-      "model": "antigravity/gemini-3.8-flash"
-    },
-    {
-      "provider": "pi",
-      "model": "opencode-go/deepseek-v4.1-flash"
-    },
-    {
-      "provider": "opencode",
-      "model": "claude-code/claude-haiku-5-5"
-    },
-    {
-      "provider": "opencode",
-      "model": "claude-code/claude-sonnet-5-5"
-    },
-    {
-      "provider": "opencode",
-      "model": "claude-code/claude-opus-5-5[1m]"
-    },
-    {
-      "provider": "opencode",
-      "model": "openai/gpt-6.1-sol"
-    },
-    {
-      "provider": "opencode",
-      "model": "openai/gpt-6-luna"
-    },
-    {
-      "provider": "opencode",
-      "model": "openai/gpt-6-astra"
-    },
-    {
-      "provider": "opencode",
-      "model": "google/gemini-3.8-flash"
-    },
-    {
-      "provider": "opencode",
-      "model": "opencode-go/deepseek-v4.1-flash"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "claude-code/claude-haiku-5-5"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "claude-code/claude-sonnet-5-5"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "claude-code/claude-opus-5-5[1m]"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "openai/gpt-6.1-sol"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "openai/gpt-6-luna"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "openai/gpt-6-astra"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "google/gemini-3.8-flash"
-    },
-    {
-      "provider": "opencode_work",
-      "model": "opencode-go/deepseek-v4.1-flash"
+      "id": "herdr-floating",
+      "name": "Herdr",
+      "command": "/usr/bin/kitty --detach --title floating --directory \"$PWD\" /usr/bin/python3 /home/geril/my/dotfiles/bin/herdr-open-project.py \"$PWD\" && exit",
+      "icon": "play",
+      "runOnWorktreeCreate": false,
+      "runOnSettle": false
     }
-  ]
+  ],
+  "projectSettingsFolded": true,
+  "idleCompaction": "onReturn",
+  "providerInstances": {
+    "opencode": {
+      "driver": "opencode",
+      "displayName": "OpenCode",
+      "environment": [
+        {
+          "name": "CLAUDE_CONFIG_DIR",
+          "value": "/home/geril/.claude",
+          "sensitive": false
+        },
+        {
+          "name": "OPENCODE_CONFIG_DIR",
+          "value": "/home/geril/my/dotfiles/.config/opencode",
+          "sensitive": false
+        },
+        {
+          "name": "OPENCODE_CLAUDE_PROXY_PORT",
+          "value": "0",
+          "sensitive": false
+        }
+      ],
+      "enabled": true,
+      "config": {
+        "binaryPath": "opencode",
+        "serverUrl": "",
+        "serverPassword": "",
+        "customModels": []
+      }
+    },
+    "opencode_work": {
+      "driver": "opencode",
+      "displayName": "OpenCode Work",
+      "environment": [
+        {
+          "name": "CLAUDE_CONFIG_DIR",
+          "value": "/home/geril/.claude-profiles/work",
+          "sensitive": false
+        },
+        {
+          "name": "OPENCODE_CONFIG_DIR",
+          "value": "/home/geril/my/dotfiles/.config/opencode",
+          "sensitive": false
+        },
+        {
+          "name": "OPENCODE_CLAUDE_PROXY_PORT",
+          "value": "0",
+          "sensitive": false
+        }
+      ],
+      "enabled": true,
+      "config": {
+        "binaryPath": "opencode",
+        "serverUrl": "",
+        "serverPassword": "",
+        "customModels": []
+      }
+    },
+    "pi": {
+      "driver": "pi",
+      "displayName": "Pi",
+      "environment": [
+        {
+          "name": "CLAUDE_CODE_ENTRYPOINT",
+          "value": "pi-claude-bridge",
+          "sensitive": false
+        }
+      ],
+      "enabled": true
+    },
+    "pi_work": {
+      "driver": "pi",
+      "displayName": "Pi Work",
+      "environment": [
+        {
+          "name": "CLAUDE_CONFIG_DIR",
+          "value": "/home/geril/.claude-profiles/work",
+          "sensitive": false
+        }
+      ],
+      "enabled": true,
+      "config": {
+        "binaryPath": "pi",
+        "launchArgs": "--provider claude-bridge --model claude-sonnet-5-5"
+      }
+    },
+    "claudeAgent": {
+      "driver": "claudeAgent",
+      "displayName": "Claude",
+      "environment": [
+        {
+          "name": "CLAUDE_CODE_ENTRYPOINT",
+          "value": "t3-code",
+          "sensitive": false
+        }
+      ],
+      "enabled": true,
+      "config": {
+        "binaryPath": "claude"
+      }
+    },
+    "claude_work": {
+      "driver": "claudeAgent",
+      "displayName": "Claude Work",
+      "enabled": true,
+      "config": {
+        "binaryPath": "claude",
+        "homePath": "~/.claude-profiles/work"
+      }
+    }
+  }
 }

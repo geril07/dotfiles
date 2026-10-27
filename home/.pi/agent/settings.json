@@ -59,7 +59,10 @@
     "openai-codex/gpt-6-astra",
     "antigravity/gemini-3.8-flash",
     "claude-bridge/claude-sonnet-5-5",
-    "claude-bridge/claude-opus-5-5"
+    "claude-bridge/claude-opus-5-5",
+    "opencode-go/deepseek-v4.1-flash",
+    "openai-codex/gpt-6.1-terra",
+    "openai-codex/gpt-6.1-terra-fast"
   ],
   "subagents": {
     "disableThinking": true,
@@ -78,8 +81,8 @@
         "thinking": "high"
       },
       "e2e-verifier": {
-        "model": "openai-codex/gpt-6.1-sol",
-        "thinking": "low"
+        "model": "openai-codex/gpt-6.1-terra",
+        "thinking": "medium"
       },
       "worker": {
         "model": "openai-codex/gpt-6.1-sol",

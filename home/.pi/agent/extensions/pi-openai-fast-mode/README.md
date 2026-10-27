@@ -35,6 +35,7 @@ The extension registers these exact IDs under both `openai` and `openai-codex`:
 | Virtual model | Physical model |
 | --- | --- |
 | `gpt-6.1-sol-fast` | `gpt-6.1-sol` |
+| `gpt-6.1-terra-fast` | `gpt-6.1-terra` |
 | `gpt-6-luna-fast` | `gpt-6-luna` |
 
 Select them through `/model` or `--model openai-codex/gpt-6.1-sol-fast` (use `openai/` for API access). They request `service_tier: "priority"` regardless of the saved toggle, `--fast`, or the target list. `/fast off` does not disable a fast alias: select the physical model instead. The physical model must exist in the local catalog and have credentials. Offline mode does not prevent registration. Invalid configuration still disables request changes until corrected and reloaded.

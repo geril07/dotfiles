@@ -71,10 +71,9 @@ test("fast aliases route to physical models and request priority independently o
   const bytes = await readFile(path, "utf8");
   const session = harness(agentDir);
   await session.start();
-  assert.equal(session.virtualModels.length, 4);
+  assert.equal(session.virtualModels.length, 6);
   for (const alias of session.virtualModels) {
-    const isSol = alias.id === "gpt-6.1-sol-fast";
-    const physical = { provider: alias.provider, id: isSol ? "gpt-6.1-sol" : "gpt-6-luna" };
+    const physical = { provider: alias.provider, id: alias.id.slice(0, -"-fast".length) };
     const routeContext = { modelRegistry: { find: (provider, id) => {
       assert.equal(provider, physical.provider);
       assert.equal(id, physical.id);
@@ -127,7 +126,7 @@ test("startup and shutdown retain manual targets, tiers, extra fields, and file 
 test("checked-in targets enable the new GPT-6 models for both configured providers", async () => {
   const config = parseConfig(JSON.parse(await readFile(join(directory, "../pi-openai-fast-mode.json"), "utf8")));
   for (const provider of ["openai", "openai-codex"]) {
-    for (const id of ["gpt-6-astra", "gpt-6-luna", "gpt-6-sol", "gpt-6.1-sol"]) {
+    for (const id of ["gpt-6-astra", "gpt-6-luna", "gpt-6-sol", "gpt-6.1-sol", "gpt-6.1-terra"]) {
       const payload = { model: id };
       assert.deepEqual(getFastModePayload({ ...config, enabled: true }, { provider, id }, payload), { ...payload, service_tier: "priority" });
     }
@@ -365,7 +364,7 @@ test("Pi SDK discovers the local extension once and applies its headless request
   await session.bindExtensions({ mode: "print", onError: (error) => errors.push(error) });
   assert.deepEqual(errors, []);
   for (const provider of ["openai", "openai-codex"]) {
-    for (const id of ["gpt-6.1-sol-fast", "gpt-6-luna-fast"]) {
+    for (const id of ["gpt-6.1-sol-fast", "gpt-6.1-terra-fast", "gpt-6-luna-fast"]) {
       assert.equal(modelRuntime.getModel(provider, id)?.api, "pi-virtual");
     }
   }

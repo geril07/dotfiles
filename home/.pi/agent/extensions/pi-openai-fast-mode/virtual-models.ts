@@ -3,6 +3,7 @@ import { SUPPORTED_PROVIDERS, type ModelRef } from "./types.js";
 
 const FAST_MODELS = [
   { id: "gpt-6.1-sol-fast", model: "gpt-6.1-sol" },
+  { id: "gpt-6.1-terra-fast", model: "gpt-6.1-terra" },
   { id: "gpt-6-luna-fast", model: "gpt-6-luna" },
 ] as const;
 

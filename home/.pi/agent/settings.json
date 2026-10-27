@@ -1,4 +1,5 @@
 {
+  "deviceId": "16cff299-b925-4422-8381-68b7851400dd",
   "lastChangelogVersion": "1.4.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
@@ -73,8 +74,8 @@
         "thinking": "high"
       },
       "researcher": {
-        "model": "openai-codex/gpt-6.1-sol",
-        "thinking": "low"
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "xhigh"
       },
       "reviewer": {
         "model": "openai-codex/gpt-6.1-sol",

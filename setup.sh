@@ -48,3 +48,18 @@ if [ -d "$pi_source" ]; then
         echo "Symlink created for '.pi'."
     fi
 fi
+
+# T3 keeps mutable app state under ~/.t3. Track only its server settings file.
+t3_settings_source="$PWD/home/.t3/userdata/settings.json"
+t3_settings_destination="$HOME/.t3/userdata/settings.json"
+if [ -f "$t3_settings_source" ]; then
+    mkdir -p "$(dirname "$t3_settings_destination")"
+    if [ -L "$t3_settings_destination" ]; then
+        echo "T3 settings path is already a symlink."
+    elif [ -e "$t3_settings_destination" ]; then
+        echo "T3 settings already exist; back them up and link manually."
+    else
+        ln -s "$t3_settings_source" "$t3_settings_destination"
+        echo "Symlink created for T3 server settings."
+    fi
+fi

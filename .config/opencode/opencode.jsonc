@@ -93,7 +93,7 @@
     "servers": {
       "exa": {
         "type": "remote",
-        "url": "https://mcp.exa.ai/mcp",
+        "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
         "disabled": false,
         "headers": {
           "x-api-key": "{env:EXA_API_KEY}",

@@ -2,7 +2,7 @@
   "mcpServers": {
     "exa": {
       "type": "http",
-      "url": "https://mcp.exa.ai/mcp",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
       "headers": {
         "x-api-key": "${EXA_API_KEY}"
       }

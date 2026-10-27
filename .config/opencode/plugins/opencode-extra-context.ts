@@ -21,7 +21,7 @@ declare const Bun: {
   };
 };
 
-const CONFIG_FILENAME = "repository-context.json";
+const CONFIG_FILENAME = "extra-context.json";
 
 type Mapping = {
   selector: string[];
@@ -29,7 +29,7 @@ type Mapping = {
   mcp: string[];
 };
 
-type RepositoryContextConfig = {
+type ExtraContextConfig = {
   mappings: Mapping[];
 };
 
@@ -76,7 +76,7 @@ function requireString(value: unknown, label: string) {
 function parseConfig(
   value: unknown,
   filepath: string,
-): RepositoryContextConfig {
+): ExtraContextConfig {
   if (!isRecord(value))
     throw new Error(`${filepath} must contain a JSON object`);
 
@@ -139,7 +139,7 @@ function parseConfig(
 async function loadConfig(filepath: string) {
   const file = Bun.file(filepath);
   if (!(await file.exists()))
-    return { mappings: [] } satisfies RepositoryContextConfig;
+    return { mappings: [] } satisfies ExtraContextConfig;
   return parseConfig(await file.json(), filepath);
 }
 
@@ -147,7 +147,7 @@ function matches(selectors: string[], worktree: string) {
   return selectors.some((selector) => new Bun.Glob(selector).match(worktree));
 }
 
-function resolveMcpServers(config: RepositoryContextConfig, worktree: string) {
+function resolveMcpServers(config: ExtraContextConfig, worktree: string) {
   const servers = new Set<string>();
   for (const mapping of config.mappings) {
     if (matches(mapping.selector, worktree)) {
@@ -190,7 +190,7 @@ async function expandInstructionPattern(
 }
 
 async function resolveInstructionPaths(
-  config: RepositoryContextConfig,
+  config: ExtraContextConfig,
   worktree: string,
   configDirectory: string,
 ) {
@@ -231,7 +231,7 @@ function render(files: InstructionFile[]) {
 }
 
 export default Plugin.define({
-  id: "opencode.repository-context",
+  id: "opencode.extra-context",
   async setup(ctx) {
     const filepath = globalConfigPath();
     const config = await loadConfig(filepath);
@@ -247,7 +247,7 @@ export default Plugin.define({
         for (const server of managedMcpServers) {
           if (!editor.get(server)) {
             console.warn(
-              `repository-context: MCP server "${server}" is not configured`,
+              `extra-context: MCP server "${server}" is not configured`,
             );
             continue;
           }

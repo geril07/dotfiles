@@ -3,7 +3,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
 
-const CONFIG_FILENAME = "repository-context.json";
+const CONFIG_FILENAME = "extra-context.json";
 const GLOB_CHARACTERS = ["*", "?", "[", "]", "{", "}"];
 
 type McpServerConfig = Parameters<ExtensionAPI["registerMcpServer"]>[1];
@@ -14,7 +14,7 @@ type Mapping = {
   mcp: string[];
 };
 
-type RepositoryContextConfig = {
+type ExtraContextConfig = {
   mappings: Mapping[];
   pi: {
     mcpServers: Record<string, McpServerConfig>;
@@ -67,7 +67,7 @@ function requireString(value: unknown, label: string) {
 function parseConfig(
   value: unknown,
   filepath: string,
-): RepositoryContextConfig {
+): ExtraContextConfig {
   if (!isRecord(value)) {
     throw new Error(`${filepath} must contain a JSON object`);
   }
@@ -157,7 +157,7 @@ async function loadConfig(filepath: string) {
     return parseConfig(JSON.parse(content) as unknown, filepath);
   } catch (error) {
     if (isNodeError(error) && error.code === "ENOENT") {
-      return { mappings: [], pi: { mcpServers: {} } } satisfies RepositoryContextConfig;
+      return { mappings: [], pi: { mcpServers: {} } } satisfies ExtraContextConfig;
     }
     throw error;
   }
@@ -268,7 +268,7 @@ function matches(selectors: string[], worktree: string) {
   return selectors.some((selector) => matchesGlob(selector, worktree));
 }
 
-function resolveMcpServerNames(config: RepositoryContextConfig, worktree: string) {
+function resolveMcpServerNames(config: ExtraContextConfig, worktree: string) {
   const servers = new Set<string>();
   for (const mapping of config.mappings) {
     if (matches(mapping.selector, worktree)) {
@@ -342,7 +342,7 @@ async function expandInstructionPattern(
 }
 
 async function resolveInstructionPaths(
-  config: RepositoryContextConfig,
+  config: ExtraContextConfig,
   worktree: string,
   configDirectory: string,
 ) {
@@ -380,17 +380,17 @@ function render(files: InstructionFile[]) {
     .join("\n\n");
 }
 
-export default async function repositoryContextExtension(pi: ExtensionAPI) {
+export default async function extraContextExtension(pi: ExtensionAPI) {
   const filepath = globalConfigPath();
   const configDirectory = path.dirname(filepath);
-  let config: RepositoryContextConfig;
+  let config: ExtraContextConfig;
 
   try {
     config = await loadConfig(filepath);
   } catch (error) {
     config = { mappings: [], pi: { mcpServers: {} } };
     const message = error instanceof Error ? error.message : String(error);
-    console.error(`[repository-context] Failed to load ${filepath}: ${message}`);
+    console.error(`[extra-context] Failed to load ${filepath}: ${message}`);
   }
 
   const registeredMcpServers = new Set<string>();
@@ -408,7 +408,7 @@ export default async function repositoryContextExtension(pi: ExtensionAPI) {
       const serverConfig = config.pi.mcpServers[name];
       if (!serverConfig) {
         console.error(
-          `[repository-context] MCP server "${name}" is selected for ${ctx.cwd} but has no Pi config in ${filepath}`,
+          `[extra-context] MCP server "${name}" is selected for ${ctx.cwd} but has no Pi config in ${filepath}`,
         );
         continue;
       }
@@ -418,7 +418,7 @@ export default async function repositoryContextExtension(pi: ExtensionAPI) {
         registeredMcpServers.add(name);
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error(`[repository-context] Failed to register MCP server "${name}": ${message}`);
+        console.error(`[extra-context] Failed to register MCP server "${name}": ${message}`);
       }
     }
   });
@@ -441,7 +441,7 @@ export default async function repositoryContextExtension(pi: ExtensionAPI) {
       };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      console.error(`[repository-context] Failed to resolve context: ${message}`);
+      console.error(`[extra-context] Failed to resolve context: ${message}`);
     }
   });
 }

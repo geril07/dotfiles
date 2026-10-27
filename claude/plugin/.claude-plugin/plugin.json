@@ -1,0 +1,8 @@
+{
+  "name": "my",
+  "version": "0.1.0",
+  "description": "Shared local skills, agents, and extra context for Claude Code.",
+  "author": {
+    "name": "geril"
+  }
+}

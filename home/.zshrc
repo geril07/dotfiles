@@ -52,7 +52,7 @@ alias opencode='PATH="$AGENT_PATH:$PATH" command opencode'
 alias opencode2='PATH="$AGENT_PATH:$PATH" command opencode2'
 alias agy='PATH="$AGENT_PATH:$PATH" command agy'
 alias codex='PATH="$AGENT_PATH:$PATH" command codex'
-alias claude='PATH="$AGENT_PATH:$PATH" command claude --mcp-config="$HOME/.claude/mcp.json"'
+alias claude='PATH="$AGENT_PATH:$PATH" command claude'
 
 ca() (
   if (( $# < 2 )); then

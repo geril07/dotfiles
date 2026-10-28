@@ -11,3 +11,17 @@ Models from other providers require Pi or OpenCode; ask the user before switchin
 tools or substituting a Claude model.
 
 Use skills from the `my` plugin by their registered names, such as `my:find-docs`.
+
+## Model aliases
+
+When the user names a Claude model for a subagent, pass it as `model` and set `effort`
+from this table. The model name selects only the model; choose the agent by the job.
+A reasoning level from the user overrides the default.
+
+Effort variants: low/medium/high/xhigh/max
+
+| Alias  | `model`  | Default `effort` |
+| ------ | -------- | ---------------- |
+| Haiku  | `haiku`  | high             |
+| Sonnet | `sonnet` | high             |
+| Opus   | `opus`   | medium           |

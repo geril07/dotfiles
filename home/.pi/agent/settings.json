@@ -11,7 +11,8 @@
     "openai/gpt-6.1-sol": "low",
     "openai-codex/gpt-6-luna": "xhigh",
     "openai-codex/gpt-6.1-sol": "low",
-    "claude-bridge/claude-sonnet-5-5": "high"
+    "claude-bridge/claude-sonnet-5-5": "high",
+    "opencode-go/deepseek-v4.1-flash": "high"
   },
   "editorPaddingX": 2,
   "theme": "catppuccin-macchiato",

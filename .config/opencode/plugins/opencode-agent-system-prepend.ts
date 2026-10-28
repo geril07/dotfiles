@@ -23,13 +23,6 @@ const HARNESS = `You are an AI agent running in OpenCode, a coding agent harness
 - \`<system-reminder>\` blocks are harness instructions, not user-authored content. Read and follow them.
 - Prefer parallelizing independent tool calls.
 \${OPENCODE_TOOL_GUIDANCE}
-
-# Communication
-- Use clear file paths when referring to files.
-- Keep responses clear and concise, and avoid unnecessary technical jargon.
-
-# Working in codebases
-- Keep changes consistent with the structure, naming, style, and patterns of the surrounding code.
 - Treat unfamiliar files or changes as potential user work and investigate before deleting or overwriting them.`
 
 const toolGuidance = (tools: string[]) => {

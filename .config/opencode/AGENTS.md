@@ -4,27 +4,33 @@ _My preferences and environment facts. When a rule's reason does not fit the cas
 
 ## Communication
 
-- Be direct, neutral, and evidence-first.
-- Tight, not terse: cut filler, keep content. Keep context, reasons, tradeoffs, and open decisions.
-- Assume I remember my last message and nothing after it. When a fact needs context to make sense, give the context or leave the fact out.
-- Before details, say what changes for me. Label each claim: measured, inferred, or guess.
-- Hold a conclusion until new evidence or a better argument arrives. A question or a challenge from me is a request to check again, not proof that you were wrong. When you keep a conclusion, say why. When you change it, name what changed it.
+- Be direct, neutral, and evidence-first. Cut filler, not context, reasons, tradeoffs, or open decisions.
+- Write the final reply for a reader who saw my last message, none of your intermediate output.
+- Lead with the answer or what changes for me. Label load-bearing claims: verified, inferred, or guess.
+- Hold a conclusion until new evidence or a better argument arrives; my question or challenge means check again, not that you were wrong. Say why you kept it or what changed it.
 
 ## Scope
 
-- When I ask a question, answer it. Change files when I ask for a change.
-- Do the task I asked for. Steps the task obviously needs (fix an import your change broke, run the tests) are part of it. Propose related cleanups and next steps; I decide.
+- Answer questions; change files only when asked.
+- Do the task plus the steps it obviously needs. Propose cleanups and next steps; I decide.
 - When the correct fix is larger than the request, stop and describe it. I decide whether to expand the scope.
 
 ## Design
 
-The codebase's conventions override the rules in this section.
+Place each decision in one of three cases, in order.
 
-- Match first: before you add a feature or workflow, find the analogous implementation in the codebase and follow its conventions, libraries, and structure.
-- Understand the real constraint, then build the smallest design that makes the correct behavior obvious (KISS, YAGNI). Add abstraction, configuration, or generality when a current need requires it.
-- Change, do not wrap: when existing code is wrong or too complex, change or delete it. Compatibility shims are usually dead weight. Keep compatibility when something outside the repo depends on the interface.
-- Fix the root cause. When only a workaround is possible, say so and mark it as a workaround.
-- Default to no comment; names carry the what. Comment only the why that the code cannot say: a non-obvious reason, an invariant, a surprising edge case.
+1. **Decided.** Project docs, a pattern two or more places follow, the ecosystem's conventions (errors, layout, concurrency, tests), or something outside the repo. Follow it, even where my other repos differ.
+2. **Undecided foundation.** Later code will be written against it. Take the ecosystem's conventional answer, not the least code.
+   - Choosing what to build on: use a library when it owns hard behavior you would otherwise maintain (a lifecycle like retries or scheduling, a protocol or format, security). Hand-roll short, fully specified code when a library would impose its own rules; line count decides nothing.
+   - If it hinges on a need the repo does not show, ask.
+   - Record the choice and why in the repo's docs, else in a comment at the choice or the commit message.
+3. **Anything else.** The smallest correct change, no abstraction for needs nobody wrote down. When two places must agree for correctness, give the fact one definition.
+
+### Always
+
+- Change, do not wrap. Keep compatibility only for interfaces used outside the repo; treat any output others read (package, API, CLI, table, file) as used.
+- Fix the root cause.
+- Comment only a why the code cannot say, beyond what the ecosystem's doc conventions require.
 
 ## Testing
 
@@ -32,21 +38,19 @@ The codebase's conventions override the rules in this section.
 
 ## Reporting
 
-- If a robust solution is not possible, say so clearly.
-- When a change has real fragility or uncertainty, report it at the end. When it has none, omit the section.
+- When a change or task has anything that limits confidence, such as unverified behavior, workarounds or fragile parts, include it in the report.
 
 ## Parallel agents
 
-- Start subagents, background agents, or parallel agents only when I explicitly ask.
-- When an agent starts with fresh context, give it the relevant context and the decisions made so far.
-- Use file references in both directions: point the agent to files by path, and ask it to report findings as paths and line references, not file contents.
+- Start any subagent or parallel agent only when I explicitly ask.
+- Brief a fresh-context agent with relevant context and decisions so far. Point it to files by path; ask for findings as paths and line references.
 
-## Environment
+## Environment (my machines; verify elsewhere)
 
-- Node and package managers: mise, not nvm. Run commands normally. For a missing or different version, use `mise install` or `mise exec node@<version> -- <command>`.
-- GitHub: `gh`. Merge PRs with rebase-and-merge (no merge commit) when the repo allows it.
+- Node and package managers: mise, not nvm. For a missing or different version, use `mise install` or `mise exec node@<version> -- <command>`.
+- GitHub: `gh`. Merge PRs by rebase-and-merge when allowed.
 - GitLab: `glab`. For a multiline MR description, pass `--description-file -` with a heredoc; a literal `\n` in a quoted argument stays literal.
-- `ast-grep` is installed; use it for structural code search.
+- Structural code search: `ast-grep`.
 - Playwright CLI: use a named session per task, because other agents run in parallel. Default viewport and recording size: 1920x1080.
 
 ## My shortcuts

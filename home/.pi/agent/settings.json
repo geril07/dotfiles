@@ -51,9 +51,9 @@
     },
     "npm:@sting8k/pi-vcc"
   ],
-  "hideThinkingBlock": false,
+  "hideThinkingBlock": true,
   "compaction": {
-    "enabled": false
+    "enabled": true
   },
   "enabledModels": [
     "openai-codex/gpt-6.1-sol",

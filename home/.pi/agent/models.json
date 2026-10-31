@@ -1,5 +1,12 @@
 {
   "providers": {
+    "openai-codex": {
+      "modelOverrides": {
+        "gpt-6-luna": {
+          "contextWindow": 500000
+        }
+      }
+    },
     "openrouter": {
       "models": [
         {

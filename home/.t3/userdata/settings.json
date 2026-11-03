@@ -3,6 +3,10 @@
     {
       "provider": "pi",
       "model": "openai-codex/gpt-6.1-sol"
+    },
+    {
+      "provider": "pi",
+      "model": "opencode-go/deepseek-v4.1-flash"
     }
   ],
   "providerModelPreferences": {
@@ -2574,7 +2578,21 @@
   ],
   "defaultModelSelection": {
     "instanceId": "pi",
-    "model": "openai-codex/gpt-6.1-sol"
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "options": [
+      {
+        "id": "thinking",
+        "value": "high"
+      }
+    ]
+  },
+  "projectSettingsOverrides": {
+    "d3dcd4d4-a8f6-4e96-82a1-b90fabf881d6": {
+      "defaultModelSelection": {
+        "instanceId": "claude_work",
+        "model": "claude-sonnet-5-5"
+      }
+    }
   },
   "projectSettingsFolded": true,
   "idleCompaction": "onReturn",

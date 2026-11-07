@@ -33,7 +33,8 @@
   },
   "plugins": [
     "./herdr-opencode",
-    "./cache-miss"
+    "./cache-miss",
+    "./plugins/compact-at"
   ],
   "prompt": {
     "paste": "compact",

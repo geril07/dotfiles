@@ -1,0 +1,3 @@
+#!/bin/sh
+# Chromium's Windows-style middle-click autoscroll is off on Linux; enable it for T3 Code.
+exec /opt/t3code-bin/AppRun --enable-blink-features=MiddleClickAutoscroll --test-type "$@"

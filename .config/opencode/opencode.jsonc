@@ -74,7 +74,7 @@
       "model": "openai/gpt-6-luna-fast#high",
     },
     "researcher": {
-      "model": "openai/gpt-6.1-sol#low",
+      "model": "openai/gpt-6-luna#xhigh",
     },
     "reviewer": {
       "model": "openai/gpt-6.1-sol#high",

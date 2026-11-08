@@ -7,6 +7,10 @@
     {
       "provider": "pi",
       "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode-go/deepseek-v4.1-flash"
     }
   ],
   "providerModelPreferences": {
@@ -2577,11 +2581,11 @@
     }
   ],
   "defaultModelSelection": {
-    "instanceId": "pi",
+    "instanceId": "opencode",
     "model": "opencode-go/deepseek-v4.1-flash",
     "options": [
       {
-        "id": "thinking",
+        "id": "variant",
         "value": "high"
       }
     ]

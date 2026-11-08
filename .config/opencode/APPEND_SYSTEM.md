@@ -15,3 +15,4 @@ When no model is requested, leave `model` unset so the configured agent default 
 | Opus         | `claude-code/claude-opus-5-5[1m]` | medium           |
 | Haiku        | `claude-code/claude-haiku-5-5`    | high             |
 | Gemini Flash | `google/gemini-3.8-flash`         | high             |
+| Deepseek     | `opencode-go/deepseek-v4.1-flash` | high             |

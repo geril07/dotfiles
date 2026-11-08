@@ -1,7 +1,4 @@
-export type Setting =
-  | { mode: "off" }
-  | { mode: "auto" }
-  | { mode: "fixed"; tokens: number }
+export type Setting = { mode: "off" } | { mode: "fixed"; tokens: number }
 
 export type Usage = {
   input: number
@@ -14,9 +11,6 @@ export type Usage = {
 export type Status = {
   setting: Setting
   tokens?: number
-  contextWindow?: number
-  threshold?: number
-  model?: string
   failures: number
   maxFailures: number
   pending: boolean
@@ -27,23 +21,20 @@ export const MAX_FAILURES = 3
 /** More than this is a unit mistake (see parseSetting), not a threshold. */
 export const MAX_THRESHOLD = 5_000_000
 export const MIN_THRESHOLD = 1000
-/** Room a native summary needs, capped the way Claude Code caps its own reserve. */
-const SUMMARY_RESERVE = 20_000
 
 /**
- * `off` (plugin does nothing), `auto` (window-derived), or thousands of tokens: `300` is 300 000 and
- * `30` is 30 000, so the common values stay short. Undefined means "show status".
+ * `off` (plugin does nothing) or thousands of tokens: `300` is 300 000 and `30` is 30 000, so the
+ * common values stay short. Undefined means "show status".
  */
 export function parseSetting(args: string): Setting | undefined {
   const text = args.trim().toLowerCase()
   if (!text) return undefined
   if (text === "off") return { mode: "off" }
-  if (text === "auto") return { mode: "auto" }
   // A trailing `k` says the same thing; the bare number already means thousands.
   const match = /^(\d+(?:[.,]\d+)?)k?$/.exec(text)
   if (!match) {
     throw new Error(
-      `/compact-at takes thousands of tokens, "auto" or "off": ${JSON.stringify(args.trim())} is not a number. 300 means 300k tokens.`,
+      `/compact-at takes thousands of tokens or "off": ${JSON.stringify(args.trim())} is not a number. 300 means 300k tokens.`,
     )
   }
   const tokens = Math.round(Number(match[1].replace(",", ".")) * 1000)
@@ -60,27 +51,11 @@ export function parseSetting(args: string): Setting | undefined {
 }
 
 /**
- * Claude Code's rule (src/services/compact/autoCompact.ts): reserve room for the summary, then a buffer
- * that grows with the window, because one turn can add proportionally more tokens on a bigger model.
+ * The absolute trigger. OpenCode's own automatic compaction covers the model window; this plugin
+ * only moves the trigger earlier, so there is no window-derived mode here.
  */
-export function autoThreshold(contextWindow: number, maxOutputTokens: number): number {
-  const reserved = Math.min(maxOutputTokens > 0 ? maxOutputTokens : SUMMARY_RESERVE, SUMMARY_RESERVE)
-  const effective = Math.max(0, contextWindow - reserved)
-  const tier = effective >= 800_000 ? 50_000 : effective >= 400_000 ? 30_000 : 13_000
-  // A fixed buffer larger than a third of a small window leaves no usable context; cap it there.
-  const buffer = Math.min(tier, Math.floor(effective / 3))
-  return Math.max(MIN_THRESHOLD, effective - buffer)
-}
-
-export function thresholdOf(
-  setting: Setting,
-  contextWindow: number,
-  maxOutputTokens: number,
-): number | undefined {
-  if (setting.mode === "off") return undefined
-  if (setting.mode === "fixed") return setting.tokens
-  if (contextWindow <= 0) return undefined
-  return autoThreshold(contextWindow, maxOutputTokens)
+export function thresholdOf(setting: Setting): number | undefined {
+  return setting.mode === "fixed" ? setting.tokens : undefined
 }
 
 export function formatTokens(value: number): string {
@@ -93,7 +68,7 @@ export function formatTokens(value: number): string {
 export function readSetting(value: unknown): Setting | undefined {
   if (typeof value !== "object" || value === null) return undefined
   const data = value as Partial<Setting>
-  if (data.mode === "off" || data.mode === "auto") return { mode: data.mode }
+  if (data.mode === "off") return { mode: "off" }
   if (
     data.mode === "fixed" &&
     typeof data.tokens === "number" &&

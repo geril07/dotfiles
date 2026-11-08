@@ -11,37 +11,18 @@ function describe(status: Status): string {
   const lines: string[] = []
   if (status.setting.mode === "off") {
     lines.push("compact-at: off (OpenCode's own compaction setting still applies)")
-  } else if (status.setting.mode === "auto") {
-    lines.push("compact-at: auto (window-derived, Claude Code rule)")
   } else {
     lines.push(`compact-at: ${formatTokens(status.setting.tokens)} tokens in this session`)
-  }
-
-  if (status.model) {
-    lines.push(
-      `model: ${status.model}${status.contextWindow ? `, window ${formatTokens(status.contextWindow)}` : ""}`,
-    )
-  } else if (status.contextWindow) {
-    lines.push(`window: ${formatTokens(status.contextWindow)}`)
   }
 
   if (status.tokens === undefined) {
     lines.push("now: unknown (measured again after the next reply)")
   } else {
-    const share = status.contextWindow
-      ? ` (${Math.round((status.tokens / status.contextWindow) * 100)}%)`
-      : ""
-    lines.push(`now: ${formatTokens(status.tokens)}${share}`)
+    lines.push(`now: ${formatTokens(status.tokens)}`)
   }
 
-  if (status.threshold !== undefined) {
-    if (status.contextWindow && status.threshold >= status.contextWindow) {
-      lines.push(
-        `threshold: ${formatTokens(status.threshold)} - above the model window, so it cannot fire before the provider limit`,
-      )
-    } else {
-      lines.push(`fires at: ${formatTokens(status.threshold)}`)
-    }
+  if (status.setting.mode === "fixed") {
+    lines.push(`fires at: ${formatTokens(status.setting.tokens)}`)
   }
 
   if (status.pending) lines.push("compaction: pending")
@@ -54,11 +35,6 @@ function describe(status: Status): string {
 function summary(status: Status): string {
   if (status.setting.mode === "off") {
     return "Off. OpenCode's own compaction setting still applies."
-  }
-  if (status.setting.mode === "auto") {
-    return status.threshold
-      ? `Auto: compacts at ${formatTokens(status.threshold)} tokens.`
-      : "Auto: waiting for a model with a known window."
   }
   return `Compacts at ${formatTokens(status.setting.tokens)} tokens.`
 }
@@ -78,7 +54,7 @@ export default Plugin.define({
       commands: [
         {
           id: "compact-at",
-          title: "Auto-compaction threshold",
+          title: "Compaction threshold",
           group: "Session",
           palette: true,
           slash: { name: "compact-at", arguments: true },

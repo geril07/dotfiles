@@ -3,6 +3,7 @@ import { CompactAt } from "./rpc.js"
 import {
   MAX_FAILURES,
   contextTokens,
+  parseSetting,
   readSetting,
   thresholdOf,
   type Setting,
@@ -12,20 +13,18 @@ import {
 
 // Port of pi's compact-at extension: a per-session absolute auto-compaction threshold.
 //
-// OpenCode has `compaction.auto` + `compaction.buffer`, but both are config-level and relative to the
-// model window. This plugin keeps an absolute number per session instead, stored in plugin storage
-// (session instructions entries would be injected into the model prompt).
+// OpenCode's own automatic compaction already handles "approaching the model's window"; it is
+// config-level and relative to that window. This plugin keeps an absolute number per session
+// instead, so a session can compact earlier than the built-in rule. The value lives in plugin
+// storage (session instructions entries would be injected into the model prompt).
 //
 // pi compacts only while idle because its compact() aborts the running turn. OpenCode's compact()
 // queues the request for the next safe point instead, so mid-turn compaction is possible; this port
 // still checks only when the session goes idle, matching pi's "never kill autonomous work" rule.
-
-type Limits = { window?: number; maxOutput: number; model?: string }
-type ModelInfo = {
-  providerID: string
-  id: string
-  limit: { context: number; output: number }
-}
+//
+// The server command is the only surface for clients without plugin UI (T3 Code, for example):
+// they can set or clear the threshold, but cannot display the status. The TUI half owns the status
+// dialog and the toasts. Both surfaces share the same helpers here.
 
 const key = (sessionID: string) => `sessions/${sessionID}`
 
@@ -36,8 +35,6 @@ export default Plugin.define({
   async setup(ctx) {
     const controller = new AbortController()
     const settings = new Map<string, Setting>()
-    const limits = new Map<string, Limits>()
-    const models = new Map<string, ModelInfo>()
     const lastTokens = new Map<string, number>()
     /** Compactions we requested; used to tell our failure/notice from a manual one. */
     const requestedAt = new Map<string, number>()
@@ -63,7 +60,7 @@ export default Plugin.define({
         const next = readSetting(setting)
         if (!next) {
           return context.error("invalid", "compact-at needs a valid setting", {
-            message: "expected off, auto, or fixed with a token count",
+            message: "expected off or a token count",
           })
         }
         await write(sessionID, next)
@@ -86,7 +83,6 @@ export default Plugin.define({
 
     const forget = (sessionID: string) => {
       settings.delete(sessionID)
-      limits.delete(sessionID)
       lastTokens.delete(sessionID)
       requestedAt.delete(sessionID)
       pending.delete(sessionID)
@@ -106,7 +102,6 @@ export default Plugin.define({
       refused.delete(sessionID)
       // An explicit command must be able to unstick a request whose completion event never arrived.
       pending.delete(sessionID)
-      limits.delete(sessionID)
       await emit("changed", { sessionID })
     }
 
@@ -138,44 +133,6 @@ export default Plugin.define({
       const off: Setting = { mode: "off" }
       settings.set(sessionID, off)
       return off
-    }
-
-    const findModel = async (providerID: string, modelID: string) => {
-      const id = `${providerID}/${modelID}`
-      const cached = models.get(id)
-      if (cached) return cached
-      try {
-        const list = await ctx.model.list()
-        for (const model of list.data) {
-          models.set(`${model.providerID}/${model.id}`, model)
-        }
-      } catch (error) {
-        console.warn(`compact-at: could not list models: ${message(error)}`)
-      }
-      return models.get(id)
-    }
-
-    const limitsFor = async (sessionID: string): Promise<Limits> => {
-      const cached = limits.get(sessionID)
-      if (cached) return cached
-      let result: Limits = { maxOutput: 0 }
-      try {
-        const session = await ctx.session.get({ sessionID })
-        const model = session.model
-          ? await findModel(session.model.providerID, session.model.id)
-          : (await ctx.model.default()).data
-        if (model) {
-          result = {
-            window: model.limit.context,
-            maxOutput: model.limit.output,
-            model: `${model.providerID}/${model.id}`,
-          }
-        }
-      } catch (error) {
-        console.warn(`compact-at: could not resolve the model for ${sessionID}: ${message(error)}`)
-      }
-      limits.set(sessionID, result)
-      return result
     }
 
     const measure = async (sessionID: string) => {
@@ -223,14 +180,9 @@ export default Plugin.define({
     const status = async (sessionID: string): Promise<Status> => {
       const setting = await resolve(sessionID)
       const now = await currentTokens(sessionID)
-      const known = await limitsFor(sessionID)
-      const threshold = thresholdOf(setting, known.window ?? 0, known.maxOutput)
       return {
         setting,
         ...(now !== undefined ? { tokens: now } : {}),
-        ...(known.window ? { contextWindow: known.window } : {}),
-        ...(known.model ? { model: known.model } : {}),
-        ...(threshold !== undefined ? { threshold } : {}),
         failures: failures.get(sessionID) ?? 0,
         maxFailures: MAX_FAILURES,
         pending: pending.has(sessionID),
@@ -259,13 +211,10 @@ export default Plugin.define({
       checking.add(sessionID)
       try {
         const setting = await resolve(sessionID)
-        if (setting.mode === "off") return
+        const threshold = thresholdOf(setting)
+        if (threshold === undefined) return
         const now = await currentTokens(sessionID)
-        if (now === undefined) return
-        const known = setting.mode === "auto" ? await limitsFor(sessionID) : undefined
-        if (setting.mode === "auto" && !known?.window) return
-        const threshold = thresholdOf(setting, known?.window ?? 0, known?.maxOutput ?? 0)
-        if (threshold === undefined || now < threshold) return
+        if (now === undefined || now < threshold) return
         const prior = refused.get(sessionID)
         if (prior !== undefined && now <= prior) return
         // Awaits above may have raced with another event for the same session.
@@ -288,11 +237,6 @@ export default Plugin.define({
     }
 
     const handle = async (event: { type: string; data: Record<string, unknown> }) => {
-      if (event.type === "model.updated") {
-        models.clear()
-        limits.clear()
-        return
-      }
       const sessionID = typeof event.data.sessionID === "string" ? event.data.sessionID : undefined
       if (!sessionID) return
       switch (event.type) {
@@ -351,10 +295,6 @@ export default Plugin.define({
           await fail(sessionID, text, count)
           return
         }
-        case "session.model.selected": {
-          limits.delete(sessionID)
-          return
-        }
         case "session.deleted": {
           forget(sessionID)
           void ctx.storage.remove(key(sessionID)).catch(() => {})
@@ -362,6 +302,24 @@ export default Plugin.define({
         }
       }
     }
+
+    // Clients without plugin UI (T3 Code) can only reach the plugin here. No argument means the
+    // status the TUI dialog shows; the server has no way to print it, so it only checks now.
+    await ctx.command.transform((editor) => {
+      editor.add({
+        name: "compact-at",
+        description: "Set this session's compaction threshold in thousands of tokens, or off",
+        execute: async ({ sessionID, prompt }) => {
+          const next = parseSetting(prompt.text ?? "")
+          if (!next) {
+            await maybeCompact(sessionID)
+            return
+          }
+          await write(sessionID, next)
+          await maybeCompact(sessionID)
+        },
+      })
+    })
 
     void (async () => {
       try {
@@ -376,9 +334,7 @@ export default Plugin.define({
             "session.compaction.started",
             "session.compaction.ended",
             "session.compaction.failed",
-            "session.model.selected",
             "session.deleted",
-            "model.updated",
           ],
           signal: controller.signal,
         })

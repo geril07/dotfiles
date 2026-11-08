@@ -18,27 +18,24 @@ const ENTRY = "compact-at";
 const MAX_FAILURES = 3;
 /** pi core's default `compaction.reserveTokens`; used only to explain which threshold fires first. */
 const NATIVE_RESERVE = 16384;
-/** Room a native summary needs, capped the way Claude Code caps its own reserve. */
-const SUMMARY_RESERVE = 20_000;
 const MIN_THRESHOLD = 1000;
 /** More than this is a unit mistake (see parseSetting), not a threshold. */
 const MAX_THRESHOLD = 5_000_000;
 
-export type Setting = { mode: "off" } | { mode: "auto" } | { mode: "fixed"; tokens: number };
+export type Setting = { mode: "off" } | { mode: "fixed"; tokens: number };
 
 /**
- * `off` (extension does nothing), `auto` (window-derived), or thousands of tokens: `300` is 300 000 and
- * `30` is 30 000, so the common values stay short. Returns undefined for "show status".
+ * `off` (extension does nothing) or thousands of tokens: `300` is 300 000 and `30` is 30 000, so the
+ * common values stay short. Returns undefined for "show status".
  */
 export function parseSetting(args: string): Setting | undefined {
 	const text = args.trim().toLowerCase();
 	if (!text) return undefined;
 	if (text === "off") return { mode: "off" };
-	if (text === "auto") return { mode: "auto" };
 	// A trailing `k` says the same thing; the bare number already means thousands.
 	const match = /^(\d+(?:[.,]\d+)?)k?$/.exec(text);
 	if (!match) {
-		throw new Error(`/compact-at takes thousands of tokens, "auto" or "off": ${JSON.stringify(args.trim())} is not a number. 300 means 300k tokens.`);
+		throw new Error(`/compact-at takes thousands of tokens or "off": ${JSON.stringify(args.trim())} is not a number. 300 means 300k tokens.`);
 	}
 	const tokens = Math.round(Number(match[1].replace(",", ".")) * 1000);
 	if (!Number.isSafeInteger(tokens) || tokens < MIN_THRESHOLD) {
@@ -52,21 +49,11 @@ export function parseSetting(args: string): Setting | undefined {
 }
 
 /**
- * Claude Code's rule (src/services/compact/autoCompact.ts): reserve room for the summary, then a buffer
- * that grows with the window, because one turn can add proportionally more tokens on a bigger model.
+ * The absolute trigger. Pi's own threshold already covers the model window; this extension only
+ * moves the trigger earlier, so there is no window-derived mode here.
  */
-export function autoThreshold(contextWindow: number, maxOutputTokens: number): number {
-	const reserved = Math.min(maxOutputTokens > 0 ? maxOutputTokens : SUMMARY_RESERVE, SUMMARY_RESERVE);
-	const effective = Math.max(0, contextWindow - reserved);
-	const tier = effective >= 800_000 ? 50_000 : effective >= 400_000 ? 30_000 : 13_000;
-	// A fixed buffer larger than a third of a small window leaves no usable context; cap it there.
-	const buffer = Math.min(tier, Math.floor(effective / 3));
-	return Math.max(MIN_THRESHOLD, effective - buffer);
-}
-
-export function thresholdOf(setting: Setting, contextWindow: number, maxOutputTokens: number): number | undefined {
-	if (setting.mode === "off") return undefined;
-	return setting.mode === "auto" ? autoThreshold(contextWindow, maxOutputTokens) : setting.tokens;
+export function thresholdOf(setting: Setting): number | undefined {
+	return setting.mode === "fixed" ? setting.tokens : undefined;
 }
 
 export function nativeThreshold(contextWindow: number): number {
@@ -83,7 +70,7 @@ export function formatTokens(value: number): string {
 export function settingFrom(entries: readonly { type: string; customType?: string; data?: unknown }[]): Setting {
 	const last = [...entries].reverse().find((entry) => entry.type === "custom" && entry.customType === ENTRY);
 	const data = last?.data as Partial<Setting> | undefined;
-	if (data?.mode === "off" || data?.mode === "auto") return { mode: data.mode };
+	if (data?.mode === "off") return { mode: "off" };
 	if (data?.mode === "fixed" && typeof data.tokens === "number" && Number.isSafeInteger(data.tokens) && data.tokens >= MIN_THRESHOLD) {
 		return { mode: "fixed", tokens: data.tokens };
 	}
@@ -102,8 +89,6 @@ export default function compactAt(pi: ExtensionAPI): void {
 		if (!usage || typeof usage.tokens !== "number" || usage.tokens <= 0) return undefined;
 		return { tokens: usage.tokens, contextWindow: usage.contextWindow };
 	};
-	const maxOutput = (ctx: ExtensionContext) => ctx.model?.maxTokens ?? 0;
-
 	const describe = (ctx: ExtensionContext): string => {
 		const usage = live(ctx);
 		const window = usage?.contextWindow ?? ctx.model?.contextWindow ?? 0;
@@ -111,9 +96,7 @@ export default function compactAt(pi: ExtensionAPI): void {
 		const lines = [
 			setting.mode === "off"
 				? "compact-at: off (pi's own threshold still applies)"
-				: setting.mode === "auto"
-					? "compact-at: auto (window-derived, Claude Code rule)"
-					: `compact-at: ${formatTokens(setting.tokens)} tokens in this session`,
+				: `compact-at: ${formatTokens(setting.tokens)} tokens in this session`,
 			`model: ${model}${window > 0 ? `, window ${formatTokens(window)}` : ""}`,
 			usage
 				? `now: ${formatTokens(usage.tokens)} (${Math.round((usage.tokens / usage.contextWindow) * 100)}%)`
@@ -125,7 +108,7 @@ export default function compactAt(pi: ExtensionAPI): void {
 		if (window > 0 && overrun) {
 			lines.push(`native: unknown - the declared window ${formatTokens(window)} is already below what this model served`);
 		} else if (window > 0) {
-			const threshold = thresholdOf(setting, window, maxOutput(ctx));
+			const threshold = thresholdOf(setting);
 			const native = nativeThreshold(window);
 			lines.push(
 				threshold === undefined
@@ -141,7 +124,7 @@ export default function compactAt(pi: ExtensionAPI): void {
 		if (pending) return;
 		const usage = live(ctx);
 		if (!usage) return;
-		const threshold = thresholdOf(setting, usage.contextWindow, maxOutput(ctx));
+		const threshold = thresholdOf(setting);
 		if (threshold === undefined || usage.tokens < threshold) return;
 		if (refusedAt !== null && usage.tokens <= refusedAt) return;
 		// Compacting aborts the turn (session.compact() starts with abort()), so never do it mid-run.
@@ -195,7 +178,7 @@ export default function compactAt(pi: ExtensionAPI): void {
 	});
 
 	pi.registerCommand("compact-at", {
-		description: "Show or set this session's auto-compaction threshold in thousands of tokens: /compact-at <thousands>|auto|off",
+		description: "Show or set this session's compaction threshold in thousands of tokens: /compact-at <thousands>|off",
 		handler: async (args, ctx) => {
 			const next = parseSetting(args);
 			if (next) {

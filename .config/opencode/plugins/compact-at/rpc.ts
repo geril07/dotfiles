@@ -6,7 +6,7 @@ import { Rpc } from "@opencode/plugin/rpc"
 const setting = {
   type: "object",
   properties: {
-    mode: { type: "string", enum: ["off", "auto", "fixed"] },
+    mode: { type: "string", enum: ["off", "fixed"] },
     tokens: { type: "number" },
   },
   required: ["mode"],
@@ -18,9 +18,6 @@ const status = {
   properties: {
     setting,
     tokens: { type: "number" },
-    contextWindow: { type: "number" },
-    threshold: { type: "number" },
-    model: { type: "string" },
     failures: { type: "number" },
     maxFailures: { type: "number" },
     pending: { type: "boolean" },

@@ -11,6 +11,10 @@
     {
       "provider": "opencode",
       "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "provider": "opencode",
+      "model": "openai/gpt-6.1-sol"
     }
   ],
   "providerModelPreferences": {

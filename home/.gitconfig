@@ -29,6 +29,7 @@
 
 [fetch]
   prune = true
+	followRemoteHEAD = always
 
 [merge]
   conflictstyle = zdiff3

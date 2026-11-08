@@ -1,6 +1,6 @@
 {
   "deviceId": "16cff299-b925-4422-8381-68b7851400dd",
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "tuiMode": "fullscreen",
   "fullscreenWheelScrollLines": 3,
   "defaultProvider": "openai-codex",
@@ -93,5 +93,11 @@
         "thinking": "low"
       }
     }
+  },
+  "extensionChangelogVersions": {
+    "{\"source\":\"https://github.com/geril07/pi-goal\",\"scope\":\"user\"}": "0.54.13",
+    "{\"source\":\"npm:@zeldrisho/pi-web-fetch\",\"scope\":\"user\"}": "0.16.3",
+    "{\"source\":\"npm:pi-mcp-adapter\",\"scope\":\"user\"}": "7.0.1",
+    "{\"source\":\"npm:@sting8k/pi-vcc\",\"scope\":\"user\"}": "0.11.2"
   }
 }

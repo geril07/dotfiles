@@ -23,6 +23,7 @@ Thinking level variants: low/medium/high/xhigh/max
 | ------------ | --------------------------------- | ---------------- |
 | Luna         | `openai-codex/gpt-6-luna`         | xhigh            |
 | Sol          | `openai-codex/gpt-6.1-sol`        | low              |
+| Terra        | `openai-codex/gpt-6.1-terra`      | high             |
 | Astra        | `openai-codex/gpt-6-astra`        | medium           |
 | Sonnet       | `claude-bridge/claude-sonnet-5-5` | high             |
 | Opus         | `claude-bridge/claude-opus-5-5`   | medium           |

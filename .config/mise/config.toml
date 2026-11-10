@@ -3,6 +3,12 @@ idiomatic_version_file_enable_tools = ["node", "npm", "pnpm", "yarn"]
 auto_install = false
 not_found_system_fallback = false
 
+# Never delete replaced tool versions on our behalf: the deferred prune fires
+# inside unrelated mise commands, and agents (and humans) read that as "mise
+# removed my packages". Reclaim disk explicitly with `mise prune --dry-run`.
+[settings.upgrade]
+auto_prune = false
+
 [tool_alias]
 pnpm = "npm:pnpm"
 

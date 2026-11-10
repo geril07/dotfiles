@@ -9,8 +9,9 @@
     "refreshInterval": 60
   },
   "env": {
-    "DISABLE_AUTOUPDATER": "1",
-    "CLAUDE_CODE_SCROLL_SPEED": "3"
+    "CLAUDE_CODE_SCROLL_SPEED": "3",
+    "CLAUDE_CODE_SHELL": "/bin/bash",
+    "DISABLE_AUTOUPDATER": "1"
   },
   "attribution": {
     "commit": "",

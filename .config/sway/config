@@ -30,8 +30,8 @@ set $term kitty
 set $floating_term $term -T floating
 # set $drun tofi-drun --prompt-text "Apps: " | xargs swaymsg exec --
 # set $run tofi-run --prompt-text "Run: " | xargs swaymsg exec --
-set $drun rofi -show drun
-set $run rofi -show run
+set $drun gofi
+set $run gofi run
 
 # bindsym --whole-window $mod+button4 focus left
 # bindsym --whole-window $mod+button5 focus right
@@ -156,7 +156,7 @@ bindsym --to-code {
   $mod+Shift+s exec slurp | grim -g - - | wl-copy
   Alt+Shift+1 exec obs-recording-toggle.sh
 
-  $mod+Ctrl+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+  $mod+Ctrl+c exec gofi clipboard
   $mod+Shift+t exec handy --toggle-transcription
 }
 
@@ -204,6 +204,8 @@ mode "resize" {
 for_window [app_id=".*"] {
   border pixel 2
 }
+
+for_window [app_id="gofi"] floating enable, border none, resize set 50 ppt 495 px, resize grow width 8 px, move position center
 
 for_window [app_id="foot"] {
   # border pixel 0

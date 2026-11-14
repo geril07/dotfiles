@@ -205,7 +205,7 @@ for_window [app_id=".*"] {
   border pixel 2
 }
 
-for_window [app_id="gofi"] floating enable, border none, resize set 50 ppt 495 px, resize grow width 8 px, move position center
+for_window [app_id="gofi"] floating enable, border none, resize set 800 px 496 px, move position center
 
 for_window [app_id="foot"] {
   # border pixel 0

@@ -63,3 +63,16 @@ if [ -f "$t3_settings_source" ]; then
         echo "Symlink created for T3 server settings."
     fi
 fi
+
+# capped owns its systemd slice. Ask the tool to install itself so the unit
+# definition stays in capped.zsh; setup.sh only calls the public command.
+capped_module="$HOME/.config/zsh/capped.zsh"
+if command -v systemctl >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1 && [ -r "$capped_module" ]; then
+    if zsh -c 'source "$1" && capped install' _ "$capped_module"; then
+        echo "Installed capped systemd slice."
+    else
+        echo "Failed to install capped systemd slice."
+    fi
+else
+    echo "Skipping capped systemd slice install."
+fi

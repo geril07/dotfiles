@@ -54,34 +54,8 @@ alias agy='PATH="$AGENT_PATH:$PATH" command agy'
 alias codex='PATH="$AGENT_PATH:$PATH" command codex'
 alias claude='PATH="$AGENT_PATH:$PATH" command claude'
 
-# Hard CPU ceiling for agent runs. CPUQuota is percent of ONE core: 500% = 5 cores,
-# 200% = 2 cores. Ordinary descendants share one cgroup and quota; work delegated
-# to existing services (e.g. Docker or tmux servers) is outside the scope.
-: ${AGENT_CPU_QUOTA:=500%}
-
-capped() {
-  emulate -L zsh
-  (( $# )) || { print -u2 'usage: capped <command> [args...]'; return 2 }
-
-  local quota=$AGENT_CPU_QUOTA
-  [[ $quota == *% ]] || quota+='%'          # 300 -> 300%
-
-  local -a run=()
-  if (( $+aliases[$1] || $+functions[$1] )); then
-    # systemd-run execs directly; reload startup-defined aliases/functions in a shell.
-    run=( zsh -ic "${(j: :)${(q)@}}" )
-  else
-    run=( "$@" )
-  fi
-
-  local unit_id
-  unit_id=$(systemd-id128 new) || return
-
-  # --unit= gives every run a traceable name: journalctl -g 'agent-.*scope: Consumed'
-  systemd-run --user --scope --quiet --collect --expand-environment=no \
-    --unit="agent-$(basename -- "$1")-$unit_id" \
-    -p "CPUQuota=$quota" -- "${run[@]}"
-}
+# Agent resource scope; see ~/.config/zsh/capped.zsh.
+[[ -r ~/.config/zsh/capped.zsh ]] && source ~/.config/zsh/capped.zsh
 
 ca() (
   if (( $# < 2 )); then

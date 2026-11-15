@@ -3,4 +3,5 @@ P=":${PATH}:"
 P="${P//:$HOME\/.local\/lowprio-bin:/:}"
 P="${P#:}"
 PATH="${P%:}"
+echo 500 > /proc/self/oom_score_adj 2>/dev/null || true
 exec nice -n 10 bun "$@"

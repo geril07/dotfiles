@@ -127,6 +127,17 @@ alias mirrorlist-update='export TMPFILE="$(mktemp)"; \
 
 export SYSTEMD_LESS=FRXMK
 
+# `herdr` with no arguments opens the workspace for the current directory, matched
+# by Git checkout root; a linked worktree nests under its parent repo workspace.
+# Arguments, or a launch from inside Herdr, pass straight through.
+herdr() {
+  if (( $# )) || [[ -n $HERDR_ENV ]]; then
+    command herdr "$@"
+    return
+  fi
+  command python3 "$HOME/my/dotfiles/bin/herdr-open-project.py" "$PWD" || command herdr
+}
+
 tn() {
   local name="${PWD:t}"
 

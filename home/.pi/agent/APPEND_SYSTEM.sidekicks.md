@@ -19,14 +19,13 @@ Use the default thinking level. A thinking level from the user overrides the def
 
 Thinking level variants: low/medium/high/xhigh/max
 
-| Alias        | Model                             | Default thinking |
-| ------------ | --------------------------------- | ---------------- |
-| Luna         | `openai-codex/gpt-6-luna`         | xhigh            |
-| Sol          | `openai-codex/gpt-6.1-sol`        | low              |
-| Terra        | `openai-codex/gpt-6.1-terra`      | high             |
-| Astra        | `openai-codex/gpt-6-astra`        | medium           |
-| Sonnet       | `claude-bridge/claude-sonnet-5-5` | high             |
-| Opus         | `claude-bridge/claude-opus-5-5`   | medium           |
-| Haiku        | `claude-bridge/claude-haiku-5-5`  | high             |
-| Gemini Flash | `antigravity/gemini-3.8-flash`    | high             |
-| Deepseek     | `opencode-go/deepseek-v4.1-flash` | high             |
+| Alias    | Model                             | Default thinking |
+| -------- | --------------------------------- | ---------------- |
+| Luna     | `openai-codex/gpt-6-luna`         | xhigh            |
+| Sol      | `openai-codex/gpt-6.2-sol`        | low              |
+| Terra    | `openai-codex/gpt-6.1-terra`      | high             |
+| Astra    | `openai-codex/gpt-6.2-astra`      | medium           |
+| Sonnet   | `claude-bridge/claude-sonnet-5-5` | high             |
+| Opus     | `claude-bridge/claude-opus-5-5`   | medium           |
+| Haiku    | `claude-bridge/claude-haiku-5-5`  | high             |
+| Deepseek | `opencode-go/deepseek-v4.1-flash` | high             |

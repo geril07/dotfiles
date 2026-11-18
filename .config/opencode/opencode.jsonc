@@ -77,13 +77,13 @@
       "model": "openai/gpt-6-luna#xhigh",
     },
     "reviewer": {
-      "model": "openai/gpt-6.1-sol#high",
+      "model": "openai/gpt-6.2-sol#high",
     },
     "e2e-verifier": {
-      "model": "openai/gpt-6.1-sol#low",
+      "model": "openai/gpt-6.2-sol#low",
     },
     "worker": {
-      "model": "openai/gpt-6.1-sol#low",
+      "model": "openai/gpt-6.2-sol#low",
     },
     // "title": {
     //   "model": "openrouter/google/gemini-3.1-flash-lite",

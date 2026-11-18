@@ -6,14 +6,13 @@ The alias selects only the model. Choose the agent by the job: researcher for re
 Use the default thinking level below unless the user specifies another level.
 When no model is requested, leave `model` unset so the configured agent default applies.
 
-| Alias        | Model                             | Default thinking |
-| ------------ | --------------------------------- | ---------------- |
-| Luna         | `openai/gpt-6-luna`               | xhigh            |
-| Sol          | `openai/gpt-6.1-sol`              | low              |
-| Terra        | `openai/gpt-6.1-terra`            | high             |
-| Astra        | `openai/gpt-6-astra`              | medium           |
-| Sonnet       | `claude-code/claude-sonnet-5-5`   | high             |
-| Opus         | `claude-code/claude-opus-5-5[1m]` | medium           |
-| Haiku        | `claude-code/claude-haiku-5-5`    | high             |
-| Gemini Flash | `google/gemini-3.8-flash`         | high             |
-| Deepseek     | `opencode-go/deepseek-v4.1-flash` | high             |
+| Alias    | Model                             | Default thinking |
+| -------- | --------------------------------- | ---------------- |
+| Luna     | `openai/gpt-6-luna`               | xhigh            |
+| Sol      | `openai/gpt-6.2-sol`              | low              |
+| Terra    | `openai/gpt-6.1-terra`            | high             |
+| Astra    | `openai/gpt-6.2-astra`            | medium           |
+| Sonnet   | `claude-code/claude-sonnet-5-5`   | high             |
+| Opus     | `claude-code/claude-opus-5-5[1m]` | medium           |
+| Haiku    | `claude-code/claude-haiku-5-5`    | high             |
+| Deepseek | `opencode-go/deepseek-v4.1-flash` | high             |

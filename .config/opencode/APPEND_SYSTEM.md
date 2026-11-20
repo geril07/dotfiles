@@ -9,8 +9,8 @@ When no model is requested, leave `model` unset so the configured agent default 
 | Alias    | Model                             | Default thinking |
 | -------- | --------------------------------- | ---------------- |
 | Luna     | `openai/gpt-6-luna`               | xhigh            |
-| Sol      | `openai/gpt-6.2-sol`              | low              |
-| Terra    | `openai/gpt-6.1-terra`            | high             |
+| Sol      | `openai/gpt-6.2-sol`              | medium           |
+| Terra    | `openai/gpt-6.1-terra`            | xhigh            |
 | Astra    | `openai/gpt-6.2-astra`            | medium           |
 | Sonnet   | `claude-code/claude-sonnet-5-5`   | high             |
 | Opus     | `claude-code/claude-opus-5-5[1m]` | medium           |

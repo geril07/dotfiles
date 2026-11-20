@@ -5,16 +5,16 @@
       "model": "openai-codex/gpt-6.1-sol"
     },
     {
-      "provider": "pi",
-      "model": "opencode-go/deepseek-v4.1-flash"
-    },
-    {
       "provider": "opencode",
       "model": "opencode-go/deepseek-v4.1-flash"
     },
     {
       "provider": "opencode",
-      "model": "openai/gpt-6.1-sol"
+      "model": "openai/gpt-6.2-sol"
+    },
+    {
+      "provider": "opencode",
+      "model": "openai/gpt-6.1-terra"
     }
   ],
   "providerModelPreferences": {

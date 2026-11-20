@@ -158,6 +158,14 @@ tn() {
   fi
 }
 
+detach() {
+  if (( ! $# )); then
+    printf '%s\n' 'Usage: detach <command> [args...]' >&2
+    return 2
+  fi
+  setsid "$@" >/dev/null 2>&1 &!
+}
+
 # >>> oh-my-opencode-slim background subagents >>>
 #export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 # <<< oh-my-opencode-slim background subagents <<<
